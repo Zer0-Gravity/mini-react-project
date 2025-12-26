@@ -1,11 +1,43 @@
-import { useState } from "react";
+import { useState, type Dispatch } from "react";
 
-interface Input {
-    currency: number | string;
-}
-
-function CurrencyInput({ currency }: Input) {
+function CurrencyInput() {
     const [isOpen, setIsOpen] = useState(false);
+    const [currency, setCurrency] = useState<string>("");
+
+    const currencyData = [
+        "AUD",
+        "BGN",
+        "BRL",
+        "CAD",
+        "CHF",
+        "CNY",
+        "CZK",
+        "DKK",
+        "EUR",
+        "GBP",
+        "HKD",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "ISK",
+        "JPY",
+        "KRW",
+        "MXN",
+        "MYR",
+        "NOK",
+        "NZD",
+        "PHP",
+        "PLN",
+        "RON",
+        "SEK",
+        "SGD",
+        "THB",
+        "TRY",
+        "USD",
+        "ZAR",
+    ];
+
     return (
         <div className="flex items-center border">
             <input
@@ -29,12 +61,9 @@ function CurrencyInput({ currency }: Input) {
                             className="cursor-pointer"
                             onClick={() => setIsOpen(false)}
                         >
-                            <li>EUR</li>
-                            <li>EUR</li>
-                            <li>EUR</li>
-                            <li>EUR</li>
-                            <li>EUR</li>
-                            <li>EUR</li>
+                            {currencyData.map((item) => (
+                                <li>{item}</li>
+                            ))}
                         </ul>
                     </div>
                 )}
