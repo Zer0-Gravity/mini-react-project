@@ -9,6 +9,7 @@ interface Input {
 function CurrencyInput({ setValue, handleInput, amount }: Input) {
     const [isOpen, setIsOpen] = useState(false);
     const [currency, setCurrency] = useState<string>("");
+    const [search, setSearch] = useState<string>("");
 
     const currencyData = [
         "AUD",
@@ -49,6 +50,14 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
         setValue(currency);
     };
 
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
+
+    const filteredItem = currencyData.filter((item) => {
+        return item.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
+
     return (
         <div className="flex items-center border">
             <input
@@ -69,12 +78,14 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
                             type="search"
                             placeholder="Search currency"
                             className="border p-2 mb-2"
+                            value={search}
+                            onChange={handleSearchInput}
                         />
                         <ul
                             className="cursor-pointer"
                             onClick={() => setIsOpen(false)}
                         >
-                            {currencyData.map((item, index) => (
+                            {filteredItem.map((item, index) => (
                                 <li
                                     key={index}
                                     onClick={() => handleValue(item)}
