@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CurrencyInput from "./CurrencyInput";
 import axios from "axios";
 
@@ -22,10 +22,14 @@ function CurrencyApp() {
     const [currTo, setCurrTo] = useState<string>("");
     const [data, setData] = useState<Data | null>(null);
     const [currency, setCurrency] = useState<Currency>();
+    const [loading, setLoading] = useState<boolean>(true);
+    const [amountFrom, setAmountFrom] = useState<number>(0);
+    const [amountTo, setAmountTo] = useState<number>(0);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 if (currFrom && currTo) {
                     await axios
                         .get(
@@ -44,12 +48,25 @@ function CurrencyApp() {
             } catch (error) {
                 console.log("Error fetching", error);
             }
+            setLoading(false);
         };
 
         fetchData();
     }, [currFrom, currTo]);
 
-    console.log(data?.rates);
+    const handleAmountFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(e.target.value);
+        setAmountFrom(value);
+        setAmountTo(Number((value * Number(data?.rates[currTo])).toFixed(2)));
+    };
+
+    const handleAmountTo = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(e.target.value);
+        setAmountTo(value);
+        setAmountFrom(Number((value / Number(data?.rates[currTo])).toFixed(2)));
+    };
+
+    console.log(data);
 
     return (
         <div className="flex w-225 p-2 bg-amber-50 ">
@@ -64,8 +81,17 @@ function CurrencyApp() {
                 ) : (
                     <h1>Select a currency you wanna count</h1>
                 )}
-                <CurrencyInput setValue={setCurrFrom} />
-                <CurrencyInput setValue={setCurrTo} />
+                {loading && <p>Loading plese wait.....</p>}
+                <CurrencyInput
+                    setValue={setCurrFrom}
+                    amount={amountFrom}
+                    handleInput={handleAmountFrom}
+                />
+                <CurrencyInput
+                    setValue={setCurrTo}
+                    amount={amountTo}
+                    handleInput={handleAmountTo}
+                />
             </div>
             <div>
                 <h1>Chart goes here</h1>

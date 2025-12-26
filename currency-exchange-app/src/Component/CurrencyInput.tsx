@@ -1,10 +1,12 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import React, { useState, type Dispatch, type SetStateAction } from "react";
 
-function CurrencyInput({
-    setValue,
-}: {
+interface Input {
     setValue: Dispatch<SetStateAction<string>>;
-}) {
+    handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    amount: number;
+}
+
+function CurrencyInput({ setValue, handleInput, amount }: Input) {
     const [isOpen, setIsOpen] = useState(false);
     const [currency, setCurrency] = useState<string>("");
 
@@ -53,6 +55,8 @@ function CurrencyInput({
                 type="number"
                 placeholder="Type your currency..."
                 className="flex-1 outline-none p-2"
+                value={amount}
+                onChange={handleInput}
             />
             <div className="bg-white p-2 relative">
                 {/* Custom Dropdown button */}
