@@ -1,6 +1,10 @@
-import { useState, type Dispatch } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 
-function CurrencyInput() {
+function CurrencyInput({
+    setValue,
+}: {
+    setValue: Dispatch<SetStateAction<string>>;
+}) {
     const [isOpen, setIsOpen] = useState(false);
     const [currency, setCurrency] = useState<string>("");
 
@@ -38,6 +42,11 @@ function CurrencyInput() {
         "ZAR",
     ];
 
+    const handleValue = (currency: string) => {
+        setCurrency(currency);
+        setValue(currency);
+    };
+
     return (
         <div className="flex items-center border">
             <input
@@ -62,7 +71,9 @@ function CurrencyInput() {
                             onClick={() => setIsOpen(false)}
                         >
                             {currencyData.map((item) => (
-                                <li>{item}</li>
+                                <li onClick={() => handleValue(item)}>
+                                    {item}
+                                </li>
                             ))}
                         </ul>
                     </div>

@@ -3,8 +3,8 @@ import CurrencyInput from "./CurrencyInput";
 import axios from "axios";
 
 function CurrencyApp() {
-    const [currFrom, setCurrFrom] = useState<number>(0);
-    const [currTo, setCurrTo] = useState<number>(0);
+    const [currFrom, setCurrFrom] = useState<string>("");
+    const [currTo, setCurrTo] = useState<string>("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,8 +28,8 @@ function CurrencyApp() {
                     <p>1 money equals to</p>
                     <h1 className="text-4xl">0,0000 This Big Money</h1>
                 </div>
-                <CurrencyInput />
-                <CurrencyInput />
+                <CurrencyInput setValue={setCurrFrom} />
+                <CurrencyInput setValue={setCurrTo} />
             </div>
             <div>
                 <h1>Chart goes here</h1>
