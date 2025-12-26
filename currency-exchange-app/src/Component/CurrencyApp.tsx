@@ -2,23 +2,39 @@ import { useEffect, useState } from "react";
 import CurrencyInput from "./CurrencyInput";
 import axios from "axios";
 
+interface Data {
+    amount: number;
+    base: string;
+    date: string;
+    rates: Rates;
+}
+
+interface Rates {
+    [key: string]: string;
+}
+
 function CurrencyApp() {
     const [currFrom, setCurrFrom] = useState<string>("");
     const [currTo, setCurrTo] = useState<string>("");
+    const [data, setData] = useState<Data | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            axios
-                .get(
-                    `https://api.frankfurter.dev/v1/latest?base=${currFrom}&symbols=${currTo}`
-                )
-                .then((response) => {
-                    console.log(response.data);
-                });
+            if (currFrom && currTo) {
+                await axios
+                    .get(
+                        `https://api.frankfurter.dev/v1/latest?base=${currFrom}&symbols=${currTo}`
+                    )
+                    .then((response) => {
+                        setData(response.data);
+                    });
+            }
         };
 
         fetchData();
     }, [currFrom, currTo]);
+
+    console.log(data);
 
     return (
         <div className="flex w-225 p-2 bg-amber-50 ">

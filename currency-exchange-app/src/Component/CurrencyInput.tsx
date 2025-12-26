@@ -70,8 +70,11 @@ function CurrencyInput({
                             className="cursor-pointer"
                             onClick={() => setIsOpen(false)}
                         >
-                            {currencyData.map((item) => (
-                                <li onClick={() => handleValue(item)}>
+                            {currencyData.map((item, index) => (
+                                <li
+                                    key={index}
+                                    onClick={() => handleValue(item)}
+                                >
                                     {item}
                                 </li>
                             ))}
