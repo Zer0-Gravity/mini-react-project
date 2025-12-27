@@ -1,5 +1,10 @@
 **Currency Exchange App**
 
+
+# DEMO APP
+
+![App Demo](./src/Demo/Currency%20Demo.gif)
+
 A small React app project to convert currencies using public API. 
 
 API Used Frankfurter API, link : https://frankfurter.dev/
@@ -12,3 +17,8 @@ API Used Frankfurter API, link : https://frankfurter.dev/
 - Typescript
 - Tailwind
 - Axios 
+
+## Library Used
+- React Floating UI
+- Axios
+- Country Flag Icon
