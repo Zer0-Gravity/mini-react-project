@@ -1,4 +1,12 @@
 import {
+    autoPlacement,
+    autoUpdate,
+    flip,
+    offset,
+    shift,
+    useFloating,
+} from "@floating-ui/react";
+import {
     AU,
     BG,
     BR,
@@ -115,6 +123,11 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
         return currency.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
 
+    const { refs, floatingStyles } = useFloating({
+        placement: "right-start",
+        middleware: [offset(10), flip(), shift()],
+        whileElementsMounted: autoUpdate,
+    });
     return (
         <div className="flex items-center border" ref={dropdownRef}>
             <input
@@ -126,7 +139,12 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
             />
             <div className="bg-white p-2 relative">
                 {/* Custom Dropdown button */}
-                <button onClick={() => setIsOpen(!isOpen)}>
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    ref={(node) => {
+                        refs.setReference(node);
+                    }}
+                >
                     {currency ? (
                         <div className="flex items-center gap-1">
                             <h1>{currency}</h1>
@@ -137,7 +155,13 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
                     )}
                 </button>
                 {isOpen && (
-                    <div className="absolute mt-3 bg-gray-400 p-2 max-h-100 overflow-hidden overflow-y-auto">
+                    <div
+                        ref={(node) => {
+                            refs.setFloating(node);
+                        }}
+                        style={floatingStyles}
+                        className=" bg-gray-400 p-2 max-h-100 overflow-hidden overflow-y-auto"
+                    >
                         <input
                             type="search"
                             placeholder="Search currency"
