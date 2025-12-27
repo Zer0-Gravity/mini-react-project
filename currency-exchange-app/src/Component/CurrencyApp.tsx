@@ -69,33 +69,41 @@ function CurrencyApp() {
     console.log(data);
 
     return (
-        <div className="flex w-225 p-2 bg-amber-50 ">
-            <div className="flex flex-col gap-3">
-                <h1 className="text-2xl font-bold">CURRENCY CONVERTER</h1>
-                {data && currency ? (
-                    <div>
-                        <p>{`${data.amount}  ${currency[currFrom]} is equal to`}</p>
-                        <h1 className="text-4xl">{`${data.rates[currTo]} ${currency[currTo]}`}</h1>
-                        <p>{data.date}</p>
+        <div className="flex w-112.5 h-100 p-5 flex-col gap-3 bg-amber-200 rounded-lg">
+            <h1 className=" text-lg font-semibold">CURRENCY CONVERTER</h1>
+            {data && currency ? (
+                <div className="flex-1 flex flex-col">
+                    <div className="flex-1">
+                        <p>{`${amountFrom}  ${currency[currFrom]} is equal to`}</p>
+                        <h1 className="text-4xl font-bold">{`${amountTo} ${currency[currTo]}`}</h1>
                     </div>
-                ) : (
-                    <h1>Select a currency you wanna count</h1>
-                )}
-                {loading && <p>Loading plese wait.....</p>}
-                <CurrencyInput
-                    setValue={setCurrFrom}
-                    amount={amountFrom}
-                    handleInput={handleAmountFrom}
-                />
-                <CurrencyInput
-                    setValue={setCurrTo}
-                    amount={amountTo}
-                    handleInput={handleAmountTo}
-                />
-            </div>
-            <div>
-                <h1>Chart goes here</h1>
-            </div>
+                    <div>
+                        <p>{`Data as of : ${data.date} Exchange rate: ${data.rates[currTo]}`}</p>
+                    </div>
+                </div>
+            ) : (
+                <h1 className="flex-1 text-xl font-medium">
+                    Select a currency you wanna count
+                </h1>
+            )}
+            {loading && <p>Loading plese wait.....</p>}
+            <CurrencyInput
+                setValue={setCurrFrom}
+                amount={amountFrom}
+                handleInput={handleAmountFrom}
+            />
+            <CurrencyInput
+                setValue={setCurrTo}
+                amount={amountTo}
+                handleInput={handleAmountTo}
+            />
+            <p>
+                Data acquired from{" "}
+                <a href="https://frankfurter.dev/" className="underline">
+                    Frankfurter
+                </a>{" "}
+                API
+            </p>
         </div>
     );
 }

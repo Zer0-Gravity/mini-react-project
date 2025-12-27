@@ -1,5 +1,4 @@
 import {
-    autoPlacement,
     autoUpdate,
     flip,
     offset,
@@ -129,7 +128,10 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
         whileElementsMounted: autoUpdate,
     });
     return (
-        <div className="flex items-center border" ref={dropdownRef}>
+        <div
+            className="flex w-full items-center border rounded-xl"
+            ref={dropdownRef}
+        >
             <input
                 type="number"
                 placeholder="Type your currency..."
@@ -137,13 +139,14 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
                 value={amount}
                 onChange={handleInput}
             />
-            <div className="bg-white p-2 relative">
+            <div>
                 {/* Custom Dropdown button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     ref={(node) => {
                         refs.setReference(node);
                     }}
+                    className="w-30 grid place-content-center rounded-xl bg-blue-900 p-2 text-white font-semibold"
                 >
                     {currency ? (
                         <div className="flex items-center gap-1">
@@ -160,12 +163,12 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
                             refs.setFloating(node);
                         }}
                         style={floatingStyles}
-                        className=" bg-gray-400 p-2 max-h-100 overflow-hidden overflow-y-auto"
+                        className=" bg-amber-200 p-3 rounded-lg max-h-100 w-62.5 overflow-hidden overflow-y-auto shadow-xl"
                     >
                         <input
                             type="search"
                             placeholder="Search currency"
-                            className="border p-2 mb-2"
+                            className="border p-2 mb-2 w-full rounded-lg"
                             value={search}
                             onChange={handleSearchInput}
                         />
@@ -176,7 +179,7 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
                             {filteredItem.length > 0 ? (
                                 filteredItem.map((item, index) => (
                                     <label
-                                        className="flex justify-between p-2 hover:bg-amber-200"
+                                        className="flex justify-between p-2 hover:bg-blue-900 hover:text-white rounded-lg transition-all duration-150"
                                         onClick={() =>
                                             handleValue(
                                                 item.currency,
@@ -189,7 +192,7 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
                                     </label>
                                 ))
                             ) : (
-                                <p>Country not found</p>
+                                <p className="text-center">Country not found</p>
                             )}
                         </ul>
                     </div>
