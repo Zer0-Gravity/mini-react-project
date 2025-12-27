@@ -32,6 +32,8 @@ import {
     ZA,
 } from "country-flag-icons/react/1x1";
 import React, {
+    useEffect,
+    useRef,
     useState,
     type Dispatch,
     type ReactElement,
@@ -49,6 +51,21 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
     const [currency, setCurrency] = useState<string>("");
     const [flag, setFlag] = useState<ReactElement>();
     const [search, setSearch] = useState<string>("");
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleDropdown = (e: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(e.target as Node)
+            ) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleDropdown);
+        return () => document.removeEventListener("mousedown", handleDropdown);
+    }, []);
 
     const currencyData = [
         { currency: "AUD", flagCode: <AU className="w-7 rounded-full" /> },
@@ -99,7 +116,7 @@ function CurrencyInput({ setValue, handleInput, amount }: Input) {
     });
 
     return (
-        <div className="flex items-center border">
+        <div className="flex items-center border" ref={dropdownRef}>
             <input
                 type="number"
                 placeholder="Type your currency..."
