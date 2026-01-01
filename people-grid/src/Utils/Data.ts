@@ -31,7 +31,7 @@ export const peopleData = [
         name: "Diana Prince",
         email: "diana.p@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
     },
@@ -76,7 +76,7 @@ export const peopleData = [
         name: "Ian Wright",
         email: "ian.w@example.com",
         role: "Admin",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
     },
@@ -121,7 +121,7 @@ export const peopleData = [
         name: "Nina Simone",
         email: "nina.s@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1567532939604-b6c5b0ad2e01?w=100&h=100&fit=crop",
     },
@@ -184,7 +184,7 @@ export const peopleData = [
         name: "Ursula K.",
         email: "ursula.k@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
     },
@@ -229,7 +229,7 @@ export const peopleData = [
         name: "Zane Grey",
         email: "zane.g@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop",
     },
@@ -274,7 +274,7 @@ export const peopleData = [
         name: "Ethan Hunt",
         email: "ethan.h@example.com",
         role: "Admin",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1480427461922-7ad335657f4a?w=100&h=100&fit=crop",
     },
@@ -310,7 +310,7 @@ export const peopleData = [
         name: "Iris West",
         email: "iris.w@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
     },
@@ -364,7 +364,7 @@ export const peopleData = [
         name: "Olivia Pope",
         email: "olivia.p@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1531746020798-e795c53bbfe7?w=100&h=100&fit=crop",
     },
@@ -409,7 +409,7 @@ export const peopleData = [
         name: "Tyrion Lannister",
         email: "tyrion.l@example.com",
         role: "Admin",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
     },
@@ -454,7 +454,7 @@ export const peopleData = [
         name: "Yogi Bear",
         email: "yogi.b@example.com",
         role: "Editor",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
     },
@@ -499,7 +499,7 @@ export const peopleData = [
         name: "Don Draper",
         email: "don.d@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
     },
@@ -544,7 +544,7 @@ export const peopleData = [
         name: "Indiana Jones",
         email: "indy.j@example.com",
         role: "Admin",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     },
@@ -589,7 +589,7 @@ export const peopleData = [
         name: "Neo Anderson",
         email: "neo.a@example.com",
         role: "Editor",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     },
@@ -634,7 +634,7 @@ export const peopleData = [
         name: "Sarah Connor",
         email: "sarah.c@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1531746020798-e795c53bbfe7?w=100&h=100&fit=crop",
     },
@@ -679,7 +679,7 @@ export const peopleData = [
         name: "Xavier Renegade",
         email: "xavier.r@example.com",
         role: "Admin",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     },
@@ -724,7 +724,7 @@ export const peopleData = [
         name: "Cinderella",
         email: "cindy.e@example.com",
         role: "Editor",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
     },
@@ -769,7 +769,7 @@ export const peopleData = [
         name: "Homer Simpson",
         email: "homer.s@example.com",
         role: "User",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
     },
@@ -814,7 +814,7 @@ export const peopleData = [
         name: "Mario Bros",
         email: "mario.b@example.com",
         role: "Admin",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     },
@@ -859,7 +859,7 @@ export const peopleData = [
         name: "Robin Grayson",
         email: "robin.g@example.com",
         role: "Editor",
-        status: "Pending",
+        status: "Vacation",
         profileImage:
             "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
     },

@@ -30,45 +30,55 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
                 </thead>
 
                 <tbody>
-                    {currentData.map((employee) => (
-                        <tr
-                            key={employee.id}
-                            className="border border-gray-600"
-                        >
-                            <td className="px-4 py-2">{employee.id}</td>
-                            <td className="px-4 py-2">
-                                <img
-                                    src={employee.profileImage}
-                                    alt={employee.name}
-                                    className="rounded-full aspect-square w-12.5"
-                                />
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex flex-col">
-                                    <span>{employee.name}</span>
-                                    <span>{employee.email}</span>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">{employee.role}</td>
-                            <td className="px-4 py-2">{employee.status}</td>
-                            <td className="px-4 py-2">
-                                <button>
-                                    <HiDotsCircleHorizontal size={25} />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {currentData.length ? (
+                        currentData.map((employee) => (
+                            <tr
+                                key={employee.id}
+                                className="border border-gray-600"
+                            >
+                                <td className="px-4 py-2">{employee.id}</td>
+                                <td className="px-4 py-2">
+                                    <img
+                                        src={employee.profileImage}
+                                        alt={employee.name}
+                                        className="rounded-full aspect-square w-12.5"
+                                    />
+                                </td>
+                                <td className="px-4 py-2">
+                                    <div className="flex flex-col">
+                                        <span>{employee.name}</span>
+                                        <span>{employee.email}</span>
+                                    </div>
+                                </td>
+                                <td className="px-4 py-2">{employee.role}</td>
+                                <td className="px-4 py-2">{employee.status}</td>
+                                <td className="px-4 py-2">
+                                    <button>
+                                        <HiDotsCircleHorizontal size={25} />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <h1 className="w-full">No Employee Found</h1>
+                    )}
                 </tbody>
             </table>
 
             <div className="flex gap-4 justify-end">
-                <button onClick={() => handleNavButton(currentPage - 1)}>
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => handleNavButton(currentPage - 1)}
+                >
                     Previous
                 </button>
                 <p>
                     Page {currentPage} of {totalPage}
                 </p>
-                <button onClick={() => handleNavButton(currentPage + 1)}>
+                <button
+                    disabled={currentPage === totalPage}
+                    onClick={() => handleNavButton(currentPage + 1)}
+                >
                     Next
                 </button>
             </div>
