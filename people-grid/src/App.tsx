@@ -7,7 +7,7 @@ import type { PeopleProps } from "./Utils/Type";
 function App() {
     const [people, setAddPeople] = useState<PeopleProps[]>(peopleData);
 
-    return (
+    return (    
         <div>
             <Sidebar />
             <div className="p-5">

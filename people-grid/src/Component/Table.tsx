@@ -1,7 +1,20 @@
 import { HiDotsCircleHorizontal } from "react-icons/hi";
 import type { PeopleProps } from "../Utils/Type";
+import { useState } from "react";
 
 function Table({ filteredData }: { filteredData: PeopleProps[] }) {
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemPerPage = 10;
+    const startIndex = (currentPage - 1) * itemPerPage;
+    const currentData = filteredData.slice(
+        startIndex,
+        startIndex + itemPerPage
+    );
+
+    const totalPage = Math.ceil(filteredData.length / itemPerPage);
+    const handleNavButton = (page: number) => setCurrentPage(page);
+
     return (
         <div className="flex flex-col">
             <table className="min-w-full table-auto rounded border border-gray-700 ">
@@ -17,7 +30,7 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
                 </thead>
 
                 <tbody>
-                    {filteredData.map((employee) => (
+                    {currentData.map((employee) => (
                         <tr
                             key={employee.id}
                             className="border border-gray-600"
@@ -49,9 +62,15 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
             </table>
 
             <div className="flex gap-4 justify-end">
-                <button>Previous</button>
-                <p>Page 1 of 2</p>
-                <button>Next</button>
+                <button onClick={() => handleNavButton(currentPage - 1)}>
+                    Previous
+                </button>
+                <p>
+                    Page {currentPage} of {totalPage}
+                </p>
+                <button onClick={() => handleNavButton(currentPage + 1)}>
+                    Next
+                </button>
             </div>
         </div>
     );
