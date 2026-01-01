@@ -1,53 +1,78 @@
-function Dropdown() {
+import Input from "./Input";
+
+interface DropdownProps {
+    setFilterRole: (value: string) => void;
+    setFilterStatus: (value: string) => void;
+}
+
+function Dropdown({ setFilterRole, setFilterStatus }: DropdownProps) {
     return (
         <div className="absolute bg-amber-100 p-5">
             <div>
                 <h1>Filter By Role</h1>
                 <div>
-                    <Input value="" desc="All" filter="filter-role" />
-                    <Input value="" desc="Manager" filter="filter-role" />
-                    <Input value="" desc="Admin" filter="filter-role" />
-                    <Input value="" desc="Editor" filter="filter-role" />
-                    <Input value="" desc="User" filter="filter-role" />
+                    <Input
+                        value=""
+                        desc="All"
+                        filter="filter-role"
+                        onFilter={setFilterRole}
+                    />
+                    <Input
+                        value="Manager"
+                        desc="Manager"
+                        filter="filter-role"
+                        onFilter={setFilterRole}
+                    />
+                    <Input
+                        value="Admin"
+                        desc="Admin"
+                        filter="filter-role"
+                        onFilter={setFilterRole}
+                    />
+                    <Input
+                        value="Editor"
+                        desc="Editor"
+                        filter="filter-role"
+                        onFilter={setFilterRole}
+                    />
+                    <Input
+                        value="User"
+                        desc="User"
+                        filter="filter-role"
+                        onFilter={setFilterRole}
+                    />
                 </div>
             </div>
             <div>
                 <h1>Filter By Status</h1>
                 <div>
-                    <Input value="" desc="All" filter="filter-status" />
+                    <Input
+                        value=""
+                        desc="All"
+                        filter="filter-status"
+                        onFilter={setFilterStatus}
+                    />
                     <Input
                         value="Active"
                         desc="Active"
                         filter="filter-status"
+                        onFilter={setFilterStatus}
                     />
                     <Input
                         value="Inactive"
                         desc="Inactive"
                         filter="filter-status"
+                        onFilter={setFilterStatus}
                     />
                     <Input
                         value="Vacation"
                         desc="Vacation"
                         filter="filter-status"
+                        onFilter={setFilterStatus}
                     />
                 </div>
             </div>
         </div>
-    );
-}
-
-interface InputProp {
-    value: string;
-    desc: string;
-    filter: string;
-}
-
-function Input({ value, desc, filter }: InputProp) {
-    return (
-        <label>
-            <input type="radio" name={filter} value={value} />
-            <span>{desc}</span>
-        </label>
     );
 }
 

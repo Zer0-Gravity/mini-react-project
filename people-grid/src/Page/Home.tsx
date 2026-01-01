@@ -7,10 +7,21 @@ import Dropdown from "../Component/Dropdown";
 function Home({ people }: { people: PeopleProps[] }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [filterDropDown, setFilterDropDown] = useState<boolean>(false);
+    const [filterRole, setFilterRole] = useState<string>("");
+    const [filterStatus, setFilterStatus] = useState<string>("");
 
-    const filteredData = people.filter((data) => {
-        return data.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredData = people.filter(({ name, role, status }) => {
+        const matchName = name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+
+        const matchRole = filterRole === "" || role === filterRole;
+        const matchStatus = filterStatus === "" || status === filterStatus;
+
+        return matchName && matchRole && matchStatus;
     });
+
+    console.log(filterRole, filterStatus);
 
     return (
         <div className="ml-35">
@@ -30,7 +41,12 @@ function Home({ people }: { people: PeopleProps[] }) {
                         <LuFilter size={25} /> Filter
                     </button>
 
-                    {filterDropDown && <Dropdown />}
+                    {filterDropDown && (
+                        <Dropdown
+                            setFilterRole={setFilterRole}
+                            setFilterStatus={setFilterStatus}
+                        />
+                    )}
                 </div>
                 <div>
                     <button>Add Employee</button>
