@@ -1,14 +1,14 @@
 import { HiDotsCircleHorizontal } from "react-icons/hi";
 import type { PeopleProps } from "../Utils/Type";
 
-function Table({ people }: { people: PeopleProps[] }) {
+function Table({ filteredData }: { filteredData: PeopleProps[] }) {
     return (
         <div className="flex flex-col">
             <table className="min-w-full table-auto rounded border border-gray-700 ">
                 <thead>
                     <tr>
-                        <th className="px-5 py-2 text-left">ID</th>
-                        <th className="px-5 py-2 text-left">Profile</th>
+                        <th className="px-5 py-2 text-left w-10">ID</th>
+                        <th className="px-5 py-2 text-left w-15">Profile</th>
                         <th className="px-5 py-2 text-left">Name</th>
                         <th className="px-5 py-2 text-left">Role</th>
                         <th className="px-5 py-2 text-left">Status</th>
@@ -17,7 +17,7 @@ function Table({ people }: { people: PeopleProps[] }) {
                 </thead>
 
                 <tbody>
-                    {people.map((employee) => (
+                    {filteredData.map((employee) => (
                         <tr
                             key={employee.id}
                             className="border border-gray-600"
@@ -25,9 +25,9 @@ function Table({ people }: { people: PeopleProps[] }) {
                             <td className="px-4 py-2">{employee.id}</td>
                             <td className="px-4 py-2">
                                 <img
-                                    src="https://placehold.co/50x50"
-                                    alt="john-doe"
-                                    className="rounded-full"
+                                    src={employee.profileImage}
+                                    alt={employee.name}
+                                    className="rounded-full aspect-square w-12.5"
                                 />
                             </td>
                             <td className="px-4 py-2">
