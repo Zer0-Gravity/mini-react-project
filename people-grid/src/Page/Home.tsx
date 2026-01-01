@@ -1,6 +1,7 @@
 import Table from "../Component/Table";
+import type { PeopleProps } from "../Utils/Type";
 
-function Home() {
+function Home({ people }: { people: PeopleProps[] }) {
     return (
         <div className="ml-35">
             <div className="flex">
@@ -30,7 +31,7 @@ function Home() {
                 </div>
             </div>
 
-            <Table />
+            <Table people={people} />
         </div>
     );
 }

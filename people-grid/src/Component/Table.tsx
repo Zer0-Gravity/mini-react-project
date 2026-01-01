@@ -1,8 +1,9 @@
 import { HiDotsCircleHorizontal } from "react-icons/hi";
+import type { PeopleProps } from "../Utils/Type";
 
-function Table() {
+function Table({ people }: { people: PeopleProps[] }) {
     return (
-        <div>
+        <div className="flex flex-col">
             <table className="min-w-full table-auto rounded border border-gray-700 ">
                 <thead>
                     <tr>
@@ -16,31 +17,42 @@ function Table() {
                 </thead>
 
                 <tbody>
-                    <tr className="border border-gray-600">
-                        <td className="px-4 py-2">90</td>
-                        <td className="px-4 py-2">
-                            <img
-                                src="https://placehold.co/50x50"
-                                alt="john-doe"
-                                className="rounded-full"
-                            />
-                        </td>
-                        <td className="px-4 py-2">
-                            <div className="flex flex-col">
-                                <span>John Doe</span>
-                                <span>Johndoe@email.com</span>
-                            </div>
-                        </td>
-                        <td className="px-4 py-2">Admin</td>
-                        <td className="px-4 py-2">Active</td>
-                        <td className="px-4 py-2">
-                            <button>
-                                <HiDotsCircleHorizontal size={25} />
-                            </button>
-                        </td>
-                    </tr>
+                    {people.map((employee) => (
+                        <tr
+                            key={employee.id}
+                            className="border border-gray-600"
+                        >
+                            <td className="px-4 py-2">{employee.id}</td>
+                            <td className="px-4 py-2">
+                                <img
+                                    src="https://placehold.co/50x50"
+                                    alt="john-doe"
+                                    className="rounded-full"
+                                />
+                            </td>
+                            <td className="px-4 py-2">
+                                <div className="flex flex-col">
+                                    <span>{employee.name}</span>
+                                    <span>{employee.email}</span>
+                                </div>
+                            </td>
+                            <td className="px-4 py-2">{employee.role}</td>
+                            <td className="px-4 py-2">{employee.status}</td>
+                            <td className="px-4 py-2">
+                                <button>
+                                    <HiDotsCircleHorizontal size={25} />
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
+
+            <div className="flex gap-4 justify-end">
+                <button>Previous</button>
+                <p>Page 1 of 2</p>
+                <button>Next</button>
+            </div>
         </div>
     );
 }
