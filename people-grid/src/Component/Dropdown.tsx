@@ -1,13 +1,27 @@
 import Input from "./Input";
+import { useFloating } from "@floating-ui/react";
 
 interface DropdownProps {
     setFilterRole: (value: string) => void;
     setFilterStatus: (value: string) => void;
+    refs: ReturnType<typeof useFloating>["refs"];
+    floatingStyles: ReturnType<typeof useFloating>["floatingStyles"];
 }
 
-function Dropdown({ setFilterRole, setFilterStatus }: DropdownProps) {
+function Dropdown({
+    setFilterRole,
+    setFilterStatus,
+    refs,
+    floatingStyles,
+}: DropdownProps) {
     return (
-        <div className="absolute bg-amber-100 p-5">
+        <div
+            className=" bg-amber-100 p-5"
+            ref={(node) => {
+                refs.setFloating(node);
+            }}
+            style={floatingStyles}
+        >
             <div>
                 <h1>Filter By Role</h1>
                 <div>
