@@ -22,7 +22,7 @@ I built this mini project to practice implementing filter and pagination on larg
 - [React Icon](react-icons.github.io)
 
 ### Preview
-![Demo Gif](./src//Demo/Filter%20Demo.gif)
+![Demo Gif](./src/Demo/Filter_Demo.gif)
 
 
 ### Quick Start
