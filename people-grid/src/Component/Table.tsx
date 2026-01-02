@@ -34,7 +34,7 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
                         currentData.map((employee) => (
                             <tr
                                 key={employee.id}
-                                className="border border-gray-600 hover:bg-accent-color"
+                                className="border border-gray-600 hover:bg-accent-color hover:text-dark-text"
                             >
                                 <td className="px-4 py-2">{employee.id}</td>
                                 <td className="px-4 py-2">

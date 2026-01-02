@@ -51,13 +51,13 @@ function Home({ people }: { people: PeopleProps[] }) {
 
     return (
         <div className="ml-35 space-y-10" ref={dropdownRef}>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
                 <div>
                     <input
                         type="search"
                         placeholder="Search employee.."
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="p-2 bg-white rounded-lg outline-none w-60"
+                        className="px-3 py-2 bg-white rounded-lg outline-none w-60"
                     />
                 </div>
                 <div className="px-3 py-2 rounded-lg bg-accent-color">
