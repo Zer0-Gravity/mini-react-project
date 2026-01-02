@@ -44,24 +44,25 @@ function Home({ people }: { people: PeopleProps[] }) {
     });
 
     const { refs, floatingStyles } = useFloating({
-        placement: "bottom-end",
-        middleware: [offset(10), flip(), shift()],
+        placement: "left-start",
+        middleware: [offset(20), flip(), shift()],
         whileElementsMounted: autoUpdate,
     });
 
     return (
-        <div className="ml-35" ref={dropdownRef}>
-            <div className="flex items-center">
-                <div className="flex-1">
+        <div className="ml-35 space-y-10" ref={dropdownRef}>
+            <div className="flex items-center justify-between">
+                <div>
                     <input
                         type="search"
                         placeholder="Search employee.."
                         onChange={(e) => setSearchQuery(e.target.value)}
+                        className="p-2 bg-white rounded-lg outline-none w-60"
                     />
                 </div>
-                <div>
+                <div className="px-3 py-2 rounded-lg bg-accent-color">
                     <button
-                        className="flex text-xl items-center"
+                        className="flex text-xl items-center justify-between text-dark-text font-semibold   "
                         onClick={() => setFilterDropDown(!filterDropDown)}
                         ref={(node) => {
                             refs.setReference(node);
@@ -78,9 +79,6 @@ function Home({ people }: { people: PeopleProps[] }) {
                             floatingStyles={floatingStyles}
                         />
                     )}
-                </div>
-                <div>
-                    <button>Add Employee</button>
                 </div>
             </div>
 

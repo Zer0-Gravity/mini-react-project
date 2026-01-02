@@ -16,15 +16,15 @@ function Dropdown({
 }: DropdownProps) {
     return (
         <div
-            className=" bg-amber-100 p-5"
+            className=" bg-accent-color p-5 flex flex-col gap-5 h-50 rounded-2xl"
             ref={(node) => {
                 refs.setFloating(node);
             }}
             style={floatingStyles}
         >
-            <div>
+            <div className="flex flex-col gap-4">
                 <h1>Filter By Role</h1>
-                <div>
+                <div className="space-x-3">
                     <Input
                         value=""
                         desc="All"
@@ -57,9 +57,9 @@ function Dropdown({
                     />
                 </div>
             </div>
-            <div>
+            <div className="flex flex-col gap-4">
                 <h1>Filter By Status</h1>
-                <div>
+                <div className="space-x-3">
                     <Input
                         value=""
                         desc="All"

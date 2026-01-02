@@ -16,8 +16,8 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
     const handleNavButton = (page: number) => setCurrentPage(page);
 
     return (
-        <div className="flex flex-col">
-            <table className="min-w-full table-auto rounded border border-gray-700 ">
+        <div className="flex flex-col gap-4">
+            <table className="min-w-full table-auto rounded border border-gray-700 text-light-text">
                 <thead>
                     <tr>
                         <th className="px-5 py-2 text-left w-10">ID</th>
@@ -34,7 +34,7 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
                         currentData.map((employee) => (
                             <tr
                                 key={employee.id}
-                                className="border border-gray-600"
+                                className="border border-gray-600 hover:bg-accent-color"
                             >
                                 <td className="px-4 py-2">{employee.id}</td>
                                 <td className="px-4 py-2">
@@ -46,8 +46,12 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
                                 </td>
                                 <td className="px-4 py-2">
                                     <div className="flex flex-col">
-                                        <span>{employee.name}</span>
-                                        <span>{employee.email}</span>
+                                        <span className="font-bold">
+                                            {employee.name}
+                                        </span>
+                                        <span className="font-light">
+                                            {employee.email}
+                                        </span>
                                     </div>
                                 </td>
                                 <td className="px-4 py-2">{employee.role}</td>
@@ -65,19 +69,21 @@ function Table({ filteredData }: { filteredData: PeopleProps[] }) {
                 </tbody>
             </table>
 
-            <div className="flex gap-4 justify-end">
+            <div className="flex gap-4 justify-end items-center">
                 <button
                     disabled={currentPage === 1}
                     onClick={() => handleNavButton(currentPage - 1)}
+                    className="p-2 bg-accent-color rounded-lg font-semibold disabled:opacity-60"
                 >
                     Previous
                 </button>
-                <p>
+                <p className="text-light-text">
                     Page {currentPage} of {totalPage}
                 </p>
                 <button
                     disabled={currentPage === totalPage}
                     onClick={() => handleNavButton(currentPage + 1)}
+                    className="p-2 bg-accent-color rounded-lg font-semibold disabled:opacity-60"
                 >
                     Next
                 </button>

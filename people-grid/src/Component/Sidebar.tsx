@@ -9,17 +9,17 @@ import {
 
 function Sidebar() {
     return (
-        <div className="fixed h-screen border-r p-4">
-            <h1>LOGO</h1>
+        <div className="fixed h-screen border-r p-4 flex flex-col gap-5">
+            <h1 className="font-bold text-3xl text-light-text">FILTER</h1>
             <ul className="space-y-4">
-                <ChildrenList icon={<FaHome size={25} />} desc={"Home"} />
+                <ChildrenList icon={<FaHome size={15} />} desc={"Home"} />
                 <ChildrenList
-                    icon={<FaBriefcase size={25} />}
+                    icon={<FaBriefcase size={15} />}
                     desc={"Manager"}
                 />
-                <ChildrenList icon={<FaKey size={25} />} desc={"Admin"} />
-                <ChildrenList icon={<FaPen size={25} />} desc={"Editor"} />
-                <ChildrenList icon={<FaUserCircle size={25} />} desc={"User"} />
+                <ChildrenList icon={<FaKey size={15} />} desc={"Admin"} />
+                <ChildrenList icon={<FaPen size={15} />} desc={"Editor"} />
+                <ChildrenList icon={<FaUserCircle size={15} />} desc={"User"} />
             </ul>
         </div>
     );
@@ -32,7 +32,7 @@ interface ListProps {
 
 function ChildrenList({ icon, desc }: ListProps) {
     return (
-        <li className="flex gap-4">
+        <li className="flex gap-4 text-light-text items-center hover:bg-accent-color hover:text-dark-text">
             {icon}
             <span>{desc}</span>
         </li>

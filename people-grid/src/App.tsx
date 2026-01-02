@@ -1,17 +1,13 @@
-import { useState } from "react";
 import Sidebar from "./Component/Sidebar";
 import Home from "./Page/Home";
 import { peopleData } from "./Utils/Data";
-import type { PeopleProps } from "./Utils/Type";
 
 function App() {
-    const [people, setAddPeople] = useState<PeopleProps[]>(peopleData);
-
-    return (    
+    return (
         <div>
             <Sidebar />
-            <div className="p-5">
-                <Home people={people} />
+            <div className="p-5 bg-primary-color h-screen">
+                <Home people={peopleData} />
             </div>
         </div>
     );
