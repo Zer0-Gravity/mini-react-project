@@ -39,6 +39,11 @@ function TodoApp() {
         setTodos(todos.filter((_, i) => index !== i));
     };
 
+    const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        setTag(val ? val : "");
+    };
+
     const handleSubmitTodo = () => {
         const newTodo: TodoProps = {
             title: title,
@@ -75,7 +80,7 @@ function TodoApp() {
                         {isModal && (
                             <Modal
                                 onClose={() => setIsModal(false)}
-                                data={{ setTitle, setContext, setTag }}
+                                data={{ setTitle, setContext, handleTagChange }}
                                 onSubmit={handleSubmitTodo}
                             />
                         )}

@@ -1,39 +1,33 @@
+import type React from "react";
+
 interface TagProps {
-    setTag: (tag: string) => void;
+    handleTagChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function TagInput({ setTag }: TagProps) {
+function TagInput({ handleTagChange }: TagProps) {
     return (
         <div className="absolute">
             <label>
-                <input
-                    type="radio"
-                    value="Urgent"
-                    onChange={(e) => setTag(e.target.value)}
-                />
+                <input type="radio" value="Urgent" onChange={handleTagChange} />
                 <span>Urgent</span>
             </label>
             <label>
                 <input
                     type="radio"
                     value="Personal"
-                    onChange={(e) => setTag(e.target.value)}
+                    onChange={handleTagChange}
                 />
                 <span>Personal</span>
             </label>
             <label>
-                <input
-                    type="radio"
-                    value="Quick"
-                    onChange={(e) => setTag(e.target.value)}
-                />
+                <input type="radio" value="Quick" onChange={handleTagChange} />
                 <span>Quick</span>
             </label>
             <label>
                 <input
                     type="radio"
                     value="Important"
-                    onChange={(e) => setTag(e.target.value)}
+                    onChange={handleTagChange}
                 />
                 <span>Important</span>
             </label>

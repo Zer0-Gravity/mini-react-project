@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import TagInput from "./TagInput";
 import {
     IoMdAddCircle,
@@ -12,7 +12,7 @@ interface ModalProps {
     data: {
         setTitle: (title: string) => void;
         setContext: (context: string) => void;
-        setTag: (tag: string) => void;
+        handleTagChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
 }
 
@@ -48,7 +48,11 @@ function Modal({ onClose, data, onSubmit }: ModalProps) {
                                 Tags <IoMdArrowDropdown />
                             </button>
 
-                            {inputDropdown && <TagInput setTag={data.setTag} />}
+                            {inputDropdown && (
+                                <TagInput
+                                    handleTagChange={data.handleTagChange}
+                                />
+                            )}
                         </div>
                     </div>
                     <div className="flex justify-end gap-2">
