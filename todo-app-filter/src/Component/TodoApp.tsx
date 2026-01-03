@@ -77,6 +77,9 @@ function TodoApp() {
         return matchSearch && matchTag;
     });
 
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    filterTodos.sort((a: any) => (a.status === "finish" ? 1 : -1));
+
     return (
         <div className="w-150 h-[400] border p-4">
             <section>

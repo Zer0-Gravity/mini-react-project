@@ -47,7 +47,7 @@ function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
                                 <td>
                                     <label htmlFor={todo.title}>
                                         <span className="has-checked:line-through">
-                                            {todo.title} + {todo.status}
+                                            {todo.title}
                                         </span>
                                     </label>
                                 </td>
