@@ -9,8 +9,10 @@ interface TodoProps {
     title: string;
     context: string;
     tag: string;
-    done: boolean;
+    status: Status;
 }
+
+type Status = "finish" | "unfinished";
 
 function TableTodo({ todos, delTodo }: TableProps) {
     return (

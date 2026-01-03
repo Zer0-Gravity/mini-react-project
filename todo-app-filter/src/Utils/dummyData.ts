@@ -1,62 +1,71 @@
-export const dummyTodos = [
+interface TodoProps {
+    title: string;
+    context: string;
+    tag: string;
+    status: Status;
+}
+
+type Status = "finish" | "unfinished";
+
+export const dummyTodos: TodoProps[] = [
     {
         title: "Make Bread",
         tag: "Quick",
         context: "Cooking",
-        done: false,
+        status: "unfinished",
     },
     {
         title: "Finish homework",
         tag: "Urgent",
         context: "School",
-        done: false,
+        status: "unfinished",
     },
     {
         title: "Buy groceries",
         tag: "Important",
         context: "Home",
-        done: false,
+        status: "unfinished",
     },
     {
         title: "Clean the kitchen",
         tag: "Personal",
         context: "Home",
-        done: true,
+        status: "unfinished",
     },
     {
         title: "Read 10 pages",
         tag: "Quick",
         context: "Personal",
-        done: false,
+        status: "unfinished",
     },
     {
         title: "Submit project report",
         tag: "Urgent",
         context: "Work",
-        done: false,
+        status: "unfinished",
     },
     {
         title: "Call Mom",
         tag: "Personal",
         context: "Social",
-        done: true,
+        status: "unfinished",
     },
     {
         title: "Fix broken chair",
         tag: "Important",
         context: "Home",
-        done: false,
+        status: "unfinished",
     },
     {
         title: "Check emails",
         tag: "Quick",
         context: "Work",
-        done: true,
+        status: "unfinished",
     },
     {
         title: "Prepare presentation",
         tag: "Important",
         context: "Work",
-        done: false,
+        status: "unfinished",
     },
 ];

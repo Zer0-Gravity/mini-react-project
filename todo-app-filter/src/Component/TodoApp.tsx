@@ -10,8 +10,10 @@ interface TodoProps {
     title: string;
     context: string;
     tag: string;
-    done: boolean;
+    status: Status;
 }
+
+type Status = "finish" | "unfinished";
 
 function TodoApp() {
     const [todos, setTodos] = useState<TodoProps[]>(dummyTodos);
@@ -23,6 +25,7 @@ function TodoApp() {
     const [tag, setTag] = useState<string>("");
     const [tagFilter, setTagFilter] = useState<string>("");
     const [searchQuery, setSearchQuery] = useState<string>("");
+    const [status, setStatus] = useState<Status>("unfinished");
 
     const handleDeleteTodos = (index: number) => {
         setTodos(todos.filter((_, i) => index !== i));
@@ -44,7 +47,7 @@ function TodoApp() {
             title: title,
             tag: tag,
             context: context,
-            done: false,
+            status: status,
         };
 
         setTodos((prev) => [...prev, newTodo]);
