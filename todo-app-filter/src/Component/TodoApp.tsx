@@ -32,13 +32,27 @@ function TodoApp() {
 
     const [dropdown, setDropdown] = useState<boolean>(false);
     const [isModal, setIsModal] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>("");
+    const [context, setContext] = useState<string>("");
+    const [tag, setTag] = useState<string>("");
 
     const handleDeleteTodos = (index: number) => {
         setTodos(todos.filter((_, i) => index !== i));
     };
 
+    const handleSubmitTodo = () => {
+        const newTodo: TodoProps = {
+            title: title,
+            tag: "Quick",
+            context: context,
+            done: false,
+        };
+
+        setTodos((prev) => [...prev, newTodo]);
+    };
+
     return (
-        <div className="w-[600px] h-[400] border p-4">
+        <div className="w-150 h-[400] border p-4">
             <section>
                 <h1 className="font-bold text-xl">
                     TODO APP <span className="text-xs">with filter</span>
@@ -51,7 +65,13 @@ function TodoApp() {
                 <div className="flex">
                     <div>
                         <button onClick={() => setIsModal(true)}>Add</button>
-                        {isModal && <Modal onClose={() => setIsModal(false)} />}
+                        {isModal && (
+                            <Modal
+                                onClose={() => setIsModal(false)}
+                                data={{ setTitle, setContext, setTag }}
+                                onSubmit={handleSubmitTodo}
+                            />
+                        )}
                     </div>
                     <div className="relative">
                         <button
