@@ -3,6 +3,7 @@ import { FaRegCheckSquare, FaTrash } from "react-icons/fa";
 interface TableProps {
     todos: TodoProps[];
     delTodo: (index: number) => void;
+    handleCheckedTodo: (titleToUpdate: string) => void;
 }
 
 interface TodoProps {
@@ -14,7 +15,7 @@ interface TodoProps {
 
 type Status = "finish" | "unfinished";
 
-function TableTodo({ todos, delTodo }: TableProps) {
+function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
     return (
         <div>
             <table className="min-w-full">
@@ -34,12 +35,19 @@ function TableTodo({ todos, delTodo }: TableProps) {
                         todos.map((todo, index) => (
                             <tr className="has-checked:opacity-40 ">
                                 <td>
-                                    <input type="checkbox" id={todo.title} />
+                                    <input
+                                        type="checkbox"
+                                        id={todo.title}
+                                        checked={todo.status === "finish"}
+                                        onChange={() =>
+                                            handleCheckedTodo(todo.title)
+                                        }
+                                    />
                                 </td>
                                 <td>
                                     <label htmlFor={todo.title}>
                                         <span className="has-checked:line-through">
-                                            {todo.title}
+                                            {todo.title} + {todo.status}
                                         </span>
                                     </label>
                                 </td>

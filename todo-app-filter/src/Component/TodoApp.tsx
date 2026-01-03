@@ -25,7 +25,6 @@ function TodoApp() {
     const [tag, setTag] = useState<string>("");
     const [tagFilter, setTagFilter] = useState<string>("");
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [status, setStatus] = useState<Status>("unfinished");
 
     const handleDeleteTodos = (index: number) => {
         setTodos(todos.filter((_, i) => index !== i));
@@ -47,10 +46,25 @@ function TodoApp() {
             title: title,
             tag: tag,
             context: context,
-            status: status,
+            status: "unfinished",
         };
 
         setTodos((prev) => [...prev, newTodo]);
+    };
+
+    const handleCheckedTodo = (titleToUpdate: string) => {
+        const checkedList: TodoProps[] = todos.map((todo) => {
+            if (todo.title === titleToUpdate) {
+                const newStatus: Status =
+                    todo.status === "unfinished" ? "finish" : "unfinished";
+
+                return { ...todo, status: newStatus };
+            }
+
+            return todo;
+        });
+
+        setTodos(checkedList);
     };
 
     const filterTodos = todos.filter((todo) => {
@@ -109,7 +123,11 @@ function TodoApp() {
                 </div>
             </section>
             <section>
-                <TableTodo todos={filterTodos} delTodo={handleDeleteTodos} />
+                <TableTodo
+                    todos={filterTodos}
+                    delTodo={handleDeleteTodos}
+                    handleCheckedTodo={handleCheckedTodo}
+                />
             </section>
         </div>
     );
