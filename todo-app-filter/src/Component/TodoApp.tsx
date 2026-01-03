@@ -33,6 +33,7 @@ function TodoApp() {
     const [title, setTitle] = useState<string>("");
     const [context, setContext] = useState<string>("");
     const [tag, setTag] = useState<string>("");
+    const [tagFilter, setTagFilter] = useState<string>("");
     const [searchQuery, setSearchQuery] = useState<string>("");
 
     const handleDeleteTodos = (index: number) => {
@@ -42,6 +43,12 @@ function TodoApp() {
     const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
         setTag(val ? val : "");
+    };
+
+    const handleTagFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        const isChecked = e.target.checked;
+        setTagFilter(isChecked ? val : "");
     };
 
     const handleSubmitTodo = () => {
@@ -56,7 +63,13 @@ function TodoApp() {
     };
 
     const filterTodos = todos.filter((todo) => {
-        return todo.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchSearch = todo.title
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+        const matchTag =
+            !tagFilter || tagFilter === "" || todo.tag === tagFilter;
+
+        return matchSearch && matchTag;
     });
 
     return (
@@ -95,7 +108,12 @@ function TodoApp() {
                             <IoMdArrowDropdown />
                         </button>
 
-                        {dropdown && <Dropdown />}
+                        {dropdown && (
+                            <Dropdown
+                                handleTagFilter={handleTagFilter}
+                                tagFilter={tagFilter}
+                            />
+                        )}
                     </div>
                 </div>
             </section>
