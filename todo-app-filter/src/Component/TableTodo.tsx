@@ -2,15 +2,19 @@ import { FaRegCheckSquare, FaTrash } from "react-icons/fa";
 
 interface TableProps {
     todos: TodoProps[];
+    delTodo: (index: number) => void;
 }
 
 interface TodoProps {
     title: string;
-    status: string;
     context: string;
+    tag: Tags;
+    done: boolean;
 }
 
-function TableTodo({ todos }: TableProps) {
+type Tags = "Urgent" | "Quick" | "Personal" | "Important";
+
+function TableTodo({ todos, delTodo }: TableProps) {
     return (
         <div>
             <table className="min-w-full">
@@ -26,7 +30,7 @@ function TableTodo({ todos }: TableProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {todos.map((todo) => (
+                    {todos.map((todo, index) => (
                         <tr className="has-checked:opacity-40 ">
                             <td>
                                 <input type="checkbox" id={todo.title} />
@@ -36,12 +40,14 @@ function TableTodo({ todos }: TableProps) {
                                     <span className="has-checked:line-through">
                                         {todo.title}
                                     </span>
-                                </label>    
+                                </label>
                             </td>
-                            <td>{todo.status}</td>
+                            <td>{todo.tag}</td>
                             <td>{todo.context}</td>
                             <td>
-                                <FaTrash />
+                                <button onClick={() => delTodo(index)}>
+                                    <FaTrash />
+                                </button>
                             </td>
                         </tr>
                     ))}

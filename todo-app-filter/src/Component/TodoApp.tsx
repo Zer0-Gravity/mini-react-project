@@ -33,6 +33,10 @@ function TodoApp() {
     const [dropdown, setDropdown] = useState<boolean>(false);
     const [isModal, setIsModal] = useState<boolean>(false);
 
+    const handleDeleteTodos = (index: number) => {
+        setTodos(todos.filter((_, i) => index !== i));
+    };
+
     return (
         <div className="w-[600px] h-[400] border p-4">
             <section>
@@ -64,7 +68,7 @@ function TodoApp() {
                 </div>
             </section>
             <section>
-                <TableTodo todos={todos} />
+                <TableTodo todos={todos} delTodo={handleDeleteTodos} />
             </section>
         </div>
     );
