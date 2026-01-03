@@ -28,27 +28,31 @@ function TableTodo({ todos, delTodo }: TableProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {todos.map((todo, index) => (
-                        <tr className="has-checked:opacity-40 ">
-                            <td>
-                                <input type="checkbox" id={todo.title} />
-                            </td>
-                            <td>
-                                <label htmlFor={todo.title}>
-                                    <span className="has-checked:line-through">
-                                        {todo.title}
-                                    </span>
-                                </label>
-                            </td>
-                            <td>{todo.tag}</td>
-                            <td>{todo.context}</td>
-                            <td>
-                                <button onClick={() => delTodo(index)}>
-                                    <FaTrash />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {todos.length !== 0 ? (
+                        todos.map((todo, index) => (
+                            <tr className="has-checked:opacity-40 ">
+                                <td>
+                                    <input type="checkbox" id={todo.title} />
+                                </td>
+                                <td>
+                                    <label htmlFor={todo.title}>
+                                        <span className="has-checked:line-through">
+                                            {todo.title}
+                                        </span>
+                                    </label>
+                                </td>
+                                <td>{todo.tag}</td>
+                                <td>{todo.context}</td>
+                                <td>
+                                    <button onClick={() => delTodo(index)}>
+                                        <FaTrash />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <h1>No Todos Found</h1>
+                    )}
                 </tbody>
             </table>
         </div>

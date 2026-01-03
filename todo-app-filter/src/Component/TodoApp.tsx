@@ -4,6 +4,7 @@ import { FaFilter } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Dropdown from "./Dropdown";
 import Modal from "./Modal";
+import { dummyTodos } from "../Utils/dummyData";
 
 interface TodoProps {
     title: string;
@@ -13,20 +14,7 @@ interface TodoProps {
 }
 
 function TodoApp() {
-    const [todos, setTodos] = useState<TodoProps[]>([
-        {
-            title: "Make Bread",
-            tag: "Quick",
-            context: "Cooking",
-            done: false,
-        },
-        {
-            title: "Finish homework",
-            tag: "Urgent",
-            context: "School",
-            done: false,
-        },
-    ]);
+    const [todos, setTodos] = useState<TodoProps[]>(dummyTodos);
 
     const [dropdown, setDropdown] = useState<boolean>(false);
     const [isModal, setIsModal] = useState<boolean>(false);
