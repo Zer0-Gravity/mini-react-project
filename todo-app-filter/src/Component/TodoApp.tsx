@@ -33,6 +33,7 @@ function TodoApp() {
     const [title, setTitle] = useState<string>("");
     const [context, setContext] = useState<string>("");
     const [tag, setTag] = useState<string>("");
+    const [searchQuery, setSearchQuery] = useState<string>("");
 
     const handleDeleteTodos = (index: number) => {
         setTodos(todos.filter((_, i) => index !== i));
@@ -49,6 +50,10 @@ function TodoApp() {
         setTodos((prev) => [...prev, newTodo]);
     };
 
+    const filterTodos = todos.filter((todo) => {
+        return todo.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
     return (
         <div className="w-150 h-[400] border p-4">
             <section>
@@ -57,7 +62,11 @@ function TodoApp() {
                 </h1>
 
                 <div>
-                    <input type="search" placeholder="Search.." />
+                    <input
+                        type="search"
+                        placeholder="Search.."
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </div>
 
                 <div className="flex">
@@ -86,7 +95,7 @@ function TodoApp() {
                 </div>
             </section>
             <section>
-                <TableTodo todos={todos} delTodo={handleDeleteTodos} />
+                <TableTodo todos={filterTodos} delTodo={handleDeleteTodos} />
             </section>
         </div>
     );
