@@ -8,11 +8,9 @@ import Modal from "./Modal";
 interface TodoProps {
     title: string;
     context: string;
-    tag: Tags;
+    tag: string;
     done: boolean;
 }
-
-type Tags = "Urgent" | "Quick" | "Personal" | "Important";
 
 function TodoApp() {
     const [todos, setTodos] = useState<TodoProps[]>([
@@ -43,7 +41,7 @@ function TodoApp() {
     const handleSubmitTodo = () => {
         const newTodo: TodoProps = {
             title: title,
-            tag: "Quick",
+            tag: tag,
             context: context,
             done: false,
         };

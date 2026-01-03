@@ -1,3 +1,5 @@
+import { useState } from "react";
+import TagInput from "./TagInput";
 import {
     IoMdAddCircle,
     IoMdArrowDropdown,
@@ -15,6 +17,8 @@ interface ModalProps {
 }
 
 function Modal({ onClose, data, onSubmit }: ModalProps) {
+    const [inputDropdown, setInputDropdown] = useState<boolean>(false);
+
     return (
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <div className="bg-white p-5">
@@ -37,9 +41,14 @@ function Modal({ onClose, data, onSubmit }: ModalProps) {
                             onChange={(e) => data.setContext(e.target.value)}
                         />
                         <div>
-                            <button className="flex w-full justify-between items-center">
+                            <button
+                                className="flex w-full justify-between items-center"
+                                onClick={() => setInputDropdown(!inputDropdown)}
+                            >
                                 Tags <IoMdArrowDropdown />
                             </button>
+
+                            {inputDropdown && <TagInput setTag={data.setTag} />}
                         </div>
                     </div>
                     <div className="flex justify-end gap-2">

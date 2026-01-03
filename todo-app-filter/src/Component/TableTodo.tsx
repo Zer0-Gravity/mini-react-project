@@ -8,11 +8,9 @@ interface TableProps {
 interface TodoProps {
     title: string;
     context: string;
-    tag: Tags;
+    tag: string;
     done: boolean;
 }
-
-type Tags = "Urgent" | "Quick" | "Personal" | "Important";
 
 function TableTodo({ todos, delTodo }: TableProps) {
     return (
