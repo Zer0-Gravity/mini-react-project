@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TableTodo from "./TableTodo";
 import { FaFilter } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -17,7 +17,6 @@ type Status = "finish" | "unfinished";
 
 function TodoApp() {
     const [todos, setTodos] = useState<TodoProps[]>(dummyTodos);
-
     const [dropdown, setDropdown] = useState<boolean>(false);
     const [isModal, setIsModal] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
@@ -25,6 +24,24 @@ function TodoApp() {
     const [tag, setTag] = useState<string>("");
     const [tagFilter, setTagFilter] = useState<string>("");
     const [searchQuery, setSearchQuery] = useState<string>("");
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const handleOutsideEvent = (e: any) => {
+            if (
+                dropdown &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(e.target as Node)
+            ) {
+                setDropdown(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleOutsideEvent);
+        return () =>
+            document.removeEventListener("mousedown", handleOutsideEvent);
+    });
 
     const handleDeleteTodos = (index: number) => {
         setTodos(todos.filter((_, i) => index !== i));
@@ -126,7 +143,7 @@ function TodoApp() {
                             />
                         )}
                     </div>
-                    <div className="relative">
+                    <div className="relative" ref={dropdownRef}>
                         <button
                             className={`flex items-center gap-1 p-1 w-30 font-semibold rounded-lg justify-between ${
                                 tagFilter

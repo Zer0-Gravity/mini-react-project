@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TagInput from "./TagInput";
 import {
     IoMdAddCircle,
@@ -19,6 +19,24 @@ interface ModalProps {
 
 function Modal({ onClose, data, onSubmit, tag }: ModalProps) {
     const [inputDropdown, setInputDropdown] = useState<boolean>(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const handleOutsideEvent = (e: any) => {
+            if (
+                inputDropdown &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(e.target as Node)
+            ) {
+                setInputDropdown(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleOutsideEvent);
+        return () =>
+            document.removeEventListener("mousedown", handleOutsideEvent);
+    });
 
     return (
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -43,7 +61,7 @@ function Modal({ onClose, data, onSubmit, tag }: ModalProps) {
                             onChange={(e) => data.setContext(e.target.value)}
                             className="p-2 outline-0 bg-white text-black placeholder:text-black rounded-lg"
                         />
-                        <div className="relative">
+                        <div className="relative" ref={dropdownRef}>
                             <button
                                 className="flex w-full justify-between items-center bg-action-button p-2 rounded-lg text-black"
                                 onClick={() => setInputDropdown(!inputDropdown)}
