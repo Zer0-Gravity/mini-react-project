@@ -21,7 +21,7 @@ I built this app to and implementing sorting, add task, and delete task. Using f
 - [React Icon](react-icons.github.io)
 
 ### Preview
-![Demo Gif](./src/Demo/Demo%20Todoapp.mp4)
+![Demo Gif](./src/Demo/Demo%20Todo%20App.gif)
 
 
 ### Quick Start
