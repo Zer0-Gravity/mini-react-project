@@ -2,7 +2,7 @@ import { FaRegCheckSquare, FaTrash } from "react-icons/fa";
 
 interface TableProps {
     todos: TodoProps[];
-    delTodo: (index: number) => void;
+    delTodo: (uuid: string) => void;
     handleCheckedTodo: (titleToUpdate: string) => void;
 }
 
