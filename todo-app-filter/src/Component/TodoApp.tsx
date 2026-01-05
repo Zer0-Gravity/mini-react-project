@@ -16,7 +16,20 @@ interface TodoProps {
 type Status = "finish" | "unfinished";
 
 function TodoApp() {
-    const [todos, setTodos] = useState<TodoProps[]>(dummyTodos);
+    const [todos, setTodos] = useState<TodoProps[]>(() => {
+        const savedTodo = localStorage.getItem("todoList");
+
+        if (savedTodo) {
+            try {
+                return JSON.parse(savedTodo);
+            } catch (error) {
+                console.error("error to parse todo", error);
+                return dummyTodos;
+            }
+        }
+
+        return dummyTodos;
+    });
     const [dropdown, setDropdown] = useState<boolean>(false);
     const [isModal, setIsModal] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
@@ -43,6 +56,10 @@ function TodoApp() {
             document.removeEventListener("mousedown", handleOutsideEvent);
     });
 
+    useEffect(() => {
+        localStorage.setItem("todoList", JSON.stringify(todos));
+    }, [todos]);
+
     const handleDeleteTodos = (index: number) => {
         setTodos(todos.filter((_, i) => index !== i));
     };
@@ -66,8 +83,10 @@ function TodoApp() {
             status: "unfinished",
         };
 
+        const addTodo = (prev: TodoProps[]) => [...prev, newTodo];
+
         if (title && context) {
-            setTodos((prev) => [...prev, newTodo]);
+            setTodos(addTodo);
             setTitle("");
             setTag("");
             setContext("");
