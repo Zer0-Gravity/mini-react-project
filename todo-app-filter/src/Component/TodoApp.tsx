@@ -58,6 +58,13 @@ function TodoApp() {
         }
     };
 
+    const handleCloseModal = () => {
+        setIsModal(false);
+        setTitle("");
+        setTag("");
+        setContext("");
+    };
+
     const handleCheckedTodo = (titleToUpdate: string) => {
         const checkedList: TodoProps[] = todos.map((todo) => {
             if (todo.title === titleToUpdate) {
@@ -112,9 +119,10 @@ function TodoApp() {
                         </button>
                         {isModal && (
                             <Modal
-                                onClose={() => setIsModal(false)}
+                                onClose={handleCloseModal}
                                 data={{ setTitle, setContext, handleTagChange }}
                                 onSubmit={handleSubmitTodo}
+                                tag={tag}
                             />
                         )}
                     </div>

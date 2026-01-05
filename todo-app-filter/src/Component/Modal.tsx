@@ -9,6 +9,7 @@ import {
 interface ModalProps {
     onClose: () => void;
     onSubmit: () => void;
+    tag: string;
     data: {
         setTitle: (title: string) => void;
         setContext: (context: string) => void;
@@ -16,7 +17,7 @@ interface ModalProps {
     };
 }
 
-function Modal({ onClose, data, onSubmit }: ModalProps) {
+function Modal({ onClose, data, onSubmit, tag }: ModalProps) {
     const [inputDropdown, setInputDropdown] = useState<boolean>(false);
 
     return (
@@ -47,7 +48,8 @@ function Modal({ onClose, data, onSubmit }: ModalProps) {
                                 className="flex w-full justify-between items-center bg-action-button p-2 rounded-lg text-black"
                                 onClick={() => setInputDropdown(!inputDropdown)}
                             >
-                                Tags <IoMdArrowDropdown />
+                                {tag ? tag : "Select Tags"}{" "}
+                                <IoMdArrowDropdown />
                             </button>
 
                             {inputDropdown && (
