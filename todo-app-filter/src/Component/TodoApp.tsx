@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import { dummyTodos } from "../Utils/dummyData";
 
 interface TodoProps {
+    id: string;
     title: string;
     context: string;
     tag: string;
@@ -60,8 +61,8 @@ function TodoApp() {
         localStorage.setItem("todoList", JSON.stringify(todos));
     }, [todos]);
 
-    const handleDeleteTodos = (index: number) => {
-        setTodos(todos.filter((_, i) => index !== i));
+    const handleDeleteTodos = (uuid: string) => {
+        setTodos((prev) => prev.filter((todo) => todo.id !== uuid));
     };
 
     const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +78,7 @@ function TodoApp() {
 
     const handleSubmitTodo = () => {
         const newTodo: TodoProps = {
+            id: crypto.randomUUID(),
             title: title,
             tag: tag,
             context: context,

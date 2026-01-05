@@ -7,6 +7,7 @@ interface TableProps {
 }
 
 interface TodoProps {
+    id: string;
     title: string;
     context: string;
     tag: string;
@@ -40,8 +41,11 @@ function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
                 </thead>
                 <tbody className="max-h-400">
                     {todos.length !== 0 ? (
-                        todos.map((todo, index) => (
-                            <tr key={index} className="has-checked:opacity-40 ">
+                        todos.map((todo) => (
+                            <tr
+                                key={todo.id}
+                                className="has-checked:opacity-40 "
+                            >
                                 <td className="py-2 px-5">
                                     <input
                                         type="checkbox"
@@ -62,7 +66,7 @@ function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
                                 <td className="py-2 px-5">{todo.tag}</td>
                                 <td className="py-2 px-5">{todo.context}</td>
                                 <td className="py-2 px-5">
-                                    <button onClick={() => delTodo(index)}>
+                                    <button onClick={() => delTodo(todo.id)}>
                                         <FaTrash color="#F52F57" />
                                     </button>
                                 </td>
