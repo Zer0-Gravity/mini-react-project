@@ -69,7 +69,9 @@ function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
                             </tr>
                         ))
                     ) : (
-                        <h1>No Todos Found</h1>
+                        <h1 className="font-bold text-center py-2 px-5">
+                            No Todos Found
+                        </h1>
                     )}
                 </tbody>
             </table>
