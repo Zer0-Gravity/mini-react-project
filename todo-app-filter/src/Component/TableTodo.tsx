@@ -17,24 +17,32 @@ type Status = "finish" | "unfinished";
 
 function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
     return (
-        <div>
+        <div className="h-120 overflow-y-auto table-container">
             <table className="min-w-full">
                 <thead>
                     <tr>
-                        <th>
+                        <th className=" py-2 px-5 sticky top-0 bg-active rounded-l-lg">
                             <FaRegCheckSquare />
                         </th>
-                        <th>Task</th>
-                        <th>Status</th>
-                        <th>Context</th>
-                        <th>Action</th>
+                        <th className="text-left py-2 px-5 sticky top-0 bg-active">
+                            Task
+                        </th>
+                        <th className="text-left py-2 px-5 sticky top-0 bg-active">
+                            Status
+                        </th>
+                        <th className="text-left py-2 px-5 sticky top-0 bg-active">
+                            Context
+                        </th>
+                        <th className="text-left py-2 px-5 sticky top-0 bg-active rounded-r-lg">
+                            Action
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="max-h-400">
                     {todos.length !== 0 ? (
                         todos.map((todo, index) => (
-                            <tr className="has-checked:opacity-40 ">
-                                <td>
+                            <tr key={index} className="has-checked:opacity-40 ">
+                                <td className="py-2 px-5">
                                     <input
                                         type="checkbox"
                                         id={todo.title}
@@ -44,18 +52,18 @@ function TableTodo({ todos, delTodo, handleCheckedTodo }: TableProps) {
                                         }
                                     />
                                 </td>
-                                <td>
+                                <td className="py-2 px-5">
                                     <label htmlFor={todo.title}>
                                         <span className="has-checked:line-through">
                                             {todo.title}
                                         </span>
                                     </label>
                                 </td>
-                                <td>{todo.tag}</td>
-                                <td>{todo.context}</td>
-                                <td>
+                                <td className="py-2 px-5">{todo.tag}</td>
+                                <td className="py-2 px-5">{todo.context}</td>
+                                <td className="py-2 px-5">
                                     <button onClick={() => delTodo(index)}>
-                                        <FaTrash />
+                                        <FaTrash color="#F52F57" />
                                     </button>
                                 </td>
                             </tr>

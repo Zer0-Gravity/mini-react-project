@@ -20,29 +20,31 @@ function Modal({ onClose, data, onSubmit }: ModalProps) {
     const [inputDropdown, setInputDropdown] = useState<boolean>(false);
 
     return (
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-            <div className="bg-white p-5">
-                <section>
-                    <h1>Add Task</h1>
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-bg-primary p-5 w-100 h-100 flex flex-col rounded-xl">
+                <section className="flex justify-between items-center">
+                    <h1 className="text-2xl font-bold">Add Task</h1>
                     <button onClick={onClose}>
                         <IoMdCloseCircle />
                     </button>
                 </section>
-                <section>
-                    <div className="flex flex-col">
+                <section className="flex-1 flex flex-col">
+                    <div className="flex flex-col flex-1 gap-5 justify-center">
                         <input
                             type="text"
                             placeholder="Title..."
                             onChange={(e) => data.setTitle(e.target.value)}
+                            className="p-2 outline-0 bg-white text-black placeholder:text-black rounded-lg"
                         />
                         <input
                             type="text"
                             placeholder="Context.."
                             onChange={(e) => data.setContext(e.target.value)}
+                            className="p-2 outline-0 bg-white text-black placeholder:text-black rounded-lg"
                         />
-                        <div>
+                        <div className="relative">
                             <button
-                                className="flex w-full justify-between items-center"
+                                className="flex w-full justify-between items-center bg-action-button p-2 rounded-lg text-black"
                                 onClick={() => setInputDropdown(!inputDropdown)}
                             >
                                 Tags <IoMdArrowDropdown />
@@ -56,11 +58,14 @@ function Modal({ onClose, data, onSubmit }: ModalProps) {
                         </div>
                     </div>
                     <div className="flex justify-end gap-2">
-                        <button className="flex items-center" onClick={onClose}>
+                        <button
+                            className="flex items-center gap-1 bg-red-600 p-2 rounded-lg"
+                            onClick={onClose}
+                        >
                             Cancel <IoMdCloseCircle />
                         </button>
                         <button
-                            className="flex items-center"
+                            className="flex items-center gap-1 bg-green-600 p-2 rounded-lg"
                             onClick={onSubmit}
                         >
                             Add <IoMdAddCircle />

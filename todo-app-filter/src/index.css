@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+    --color-action-button: #facc15;
+    --color-bg-primary: #2563eb;
+    --color-active: #60a5fa;
+    --color-secondary-text: #bfdbfe;
+    --color-task-card: #1e40af;
+}
+
+@layer utilities {
+    .table-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .input-check {
+        @apply flex py-1.5 px-2 rounded-lg border-2 text-black font-semibold has-checked:bg-active has-checked:text-white has-checked:border-2;
+    }
+}
