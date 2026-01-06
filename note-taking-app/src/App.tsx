@@ -11,7 +11,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className="p-6 flex gap-4 h-screen items-center justify-center ">
-                <CollectionGrid notes={notes} />
+                <CollectionGrid notes={notes} setter={setNotes} />
                 <Routes>
                     <Route
                         path="/detail/:noteID"

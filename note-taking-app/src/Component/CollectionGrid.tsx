@@ -1,15 +1,31 @@
 import { LuExternalLink, LuFolder, LuPlus, LuTrash2 } from "react-icons/lu";
 import type { CollectionProps } from "../utils/Type";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import Modal from "./Modal";
+import type { Note } from "../utils/Type";
 
 interface CardProps {
     notes: CollectionProps[];
+    setter: Dispatch<SetStateAction<CollectionProps[]>>;
 }
 
-function CollectionGrid({ notes }: CardProps) {
+function CollectionGrid({ notes, setter }: CardProps) {
     const [modalInput, setModalInput] = useState<boolean>(false);
+    const [collectionTitle, setCollectionTitle] = useState<string>("");
+    const [collectionDesc, setCollectionDesc] = useState<string>("");
+
+    const addNewCollection = () => {
+        const newCollection = {
+            collectionId: crypto.randomUUID(),
+            collectionName: collectionTitle,
+            date: new Date().toLocaleDateString(),
+            description: collectionDesc ? collectionDesc : "",
+            note: [] as Note[],
+        };
+
+        setter((prev) => [...prev, newCollection]);
+    };
 
     return (
         <div className="h-full w-137.5">
@@ -25,7 +41,16 @@ function CollectionGrid({ notes }: CardProps) {
                     <LuPlus /> New Collection
                 </button>
 
-                {modalInput && <Modal onClose={() => setModalInput(false)} />}
+                {modalInput && (
+                    <Modal
+                        onClose={() => setModalInput(false)}
+                        inputHandler={{
+                            setCollectionTitle,
+                            setCollectionDesc,
+                            addNewCollection,
+                        }}
+                    />
+                )}
             </header>
 
             {/* Card List */}

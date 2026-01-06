@@ -1,12 +1,12 @@
 export interface CollectionProps {
     collectionId: string;
     collectionName: string;
-    document: Doc[];
+    note: Note[];
     date: string;
     description: string;
 }
 
-export interface Doc {
+export interface Note {
     documentId: string;
     title: string;
     body: string;

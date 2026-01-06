@@ -6,7 +6,7 @@ export const dummyNote: CollectionProps[] = [
         collectionName: "School",
         date: "12-01-2026", // Moved to parent
         description: "All academic materials, lecture notes, and lab reports.", // Moved to parent
-        document: [
+        note: [
             {
                 documentId: "fc8d1597-ab4b-4b8c-bb24-21ea38c8455d",
                 title: "Calculus Math",
@@ -25,7 +25,7 @@ export const dummyNote: CollectionProps[] = [
         date: "01-02-2026",
         description:
             "Professional projects, meeting minutes, and marketing assets.",
-        document: [
+        note: [
             {
                 documentId: "bc112233-4455-6677-8899-aabbccddeeff",
                 title: "Marketing Strategy",
@@ -38,7 +38,7 @@ export const dummyNote: CollectionProps[] = [
         collectionName: "Personal",
         date: "10-02-2026",
         description: "Personal thoughts, grocery lists, and hobby notes.",
-        document: [
+        note: [
             {
                 documentId: "ee123456-7890-abcd-efgh-ijklmnopqrst",
                 title: "Grocery List",

@@ -38,8 +38,8 @@ function DetailPanel({ notes }: DetailProps) {
                         </div>
 
                         <div>
-                            {currentNotes.document.length !== 0 ? (
-                                currentNotes.document.map((note) => (
+                            {currentNotes.note.length !== 0 ? (
+                                currentNotes.note.map((note) => (
                                     <div
                                         key={note.documentId}
                                         onClick={() =>
