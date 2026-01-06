@@ -1,9 +1,9 @@
-import { LuExternalLink, LuFolder, LuPlus, LuTrash2 } from "react-icons/lu";
 import type { CollectionProps } from "../utils/Type";
-import { Link } from "react-router-dom";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import Modal from "./Modal";
 import type { Note } from "../utils/Type";
+import CollectionCard from "./CollectionCard";
+import { LuPlus } from "react-icons/lu";
 
 interface CardProps {
     notes: CollectionProps[];
@@ -56,28 +56,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
             {/* Card List */}
             <section className="flex gap-2 flex-wrap">
                 {notes.length !== 0 ? (
-                    notes.map((note) => (
-                        <div
-                            key={note.collectionId}
-                            className="border flex flex-col w-57.5 h-20 p-2 justify-between"
-                        >
-                            <div className="flex">
-                                <LuFolder size={25} />
-                                <h3>{note.collectionName}</h3>
-                            </div>
-
-                            <div className="flex justify-end gap-2">
-                                <button>
-                                    <Link to={`/detail/${note.collectionId}`}>
-                                        <LuExternalLink />
-                                    </Link>
-                                </button>
-                                <button>
-                                    <LuTrash2 />
-                                </button>
-                            </div>
-                        </div>
-                    ))
+                    notes.map((note) => <CollectionCard note={note} />)
                 ) : (
                     <h1>No collection</h1>
                 )}
