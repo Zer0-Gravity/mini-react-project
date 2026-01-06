@@ -5,7 +5,7 @@ function DetailPanel() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     return (
-        <div className="w-145 h-full border">
+        <div className="w-137.5 h-full border p-4">
             <section>
                 <h1>Collection Name</h1>
                 <p>
@@ -15,7 +15,7 @@ function DetailPanel() {
 
             <section>
                 <h2>Description : </h2>
-                <p contentEditable="true" className="p-2">
+                <p className="p-2">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Provident, doloremque eveniet qui ab id sunt. Cupiditate
                     voluptas accusamus sed veritatis, eveniet perferendis
