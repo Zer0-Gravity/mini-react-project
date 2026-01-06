@@ -27,6 +27,10 @@ function CollectionGrid({ notes, setter }: CardProps) {
         setter((prev) => [...prev, newCollection]);
     };
 
+    const deleteCollection = (uuid: string) => {
+        setter((prev) => prev.filter((note) => note.collectionId !== uuid));
+    };
+
     return (
         <div className="h-full w-137.5">
             {/* Search Bar */}
@@ -56,7 +60,13 @@ function CollectionGrid({ notes, setter }: CardProps) {
             {/* Card List */}
             <section className="flex gap-2 flex-wrap">
                 {notes.length !== 0 ? (
-                    notes.map((note) => <CollectionCard note={note} />)
+                    notes.map((note) => (
+                        <CollectionCard
+                            key={note.collectionId}
+                            note={note}
+                            delCollection={deleteCollection}
+                        />
+                    ))
                 ) : (
                     <h1>No collection</h1>
                 )}

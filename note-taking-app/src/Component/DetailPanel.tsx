@@ -9,12 +9,8 @@ interface DetailProps {
 
 function DetailPanel({ notes }: DetailProps) {
     const { noteID } = useParams();
-
-    const currentNotes = notes.find((note) => note.collectionId === noteID);
-
-    console.log(currentNotes);
-
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const currentNotes = notes.find((note) => note.collectionId === noteID);
 
     return (
         <div className="w-137.5 h-full border p-4">

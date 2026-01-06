@@ -4,9 +4,10 @@ import type { CollectionProps } from "../utils/Type";
 
 interface CardProps {
     note: CollectionProps;
+    delCollection: (uuid: string) => void;
 }
 
-function CollectionCard({ note }: CardProps) {
+function CollectionCard({ note, delCollection }: CardProps) {
     return (
         <div
             key={note.collectionId}
@@ -23,7 +24,7 @@ function CollectionCard({ note }: CardProps) {
                         <LuExternalLink />
                     </Link>
                 </button>
-                <button>
+                <button onClick={() => delCollection(note.collectionId)}>
                     <LuTrash2 />
                 </button>
             </div>
