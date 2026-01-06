@@ -1,12 +1,16 @@
 import { LuExternalLink, LuFolder, LuPlus, LuTrash2 } from "react-icons/lu";
 import type { CollectionProps } from "../utils/Type";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Modal from "./Modal";
 
 interface CardProps {
     notes: CollectionProps[];
 }
 
 function CollectionGrid({ notes }: CardProps) {
+    const [modalInput, setModalInput] = useState<boolean>(false);
+
     return (
         <div className="h-full w-137.5">
             {/* Search Bar */}
@@ -17,9 +21,11 @@ function CollectionGrid({ notes }: CardProps) {
             {/* Header */}
             <header className="flex justify-between">
                 <h1>Note Collection</h1>
-                <button className="flex">
+                <button className="flex" onClick={() => setModalInput(true)}>
                     <LuPlus /> New Collection
                 </button>
+
+                {modalInput && <Modal onClose={() => setModalInput(false)} />}
             </header>
 
             {/* Card List */}
