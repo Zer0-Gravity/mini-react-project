@@ -4,6 +4,7 @@ import DetailPanel from "./Component/DetailPanel";
 import { dummyNote } from "./utils/dummyText";
 import type { CollectionProps } from "./utils/Type";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DetailEmpty from "./Page/DetailEmpty";
 
 function App() {
     const [notes, setNotes] = useState<CollectionProps[]>(dummyNote);
@@ -13,6 +14,7 @@ function App() {
             <div className="p-6 flex gap-4 h-screen items-center justify-center ">
                 <CollectionGrid notes={notes} setter={setNotes} />
                 <Routes>
+                    <Route path="/" element={<DetailEmpty />} />
                     <Route
                         path="/detail/:noteID"
                         element={<DetailPanel notes={notes} />}

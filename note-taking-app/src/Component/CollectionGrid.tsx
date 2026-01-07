@@ -27,6 +27,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
         setter((prev) => [...prev, newCollection]);
     };
 
+    //Delete collection function
     const deleteCollection = (uuid: string) => {
         setter((prev) => prev.filter((note) => note.collectionId !== uuid));
     };
@@ -41,6 +42,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
             {/* Header */}
             <header className="flex justify-between">
                 <h1>Note Collection</h1>
+                {/* Trigger modal flag to true when user click +New Collection */}
                 <button className="flex" onClick={() => setModalInput(true)}>
                     <LuPlus /> New Collection
                 </button>
