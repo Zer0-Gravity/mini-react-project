@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { LuFile, LuPlus, LuTrash2 } from "react-icons/lu";
 import type { CollectionProps } from "../utils/Type";
 import { Link, useParams } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
+import NoteList from "./NoteList";
+import { LuPlus } from "react-icons/lu";
+import { useState } from "react";
+import NewNoteModal from "./NewNoteModal";
 
 interface DetailProps {
     notes: CollectionProps[];
@@ -10,7 +12,8 @@ interface DetailProps {
 
 function DetailPanel({ notes }: DetailProps) {
     const { noteID } = useParams();
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [modalNewNote, setModalNewNote] = useState<boolean>(false);
+
     const currentNotes = notes.find((note) => note.collectionId === noteID);
 
     return (
@@ -36,32 +39,19 @@ function DetailPanel({ notes }: DetailProps) {
                     <section>
                         <div className="flex justify-between">
                             <h1>Note</h1>
-                            <button>
+                            <button onClick={() => setModalNewNote(true)}>
                                 <LuPlus />
                             </button>
-                        </div>
 
-                        <div>
-                            {currentNotes.note.length !== 0 ? (
-                                currentNotes.note.map((note) => (
-                                    <div
-                                        key={note.documentId}
-                                        onClick={() =>
-                                            setIsModalOpen(!isModalOpen)
-                                        }
-                                        className="cursor-pointer"
-                                    >
-                                        <LuFile />
-                                        <h1>{note.title}</h1>
-                                        <LuTrash2 />
-                                    </div>
-                                ))
-                            ) : (
-                                <h1>No note here</h1>
+                            {/* This where new note created */}
+                            {modalNewNote && (
+                                <NewNoteModal
+                                    onClose={() => setModalNewNote(false)}
+                                />
                             )}
                         </div>
 
-                        {isModalOpen && <div>This is more detail page</div>}
+                        <NoteList childArray={currentNotes.note} />
                     </section>
                 </div>
             ) : (
