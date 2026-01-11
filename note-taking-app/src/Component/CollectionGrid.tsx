@@ -25,6 +25,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
         };
 
         setter((prev) => [...prev, newCollection]);
+        setModalInput(false);
     };
 
     //Delete collection function
