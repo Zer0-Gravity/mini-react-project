@@ -4,7 +4,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import NoteList from "./NoteList";
 import { LuPlus } from "react-icons/lu";
 import { useState } from "react";
-import NewNoteModal from "./NewNoteModal";
+import NoteModal from "./NoteModal";
 
 interface DetailProps {
     notes: CollectionProps[];
@@ -12,7 +12,8 @@ interface DetailProps {
 
 function DetailPanel({ notes }: DetailProps) {
     const { noteID } = useParams();
-    const [modalNewNote, setModalNewNote] = useState<boolean>(false);
+    const [modalNote, setModalNote] = useState<boolean>(false);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
 
     const currentNotes = notes.find((note) => note.collectionId === noteID);
 
@@ -39,19 +40,24 @@ function DetailPanel({ notes }: DetailProps) {
                     <section>
                         <div className="flex justify-between">
                             <h1>Note</h1>
-                            <button onClick={() => setModalNewNote(true)}>
+                            <button onClick={() => setModalNote(true)}>
                                 <LuPlus />
                             </button>
 
                             {/* This where new note created */}
-                            {modalNewNote && (
-                                <NewNoteModal
-                                    onClose={() => setModalNewNote(false)}
+                            {modalNote && (
+                                <NoteModal
+                                    onClose={() => setModalNote(false)}
+                                    isEdit={isEditing}
                                 />
                             )}
                         </div>
 
-                        <NoteList childArray={currentNotes.note} />
+                        <NoteList
+                            childArray={currentNotes.note}
+                            setClose={setModalNote}
+                            setEdit={setIsEditing}
+                        />
                     </section>
                 </div>
             ) : (

@@ -1,13 +1,21 @@
 import { LuFile, LuTrash2 } from "react-icons/lu";
 import type { Note } from "../utils/Type";
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
+import NoteModal from "./NoteModal";
 
 interface NoteProps {
     childArray: Note[];
+    setClose: Dispatch<SetStateAction<boolean>>;
+    setEdit: Dispatch<SetStateAction<boolean>>;
 }
 
-function NoteList({ childArray }: NoteProps) {
+function NoteList({ childArray, setEdit }: NoteProps) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const handleFlag = () => {
+        setIsModalOpen(true);
+        setEdit(true);
+    };
 
     return (
         <div>
@@ -16,7 +24,7 @@ function NoteList({ childArray }: NoteProps) {
                     childArray.map((note) => (
                         <div
                             key={note.documentId}
-                            onClick={() => setIsModalOpen(!isModalOpen)}
+                            onClick={handleFlag}
                             className="cursor-pointer"
                         >
                             <LuFile />
@@ -29,7 +37,12 @@ function NoteList({ childArray }: NoteProps) {
                 )}
             </div>
 
-            {isModalOpen && <div>This is more detail page</div>}
+            {isModalOpen && (
+                <NoteModal
+                    onClose={() => setIsModalOpen(false)}
+                    isEdit={true}
+                />
+            )}
         </div>
     );
 }

@@ -1,11 +1,13 @@
 interface NoteModalProps {
     onClose: () => void;
+    isEdit: boolean;
 }
 
-function NewNoteModal({ onClose }: NoteModalProps) {
+function NoteModal({ onClose, isEdit }: NoteModalProps) {
     return (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
             <div className="bg-white">
+                <div contentEditable>{isEdit ? "Editing" : "New Note"}</div>
                 <div>
                     <button onClick={onClose}>Close</button>
                     <button>Save</button>
@@ -15,4 +17,4 @@ function NewNoteModal({ onClose }: NoteModalProps) {
     );
 }
 
-export default NewNoteModal;
+export default NoteModal;
