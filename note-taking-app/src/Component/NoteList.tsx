@@ -5,15 +5,24 @@ import NoteModal from "./NoteModal";
 
 interface NoteProps {
     childArray: Note[];
-    setClose: Dispatch<SetStateAction<boolean>>;
     setEdit: Dispatch<SetStateAction<boolean>>;
+    setSelectedNote: Dispatch<SetStateAction<string>>;
+    activeNote: Note | undefined;
+    isEdit: boolean;
 }
 
-function NoteList({ childArray, setEdit }: NoteProps) {
+function NoteList({
+    childArray,
+    setEdit,
+    setSelectedNote,
+    activeNote,
+    isEdit,
+}: NoteProps) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const handleFlag = () => {
+    const handleFlag = (noteId: string) => {
         setIsModalOpen(true);
+        setSelectedNote(noteId);
         setEdit(true);
     };
 
@@ -24,7 +33,7 @@ function NoteList({ childArray, setEdit }: NoteProps) {
                     childArray.map((note) => (
                         <div
                             key={note.documentId}
-                            onClick={handleFlag}
+                            onClick={() => handleFlag(note.documentId)}
                             className="cursor-pointer"
                         >
                             <LuFile />
@@ -40,7 +49,8 @@ function NoteList({ childArray, setEdit }: NoteProps) {
             {isModalOpen && (
                 <NoteModal
                     onClose={() => setIsModalOpen(false)}
-                    isEdit={true}
+                    activeNote={activeNote}
+                    isEdit={isEdit}
                 />
             )}
         </div>

@@ -14,8 +14,17 @@ function DetailPanel({ notes }: DetailProps) {
     const { noteID } = useParams();
     const [modalNote, setModalNote] = useState<boolean>(false);
     const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [selectedNote, setSelectedNote] = useState<string>("");
 
     const currentNotes = notes.find((note) => note.collectionId === noteID);
+    const activeNote = currentNotes?.note.find(
+        (note) => note.documentId === selectedNote
+    );
+
+    const handleOpenNew = () => {
+        setModalNote(true);
+        setIsEditing(false);
+    };
 
     return (
         <div className="w-137.5 h-full border p-4">
@@ -40,7 +49,7 @@ function DetailPanel({ notes }: DetailProps) {
                     <section>
                         <div className="flex justify-between">
                             <h1>Note</h1>
-                            <button onClick={() => setModalNote(true)}>
+                            <button onClick={handleOpenNew}>
                                 <LuPlus />
                             </button>
 
@@ -48,6 +57,7 @@ function DetailPanel({ notes }: DetailProps) {
                             {modalNote && (
                                 <NoteModal
                                     onClose={() => setModalNote(false)}
+                                    activeNote={activeNote}
                                     isEdit={isEditing}
                                 />
                             )}
@@ -55,8 +65,10 @@ function DetailPanel({ notes }: DetailProps) {
 
                         <NoteList
                             childArray={currentNotes.note}
-                            setClose={setModalNote}
                             setEdit={setIsEditing}
+                            setSelectedNote={setSelectedNote}
+                            activeNote={activeNote}
+                            isEdit={isEditing}
                         />
                     </section>
                 </div>
