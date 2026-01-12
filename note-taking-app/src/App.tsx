@@ -17,7 +17,7 @@ function App() {
                     <Route path="/" element={<DetailEmpty />} />
                     <Route
                         path="/detail/:noteID"
-                        element={<DetailPanel notes={notes} />}
+                        element={<DetailPanel notes={notes} setter={setNotes}/>}
                     />
                 </Routes>
             </div>

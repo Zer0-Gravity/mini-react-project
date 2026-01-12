@@ -1,16 +1,17 @@
-import type { CollectionProps } from "../utils/Type";
+import type { CollectionProps, Note } from "../utils/Type";
 import { Link, useParams } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import NoteList from "./NoteList";
 import { LuPlus } from "react-icons/lu";
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import NoteModal from "./NoteModal";
 
 interface DetailProps {
     notes: CollectionProps[];
+    setter: Dispatch<SetStateAction<CollectionProps[]>>;
 }
 
-function DetailPanel({ notes }: DetailProps) {
+function DetailPanel({ notes, setter }: DetailProps) {
     const { noteID } = useParams();
     const [modalNote, setModalNote] = useState<boolean>(false);
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -20,6 +21,27 @@ function DetailPanel({ notes }: DetailProps) {
     const activeNote = currentNotes?.note.find(
         (note) => note.documentId === selectedNote
     );
+
+    const saveNote = (noteData: Note) => {
+        setter((prev) => {
+            return prev.map((collection) => {
+                if (collection.collectionId === currentNotes?.collectionId) {
+                    return {
+                        ...collection,
+                        note: isEditing
+                            ? collection.note.map((n) =>
+                                  n.documentId === selectedNote
+                                      ? { ...n, ...noteData }
+                                      : n
+                              )
+                            : [...collection.note, noteData],
+                    };
+                }
+
+                return collection;
+            });
+        });
+    };
 
     const handleOpenNew = () => {
         setModalNote(true);
@@ -59,6 +81,8 @@ function DetailPanel({ notes }: DetailProps) {
                                     onClose={() => setModalNote(false)}
                                     activeNote={activeNote}
                                     isEdit={isEditing}
+                                    saveNote={saveNote}
+                                    selectedNote={selectedNote}
                                 />
                             )}
                         </div>
@@ -69,6 +93,8 @@ function DetailPanel({ notes }: DetailProps) {
                             setSelectedNote={setSelectedNote}
                             activeNote={activeNote}
                             isEdit={isEditing}
+                            saveNote={saveNote}
+                            selectedNote={selectedNote}
                         />
                     </section>
                 </div>

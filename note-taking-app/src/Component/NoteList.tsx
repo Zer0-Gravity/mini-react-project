@@ -9,6 +9,8 @@ interface NoteProps {
     setSelectedNote: Dispatch<SetStateAction<string>>;
     activeNote: Note | undefined;
     isEdit: boolean;
+    saveNote: (note: Note) => void;
+    selectedNote: string;
 }
 
 function NoteList({
@@ -17,6 +19,8 @@ function NoteList({
     setSelectedNote,
     activeNote,
     isEdit,
+    saveNote,
+    selectedNote,
 }: NoteProps) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -51,6 +55,8 @@ function NoteList({
                     onClose={() => setIsModalOpen(false)}
                     activeNote={activeNote}
                     isEdit={isEdit}
+                    saveNote={saveNote}
+                    selectedNote={selectedNote}
                 />
             )}
         </div>
