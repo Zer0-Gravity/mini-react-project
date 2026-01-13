@@ -63,7 +63,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
                           ...col,
                           collectionName: title,
                           description: description,
-                          date: new Date().toLocaleTimeString(),
+                          date: new Date().toLocaleDateString(),
                       }
                     : col
             )
