@@ -43,6 +43,23 @@ function DetailPanel({ notes, setter }: DetailProps) {
         });
     };
 
+    const deleteNote = (noteId: string) => {
+        setter((prev) => {
+            return prev.map((collection) => {
+                if (collection.collectionId === currentNotes?.collectionId) {
+                    return {
+                        ...collection,
+                        note: collection.note.filter(
+                            (n) => noteId !== n.documentId
+                        ),
+                    };
+                }
+
+                return collection;
+            });
+        });
+    };
+
     const handleOpenNew = () => {
         setModalNote(true);
         setIsEditing(false);
@@ -95,6 +112,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
                             isEdit={isEditing}
                             saveNote={saveNote}
                             selectedNote={selectedNote}
+                            deleteNote={deleteNote}
                         />
                     </section>
                 </div>

@@ -11,6 +11,7 @@ interface NoteProps {
     isEdit: boolean;
     saveNote: (note: Note) => void;
     selectedNote: string;
+    deleteNote: (noteId: string) => void;
 }
 
 function NoteList({
@@ -21,6 +22,7 @@ function NoteList({
     isEdit,
     saveNote,
     selectedNote,
+    deleteNote,
 }: NoteProps) {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -35,14 +37,19 @@ function NoteList({
             <div>
                 {childArray.length !== 0 ? (
                     childArray.map((note) => (
-                        <div
-                            key={note.documentId}
-                            onClick={() => handleFlag(note.documentId)}
-                            className="cursor-pointer"
-                        >
-                            <LuFile />
-                            <h1>{note.title}</h1>
-                            <LuTrash2 />
+                        <div key={note.documentId}>
+                            <div
+                                onClick={() => handleFlag(note.documentId)}
+                                className="cursor-pointer"
+                            >
+                                <LuFile />
+                                <h1>{note.title}</h1>
+                            </div>
+                            <div>
+                                <LuTrash2
+                                    onClick={() => deleteNote(note.documentId)}
+                                />
+                            </div>
                         </div>
                     ))
                 ) : (
