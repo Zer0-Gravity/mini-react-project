@@ -22,42 +22,32 @@ function DetailPanel({ notes, setter }: DetailProps) {
         (note) => note.documentId === selectedNote
     );
 
-    const saveNote = (noteData: Note) => {
-        setter((prev) => {
-            return prev.map((collection) => {
-                if (collection.collectionId === currentNotes?.collectionId) {
-                    return {
-                        ...collection,
-                        note: isEditing
-                            ? collection.note.map((n) =>
-                                  n.documentId === selectedNote
-                                      ? { ...n, ...noteData }
-                                      : n
-                              )
-                            : [...collection.note, noteData],
-                    };
-                }
+    const updateFinderHelper = (helper: (notes: Note[]) => Note[]) => {
+        setter((prev) =>
+            prev.map((col) =>
+                col.collectionId === currentNotes?.collectionId
+                    ? { ...col, note: helper(col.note) }
+                    : col
+            )
+        );
+    };
 
-                return collection;
-            });
-        });
+    const saveNote = (noteData: Note) => {
+        updateFinderHelper((notes) =>
+            isEditing
+                ? notes.map((note) =>
+                      note.documentId === selectedNote
+                          ? { ...note, ...noteData }
+                          : note
+                  )
+                : [...notes, noteData]
+        );
     };
 
     const deleteNote = (noteId: string) => {
-        setter((prev) => {
-            return prev.map((collection) => {
-                if (collection.collectionId === currentNotes?.collectionId) {
-                    return {
-                        ...collection,
-                        note: collection.note.filter(
-                            (n) => noteId !== n.documentId
-                        ),
-                    };
-                }
-
-                return collection;
-            });
-        });
+        updateFinderHelper((notes) =>
+            notes.filter((note) => note.documentId !== noteId)
+        );
     };
 
     const handleOpenNew = () => {
