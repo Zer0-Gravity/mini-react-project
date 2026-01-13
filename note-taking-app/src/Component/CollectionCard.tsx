@@ -10,14 +10,16 @@ interface CardProps {
 function CollectionCard({ note, delCollection }: CardProps) {
     return (
         <Link key={note.collectionId} to={`/detail/${note.collectionId}`}>
-            <div className="flex flex-col bg-amber-100 w-57.5 h-20 p-2 justify-between">
-                <div className="flex">
+            <div className="flex flex-col bg-secondary-color w-55 h-20 p-2 justify-between rounded-lg text-text-dark">
+                <div className="flex gap-3 items-center">
                     <LuFolder size={25} />
-                    <h3>{note.collectionName}</h3>
+                    <h3 className="text-[20px] font-semibold">
+                        {note.collectionName}
+                    </h3>
                 </div>
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-end gap-2 ">
                     <button onClick={() => delCollection(note.collectionId)}>
-                        <LuTrash2 />
+                        <LuTrash2 size={20} />
                     </button>
                 </div>
             </div>

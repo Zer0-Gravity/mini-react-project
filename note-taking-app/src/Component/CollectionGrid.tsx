@@ -34,12 +34,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
     };
 
     return (
-        <div className="h-full w-137.5">
-            {/* Search Bar */}
-            <section>
-                <input type="search" placeholder="Search..." />
-            </section>
-
+        <div className="h-full w-137.5 bg-[#4DA9FF] text-white">
             {/* Header */}
             <header className="flex justify-between">
                 <h1>Note Collection</h1>

@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+    font-family: "Fredoka", sans-serif;
+}
 
 @layer utilities {
     .title-editor:empty::before {
@@ -6,4 +11,12 @@
         color: gray;
         cursor: text;
     }
+}
+
+@theme {
+    --color-primary-color: #344966;
+    --color-secondary-color: #ff7a5c;
+    --color-third-color: #f0f4ef;
+    --color-text-dark: #0d1821;
+    --color-text-light: #f0f4ef;
 }
