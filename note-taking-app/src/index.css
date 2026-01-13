@@ -11,6 +11,10 @@ body {
         color: gray;
         cursor: text;
     }
+
+    .scrollbar-hidden::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 @theme {
@@ -19,4 +23,9 @@ body {
     --color-third-color: #f0f4ef;
     --color-text-dark: #0d1821;
     --color-text-light: #f0f4ef;
+}
+
+h1,
+h2 {
+    color: #f0f4ef;
 }

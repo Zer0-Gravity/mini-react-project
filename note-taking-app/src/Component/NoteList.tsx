@@ -34,16 +34,19 @@ function NoteList({
 
     return (
         <div>
-            <div>
+            <div className="bg-third-color p-3 rounded-lg h-110 overflow-y-auto overflow-hidden scrollbar-hidden">
                 {childArray.length !== 0 ? (
                     childArray.map((note) => (
-                        <div key={note.documentId}>
+                        <div
+                            key={note.documentId}
+                            className="flex rounded-lg items-center justify-between bg-secondary-color my-1 p-2"
+                        >
                             <div
                                 onClick={() => handleFlag(note.documentId)}
-                                className="cursor-pointer"
+                                className="cursor-pointer flex items-center gap-3 flex-1"
                             >
                                 <LuFile />
-                                <h1>{note.title}</h1>
+                                <p>{note.title}</p>
                             </div>
                             <div>
                                 <LuTrash2
@@ -53,7 +56,7 @@ function NoteList({
                         </div>
                     ))
                 ) : (
-                    <h1>No note here</h1>
+                    <p className="text-center">No note here</p>
                 )}
             </div>
 

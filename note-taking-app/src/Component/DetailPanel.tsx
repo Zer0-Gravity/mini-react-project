@@ -76,9 +76,9 @@ function DetailPanel({ notes, setter }: DetailProps) {
     };
 
     return (
-        <div className="w-137.5 h-full border p-4 flex flex-col">
+        <div className="w-137.5 h-full border p-10 flex flex-col bg-primary-color">
             {currentNotes ? (
-                <div className="flex-1">
+                <div className="flex-1 space-y-7">
                     <section className="flex justify-between">
                         <div>
                             <h1
@@ -87,32 +87,37 @@ function DetailPanel({ notes, setter }: DetailProps) {
                                 dangerouslySetInnerHTML={{
                                     __html: currentNotes.collectionName,
                                 }}
+                                className="text-[40px] font-semibold outline-none"
                             ></h1>
-                            <p>
+                            <h1>
                                 Date modified: <i>{currentNotes.date}</i>
-                            </p>
+                            </h1>
                         </div>
                         <Link to="/">
-                            <IoMdCloseCircle size={25} />
+                            <IoMdCloseCircle size={25} color="#ff7a5c" />
                         </Link>
                     </section>
 
-                    <section>
+                    <section className="space-y-3">
                         <h2>Description : </h2>
-                        <p
-                            className="p-2"
+                        <div
+                            className="p-2 w-full min-h-32.5 bg-third-color outline-none rounded-lg"
                             ref={descriptionRef}
                             contentEditable
                             dangerouslySetInnerHTML={{
                                 __html: currentNotes.description,
                             }}
-                        ></p>
+                        ></div>
                     </section>
-                    <section>
+                    <section className="space-y-3">
                         <div className="flex justify-between">
                             <h1>Note</h1>
-                            <button onClick={handleOpenNew}>
+                            <button
+                                className="flex items-center gap-1 bg-secondary-color py-1 px-2 rounded-lg"
+                                onClick={handleOpenNew}
+                            >
                                 <LuPlus />
+                                add
                             </button>
 
                             {/* This where new note created */}
@@ -142,7 +147,10 @@ function DetailPanel({ notes, setter }: DetailProps) {
             ) : (
                 <div>No Note here</div>
             )}
-            <button onClick={updateCollection} className="flex justify-end">
+            <button
+                onClick={updateCollection}
+                className="flex p-2 bg-secondary-color justify-center rounded-lg"
+            >
                 Save
             </button>
         </div>
