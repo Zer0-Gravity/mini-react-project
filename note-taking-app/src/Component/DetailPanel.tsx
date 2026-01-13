@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import NoteList from "./NoteList";
 import { LuPlus } from "react-icons/lu";
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import NoteModal from "./NoteModal";
 
 interface DetailProps {
@@ -17,6 +17,8 @@ function DetailPanel({ notes, setter }: DetailProps) {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [selectedNote, setSelectedNote] = useState<string>("");
 
+    const titleRef = useRef<HTMLDivElement>(null);
+    const descriptionRef = useRef<HTMLDivElement>(null);
     const currentNotes = notes.find((note) => note.collectionId === noteID);
     const activeNote = currentNotes?.note.find(
         (note) => note.documentId === selectedNote
@@ -50,18 +52,42 @@ function DetailPanel({ notes, setter }: DetailProps) {
         );
     };
 
+    const updateCollection = () => {
+        const title = titleRef.current?.innerText ?? "";
+        const description = descriptionRef.current?.innerHTML ?? "";
+
+        setter((prev) =>
+            prev.map((col) =>
+                col.collectionId === currentNotes?.collectionId
+                    ? {
+                          ...col,
+                          collectionName: title,
+                          description: description,
+                          date: new Date().toLocaleTimeString(),
+                      }
+                    : col
+            )
+        );
+    };
+
     const handleOpenNew = () => {
         setModalNote(true);
         setIsEditing(false);
     };
 
     return (
-        <div className="w-137.5 h-full border p-4">
+        <div className="w-137.5 h-full border p-4 flex flex-col">
             {currentNotes ? (
-                <div>
+                <div className="flex-1">
                     <section className="flex justify-between">
                         <div>
-                            <h1>{currentNotes.collectionName}</h1>
+                            <h1
+                                ref={titleRef}
+                                contentEditable
+                                dangerouslySetInnerHTML={{
+                                    __html: currentNotes.collectionName,
+                                }}
+                            ></h1>
                             <p>
                                 Date modified: <i>{currentNotes.date}</i>
                             </p>
@@ -73,7 +99,14 @@ function DetailPanel({ notes, setter }: DetailProps) {
 
                     <section>
                         <h2>Description : </h2>
-                        <p className="p-2">{currentNotes.description}</p>
+                        <p
+                            className="p-2"
+                            ref={descriptionRef}
+                            contentEditable
+                            dangerouslySetInnerHTML={{
+                                __html: currentNotes.description,
+                            }}
+                        ></p>
                     </section>
                     <section>
                         <div className="flex justify-between">
@@ -109,6 +142,9 @@ function DetailPanel({ notes, setter }: DetailProps) {
             ) : (
                 <div>No Note here</div>
             )}
+            <button onClick={updateCollection} className="flex justify-end">
+                Save
+            </button>
         </div>
     );
 }
