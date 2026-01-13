@@ -34,12 +34,17 @@ function CollectionGrid({ notes, setter }: CardProps) {
     };
 
     return (
-        <div className="h-full w-137.5 bg-[#4DA9FF] text-white">
+        <div className="h-full w-137.5 bg-primary-color p-10">
             {/* Header */}
-            <header className="flex justify-between">
-                <h1>Note Collection</h1>
+            <header className="flex justify-between mb-10 items-center">
+                <h1 className="text-[32px] font-semibold text-text-light">
+                    Note Collection
+                </h1>
                 {/* Trigger modal flag to true when user click +New Collection */}
-                <button className="flex" onClick={() => setModalInput(true)}>
+                <button
+                    className="flex items-center gap-2 bg-secondary-color p-2 rounded-lg"
+                    onClick={() => setModalInput(true)}
+                >
                     <LuPlus /> New Collection
                 </button>
 
