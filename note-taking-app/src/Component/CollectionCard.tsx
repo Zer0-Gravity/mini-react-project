@@ -1,10 +1,11 @@
 import { LuFolder, LuTrash2 } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import type { CollectionProps } from "../utils/Type";
+import type React from "react";
 
 interface CardProps {
     note: CollectionProps;
-    delCollection: (uuid: string) => void;
+    delCollection: (e: React.MouseEvent, uuid: string) => void;
 }
 
 function CollectionCard({ note, delCollection }: CardProps) {
@@ -18,7 +19,9 @@ function CollectionCard({ note, delCollection }: CardProps) {
                     </h3>
                 </div>
                 <div className="flex justify-end gap-2 ">
-                    <button onClick={() => delCollection(note.collectionId)}>
+                    <button
+                        onClick={(e) => delCollection(e, note.collectionId)}
+                    >
                         <LuTrash2 size={20} />
                     </button>
                 </div>

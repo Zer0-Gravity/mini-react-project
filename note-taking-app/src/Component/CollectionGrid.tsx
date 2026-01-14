@@ -1,9 +1,10 @@
 import type { CollectionProps } from "../utils/Type";
-import { useState, type Dispatch, type SetStateAction } from "react";
+import React, { useState, type Dispatch, type SetStateAction } from "react";
 import Modal from "./Modal";
 import type { Note } from "../utils/Type";
 import CollectionCard from "./CollectionCard";
 import { LuPlus } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
     notes: CollectionProps[];
@@ -14,6 +15,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
     const [modalInput, setModalInput] = useState<boolean>(false);
     const [collectionTitle, setCollectionTitle] = useState<string>("");
     const [collectionDesc, setCollectionDesc] = useState<string>("");
+    const navigate = useNavigate();
 
     const addNewCollection = () => {
         const newCollection = {
@@ -29,8 +31,11 @@ function CollectionGrid({ notes, setter }: CardProps) {
     };
 
     //Delete collection function
-    const deleteCollection = (uuid: string) => {
+    const deleteCollection = (e: React.MouseEvent, uuid: string) => {
+        e.preventDefault();
+        e.stopPropagation();
         setter((prev) => prev.filter((note) => note.collectionId !== uuid));
+        navigate("/");
     };
 
     return (
@@ -71,7 +76,9 @@ function CollectionGrid({ notes, setter }: CardProps) {
                         />
                     ))
                 ) : (
-                    <h1>No collection</h1>
+                    <h1 className="text-center">
+                        Collection empty make a new one!!
+                    </h1>
                 )}
             </section>
         </div>
