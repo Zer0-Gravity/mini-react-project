@@ -101,7 +101,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
                     <section className="space-y-3">
                         <h2>Description : </h2>
                         <div
-                            className="p-2 w-full min-h-32.5 bg-third-color outline-none rounded-lg"
+                            className="p-2 w-full max-h-32.5 h-32.5 bg-third-color outline-none rounded-lg resize-none overflow-auto scrollbar-hidden"
                             ref={descriptionRef}
                             contentEditable
                             dangerouslySetInnerHTML={{
