@@ -34,7 +34,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
     };
 
     return (
-        <div className="h-full w-137.5 bg-primary-color p-10">
+        <div className="h-full w-137.5 bg-primary-color p-10 rounded-lg">
             {/* Header */}
             <header className="flex justify-between mb-10 items-center">
                 <h1 className="text-[32px] font-semibold text-text-light">

@@ -76,7 +76,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
     };
 
     return (
-        <div className="w-137.5 h-full border p-10 flex flex-col bg-primary-color">
+        <div className="w-137.5 h-full border p-10 flex flex-col bg-primary-color rounded-lg">
             {currentNotes ? (
                 <div className="flex-1 space-y-7">
                     <section className="flex justify-between">

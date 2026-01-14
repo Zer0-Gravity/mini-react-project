@@ -49,7 +49,7 @@ function Modal({ onClose, inputHandler }: ModalProps) {
                 <div className="flex justify-end gap-2">
                     <button
                         onClick={onClose}
-                        className="w-20 py-1.5 rounded-lg bg-secondary-color"
+                        className="w-20 py-1.5 rounded-lg bg-gray-300"
                     >
                         Cancel
                     </button>
