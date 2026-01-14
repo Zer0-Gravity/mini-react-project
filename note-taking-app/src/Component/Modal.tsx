@@ -23,7 +23,7 @@ function Modal({ onClose, inputHandler }: ModalProps) {
 
     return (
         <div className="absolute bg-black/50 inset-0 flex items-center justify-center top-0">
-            <div className="bg-primary-color flex flex-col w-[500px] gap-3 p-5 rounded-lg">
+            <div className="bg-primary-color flex flex-col w-125 gap-3 p-5 rounded-lg">
                 <div className="flex justify-between">
                     <h1 className="text-2xl font-semibold">
                         Add new collection
@@ -42,7 +42,7 @@ function Modal({ onClose, inputHandler }: ModalProps) {
                     className="outline-none p-2 bg-third-color rounded-lg"
                 />
                 <textarea
-                    placeholder="Add description"
+                    placeholder="(Optional) Add description"
                     className="resize-none outline-none bg-third-color h-20 p-2 rounded-lg"
                     onChange={handleDescCollection}
                 />

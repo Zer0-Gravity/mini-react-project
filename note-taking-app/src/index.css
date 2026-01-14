@@ -6,7 +6,7 @@ body {
 }
 
 @layer utilities {
-    .title-editor:empty::before {
+    .empty-editor:empty::before {
         content: attr(data-placeholder);
         color: gray;
         cursor: text;
