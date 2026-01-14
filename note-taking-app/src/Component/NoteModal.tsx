@@ -21,12 +21,12 @@ function NoteModal({
     const bodyRef = useRef<HTMLDivElement>(null);
 
     const handleSave = () => {
-        const title = titleRef.current?.innerText ?? "";
+        const title = titleRef.current?.innerText.trim() ?? "";
         const body = bodyRef.current?.innerHTML ?? "";
 
         const noteData = {
             documentId: isEdit ? selectedNote : crypto.randomUUID(),
-            title: title ? title : "Untitled",
+            title: title || (isEdit ? activeNote?.title : "") || "Untitled",
             body: body,
         };
 
@@ -46,11 +46,11 @@ function NoteModal({
                         key={activeNote?.documentId}
                         contentEditable
                         ref={titleRef}
-                        data-placeholder={
-                            isEdit ? activeNote?.title : "Untitled"
-                        }
-                        className="empty-editor p-3 outline-none text-xl"
-                    ></div>
+                        data-placeholder="Untitled"
+                        className="p-3 outline-none text-xl"
+                    >
+                        {isEdit ? activeNote?.title : "Untitled"}
+                    </div>
                     <IoMdCloseCircle size={25} onClick={onClose} />
                 </div>
 
@@ -59,10 +59,9 @@ function NoteModal({
                     contentEditable
                     ref={bodyRef}
                     dangerouslySetInnerHTML={{
-                        __html:
-                            (isEdit ? activeNote?.body : "Start typing") ?? "",
+                        __html: (isEdit ? activeNote?.body : "") ?? "",
                     }}
-                    className="empty-editor flex-1 p-3 outline-none"
+                    className="flex-1 p-3 outline-none"
                 ></div>
                 <div className="flex justify-end gap-5">
                     <button

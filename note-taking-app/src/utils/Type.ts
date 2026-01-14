@@ -8,6 +8,6 @@ export interface CollectionProps {
 
 export interface Note {
     documentId: string;
-    title: string;
+    title?: string;
     body: string;
 }
