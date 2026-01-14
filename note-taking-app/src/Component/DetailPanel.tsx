@@ -56,6 +56,8 @@ function DetailPanel({ notes, setter }: DetailProps) {
         const title = titleRef.current?.innerText ?? "";
         const description = descriptionRef.current?.innerHTML ?? "";
 
+        if (title || description) return;
+
         setter((prev) =>
             prev.map((col) =>
                 col.collectionId === currentNotes?.collectionId
@@ -79,15 +81,15 @@ function DetailPanel({ notes, setter }: DetailProps) {
         <div className="w-137.5 h-full border p-10 flex flex-col bg-primary-color rounded-lg">
             {currentNotes ? (
                 <div className="flex-1 space-y-7">
-                    <section className="flex justify-between">
-                        <div>
+                    <section className="flex justify-between ">
+                        <div className="flex-1">
                             <h1
                                 ref={titleRef}
                                 contentEditable
                                 dangerouslySetInnerHTML={{
                                     __html: currentNotes.collectionName,
                                 }}
-                                className="text-[40px] font-semibold outline-none"
+                                className="text-[40px] font-semibold outline-none "
                             ></h1>
                             <h1>
                                 Date modified: <i>{currentNotes.date}</i>
