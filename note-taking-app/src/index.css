@@ -15,6 +15,10 @@ body {
     .scrollbar-hidden::-webkit-scrollbar {
         display: none;
     }
+
+    .animate-button {
+        @apply active:scale-95 hover:scale-105;
+    }
 }
 
 @theme {

@@ -115,7 +115,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
                         <div className="flex justify-between">
                             <h1>Note</h1>
                             <button
-                                className="flex items-center gap-1 bg-secondary-color py-1 px-2 rounded-lg"
+                                className="flex items-center gap-1 bg-secondary-color py-1 px-2 rounded-lg animate-button"
                                 onClick={handleOpenNew}
                             >
                                 <LuPlus />

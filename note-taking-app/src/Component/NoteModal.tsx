@@ -67,13 +67,13 @@ function NoteModal({
                 <div className="flex justify-end gap-5">
                     <button
                         onClick={onClose}
-                        className="bg-gray-300 w-20 py-1.5 rounded-lg"
+                        className="bg-gray-300 w-20 py-1.5 rounded-lg animate-button"
                     >
                         Close
                     </button>
                     <button
                         onClick={handleSave}
-                        className="bg-secondary-color w-20 py-1.5 rounded-lg"
+                        className="bg-secondary-color w-20 py-1.5 rounded-lg animate-button"
                     >
                         Save
                     </button>

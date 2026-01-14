@@ -47,7 +47,7 @@ function CollectionGrid({ notes, setter }: CardProps) {
                 </h1>
                 {/* Trigger modal flag to true when user click +New Collection */}
                 <button
-                    className="flex items-center gap-2 bg-secondary-color p-2 rounded-lg"
+                    className="flex items-center gap-2 bg-secondary-color p-2 rounded-lg animate-button"
                     onClick={() => setModalInput(true)}
                 >
                     <LuPlus /> New Collection
