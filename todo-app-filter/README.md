@@ -25,6 +25,7 @@ I built this app to and implementing sorting, add task, and delete task. Using f
 
 
 ### Quick Start
-1. `git clone [your repo-link]`
-2. `npm install`
-3. `npm run dev`
+1. `git clone https://github.com/Zer0-Gravity/mini-react-project`
+2. `cd mini-react-project/todo-app-filter`
+3. `npm install`
+4. `npm run dev`
