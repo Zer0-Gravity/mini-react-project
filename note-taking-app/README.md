@@ -25,6 +25,7 @@ This project was built to demonstrate a branched array architecture. The primary
 ![Demo Gif](./src/demo/Note%20Editor%20Demo.gif)
 
 ### Quick Start
-1. `git clone [your repo-link]`
-2. `npm install`
-3. `npm run dev`
+1. `git clone https://github.com/Zer0-Gravity/mini-react-project`
+2. `cd mini-react-project/note-taking-app`
+3. `npm install`
+4. `npm run dev`
