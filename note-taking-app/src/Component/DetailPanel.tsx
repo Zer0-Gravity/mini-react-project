@@ -56,7 +56,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
         const title = titleRef.current?.innerText ?? "";
         const description = descriptionRef.current?.innerHTML ?? "";
 
-        if (title || description) return;
+        if (!title || !description) return;
 
         setter((prev) =>
             prev.map((col) =>
@@ -81,7 +81,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
         <div className="w-137.5 h-full border p-10 flex flex-col bg-primary-color rounded-lg">
             {currentNotes ? (
                 <div className="flex-1 space-y-7">
-                    <section className="flex justify-between ">
+                    <section className="flex justify-between">
                         <div className="flex-1">
                             <h1
                                 ref={titleRef}
@@ -89,7 +89,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
                                 dangerouslySetInnerHTML={{
                                     __html: currentNotes.collectionName,
                                 }}
-                                className="text-[40px] font-semibold outline-none "
+                                className="text-[40px] font-semibold outline-none max-h-15 max-w-110 overflow-auto scrollbar-hidden"
                             ></h1>
                             <h1>
                                 Date modified: <i>{currentNotes.date}</i>
@@ -151,7 +151,7 @@ function DetailPanel({ notes, setter }: DetailProps) {
             )}
             <button
                 onClick={updateCollection}
-                className="flex p-2 bg-secondary-color justify-center rounded-lg"
+                className="flex p-2 bg-secondary-color justify-center rounded-lg animate-button"
             >
                 Save
             </button>

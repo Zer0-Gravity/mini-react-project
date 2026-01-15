@@ -41,13 +41,13 @@ function NoteModal({
     return (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
             <div className="bg-third-color w-200 h-237.5 p-10 flex flex-col rounded-lg">
-                <div className="flex justify-between">
+                <div className="flex gap-2">
                     <div
                         key={activeNote?.documentId}
                         contentEditable
                         ref={titleRef}
                         data-placeholder="Untitled"
-                        className="p-3 outline-none text-xl"
+                        className="p-3 outline-none text-xl border-b-2 flex-1"
                     >
                         {isEdit ? activeNote?.title : "Untitled"}
                     </div>

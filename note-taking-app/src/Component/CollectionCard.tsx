@@ -14,7 +14,7 @@ function CollectionCard({ note, delCollection }: CardProps) {
             <div className="flex flex-col bg-secondary-color w-55 h-20 p-2 justify-between rounded-lg text-text-dark">
                 <div className="flex gap-3 items-center">
                     <LuFolder size={25} />
-                    <h3 className="text-[20px] font-medium">
+                    <h3 className="text-[20px] font-medium  truncate">
                         {note.collectionName}
                     </h3>
                 </div>

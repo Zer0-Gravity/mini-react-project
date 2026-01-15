@@ -1,75 +1,30 @@
-# React + TypeScript + Vite
+# Note Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist web application designed for efficient note management, focusing on core CRUD (Create, Read, Update, Delete) operations
 
-Currently, two official plugins are available:
+### Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project was built to demonstrate a branched array architecture. The primary goal was to implement a data structure that manages nested relationships within a standard array, ensuring seamless data manipulation during Create, Read, Update, and Delete actions.
 
-## React Compiler
+### Core Feature
+- Branched Data Logic: Specialized array handling to manage complex data relationships.
+- Efficient CRUD: Streamlined interface for managing note in real time
+                  - Collection : Add/update collection folder as main parent
+                  - Note: Add/update note inside the collection
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### Tech Used
+- **Framework**: React 19 with compiler 
+- **Styling**: Tailwind CSS
+- **Language**: Typescript
 
-Note: This will impact Vite dev & build performances.
+### Library Used
+- [React Icon](react-icons.github.io)
+- [React Router](https://reactrouter.com/)
 
-## Expanding the ESLint configuration
+### Preview
+![Demo Gif](./src/demo/Note%20Editor%20Demo.gif)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Quick Start
+1. `git clone [your repo-link]`
+2. `npm install`
+3. `npm run dev`
