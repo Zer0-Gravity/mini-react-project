@@ -5,9 +5,14 @@ import { weatherMapping } from "../Utils/WeatherCode";
 interface MainDisplayProps {
     cityData: City | null;
     weatherData: WeatherData | null;
+    handleFav: (lat: number, lon: number, name: string) => void;
 }
 
-function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
+function WeatherDisplay({
+    cityData,
+    weatherData,
+    handleFav,
+}: MainDisplayProps) {
     const getDayName = (isoDate: string | undefined) => {
         if (isoDate) {
             return new Date(isoDate).toLocaleDateString("en-US", {
@@ -29,7 +34,17 @@ function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
             <section>
                 <div>
                     <h1>{`${cityData?.name}, ${cityData?.admin1},${cityData?.country}`}</h1>
-                    <button>
+                    <button
+                        onClick={() => {
+                            if (cityData) {
+                                handleFav(
+                                    cityData.latitude,
+                                    cityData.longitude,
+                                    cityData.name
+                                );
+                            }
+                        }}
+                    >
                         <LucideHeart />
                     </button>
                 </div>

@@ -1,4 +1,10 @@
-function FavoriteList() {
+import type { Favorite } from "../Utils/Type";
+
+interface FavoriteListProps {
+    favorite: Favorite[];
+}
+
+function FavoriteList({ favorite }: FavoriteListProps) {
     return (
         <div>
             <header>

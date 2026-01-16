@@ -5,7 +5,7 @@ import WeekForecast from "./PanelTab/WeekForecast";
 import { useEffect, useState } from "react";
 import TabController from "./Component/TabController";
 import axios from "axios";
-import type { City, WeatherData } from "./Utils/Type";
+import type { City, Favorite, WeatherData } from "./Utils/Type";
 import { LucideLoaderCircle } from "lucide-react";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [cityData, setCityData] = useState<City | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    //const [favorite, setFavorite] = useState([]);
+    const [favorite, setFavorite] = useState<Favorite[]>([]);
 
     useEffect(() => {
         async function fetchWeather(
@@ -64,9 +64,26 @@ function App() {
         setSelectedTab(e.target.value);
     };
 
+    const handleFav = (lat: number, lon: number, name: string) => {
+        const newFav = {
+            name: name,
+            latitude: lat,
+            longitude: lon,
+        };
+
+        const isExist = favorite.some((item) => item.name === name);
+        if (isExist) return;
+
+        setFavorite((prev) => [...prev, newFav]);
+    };
+
     return (
         <main className="flex relative">
-            <WeatherDisplay cityData={cityData} weatherData={weatherData} />
+            <WeatherDisplay
+                cityData={cityData}
+                weatherData={weatherData}
+                handleFav={handleFav}
+            />
             <section>
                 <TabController
                     handleTabChange={handleTabChange}
@@ -74,7 +91,9 @@ function App() {
                 />
                 <div>
                     {selectedTab === "forecast" && <WeekForecast />}
-                    {selectedTab === "favorite" && <FavoriteList />}
+                    {selectedTab === "favorite" && (
+                        <FavoriteList favorite={favorite} />
+                    )}
                 </div>
             </section>
 

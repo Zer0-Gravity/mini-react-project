@@ -29,3 +29,9 @@ export interface DailyWeather {
     uv_index_max: [];
     weather_code: [];
 }
+
+export interface Favorite {
+    name: string;
+    latitude: number;
+    longitude: number;
+}
