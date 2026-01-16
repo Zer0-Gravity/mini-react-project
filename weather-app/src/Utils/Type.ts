@@ -35,3 +35,10 @@ export interface Favorite {
     latitude: number;
     longitude: number;
 }
+
+export interface FavoriteData {
+    relative_humidity_2m: number;
+    temperature_2m: number;
+    time: string;
+    weather_code: number;
+}

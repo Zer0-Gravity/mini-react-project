@@ -7,13 +7,14 @@ import TabController from "./Component/TabController";
 import axios from "axios";
 import type { City, Favorite, WeatherData } from "./Utils/Type";
 import { LucideLoaderCircle } from "lucide-react";
+import { dummy } from "./Utils/Mockdata";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [cityData, setCityData] = useState<City | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [favorite, setFavorite] = useState<Favorite[]>([]);
+    const [favorite, setFavorite] = useState<Favorite[]>(dummy);
 
     useEffect(() => {
         async function fetchWeather(
