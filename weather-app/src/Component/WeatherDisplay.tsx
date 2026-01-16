@@ -1,4 +1,5 @@
 import type { City, WeatherData } from "../Utils/Type";
+import { weatherMapping } from "../Utils/WeatherCode";
 
 interface MainDisplayProps {
     cityData: City | null;
@@ -14,6 +15,12 @@ function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
         }
     };
 
+    const code: number = weatherData?.current.weather_code ?? 0;
+    const weather = weatherMapping[code] ?? {
+        label: "Loading...",
+        icon: "Loading...",
+    };
+
     return (
         <div>
             <input type="search" placeholder="Search.." />
@@ -23,9 +30,12 @@ function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
                     <h1>{`${cityData?.name}, ${cityData?.admin1},${cityData?.country}`}</h1>
                 </div>
                 <div>
-                    <img src="https://placehold.co/200x200" alt="" />
+                    <img
+                        src={`/Weather Icon/${weather.icon}.svg`}
+                        alt="weather-icon"
+                    />
                     <h1>{weatherData?.current.temperature_2m.toFixed(0)}</h1>
-                    <h2>Thunderstorm</h2>
+                    <h2>{weather.label}</h2>
                 </div>
                 <div>
                     <h1>Wind: {weatherData?.current.wind_speed_10m} km/h</h1>
