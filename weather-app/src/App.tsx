@@ -6,11 +6,14 @@ import { useEffect, useState } from "react";
 import TabController from "./Component/TabController";
 import axios from "axios";
 import type { City, WeatherData } from "./Utils/Type";
+import { LucideLoaderCircle } from "lucide-react";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [cityData, setCityData] = useState<City | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    //const [favorite, setFavorite] = useState([]);
 
     useEffect(() => {
         async function fetchWeather(
@@ -19,20 +22,24 @@ function App() {
             timezone: string | undefined
         ) {
             try {
+                setIsLoading(true);
                 await axios
                     .get(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=uv_index_max,temperature_2m_max,temperature_2m_min,weather_code&current=temperature_2m,weather_code,precipitation,relative_humidity_2m,wind_speed_10m&timezone=${timezone}`
+                        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=uv_index_max,temperature_2m_max,temperature_2m_min,weather_code&current=is_day,temperature_2m,weather_code,precipitation,relative_humidity_2m,wind_speed_10m&timezone=${timezone}`
                     )
                     .then((response) => {
                         setWeatherData(response.data);
                     });
             } catch (error) {
                 console.error("Error fetching weather data", error);
+            } finally {
+                setIsLoading(false);
             }
         }
 
         async function getCityData() {
             try {
+                setIsLoading(true);
                 await axios
                     .get(
                         "https://geocoding-api.open-meteo.com/v1/search?name=yokohama&count=1&language=en&format=json"
@@ -45,6 +52,8 @@ function App() {
                     });
             } catch (error) {
                 console.error("Couldn't find city data", error);
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -55,10 +64,8 @@ function App() {
         setSelectedTab(e.target.value);
     };
 
-    console.log(weatherData, cityData);
-
     return (
-        <main className="flex">
+        <main className="flex relative">
             <WeatherDisplay cityData={cityData} weatherData={weatherData} />
             <section>
                 <TabController
@@ -70,6 +77,15 @@ function App() {
                     {selectedTab === "favorite" && <FavoriteList />}
                 </div>
             </section>
+
+            {isLoading && (
+                <div className="absolute inset-0 flex item-center justify-center bg-black/60 backdrop-blur-lg">
+                    <div className="bg-white">
+                        <LucideLoaderCircle className="animate-spin" />
+                        <h1>Loading data...</h1>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }

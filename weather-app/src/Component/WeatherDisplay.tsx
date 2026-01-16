@@ -1,3 +1,4 @@
+import { LucideHeart } from "lucide-react";
 import type { City, WeatherData } from "../Utils/Type";
 import { weatherMapping } from "../Utils/WeatherCode";
 
@@ -28,6 +29,9 @@ function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
             <section>
                 <div>
                     <h1>{`${cityData?.name}, ${cityData?.admin1},${cityData?.country}`}</h1>
+                    <button>
+                        <LucideHeart />
+                    </button>
                 </div>
                 <div>
                     <img

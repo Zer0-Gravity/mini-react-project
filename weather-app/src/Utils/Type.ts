@@ -15,6 +15,7 @@ export interface WeatherData {
 
 export interface CurrentWeather {
     precipitation: number;
+    is_day: boolean;
     relative_humidity_2m: number;
     temperature_2m: number;
     time: string;
