@@ -3,6 +3,7 @@ import WeatherDisplay from "./Component/WeatherDisplay";
 import FavoriteList from "./PanelTab/FavoriteList";
 import WeekForecast from "./PanelTab/WeekForecast";
 import { useState } from "react";
+import TabController from "./Component/TabController";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
@@ -12,35 +13,19 @@ function App() {
     };
 
     return (
-        <div className="flex">
+        <main className="flex">
             <WeatherDisplay />
-            <div>
+            <section>
+                <TabController
+                    handleTabChange={handleTabChange}
+                    selectedTab={selectedTab}
+                />
                 <div>
-                    <label>
-                        <input
-                            type="radio"
-                            name="navigation-tab"
-                            value="forecast"
-                            checked={selectedTab === "forecast"}
-                            onChange={handleTabChange}
-                        />
-                        <span>Week Forecast</span>
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="navigation-tab"
-                            value="favorite"
-                            checked={selectedTab === "favorite"}
-                            onChange={handleTabChange}
-                        />
-                        <span>Favorite</span>
-                    </label>
+                    {selectedTab === "forecast" && <WeekForecast />}
+                    {selectedTab === "favorite" && <FavoriteList />}
                 </div>
-                {selectedTab === "forecast" && <WeekForecast />}
-                {selectedTab === "favorite" && <FavoriteList />}
-            </div>
-        </div>
+            </section>
+        </main>
     );
 }
 
