@@ -5,7 +5,7 @@ import WeekForecast from "./PanelTab/WeekForecast";
 import { useEffect, useState } from "react";
 import TabController from "./Component/TabController";
 import axios from "axios";
-import type { GeoCoding, GeocodingResponse } from "./Utils/Type";
+import type { GeocodingResponse } from "./Utils/Type";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
