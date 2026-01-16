@@ -6,36 +6,46 @@ interface MainDisplayProps {
 }
 
 function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
+    const getDayName = (isoDate: string | undefined) => {
+        if (isoDate) {
+            return new Date(isoDate).toLocaleDateString("en-US", {
+                weekday: "long",
+            });
+        }
+    };
+
     return (
         <div>
             <input type="search" placeholder="Search.." />
 
             <section>
                 <div>
-                    <h1>Yokohama</h1>
+                    <h1>{`${cityData?.name}, ${cityData?.admin1},${cityData?.country}`}</h1>
                 </div>
                 <div>
                     <img src="https://placehold.co/200x200" alt="" />
-                    <h1>26°</h1>
+                    <h1>{weatherData?.current.temperature_2m.toFixed(0)}</h1>
                     <h2>Thunderstorm</h2>
                 </div>
                 <div>
-                    <h1>Wind: 5 km/h</h1>
-                    <h1>Humidity: 10%</h1>
+                    <h1>Wind: {weatherData?.current.wind_speed_10m} km/h</h1>
+                    <h1>
+                        Humidity: {weatherData?.current.relative_humidity_2m}%
+                    </h1>
                 </div>
             </section>
 
             <section>
                 <div>
                     <h1>Chance of rain</h1>
-                    <h1>17%</h1>
+                    <h1>{weatherData?.current.precipitation}%</h1>
                 </div>
                 <div>
                     <img src="https://placehold.co/40x40" alt="uv-index" />\
                     <p>UV Index</p>
                 </div>
                 <div>
-                    <h1>Monday</h1>
+                    <h1>{getDayName(weatherData?.current.time)}</h1>
                 </div>
             </section>
         </div>
