@@ -5,12 +5,12 @@ import WeekForecast from "./PanelTab/WeekForecast";
 import { useEffect, useState } from "react";
 import TabController from "./Component/TabController";
 import axios from "axios";
-import type { GeocodingResponse } from "./Utils/Type";
+import type { City, WeatherData } from "./Utils/Type";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
-    const [weatherData, setWeatherData] = useState(null);
-    const [cityData, setCityData] = useState<GeocodingResponse | null>(null);
+    const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+    const [cityData, setCityData] = useState<City | null>(null);
 
     useEffect(() => {
         async function fetchWeather(
@@ -38,7 +38,7 @@ function App() {
                         "https://geocoding-api.open-meteo.com/v1/search?name=yokohama&count=1&language=en&format=json"
                     )
                     .then((response) => {
-                        setCityData(response.data);
+                        setCityData(response.data.results?.[0]);
                         const results = response.data.results?.[0];
                         const { latitude, longitude, timezone } = results;
                         fetchWeather(latitude, longitude, timezone);
@@ -59,7 +59,7 @@ function App() {
 
     return (
         <main className="flex">
-            <WeatherDisplay />
+            <WeatherDisplay cityData={cityData} weatherData={weatherData} />
             <section>
                 <TabController
                     handleTabChange={handleTabChange}

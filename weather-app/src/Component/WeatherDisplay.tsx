@@ -1,11 +1,18 @@
-function WeatherDisplay() {
+import type { City, WeatherData } from "../Utils/Type";
+
+interface MainDisplayProps {
+    cityData: City | null;
+    weatherData: WeatherData | null;
+}
+
+function WeatherDisplay({ cityData, weatherData }: MainDisplayProps) {
     return (
         <div>
             <input type="search" placeholder="Search.." />
 
             <section>
                 <div>
-                    <h1>TOKYO</h1>
+                    <h1>Yokohama</h1>
                 </div>
                 <div>
                     <img src="https://placehold.co/200x200" alt="" />

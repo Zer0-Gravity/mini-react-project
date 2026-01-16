@@ -8,8 +8,9 @@ export interface City {
     timezone: string;
 }
 
-export interface GeocodingResponse {
-    results?: City[];
+export interface WeatherData {
+    current: CurrentWeather;
+    daily: DailyWeather;
 }
 
 export interface CurrentWeather {
