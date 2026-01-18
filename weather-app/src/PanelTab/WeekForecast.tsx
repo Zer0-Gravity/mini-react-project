@@ -21,8 +21,8 @@ function WeekForecast({ weatherData }: WeeklyForecastProps) {
                         const weather = weatherMapping[weatherCode];
 
                         return (
-                            <div key={index}>
-                                <div>
+                            <div key={index} className="flex">
+                                <div className="flex">
                                     <h1>
                                         {new Date(date).toLocaleDateString(
                                             "en-US",
@@ -36,7 +36,7 @@ function WeekForecast({ weatherData }: WeeklyForecastProps) {
                                         )}
                                     </h2>
                                 </div>
-                                <div>
+                                <div className="flex">
                                     <img
                                         src={`/Weather Icon/${weather.icon}.svg`}
                                         alt="weather-icon"
@@ -44,7 +44,18 @@ function WeekForecast({ weatherData }: WeeklyForecastProps) {
                                     />
                                     <span>{weather.label}</span>
                                 </div>
-                                <h1>{}°</h1>
+                                <h1>
+                                    {weatherData.daily.temperature_2m_max[
+                                        index
+                                    ].toFixed(0)}
+                                    °
+                                </h1>
+                                <h1>
+                                    {weatherData.daily.temperature_2m_min[
+                                        index
+                                    ].toFixed(0)}
+                                    °
+                                </h1>
                             </div>
                         );
                     })
