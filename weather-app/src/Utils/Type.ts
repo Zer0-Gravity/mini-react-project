@@ -30,15 +30,22 @@ export interface DailyWeather {
     weather_code: [];
 }
 
-export interface Favorite {
+export interface FavoriteList {
     name: string;
     latitude: number;
     longitude: number;
 }
 
-export interface FavoriteData {
+export interface CurrentWeather {
     relative_humidity_2m: number;
     temperature_2m: number;
     time: string;
     weather_code: number;
+}
+
+export interface CombinedData {
+    name: string;
+    latitude: number;
+    longitude: number;
+    current: CurrentWeather;
 }

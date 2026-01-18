@@ -1,20 +1,20 @@
 import type React from "react";
 import WeatherDisplay from "./Component/WeatherDisplay";
-import FavoriteList from "./PanelTab/FavoriteList";
 import WeekForecast from "./PanelTab/WeekForecast";
 import { useEffect, useState } from "react";
 import TabController from "./Component/TabController";
 import axios from "axios";
-import type { City, Favorite, WeatherData } from "./Utils/Type";
+import type { City, WeatherData, FavoriteList } from "./Utils/Type";
 import { LucideLoaderCircle } from "lucide-react";
 import { dummy } from "./Utils/Mockdata";
+import FavoriteTab from "./PanelTab/FavoriteTab";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [cityData, setCityData] = useState<City | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [favorite, setFavorite] = useState<Favorite[]>(dummy);
+    const [favorite, setFavorite] = useState<FavoriteList[]>(dummy);
 
     useEffect(() => {
         async function fetchWeather(
@@ -93,7 +93,7 @@ function App() {
                 <div>
                     {selectedTab === "forecast" && <WeekForecast />}
                     {selectedTab === "favorite" && (
-                        <FavoriteList favorite={favorite} />
+                        <FavoriteTab favorite={favorite} />
                     )}
                 </div>
             </section>
