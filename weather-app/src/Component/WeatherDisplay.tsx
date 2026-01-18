@@ -1,17 +1,20 @@
 import { LucideHeart } from "lucide-react";
 import type { City, WeatherData } from "../Utils/Type";
 import { weatherMapping } from "../Utils/WeatherCode";
+import type React from "react";
 
 interface MainDisplayProps {
     cityData: City | null;
     weatherData: WeatherData | null;
     handleFav: (lat: number, lon: number, name: string) => void;
+    handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function WeatherDisplay({
     cityData,
     weatherData,
     handleFav,
+    handleSearch,
 }: MainDisplayProps) {
     const getDayName = (isoDate: string | undefined) => {
         if (isoDate) {
@@ -29,7 +32,11 @@ function WeatherDisplay({
 
     return (
         <div>
-            <input type="search" placeholder="Search.." />
+            <input
+                type="search"
+                placeholder="Search.."
+                onChange={handleSearch}
+            />
 
             <section>
                 <div>

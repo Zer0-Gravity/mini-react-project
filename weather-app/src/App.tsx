@@ -8,6 +8,7 @@ import type { City, WeatherData, FavoriteList } from "./Utils/Type";
 import { LucideLoaderCircle } from "lucide-react";
 import { dummy } from "./Utils/Mockdata";
 import FavoriteTab from "./PanelTab/FavoriteTab";
+import { useDebounce } from "./Utils/Debouncer";
 
 function App() {
     const [selectedTab, setSelectedTab] = useState<string>("forecast");
@@ -15,13 +16,21 @@ function App() {
     const [cityData, setCityData] = useState<City | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [favorite, setFavorite] = useState<FavoriteList[]>(dummy);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+
+    const debounceSearch = useDebounce(searchQuery, 500);
 
     useEffect(() => {
         async function fetchWeather() {
             try {
                 setIsLoading(true);
+
+                const initCity = "Yokohama";
+
                 const geoCoding = await axios.get(
-                    "https://geocoding-api.open-meteo.com/v1/search?name=yokohama&count=1&language=en&format=json"
+                    `https://geocoding-api.open-meteo.com/v1/search?name=${
+                        debounceSearch ? debounceSearch : initCity
+                    }&count=1&language=en&format=json`
                 );
                 const city = geoCoding.data.results[0];
                 const { latitude, longitude } = city;
@@ -49,7 +58,7 @@ function App() {
             }
         }
         fetchWeather();
-    }, []);
+    }, [debounceSearch]);
 
     const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedTab(e.target.value);
@@ -68,12 +77,17 @@ function App() {
         setFavorite((prev) => [...prev, newFav]);
     };
 
+    const handleSearchQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
+
     return (
         <main className="flex relative">
             <WeatherDisplay
                 cityData={cityData}
                 weatherData={weatherData}
                 handleFav={handleFav}
+                handleSearch={handleSearchQuery}
             />
             <section>
                 <TabController

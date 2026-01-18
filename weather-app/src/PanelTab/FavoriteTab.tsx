@@ -48,8 +48,6 @@ function FavoriteTab({ favorite }: FavoriteListProps) {
         }
     }, [lats, lons, favorite]);
 
-    console.log(favData);
-
     return (
         <div>
             <header>

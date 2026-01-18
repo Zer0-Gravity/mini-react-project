@@ -6,8 +6,6 @@ interface WeeklyForecastProps {
 }
 
 function WeekForecast({ weatherData }: WeeklyForecastProps) {
-    console.log(weatherData);
-
     return (
         <div>
             <header>
