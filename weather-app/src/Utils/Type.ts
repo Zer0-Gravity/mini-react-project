@@ -24,10 +24,11 @@ export interface CurrentWeather {
 }
 
 export interface DailyWeather {
-    temperature_2m_max: [];
-    temperature_2m_min: [];
-    uv_index_max: [];
-    weather_code: [];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    time: string[];
+    uv_index_max: number[];
+    weather_code: number[];
 }
 
 export interface FavoriteList {

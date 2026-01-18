@@ -91,7 +91,9 @@ function App() {
                     selectedTab={selectedTab}
                 />
                 <div>
-                    {selectedTab === "forecast" && <WeekForecast />}
+                    {selectedTab === "forecast" && (
+                        <WeekForecast weatherData={weatherData} />
+                    )}
                     {selectedTab === "favorite" && (
                         <FavoriteTab favorite={favorite} />
                     )}
