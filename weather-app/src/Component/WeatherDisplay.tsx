@@ -36,6 +36,7 @@ function WeatherDisplay({
                 type="search"
                 placeholder="Search.."
                 onChange={handleSearch}
+                className="w-full border-2 border-border-color py-3 px-5 outline-none rounded-full"
             />
 
             <section className="border-2 border-border-color w-112.5 h-112.5 flex flex-col bg-primary-color rounded-[20px]">
