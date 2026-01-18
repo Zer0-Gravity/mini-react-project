@@ -23,9 +23,9 @@ function App() {
                 const geoCoding = await axios.get(
                     "https://geocoding-api.open-meteo.com/v1/search?name=yokohama&count=1&language=en&format=json"
                 );
-                const city = geoCoding.data;
-                const { latitude, longitude } = city.results[0];
-                setCityData(city.results[0]);
+                const city = geoCoding.data.results[0];
+                const { latitude, longitude } = city;
+                setCityData(city);
 
                 const weatherApi = await axios.get(
                     `https://api.open-meteo.com/v1/forecast`,
