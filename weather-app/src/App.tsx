@@ -30,7 +30,7 @@ function App() {
                 const geoCoding = await axios.get(
                     `https://geocoding-api.open-meteo.com/v1/search?name=${
                         debounceSearch ? debounceSearch : initCity
-                    }&count=1&language=en&format=json`
+                    }&count=1&language=en&format=json`,
                 );
                 const city = geoCoding.data.results[0];
                 const { latitude, longitude } = city;
@@ -46,7 +46,7 @@ function App() {
                             current: `is_day,temperature_2m,weather_code,precipitation,relative_humidity_2m,wind_speed_10m`,
                             timezone: `auto`,
                         },
-                    }
+                    },
                 );
 
                 const weatherData = weatherApi.data;
@@ -82,36 +82,38 @@ function App() {
     };
 
     return (
-        <main className="flex relative">
-            <WeatherDisplay
-                cityData={cityData}
-                weatherData={weatherData}
-                handleFav={handleFav}
-                handleSearch={handleSearchQuery}
-            />
-            <section>
-                <TabController
-                    handleTabChange={handleTabChange}
-                    selectedTab={selectedTab}
+        <main className="h-screen w-screen justify-center items-center flex">
+            <div className="flex">
+                <WeatherDisplay
+                    cityData={cityData}
+                    weatherData={weatherData}
+                    handleFav={handleFav}
+                    handleSearch={handleSearchQuery}
                 />
-                <div>
-                    {selectedTab === "forecast" && (
-                        <WeekForecast weatherData={weatherData} />
-                    )}
-                    {selectedTab === "favorite" && (
-                        <FavoriteTab favorite={favorite} />
-                    )}
-                </div>
-            </section>
-
-            {isLoading && (
-                <div className="absolute inset-0 flex item-center justify-center bg-black/60 backdrop-blur-lg">
-                    <div className="bg-white">
-                        <LucideLoaderCircle className="animate-spin" />
-                        <h1>Loading data...</h1>
+                <section>
+                    <TabController
+                        handleTabChange={handleTabChange}
+                        selectedTab={selectedTab}
+                    />
+                    <div>
+                        {selectedTab === "forecast" && (
+                            <WeekForecast weatherData={weatherData} />
+                        )}
+                        {selectedTab === "favorite" && (
+                            <FavoriteTab favorite={favorite} />
+                        )}
                     </div>
-                </div>
-            )}
+                </section>
+
+                {isLoading && (
+                    <div className="absolute inset-0 flex item-center justify-center bg-black/60 backdrop-blur-lg">
+                        <div className="bg-white">
+                            <LucideLoaderCircle className="animate-spin" />
+                            <h1>Loading data...</h1>
+                        </div>
+                    </div>
+                )}
+            </div>
         </main>
     );
 }

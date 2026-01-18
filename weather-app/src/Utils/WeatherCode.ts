@@ -11,7 +11,7 @@ export const weatherMapping: Record<number, { label: string; icon: string }> = {
     61: { label: "Light Rain", icon: "rain" },
     63: { label: "Rain", icon: "rain" },
     65: { label: "Heavy Rain", icon: "rain" },
-    71: { label: "Light Snow", icon: "hail" }, // Mapping snow to hail as closest visual match
+    71: { label: "Light Snow", icon: "hail" },
     73: { label: "Snow", icon: "hail" },
     75: { label: "Heavy Snow", icon: "hail" },
     77: { label: "Snow Grains", icon: "hail" },
@@ -20,7 +20,7 @@ export const weatherMapping: Record<number, { label: string; icon: string }> = {
     82: { label: "Violent Showers", icon: "rain" },
     85: { label: "Snow Showers", icon: "hail" },
     86: { label: "Heavy Snow Showers", icon: "hail" },
-    95: { label: "Thunderstorm", icon: "thunderstorm" },
-    96: { label: "Thunderstorm & Hail", icon: "thunderstorm" },
-    99: { label: "Thunderstorm & Heavy Hail", icon: "thunderstorm" },
+    95: { label: "Thunderstorm", icon: "thunderstorms" },
+    96: { label: "Thunderstorm & Hail", icon: "thunderstorms" },
+    99: { label: "Thunderstorm & Heavy Hail", icon: "thunderstorms" },
 };
