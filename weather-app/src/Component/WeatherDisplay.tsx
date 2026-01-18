@@ -1,4 +1,4 @@
-import { LucideHeart } from "lucide-react";
+import { LucideCalendar, LucideHeart } from "lucide-react";
 import type { City, WeatherData } from "../Utils/Type";
 import { weatherMapping } from "../Utils/WeatherCode";
 import type React from "react";
@@ -36,7 +36,7 @@ function WeatherDisplay({
                 type="search"
                 placeholder="Search.."
                 onChange={handleSearch}
-                className="w-full border-2 border-border-color py-3 px-5 outline-none rounded-full"
+                className="w-full border-2 border-border-color py-3 px-5 outline-none rounded-full bg-primary-color"
             />
 
             <section className="border-2 border-border-color w-112.5 h-112.5 flex flex-col bg-primary-color rounded-[20px]">
@@ -78,17 +78,27 @@ function WeatherDisplay({
                 </div>
             </section>
 
-            <section>
-                <div>
-                    <h1>Chance of rain</h1>
-                    <h1>{weatherData?.current.precipitation}%</h1>
+            <section className="border-2 border-border-color p-4 rounded-[20px] bg-primary-color flex justify-between items-center">
+                <div className="flex flex-col items-center">
+                    <h1 className="text-[18px] font-semibold">
+                        Chance of rain
+                    </h1>
+                    <h1 className="text-[40px] font-semibold">
+                        {weatherData?.current.precipitation}%
+                    </h1>
                 </div>
                 <div>
-                    <img src="https://placehold.co/40x40" alt="uv-index" />\
-                    <p>{weatherData?.daily.uv_index_max[0].toFixed(0)}</p>
+                    <img
+                        src={`/Weather Icon/UV Index/uv-index-${weatherData?.daily.uv_index_max[0].toFixed(0)}.svg`}
+                        alt="uv-index"
+                    />
+                    <p>UV-Index {}</p>
                 </div>
-                <div>
-                    <h1>{getDayName(weatherData?.current.time)}</h1>
+                <div className="flex flex-col items-center">
+                    <LucideCalendar size={25} />
+                    <h1 className="font-semibold text-[18px]">
+                        {getDayName(weatherData?.current.time)}
+                    </h1>
                 </div>
             </section>
         </div>
