@@ -21,7 +21,7 @@ function WeekForecast({ weatherData }: WeeklyForecastProps) {
                         const weather = weatherMapping[weatherCode];
 
                         return (
-                            <div>
+                            <div key={index}>
                                 <div>
                                     <h1>
                                         {new Date(date).toLocaleDateString(

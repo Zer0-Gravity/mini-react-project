@@ -17,48 +17,38 @@ function App() {
     const [favorite, setFavorite] = useState<FavoriteList[]>(dummy);
 
     useEffect(() => {
-        async function fetchWeather(
-            latitude: number | undefined,
-            longitude: number | undefined,
-            timezone: string | undefined
-        ) {
+        async function fetchWeather() {
             try {
                 setIsLoading(true);
-                await axios
-                    .get(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=uv_index_max,temperature_2m_max,temperature_2m_min,weather_code&current=is_day,temperature_2m,weather_code,precipitation,relative_humidity_2m,wind_speed_10m&timezone=${timezone}`
-                    )
-                    .then((response) => {
-                        setWeatherData(response.data);
-                    });
+                const geoCoding = await axios.get(
+                    "https://geocoding-api.open-meteo.com/v1/search?name=yokohama&count=1&language=en&format=json"
+                );
+                const city = geoCoding.data;
+                const { latitude, longitude } = city.results[0];
+                setCityData(city.results[0]);
+
+                const weatherApi = await axios.get(
+                    `https://api.open-meteo.com/v1/forecast`,
+                    {
+                        params: {
+                            latitude: latitude,
+                            longitude: longitude,
+                            daily: `uv_index_max,temperature_2m_max,temperature_2m_min,weather_code`,
+                            current: `is_day,temperature_2m,weather_code,precipitation,relative_humidity_2m,wind_speed_10m`,
+                            timezone: `auto`,
+                        },
+                    }
+                );
+
+                const weatherData = weatherApi.data;
+                setWeatherData(weatherData);
             } catch (error) {
                 console.error("Error fetching weather data", error);
             } finally {
                 setIsLoading(false);
             }
         }
-
-        async function getCityData() {
-            try {
-                setIsLoading(true);
-                await axios
-                    .get(
-                        "https://geocoding-api.open-meteo.com/v1/search?name=yokohama&count=1&language=en&format=json"
-                    )
-                    .then((response) => {
-                        setCityData(response.data.results?.[0]);
-                        const results = response.data.results?.[0];
-                        const { latitude, longitude, timezone } = results;
-                        fetchWeather(latitude, longitude, timezone);
-                    });
-            } catch (error) {
-                console.error("Couldn't find city data", error);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        getCityData();
+        fetchWeather();
     }, []);
 
     const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -71,7 +71,7 @@ function WeatherDisplay({
                 </div>
                 <div>
                     <img src="https://placehold.co/40x40" alt="uv-index" />\
-                    <p>UV Index</p>
+                    <p>{weatherData?.daily.uv_index_max[0].toFixed(0)}</p>
                 </div>
                 <div>
                     <h1>{getDayName(weatherData?.current.time)}</h1>
