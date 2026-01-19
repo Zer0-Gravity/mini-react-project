@@ -82,20 +82,22 @@ function App() {
     };
 
     return (
-        <main className="h-screen w-screen justify-center items-center flex">
-            <div className="flex">
-                <WeatherDisplay
-                    cityData={cityData}
-                    weatherData={weatherData}
-                    handleFav={handleFav}
-                    handleSearch={handleSearchQuery}
-                />
-                <section>
+        <main className="lg:h-screen justify-center items-center flex">
+            <div className="flex sm:flex-col lg:flex-row gap-2">
+                <div className="flex flex-col gap-2">
+                    <WeatherDisplay
+                        cityData={cityData}
+                        weatherData={weatherData}
+                        handleFav={handleFav}
+                        handleSearch={handleSearchQuery}
+                    />
+                </div>
+                <section className="flex flex-col items-center gap-2">
                     <TabController
                         handleTabChange={handleTabChange}
                         selectedTab={selectedTab}
                     />
-                    <div>
+                    <div className="border-2 border-border-color bg-primary-color rounded-[20px] h-143.75 w-full overflow-y-auto scrollbar">
                         {selectedTab === "forecast" && (
                             <WeekForecast weatherData={weatherData} />
                         )}

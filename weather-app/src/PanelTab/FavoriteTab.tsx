@@ -49,7 +49,7 @@ function FavoriteTab({ favorite }: FavoriteListProps) {
     }, [lats, lons, favorite]);
 
     return (
-        <div className="border-2 border-border-color bg-primary-color rounded-[20px] h-143.75 overflow-y-auto scrollbar">
+        <div>
             <header className="sticky top-0 bg-primary-color border-b-2 border-border-color">
                 <h1 className="text-[30px] font-semibold py-2 px-5 text-center">
                     Favorite
