@@ -83,7 +83,7 @@ function App() {
 
     return (
         <main className="lg:h-screen justify-center items-center flex">
-            <div className="flex sm:flex-col xs:flex-col lg:flex-row gap-2">
+            <div className="flex sm:flex-col xs:flex-col lg:flex-row gap-2 relative">
                 <div className="flex flex-col gap-2">
                     <WeatherDisplay
                         cityData={cityData}
@@ -108,8 +108,8 @@ function App() {
                 </section>
 
                 {isLoading && (
-                    <div className="absolute inset-0 flex item-center justify-center bg-black/60 backdrop-blur-lg">
-                        <div className="bg-white">
+                    <div className="absolute flex items-center justify-center inset-0 bg-black/30 backdrop-blur-[10px] rounded-2xl">
+                        <div className="bg-white h-15 w-50 rounded-lg flex items-center justify-center">
                             <LucideLoaderCircle className="animate-spin" />
                             <h1>Loading data...</h1>
                         </div>
