@@ -92,7 +92,7 @@ function WeatherDisplay({
                         src={`/Weather Icon/UV Index/uv-index-${weatherData?.daily.uv_index_max[0].toFixed(0)}.svg`}
                         alt="uv-index"
                     />
-                    <p>UV-Index {}</p>
+                    <p>UV-Index</p>
                 </div>
                 <div className="flex flex-col items-center">
                     <LucideCalendar size={25} />

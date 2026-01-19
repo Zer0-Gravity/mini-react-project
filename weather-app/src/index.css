@@ -3,6 +3,7 @@
 @theme {
     --color-primary-color: #fefae0;
     --color-border-color: #d4a373;
+    --breakpoint-xs: 360px;
 }
 
 @layer utilities {

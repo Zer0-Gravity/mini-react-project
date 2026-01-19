@@ -83,7 +83,7 @@ function App() {
 
     return (
         <main className="lg:h-screen justify-center items-center flex">
-            <div className="flex sm:flex-col lg:flex-row gap-2">
+            <div className="flex sm:flex-col xs:flex-col lg:flex-row gap-2">
                 <div className="flex flex-col gap-2">
                     <WeatherDisplay
                         cityData={cityData}
@@ -97,7 +97,7 @@ function App() {
                         handleTabChange={handleTabChange}
                         selectedTab={selectedTab}
                     />
-                    <div className="border-2 border-border-color bg-primary-color rounded-[20px] h-143.75 w-full overflow-y-auto scrollbar">
+                    <div className="border-2 border-border-color bg-primary-color rounded-[20px] h-145 w-full overflow-y-auto scrollbar">
                         {selectedTab === "forecast" && (
                             <WeekForecast weatherData={weatherData} />
                         )}
