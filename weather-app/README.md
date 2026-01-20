@@ -1,75 +1,47 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight weather application featuring a **favorite city** collection. Built to explore REST API integration and complex data handling
 
-Currently, two official plugins are available:
+### Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The primary goal of this project was to implement the [Open-Meteo API](https://open-meteo.com/) and manage asynchronous data fetching for multiple locations simultaneously
 
-## React Compiler
+### Core Feature
+- Global Search : Find current weather data from any city worldwide 
+- Favorite Collection: Save specific city to the favorite collection
+- Multi location sync: Display the weather situation of the collection in one view
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### Challenge
 
-Note: This will impact Vite dev & build performances.
+One of the most significant challenge was efficiently fetching weather data for a list of favorite cities without making redundant API calls.
 
-## Expanding the ESLint configuration
+  **Solution**
+  Instead just saving city name, i created custom data structure to store the exact city coordinate. This bypasses the need for geocoding api call every time the favorite list is loaded
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  **Custom Data Structure**
+  `
+    {
+      "name": "Tokyo",
+      "latitude": 35.6764,
+      "longitude": 139.6500`
+    }
+  `
+  **Implementation**
+  I utilize multi data call from open meteo and the processed to save the coordinate using `.map` and `.join(',')`. to format them into single API request. Pulling the `latitude` and `longitude` from the each favorite array then join team into a string (e.g, latitudes="35.67, 45,89") then pass the join string into api request to retrieve all the weather data
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Tech Used
+- **Framework**: React 19 with compiler 
+- **Styling**: Tailwind CSS
+- **Language**: Typescript
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Library Used
+- [Lucide React](https://lucide.dev/guide/packages/lucide-react)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Preview
+![Demo Gif](./src/Demo/Weather%20Demo.giff)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Quick Start
+1. `git clone https://github.com/Zer0-Gravity/mini-react-project`
+2. `cd mini-react-project/note-taking-app`
+3. `npm install`
+4. `npm run dev`
