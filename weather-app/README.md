@@ -15,10 +15,10 @@ The primary goal of this project was to implement the [Open-Meteo API](https://o
 
 One of the most significant challenge was efficiently fetching weather data for a list of favorite cities without making redundant API calls.
 
-  **Solution**
+  ##### Solution
   Instead just saving city name, i created custom data structure to store the exact city coordinate. This bypasses the need for geocoding api call every time the favorite list is loaded
 
-  **Custom Data Structure**
+  ##### Custom Data Structure**
   `
     {
       "name": "Tokyo",
@@ -26,7 +26,7 @@ One of the most significant challenge was efficiently fetching weather data for 
       "longitude": 139.6500`
     }
   `
-  **Implementation**
+  ##### Implementation**
   I utilize multi data call from open meteo and the processed to save the coordinate using `.map` and `.join(',')`. to format them into single API request. Pulling the `latitude` and `longitude` from the each favorite array then join team into a string (e.g, latitudes="35.67, 45,89") then pass the join string into api request to retrieve all the weather data
 
 ### Tech Used
