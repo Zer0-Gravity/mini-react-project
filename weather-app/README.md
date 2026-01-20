@@ -38,7 +38,7 @@ One of the most significant challenge was efficiently fetching weather data for 
 - [Lucide React](https://lucide.dev/guide/packages/lucide-react)
 
 ### Preview
-![Demo Gif](./src/Demo/Weather%20Demo.giff)
+![Demo Gif](./src/Demo/Weather%20Demo.gif)
 
 ### Quick Start
 1. `git clone https://github.com/Zer0-Gravity/mini-react-project`
