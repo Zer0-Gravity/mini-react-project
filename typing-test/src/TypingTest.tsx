@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import Playground from "./Component/Playground";
 import ControlBar from "./Component/ControlBar";
+import type { MockData } from "./Utils/Type";
+import { dataTyping } from "./Utils/DataTyping";
+
+type DifficultyLevels = keyof MockData;
 
 function TypingTest() {
-    const [difficulty, setDifficulty] = useState<string>("");
+    const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
 
     const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDifficulty(e.target.value);
+        setDifficulty(e.target.value as DifficultyLevels); //Narrow e.target.value (string) to union type DifficultyLevels
     };
 
-    console.log(difficulty);
+    const getRandomPassage = (level: keyof MockData) => {
+        const levelPassage = dataTyping[level]; //Cast data based on the union type value
+        const randomIndex = Math.floor(Math.random() * levelPassage.length);
+        return levelPassage[randomIndex];
+    };
+
+    const passage = getRandomPassage(difficulty);
 
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
@@ -48,7 +58,7 @@ function TypingTest() {
 
             {/* Playground */}
             <section className="w-[70%]">
-                <Playground />
+                <Playground passage={passage} />
             </section>
         </main>
     );

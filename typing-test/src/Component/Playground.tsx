@@ -1,11 +1,15 @@
-import { dataTyping } from "../Utils/DataTyping";
+import type { LevelEntries } from "../Utils/Type";
 
-function Playground() {
+interface PlaygroundProps {
+    passage: LevelEntries;
+}
+
+function Playground({ passage }: PlaygroundProps) {
     return (
         <>
             <div>
                 <p className="text-justify text-neutral-300 text-[20px]">
-                    {dataTyping.easy.map((item) => item.text)}
+                    {passage.text}
                 </p>
             </div>
             <input type="text" />
