@@ -51,7 +51,7 @@ function Playground({ passage }: PlaygroundProps) {
 
     return (
         <>
-            <section className="w-[70%] border-b border-b-neutral-600">
+            <section className=" relative min-h-140 border-b border-b-neutral-500">
                 <div>
                     {passage.text.split("").map((char, index) => (
                         <span
@@ -76,7 +76,7 @@ function Playground({ passage }: PlaygroundProps) {
             </section>
             <button
                 onClick={restartLevel}
-                className="bg-neutral-700 flex gap-2 p-3 rounded-lg active:scale-98 group"
+                className="bg-neutral-700 flex gap-2 p-3 rounded-lg active:scale-98 group mt-10"
             >
                 <span className="text-neutral-200">Restart Test</span>
                 <img

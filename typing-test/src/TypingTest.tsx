@@ -60,7 +60,9 @@ function TypingTest() {
             </section>
 
             {/* Playground */}
-            <Playground passage={passage} />
+            <section className="w-[70%] flex-1 flex flex-col items-center">
+                <Playground passage={passage} />
+            </section>
         </main>
     );
 }
