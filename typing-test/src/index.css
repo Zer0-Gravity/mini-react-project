@@ -3,6 +3,7 @@
 
 body {
     font-family: "Sora", sans-serif;
+    background-color: hsl(0, 0%, 7%);
 }
 
 @theme {
@@ -19,4 +20,3 @@ body {
     /* Yellow */
     ---color-yellow-400: hsl(49, 85%, 70%);
 }
-

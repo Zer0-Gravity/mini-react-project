@@ -1,33 +1,40 @@
 function TypingTest() {
     return (
-        <main className="w-full">
-            <header className="flex justify-around">
+        <main className="mt-10 flex flex-col gap-10 items-center">
+            {/* Header Section */}
+            <header className="flex justify-between w-[70%]">
                 <img src="/images/logo-large.svg" alt="" />
-                <div>
+                <div className="flex gap-2 items-center">
                     <img src="/images/icon-personal-best.svg" alt="" />
-                    <h1>Personal best: 92 WPM</h1>
+                    <h1 className="text-neutral-500">
+                        Personal best:
+                        <span className="text-neutral-200"> 92 WPM</span>
+                    </h1>
                 </div>
             </header>
 
             {/* Control bar section */}
-            <section className="flex justify-around border-b">
-                <div className="flex">
-                    <h1>
-                        WPM: <span>40</span>
+            <section className="flex justify-between border-b border-b-neutral-500 w-[70%]">
+                <div className="flex gap-10">
+                    <h1 className="text-neutral-500">
+                        WPM:{" "}
+                        <span className="text-neutral-200 font-bold">40</span>
                     </h1>
-                    <h1>
-                        Accuracy: <span>95%</span>
+                    <h1 className="text-neutral-500">
+                        Accuracy:{" "}
+                        <span className="text-red-500 font-bold">95%</span>
                     </h1>
-                    <h1>
-                        Time: <span>0:46</span>
+                    <h1 className="text-neutral-500">
+                        Time:{" "}
+                        <span className="text-yellow-400 font-bold">0:46</span>
                     </h1>
                 </div>
-                <div>
+                <div className="flex mb-2">
                     <div>
-                        <h1>Difficulty</h1>
+                        <h1 className="text-neutral-500">Difficulty</h1>
                     </div>
                     <div>
-                        <h1>Mode</h1>
+                        <h1 className="text-neutral-500">Mode</h1>
                     </div>
                 </div>
             </section>
