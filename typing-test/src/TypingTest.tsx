@@ -3,10 +3,10 @@ import Playground from "./Component/Playground";
 import ControlBar from "./Component/ControlBar";
 
 function TypingTest() {
-    const [difficulty, setDificulty] = useState<string>("");
+    const [difficulty, setDifficulty] = useState<string>("");
 
     const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDificulty(e.target.value);
+        setDifficulty(e.target.value);
     };
 
     console.log(difficulty);

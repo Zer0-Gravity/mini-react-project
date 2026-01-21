@@ -1,13 +1,4 @@
-interface MockData {
-    easy: LevelEntries[];
-    medium: LevelEntries[];
-    hard: LevelEntries[];
-}
-
-interface LevelEntries {
-    id: string;
-    text: string;
-}
+import type { MockData } from "./Type";
 
 export const dataTyping: MockData = {
     easy: [
