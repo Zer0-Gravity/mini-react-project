@@ -19,11 +19,11 @@ function Playground({ passage }: PlaygroundProps) {
                 /^[a-zA-Z]$/.test(e.key) && //Regex check ensure trigger only the alphabet key avoid Ctrl, Shift etc
                 document.activeElement !== inputRef.current
             ) {
-                inputRef.current?.focus();
+                inputRef.current?.focus(); //Focus on input field as soon as user type a any alphabet key
             }
         };
         window.addEventListener("keydown", handleKeydown); // Add global listener
-        return () => window.removeEventListener("keydown", handleKeydown); //Cleanup avoid memory leak
+        return () => window.removeEventListener("keydown", handleKeydown); //Cleanup to avoid memory leak
     }, []);
 
     return (
@@ -31,10 +31,12 @@ function Playground({ passage }: PlaygroundProps) {
             <div>
                 {passage.text.split("").map((char, index) => (
                     <span
-                        className={`relative text-[35px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400") : "text-neutral-400"}`}
+                        // Change font color based on the match of user input and passage char
+                        className={`relative text-[35px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400 underline") : "text-neutral-400"}`}
                     >
+                        {/* Cursor */}
                         {index === userType.length && (
-                            <span className="bg-neutral-500/50 rounded-lg inset-0 absolute w-full h-full animate-pulse"></span>
+                            <span className="bg-neutral-500/50 rounded-full inset-0 absolute w-full h-full animate-pulse"></span>
                         )}
                         {char}
                     </span>
