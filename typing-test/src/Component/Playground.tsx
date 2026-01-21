@@ -7,6 +7,7 @@ interface PlaygroundProps {
 
 function Playground({ passage }: PlaygroundProps) {
     const [userType, setUserType] = useState<string>("");
+    const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleUserType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +25,17 @@ function Playground({ passage }: PlaygroundProps) {
         }
     };
 
+    const restartLevel = () => {
+        setUserType(""); //Set user input value ot 0/empty
+
+        setSpinning(true);
+
+        //Wait 1 second then revert the spin boolean to false
+        setTimeout(() => {
+            setSpinning(false);
+        }, 1000);
+    };
+
     useEffect(() => {
         const handleKeydown = (e: KeyboardEvent) => {
             if (
@@ -39,26 +51,40 @@ function Playground({ passage }: PlaygroundProps) {
 
     return (
         <>
-            <div>
-                {passage.text.split("").map((char, index) => (
-                    <span
-                        // Change font color based on the match of user input and passage char
-                        className={`relative text-[35px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400 underline") : "text-neutral-400"}`}
-                    >
-                        {/* Cursor */}
-                        {index === userType.length && (
-                            <span className="bg-neutral-500/50 rounded-full inset-0 absolute w-full h-full animate-bounce"></span>
-                        )}
-                        {char}
-                    </span>
-                ))}
-            </div>
-            <input
-                ref={inputRef}
-                type="text"
-                onChange={handleUserType}
-                className="opacity-0 absolute"
-            />
+            <section className="w-[70%] border-b border-b-neutral-600">
+                <div>
+                    {passage.text.split("").map((char, index) => (
+                        <span
+                            // Change font color based on the match of user input and passage char
+                            className={`relative text-[35px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400 underline") : "text-neutral-400"}`}
+                        >
+                            {/* Cursor */}
+                            {index === userType.length && (
+                                <span className="bg-neutral-500/50 rounded-full inset-0 absolute w-full h-full animate-bounce"></span>
+                            )}
+                            {char}
+                        </span>
+                    ))}
+                </div>
+                <input
+                    ref={inputRef}
+                    type="text"
+                    value={userType}
+                    onChange={handleUserType}
+                    className="opacity-0 absolute"
+                />
+            </section>
+            <button
+                onClick={restartLevel}
+                className="bg-neutral-700 flex gap-2 p-3 rounded-lg active:scale-98 group"
+            >
+                <span className="text-neutral-200">Restart Test</span>
+                <img
+                    src="/images/icon-restart.svg"
+                    alt="restart"
+                    className={`${spin ? "animate-spin-reverse" : ""}`} //Check if spin true, if so the add  custom animate spin class
+                />
+            </button>
         </>
     );
 }

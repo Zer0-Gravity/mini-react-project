@@ -60,9 +60,7 @@ function TypingTest() {
             </section>
 
             {/* Playground */}
-            <section className="w-[70%] border-b border-b-neutral-600">
-                <Playground passage={passage} />
-            </section>
+            <Playground passage={passage} />
         </main>
     );
 }
