@@ -16,7 +16,7 @@ function Playground({ passage }: PlaygroundProps) {
     useEffect(() => {
         const handleKeydown = (e: KeyboardEvent) => {
             if (
-                /^[a-zA-Z]$/.test(e.key) && //Regex check ensure the trigger only the alphabet
+                /^[a-zA-Z]$/.test(e.key) && //Regex check ensure trigger only the alphabet key avoid Ctrl, Shift etc
                 document.activeElement !== inputRef.current
             ) {
                 inputRef.current?.focus();
@@ -29,16 +29,23 @@ function Playground({ passage }: PlaygroundProps) {
     return (
         <>
             <div>
-                <p className="text-justify text-neutral-300 text-[35px]">
-                    {passage.text}
-                </p>
+                {passage.text.split("").map((char, index) => (
+                    <span
+                        className={`relative text-[35px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400") : "text-neutral-400"}`}
+                    >
+                        {index === userType.length && (
+                            <span className="bg-neutral-500/50 rounded-lg inset-0 absolute w-full h-full animate-pulse"></span>
+                        )}
+                        {char}
+                    </span>
+                ))}
             </div>
             <input
                 ref={inputRef}
                 type="text"
                 onChange={handleUserType}
                 placeholder="here"
-                className="p-5 bg-white"
+                className="opacity-0 absolute"
             />
         </>
     );
