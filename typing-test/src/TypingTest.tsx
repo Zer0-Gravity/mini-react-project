@@ -1,3 +1,5 @@
+import Input from "./Component/Input";
+
 function TypingTest() {
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
@@ -13,28 +15,41 @@ function TypingTest() {
                 </div>
             </header>
 
-            {/* Control bar section */}
+            {/* Label section */}
             <section className="flex justify-between border-b border-b-neutral-500 w-[70%]">
                 <div className="flex gap-10">
                     <h1 className="text-neutral-500">
-                        WPM:{" "}
-                        <span className="text-neutral-200 font-bold">40</span>
+                        WPM:
+                        <span className="text-neutral-200 font-bold"> 40</span>
                     </h1>
                     <h1 className="text-neutral-500">
-                        Accuracy:{" "}
-                        <span className="text-red-500 font-bold">95%</span>
+                        Accuracy:
+                        <span className="text-red-500 font-bold"> 95%</span>
                     </h1>
                     <h1 className="text-neutral-500">
-                        Time:{" "}
-                        <span className="text-yellow-400 font-bold">0:46</span>
+                        Time:
+                        <span className="text-yellow-400 font-bold"> 0:46</span>
                     </h1>
                 </div>
-                <div className="flex mb-2">
-                    <div>
-                        <h1 className="text-neutral-500">Difficulty</h1>
+
+                {/* Control bar section */}
+                <div className="flex mb-2 gap-10">
+                    <div className="flex gap-3 items-center">
+                        <h1 className="text-neutral-500">Difficulty: </h1>
+                        <div className="space-x-1">
+                            <Input text="Easy" value="easy" name="difficulty" />
+                            <Input
+                                text="Medium"
+                                value="medium"
+                                name="difficulty"
+                            />
+                            <Input text="Hard" value="hard" name="difficulty" />
+                        </div>
                     </div>
-                    <div>
+                    <div className="flex gap-3 items-center">
                         <h1 className="text-neutral-500">Mode</h1>
+                        <Input text="Timed(60s)" value="60" name="mode" />
+                        <Input text="Passage" value="Passage" name="mode" />
                     </div>
                 </div>
             </section>
