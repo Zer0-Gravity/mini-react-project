@@ -10,7 +10,18 @@ function Playground({ passage }: PlaygroundProps) {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleUserType = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserType(e.target.value);
+        const value = e.target.value;
+
+        //Check if user input less than the offered passage
+        //if so set userType value based on user input
+        if (value.length <= passage.text.length) {
+            setUserType(value);
+        }
+
+        //Check if the user input have the same length with the passage
+        if (value.length === passage.text.length) {
+            alert("finish");
+        }
     };
 
     useEffect(() => {
@@ -36,7 +47,7 @@ function Playground({ passage }: PlaygroundProps) {
                     >
                         {/* Cursor */}
                         {index === userType.length && (
-                            <span className="bg-neutral-500/50 rounded-full inset-0 absolute w-full h-full animate-pulse"></span>
+                            <span className="bg-neutral-500/50 rounded-full inset-0 absolute w-full h-full animate-bounce"></span>
                         )}
                         {char}
                     </span>
@@ -46,7 +57,6 @@ function Playground({ passage }: PlaygroundProps) {
                 ref={inputRef}
                 type="text"
                 onChange={handleUserType}
-                placeholder="here"
                 className="opacity-0 absolute"
             />
         </>
