@@ -1,8 +1,17 @@
-import Input from "./Component/Input";
+import React, { useState } from "react";
 import Playground from "./Component/Playground";
+import ControlBar from "./Component/ControlBar";
 
 function TypingTest() {
-    return (    
+    const [difficulty, setDificulty] = useState<string>("");
+
+    const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDificulty(e.target.value);
+    };
+
+    console.log(difficulty);
+
+    return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
             <header className="flex justify-between w-[70%]">
@@ -34,25 +43,7 @@ function TypingTest() {
                 </div>
 
                 {/* Control bar section */}
-                <div className="flex mb-2 gap-10">
-                    <div className="flex gap-3 items-center">
-                        <h1 className="text-neutral-500">Difficulty: </h1>
-                        <div className="space-x-1">
-                            <Input text="Easy" value="easy" name="difficulty" />
-                            <Input
-                                text="Medium"
-                                value="medium"
-                                name="difficulty"
-                            />
-                            <Input text="Hard" value="hard" name="difficulty" />
-                        </div>
-                    </div>
-                    <div className="flex gap-3 items-center">
-                        <h1 className="text-neutral-500">Mode</h1>
-                        <Input text="Timed(60s)" value="60" name="mode" />
-                        <Input text="Passage" value="Passage" name="mode" />
-                    </div>
-                </div>
+                <ControlBar changeDifficulties={changeDifficulties} />
             </section>
 
             {/* Playground */}
