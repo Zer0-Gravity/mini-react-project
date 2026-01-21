@@ -36,7 +36,7 @@ function TypingTest() {
             </header>
 
             {/* Label section */}
-            <section className="flex justify-between border-b border-b-neutral-500 w-[70%]">
+            <section className="flex justify-between border-b border-b-neutral-600 w-[70%]">
                 <div className="flex gap-10">
                     <h1 className="text-neutral-500">
                         WPM:
@@ -60,7 +60,7 @@ function TypingTest() {
             </section>
 
             {/* Playground */}
-            <section className="w-[70%]">
+            <section className="w-[70%] border-b border-b-neutral-600">
                 <Playground passage={passage} />
             </section>
         </main>
