@@ -53,7 +53,10 @@ function TypingTest() {
                 </div>
 
                 {/* Control bar section */}
-                <ControlBar changeDifficulties={changeDifficulties} />
+                <ControlBar
+                    changeDifficulties={changeDifficulties}
+                    onValue={difficulty}
+                />
             </section>
 
             {/* Playground */}

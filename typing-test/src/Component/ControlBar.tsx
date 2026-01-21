@@ -3,9 +3,10 @@ import Input from "./Input";
 
 interface ControlBarProps {
     changeDifficulties: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onValue: string;
 }
 
-function ControlBar({ changeDifficulties }: ControlBarProps) {
+function ControlBar({ changeDifficulties, onValue }: ControlBarProps) {
     return (
         <>
             <div className="flex mb-2 gap-10">
@@ -17,18 +18,21 @@ function ControlBar({ changeDifficulties }: ControlBarProps) {
                             value="easy"
                             name="difficulty"
                             onInteract={changeDifficulties}
+                            onValue={onValue}
                         />
                         <Input
                             text="Medium"
                             value="medium"
                             name="difficulty"
                             onInteract={changeDifficulties}
+                            onValue={onValue}
                         />
                         <Input
                             text="Hard"
                             value="hard"
                             name="difficulty"
                             onInteract={changeDifficulties}
+                            onValue={onValue}
                         />
                     </div>
                 </div>
