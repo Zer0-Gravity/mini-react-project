@@ -13,7 +13,7 @@ function Playground({ passage }: PlaygroundProps) {
     const handleUserType = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
-        //Check if user input less than the offered passage
+        //Check if user input length less than the offered passage
         //if so set userType value based on user input
         if (value.length <= passage.text.length) {
             setUserType(value);

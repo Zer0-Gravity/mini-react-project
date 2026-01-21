@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Playground from "./Component/Playground";
 import ControlBar from "./Component/ControlBar";
-import type { MockData } from "./Utils/Type";
+import type { LevelEntries, MockData } from "./Utils/Type";
 import { dataTyping } from "./Utils/DataTyping";
 
 type DifficultyLevels = keyof MockData;
@@ -10,16 +10,22 @@ function TypingTest() {
     const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
 
     const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDifficulty(e.target.value as DifficultyLevels); //Narrow e.target.value (string) to union type DifficultyLevels
+        const level = e.target.value as DifficultyLevels; //Narrow e.target.value (string) to union type DifficultyLevels
+        setDifficulty(level);
+
+        const newPassage = getRandomPassage(level); //Get return value based on the input value
+        setPassage(newPassage);
     };
 
     const getRandomPassage = (level: keyof MockData) => {
         const levelPassage = dataTyping[level]; //Cast data based on the union type value
-        const randomIndex = Math.floor(Math.random() * levelPassage.length);
+        const randomIndex = Math.floor(Math.random() * levelPassage.length); //Randomize the array passage on random index
         return levelPassage[randomIndex];
     };
 
-    const passage = getRandomPassage(difficulty);
+    const [passage, setPassage] = useState<LevelEntries>(() =>
+        getRandomPassage(difficulty),
+    );
 
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
