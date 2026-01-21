@@ -1,7 +1,8 @@
 import Input from "./Component/Input";
+import Playground from "./Component/Playground";
 
 function TypingTest() {
-    return (
+    return (    
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
             <header className="flex justify-between w-[70%]">
@@ -52,6 +53,11 @@ function TypingTest() {
                         <Input text="Passage" value="Passage" name="mode" />
                     </div>
                 </div>
+            </section>
+
+            {/* Playground */}
+            <section className="w-[70%]">
+                <Playground />
             </section>
         </main>
     );
