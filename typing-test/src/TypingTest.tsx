@@ -3,6 +3,7 @@ import Playground from "./Component/Playground";
 import ControlBar from "./Component/ControlBar";
 import type { LevelEntries, MockData } from "./Utils/Type";
 import { dataTyping } from "./Utils/DataTyping";
+import Header from "./Component/Header";
 
 type DifficultyLevels = keyof MockData;
 type Mode = "timed" | "passage";
@@ -73,16 +74,7 @@ function TypingTest() {
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
-            <header className="flex justify-between w-[70%]">
-                <img src="/images/logo-large.svg" alt="" />
-                <div className="flex gap-2 items-center">
-                    <img src="/images/icon-personal-best.svg" alt="" />
-                    <h1 className="text-neutral-500">
-                        Personal best:
-                        <span className="text-neutral-200"> 92 WPM</span>
-                    </h1>
-                </div>
-            </header>
+            <Header />
 
             {/* Label section */}
             <section className="flex justify-between border-b border-b-neutral-600 w-[70%]">
