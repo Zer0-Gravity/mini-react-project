@@ -67,6 +67,9 @@ function TypingTest() {
 
         setMode(value);
     };
+
+    console.log(mode);
+
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
@@ -115,6 +118,7 @@ function TypingTest() {
                     passage={passage}
                     onStart={startTimer}
                     seconds={{ seconds, setSeconds }}
+                    mode={mode}
                 />
             </section>
         </main>

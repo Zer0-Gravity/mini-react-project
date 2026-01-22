@@ -8,9 +8,10 @@ interface PlaygroundProps {
         seconds: number;
         setSeconds: React.Dispatch<SetStateAction<number>>;
     };
+    mode: string;
 }
 
-function Playground({ passage, onStart, seconds }: PlaygroundProps) {
+function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
     const [userType, setUserType] = useState<string>("");
     const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
     const [disabledInput, setDisabledInput] = useState<boolean>(false); // State for dibbling input
@@ -77,15 +78,18 @@ function Playground({ passage, onStart, seconds }: PlaygroundProps) {
                 document.activeElement !== inputRef.current
             ) {
                 inputRef.current?.focus(); //Focus on input field as soon as user type a any alphabet key
-                if (!isStarted) {
-                    onStart(); // Run the timer as the condition meet
-                    isStarted = true;
+                //Check what mode currently on, if timed we start the time
+                if (mode === "timed") {
+                    if (!isStarted) {
+                        onStart(); // Run the timer as the condition meet
+                        isStarted = true;
+                    }
                 }
             }
         };
         window.addEventListener("keydown", handleKeydown); // Add global listener
         return () => window.removeEventListener("keydown", handleKeydown); //Cleanup to avoid memory leak
-    }, [onStart]);
+    }, [onStart, mode]);
 
     return (
         <>
