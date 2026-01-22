@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, type SetStateAction } from "react";
 import type { LevelEntries } from "../Utils/Type";
+import { useNavigate } from "react-router";
 
 interface PlaygroundProps {
     passage: LevelEntries;
@@ -16,6 +17,7 @@ function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
     const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
     const [disabledInput, setDisabledInput] = useState<boolean>(false); // State for dibbling input
     const inputRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
 
     const handleUserType = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -29,6 +31,11 @@ function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
         //Check if the user input have the same length with the passage
         if (value.length === passage.text.length || seconds.seconds === 0) {
             setDisabledInput(true); //Disabled input when any condition above match
+
+            //Wait for 300ms then navigate to the result page
+            setInterval(() => {
+                navigate("/result");
+            }, 300);
         }
     };
 
