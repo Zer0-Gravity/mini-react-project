@@ -12,10 +12,13 @@ function TypingTest() {
     const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const startTimer = () => {
+        //Check if the timer currently running or not
         if (timeRef.current !== null) return;
 
         timeRef.current = setInterval(() => {
             setSeconds((prev) => {
+                //Check if the seconds value less or equal than 1 then call the stopTimer function
+                //Returning the 0 value
                 if (prev <= 1) {
                     stopTimer();
                     return 0;
@@ -26,17 +29,18 @@ function TypingTest() {
     };
 
     const stopTimer = () => {
+        //If timer currently running and the stopTimer get called
+        //Stop the interval ans set to null
         if (timeRef.current) {
             clearInterval(timeRef.current);
             timeRef.current = null;
         }
     };
 
+    //Clean up on unmount
     useEffect(() => {
         return () => stopTimer();
     }, []);
-
-    console.log(seconds);
 
     const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
         const level = e.target.value as DifficultyLevels; //Narrow e.target.value (string) to union type DifficultyLevels

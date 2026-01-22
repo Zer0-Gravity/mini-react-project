@@ -47,7 +47,7 @@ function Playground({ passage, onStart }: PlaygroundProps) {
             ) {
                 inputRef.current?.focus(); //Focus on input field as soon as user type a any alphabet key
                 if (!isStarted) {
-                    onStart();
+                    onStart(); // Run the timer as the condition meet
                     isStarted = true;
                 }
             }
