@@ -31,9 +31,34 @@ function Playground({ passage, onStart, seconds }: PlaygroundProps) {
         }
     };
 
+    const calculate = () => {
+        const time = 60 / 60;
+        const totalChars = userType.length;
+
+        const correctedChars = userType.split("").reduce((acc, char, index) => {
+            return char === passage.text[index] ? acc + 1 : acc;
+        }, 0);
+
+        //Get the WPM final value based on corrected chars
+        const wpm = time > 0 ? Math.round(correctedChars / 5 / time) : 0;
+
+        //Get raw typing speed
+        const raw = time > 0 ? Math.round(totalChars / 5 / time) : 0;
+
+        //Get accuracy typing
+        const accuracy =
+            totalChars > 0
+                ? Math.round((correctedChars / totalChars) * 100)
+                : 100;
+
+        return { wpm, raw, accuracy };
+    };
+
+    console.log(calculate());
+
     const restartLevel = () => {
         setUserType("");
-        seconds.setSeconds(10); //Reset the timer value to initial value
+        seconds.setSeconds(60); //Reset the timer value to initial value
         setDisabledInput(false);
         setSpinning(true);
 

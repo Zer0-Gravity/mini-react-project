@@ -8,7 +8,7 @@ type DifficultyLevels = keyof MockData;
 
 function TypingTest() {
     const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
-    const [seconds, setSeconds] = useState<number>(10);
+    const [seconds, setSeconds] = useState<number>(60);
     const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const startTimer = () => {
