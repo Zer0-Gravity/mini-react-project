@@ -34,4 +34,36 @@ body {
             transform: rotate(-369deg);
         }
     }
+
+    .complete-icon {
+        width: 50px;
+        aspect-ratio: 1/1;
+        position: relative;
+    }
+
+    .complete-icon::before {
+        content: "";
+        position: absolute;
+        width: 70px;
+        aspect-ratio: 1/1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 100%;
+        background-color: rgba(76, 214, 122, 0.5);
+        z-index: -1;
+    }
+
+    .complete-icon::after {
+        content: "";
+        position: absolute;
+        width: 90px;
+        aspect-ratio: 1/1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 100%;
+        background-color: rgba(76, 214, 122, 0.2);
+        z-index: -1;
+    }
 }

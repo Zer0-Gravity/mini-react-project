@@ -6,8 +6,10 @@ function Result() {
             {/* Header section */}
             <Header />
 
-            <section className="flex-1 flex flex-col items-center justify-center md:w-full">
-                <img src="/images/icon-completed.svg" alt="complete" />
+            <section className="flex-1 flex flex-col items-center justify-center md:w-full ">
+                <div className="complete-icon">
+                    <img src="/images/icon-completed.svg" alt="complete" />
+                </div>
                 <h1>Test Complete</h1>
                 <p>Solid run. Keep pushing to beat your high score</p>
             </section>
