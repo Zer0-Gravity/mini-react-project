@@ -3,10 +3,17 @@ import Input from "./Input";
 
 interface ControlBarProps {
     changeDifficulties: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onValue: string;
+    changeMode: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    difficulty: string;
+    mode: string;
 }
 
-function ControlBar({ changeDifficulties, onValue }: ControlBarProps) {
+function ControlBar({
+    changeDifficulties,
+    difficulty,
+    changeMode,
+    mode,
+}: ControlBarProps) {
     return (
         <>
             <div className="flex mb-2 gap-10">
@@ -18,28 +25,40 @@ function ControlBar({ changeDifficulties, onValue }: ControlBarProps) {
                             value="easy"
                             name="difficulty"
                             onInteract={changeDifficulties}
-                            onValue={onValue}
+                            onValue={difficulty}
                         />
                         <Input
                             text="Medium"
                             value="medium"
                             name="difficulty"
                             onInteract={changeDifficulties}
-                            onValue={onValue}
+                            onValue={difficulty}
                         />
                         <Input
                             text="Hard"
                             value="hard"
                             name="difficulty"
                             onInteract={changeDifficulties}
-                            onValue={onValue}
+                            onValue={difficulty}
                         />
                     </div>
                 </div>
                 <div className="flex gap-3 items-center">
                     <h1 className="text-neutral-500">Mode</h1>
-                    <Input text="Timed(60s)" value="60" name="mode" />
-                    <Input text="Passage" value="Passage" name="mode" />
+                    <Input
+                        text="Timed(60s)"
+                        value="timed"
+                        name="mode"
+                        onInteract={changeMode}
+                        onValue={mode}
+                    />
+                    <Input
+                        text="Passage"
+                        value="passage"
+                        name="mode"
+                        onInteract={changeMode}
+                        onValue={mode}
+                    />
                 </div>
             </div>
         </>

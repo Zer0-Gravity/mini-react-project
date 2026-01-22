@@ -5,10 +5,12 @@ import type { LevelEntries, MockData } from "./Utils/Type";
 import { dataTyping } from "./Utils/DataTyping";
 
 type DifficultyLevels = keyof MockData;
+type Mode = "timed" | "passage";
 
 function TypingTest() {
     const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
     const [seconds, setSeconds] = useState<number>(60);
+    const [mode, setMode] = useState<Mode>("timed");
     const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const startTimer = () => {
@@ -59,6 +61,12 @@ function TypingTest() {
     const [passage, setPassage] = useState<LevelEntries>(() =>
         getRandomPassage(difficulty),
     );
+
+    const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value as Mode;
+
+        setMode(value);
+    };
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
@@ -95,7 +103,9 @@ function TypingTest() {
                 {/* Control bar section */}
                 <ControlBar
                     changeDifficulties={changeDifficulties}
-                    onValue={difficulty}
+                    changeMode={changeMode}
+                    difficulty={difficulty}
+                    mode={mode}
                 />
             </section>
 
