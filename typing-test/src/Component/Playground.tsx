@@ -1,14 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, type SetStateAction } from "react";
 import type { LevelEntries } from "../Utils/Type";
 
 interface PlaygroundProps {
     passage: LevelEntries;
     onStart: () => void;
+    seconds: {
+        seconds: number;
+        setSeconds: React.Dispatch<SetStateAction<number>>;
+    };
 }
 
-function Playground({ passage, onStart }: PlaygroundProps) {
+function Playground({ passage, onStart, seconds }: PlaygroundProps) {
     const [userType, setUserType] = useState<string>("");
     const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
+    const [disabledInput, setDisabledInput] = useState<boolean>(false); // State for dibbling input
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleUserType = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,14 +26,15 @@ function Playground({ passage, onStart }: PlaygroundProps) {
         }
 
         //Check if the user input have the same length with the passage
-        if (value.length === passage.text.length) {
-            alert("finish");
+        if (value.length === passage.text.length || seconds.seconds === 0) {
+            setDisabledInput(true); //Disabled input when any condition above match
         }
     };
 
     const restartLevel = () => {
-        setUserType(""); //Set user input value ot 0/empty
-
+        setUserType("");
+        seconds.setSeconds(10); //Reset the timer value to initial value
+        setDisabledInput(false);
         setSpinning(true);
 
         //Wait 1 second then revert the spin boolean to false
@@ -76,6 +82,7 @@ function Playground({ passage, onStart }: PlaygroundProps) {
                 <input
                     ref={inputRef}
                     type="text"
+                    disabled={disabledInput} //Take the boolean disabledInput state
                     value={userType}
                     onChange={handleUserType}
                     className="opacity-0 absolute"

@@ -101,7 +101,11 @@ function TypingTest() {
 
             {/* Playground */}
             <section className="w-[70%] flex-1 flex flex-col items-center">
-                <Playground passage={passage} onStart={startTimer} />
+                <Playground
+                    passage={passage}
+                    onStart={startTimer}
+                    seconds={{ seconds, setSeconds }}
+                />
             </section>
         </main>
     );
