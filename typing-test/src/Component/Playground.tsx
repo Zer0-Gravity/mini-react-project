@@ -3,9 +3,10 @@ import type { LevelEntries } from "../Utils/Type";
 
 interface PlaygroundProps {
     passage: LevelEntries;
+    onStart: () => void;
 }
 
-function Playground({ passage }: PlaygroundProps) {
+function Playground({ passage, onStart }: PlaygroundProps) {
     const [userType, setUserType] = useState<string>("");
     const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
     const inputRef = useRef<HTMLInputElement>(null);
@@ -38,16 +39,22 @@ function Playground({ passage }: PlaygroundProps) {
 
     useEffect(() => {
         const handleKeydown = (e: KeyboardEvent) => {
+            let isStarted = false;
+
             if (
                 /^[a-zA-Z]$/.test(e.key) && //Regex check ensure trigger only the alphabet key avoid Ctrl, Shift etc
                 document.activeElement !== inputRef.current
             ) {
                 inputRef.current?.focus(); //Focus on input field as soon as user type a any alphabet key
+                if (!isStarted) {
+                    onStart();
+                    isStarted = true;
+                }
             }
         };
         window.addEventListener("keydown", handleKeydown); // Add global listener
         return () => window.removeEventListener("keydown", handleKeydown); //Cleanup to avoid memory leak
-    }, []);
+    }, [onStart]);
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Playground from "./Component/Playground";
 import ControlBar from "./Component/ControlBar";
 import type { LevelEntries, MockData } from "./Utils/Type";
@@ -8,12 +8,41 @@ type DifficultyLevels = keyof MockData;
 
 function TypingTest() {
     const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
+    const [seconds, setSeconds] = useState<number>(10);
+    const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    const startTimer = () => {
+        if (timeRef.current !== null) return;
+
+        timeRef.current = setInterval(() => {
+            setSeconds((prev) => {
+                if (prev <= 1) {
+                    stopTimer();
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+    };
+
+    const stopTimer = () => {
+        if (timeRef.current) {
+            clearInterval(timeRef.current);
+            timeRef.current = null;
+        }
+    };
+
+    useEffect(() => {
+        return () => stopTimer();
+    }, []);
+
+    console.log(seconds);
 
     const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
         const level = e.target.value as DifficultyLevels; //Narrow e.target.value (string) to union type DifficultyLevels
         setDifficulty(level);
 
-        const newPassage = getRandomPassage(level); //Get return value based on the input value
+        const newPassage = getRandomPassage(level); //Get return value based on the union type
         setPassage(newPassage);
     };
 
@@ -26,7 +55,6 @@ function TypingTest() {
     const [passage, setPassage] = useState<LevelEntries>(() =>
         getRandomPassage(difficulty),
     );
-
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
@@ -54,7 +82,9 @@ function TypingTest() {
                     </h1>
                     <h1 className="text-neutral-500">
                         Time:
-                        <span className="text-yellow-400 font-bold"> 0:46</span>
+                        <span className="text-yellow-400 font-bold">
+                            0:{`${seconds < 10 ? "0" + seconds : seconds}`}
+                        </span>
                     </h1>
                 </div>
 
@@ -67,7 +97,7 @@ function TypingTest() {
 
             {/* Playground */}
             <section className="w-[70%] flex-1 flex flex-col items-center">
-                <Playground passage={passage} />
+                <Playground passage={passage} onStart={startTimer} />
             </section>
         </main>
     );
