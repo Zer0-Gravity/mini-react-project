@@ -44,8 +44,8 @@ function Playground({
 
             //Wait for 300ms then navigate to the result page
             setTimeout(() => {
-                onStop();
-                seconds.setSeconds(60);
+                onStop(); //Stop timer logic
+                seconds.setSeconds(60); // Reset the timer value
                 navigate("/result", { state: finalData }); //pass the final data using state
             }, 300);
         }

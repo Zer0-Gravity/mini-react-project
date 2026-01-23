@@ -69,3 +69,7 @@ body {
         z-index: -1;
     }
 }
+
+.custom-width {
+    @apply lg:w-[70%] md:w-[80%] sm:w-[90%] xs:w-[95%];
+}

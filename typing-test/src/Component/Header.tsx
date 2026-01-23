@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <header className="flex justify-between w-[70%] sm:w-[90%] xs:w-[95%]">
+        <header className="flex justify-between custom-width">
             <img src="/images/logo-large.svg" alt="" />
             <div className="flex gap-2 items-center">
                 <img src="/images/icon-personal-best.svg" alt="" />

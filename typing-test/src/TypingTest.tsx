@@ -77,7 +77,7 @@ function TypingTest() {
             <Header />
 
             {/* Label section */}
-            <section className="flex justify-between border-b border-b-neutral-600 w-[70%]">
+            <section className="flex justify-between border-b border-b-neutral-600 custom-width">
                 <div className="flex gap-10">
                     <h1 className="text-neutral-500">
                         WPM:
@@ -105,7 +105,7 @@ function TypingTest() {
             </section>
 
             {/* Playground */}
-            <section className="w-[70%] flex-1 flex flex-col items-center">
+            <section className="custom-width flex-1 flex flex-col items-center">
                 <Playground
                     passage={passage}
                     onStart={startTimer}
