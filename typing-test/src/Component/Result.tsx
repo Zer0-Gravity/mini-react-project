@@ -3,8 +3,12 @@ import Header from "./Header";
 
 function Result() {
     const navigate = useNavigate();
-    const { state } = useLocation();
+    const location = useLocation(); //Get the passed data
+    const data = location.state;
 
+    const backToMain = () => {
+        navigate("/", { replace: true, state: null });
+    };
     return (
         <main className="flex flex-col items-center h-screen">
             {/* Header section */}
@@ -24,32 +28,38 @@ function Result() {
                 </section>
                 <section className="flex gap-4">
                     <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
+                        <h1 className="text-neutral-500">Raw</h1>
+                        <span className="text-neutral-200 font-semibold">
+                            {data.raw}
+                        </span>
+                    </div>
+                    <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
                         <h1 className="text-neutral-500">WPM</h1>
                         <span className="text-neutral-200 font-semibold">
-                            {state.wpm}
+                            {data.wpm}
                         </span>
                     </div>
                     <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
                         <h1 className="text-neutral-500">Accuracy</h1>
                         <span className="text-red-500 font-semibold">
-                            {state.accuracy}%
+                            {data.accuracy}%
                         </span>
                     </div>
                     <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
                         <h1 className="text-neutral-500">Character</h1>
                         <p className="text-neutral-200 font-medium">
                             <span className="text-green-500 font-semibold">
-                                {state.correctChars}
+                                {data.correctChars}
                             </span>
                             /
                             <span className="text-red-500 font-semibold">
-                                {state.wrongChars}
+                                {data.wrongChars}
                             </span>
                         </p>
                     </div>
                 </section>
                 <button
-                    onClick={() => navigate("/")}
+                    onClick={backToMain}
                     className="flex bg-neutral-500 px-3 py-2.5 rounded-lg gap-3"
                 >
                     <span className="text-neutral-200">Play again</span>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 interface PlaygroundProps {
     passage: LevelEntries;
     onStart: () => void;
+    onStop: () => void;
     seconds: {
         seconds: number;
         setSeconds: React.Dispatch<SetStateAction<number>>;
@@ -12,7 +13,13 @@ interface PlaygroundProps {
     mode: string;
 }
 
-function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
+function Playground({
+    passage,
+    onStart,
+    seconds,
+    mode,
+    onStop,
+}: PlaygroundProps) {
     const [userType, setUserType] = useState<string>("");
     const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
     const [disabledInput, setDisabledInput] = useState<boolean>(false); // State for dibbling input
@@ -32,21 +39,26 @@ function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
         if (value.length === passage.text.length || seconds.seconds === 0) {
             setDisabledInput(true); //Disabled input when any condition above match
 
+            //call the calculate function to the new variable
             const finalData = calculate();
 
             //Wait for 300ms then navigate to the result page
-            setInterval(() => {
-                navigate("/result", { state: finalData });
+            setTimeout(() => {
+                onStop();
+                seconds.setSeconds(60);
+                navigate("/result", { state: finalData }); //pass the final data using state
             }, 300);
         }
     };
 
     const calculate = () => {
-        const time = 60 / 60;
+        const time = 10 / 60;
         const totalChars = userType.length;
 
         const { correctChars, wrongChars } = userType.split("").reduce(
             (acc, char, index) => {
+                //Check if the passage match the user input and put each wrong and correct
+                //to separate declared variable
                 if (char === passage.text[index]) {
                     acc.correctChars++;
                 } else {

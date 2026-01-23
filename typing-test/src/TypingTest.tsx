@@ -69,6 +69,8 @@ function TypingTest() {
         setMode(value);
     };
 
+    console.log(seconds);
+
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
@@ -107,6 +109,7 @@ function TypingTest() {
                 <Playground
                     passage={passage}
                     onStart={startTimer}
+                    onStop={stopTimer}
                     seconds={{ seconds, setSeconds }}
                     mode={mode}
                 />
