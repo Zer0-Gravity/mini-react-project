@@ -125,11 +125,11 @@ function Playground({
                     {passage.text.split("").map((char, index) => (
                         <span
                             // Change font color based on the match of user input and passage char
-                            className={`relative text-[35px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400 underline") : "text-neutral-400"}`}
+                            className={`relative text-justify xs:text-[25px] md:text-[30px] ${index < userType.length ? (userType[index] === char ? "text-green-400" : "text-red-400 underline") : "text-neutral-400"}`}
                         >
                             {/* Cursor */}
                             {index === userType.length && (
-                                <span className="bg-neutral-500/50 rounded-full inset-0 absolute w-full h-full animate-bounce"></span>
+                                <span className="bg-neutral-500/50 rounded-lg inset-0 absolute w-full h-full animate-pulse"></span>
                             )}
                             {char}
                         </span>

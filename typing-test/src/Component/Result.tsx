@@ -1,18 +1,39 @@
 import { useLocation, useNavigate } from "react-router";
 import Header from "./Header";
+import { useEffect, useRef, type SetStateAction } from "react";
 
-function Result() {
+interface ResultProps {
+    score: number[];
+    setScore: React.Dispatch<SetStateAction<number[]>>;
+}
+
+function Result({ score, setScore }: ResultProps) {
     const navigate = useNavigate();
     const location = useLocation(); //Get the passed data
     const data = location.state;
+    const scoreRef = useRef(false);
+
+    //Get the bigger score
+    const finalScore = Math.max(...score);
 
     const backToMain = () => {
         navigate("/", { replace: true, state: null });
     };
+
+    useEffect(() => {
+        if (!scoreRef.current) {
+            setScore((prev) => [...prev, data.wpm]);
+            scoreRef.current = true;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    console.log(score);
+
     return (
         <main className="flex flex-col items-center h-screen">
             {/* Header section */}
-            <Header />
+            <Header score={finalScore} />
 
             <div className="flex-1 flex flex-col items-center gap-5 justify-center">
                 <section className="flex flex-col items-center justify-center md:w-full gap-4 ">

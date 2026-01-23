@@ -8,11 +8,16 @@ import Header from "./Component/Header";
 type DifficultyLevels = keyof MockData;
 type Mode = "timed" | "passage";
 
-function TypingTest() {
+interface MainProps {
+    score: number[];
+}
+
+function TypingTest({ score }: MainProps) {
     const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
     const [seconds, setSeconds] = useState<number>(60);
     const [mode, setMode] = useState<Mode>("timed");
     const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    const finalScore = Math.max(...score);
 
     const startTimer = () => {
         //Check if the timer currently running or not
@@ -74,7 +79,7 @@ function TypingTest() {
     return (
         <main className="mt-10 flex flex-col gap-10 items-center">
             {/* Header Section */}
-            <Header />
+            <Header score={finalScore} />
 
             {/* Label section */}
             <section className="flex justify-between border-b border-b-neutral-600 custom-width">
