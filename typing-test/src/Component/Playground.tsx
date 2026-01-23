@@ -32,9 +32,11 @@ function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
         if (value.length === passage.text.length || seconds.seconds === 0) {
             setDisabledInput(true); //Disabled input when any condition above match
 
+            const finalData = calculate();
+
             //Wait for 300ms then navigate to the result page
             setInterval(() => {
-                navigate("/result");
+                navigate("/result", { state: finalData });
             }, 300);
         }
     };
@@ -43,12 +45,20 @@ function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
         const time = 60 / 60;
         const totalChars = userType.length;
 
-        const correctedChars = userType.split("").reduce((acc, char, index) => {
-            return char === passage.text[index] ? acc + 1 : acc;
-        }, 0);
+        const { correctChars, wrongChars } = userType.split("").reduce(
+            (acc, char, index) => {
+                if (char === passage.text[index]) {
+                    acc.correctChars++;
+                } else {
+                    acc.wrongChars++;
+                }
+                return acc;
+            },
+            { correctChars: 0, wrongChars: 0 },
+        );
 
         //Get the WPM final value based on corrected chars
-        const wpm = time > 0 ? Math.round(correctedChars / 5 / time) : 0;
+        const wpm = time > 0 ? Math.round(correctChars / 5 / time) : 0;
 
         //Get raw typing speed
         const raw = time > 0 ? Math.round(totalChars / 5 / time) : 0;
@@ -56,13 +66,11 @@ function Playground({ passage, onStart, seconds, mode }: PlaygroundProps) {
         //Get accuracy typing
         const accuracy =
             totalChars > 0
-                ? Math.round((correctedChars / totalChars) * 100)
+                ? Math.round((correctChars / totalChars) * 100)
                 : 100;
 
-        return { wpm, raw, accuracy };
+        return { wpm, raw, accuracy, correctChars, wrongChars };
     };
-
-    console.log(calculate());
 
     const restartLevel = () => {
         setUserType("");

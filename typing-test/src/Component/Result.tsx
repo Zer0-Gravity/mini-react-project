@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Header from "./Header";
 
 function Result() {
     const navigate = useNavigate();
-
-    const backToPlayground = () => {
-        navigate("/");
-    };
+    const { state } = useLocation();
 
     return (
         <main className="flex flex-col items-center h-screen">
@@ -29,28 +26,30 @@ function Result() {
                     <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
                         <h1 className="text-neutral-500">WPM</h1>
                         <span className="text-neutral-200 font-semibold">
-                            85
+                            {state.wpm}
                         </span>
                     </div>
                     <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
                         <h1 className="text-neutral-500">Accuracy</h1>
-                        <span className="text-red-500 font-semibold">85%</span>
+                        <span className="text-red-500 font-semibold">
+                            {state.accuracy}%
+                        </span>
                     </div>
                     <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
                         <h1 className="text-neutral-500">Character</h1>
                         <p className="text-neutral-200 font-medium">
                             <span className="text-green-500 font-semibold">
-                                120
+                                {state.correctChars}
                             </span>
                             /
                             <span className="text-red-500 font-semibold">
-                                5
+                                {state.wrongChars}
                             </span>
                         </p>
                     </div>
                 </section>
                 <button
-                    onClick={backToPlayground}
+                    onClick={() => navigate("/")}
                     className="flex bg-neutral-500 px-3 py-2.5 rounded-lg gap-3"
                 >
                     <span className="text-neutral-200">Play again</span>
