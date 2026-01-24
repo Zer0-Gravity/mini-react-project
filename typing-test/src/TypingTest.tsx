@@ -17,7 +17,7 @@ function TypingTest({ score }: MainProps) {
     const [seconds, setSeconds] = useState<number>(60);
     const [mode, setMode] = useState<Mode>("timed");
     const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
-    const finalScore = Math.max(...score);
+    const finalScore = Math.max(0, ...score);
 
     const startTimer = () => {
         //Check if the timer currently running or not

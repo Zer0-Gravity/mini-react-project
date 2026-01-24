@@ -10,9 +10,7 @@ function Header({ score }: HeaderProps) {
                 <img src="/images/icon-personal-best.svg" alt="" />
                 <h1 className="text-neutral-500">
                     Personal best:
-                    <span className="text-neutral-200">
-                        {score !== 0 ? score : "0"} WPM
-                    </span>
+                    <span className="text-neutral-200">{score} WPM</span>
                 </h1>
             </div>
         </header>

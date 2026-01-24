@@ -14,7 +14,7 @@ function Result({ score, setScore }: ResultProps) {
     const scoreRef = useRef(false);
 
     //Get the bigger score
-    const finalScore = Math.max(...score);
+    const finalScore = Math.max(0, ...score);
 
     const backToMain = () => {
         //Back and delete current state data
