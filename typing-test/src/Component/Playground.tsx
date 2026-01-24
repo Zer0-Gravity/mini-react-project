@@ -52,7 +52,7 @@ function Playground({
     };
 
     const calculate = () => {
-        const time = 10 / 60;
+        const time = 60 / 60;
         const totalChars = userType.length;
 
         const { correctChars, wrongChars } = userType.split("").reduce(

@@ -17,12 +17,14 @@ function Result({ score, setScore }: ResultProps) {
     const finalScore = Math.max(...score);
 
     const backToMain = () => {
+        //Back and delete current state data
         navigate("/", { replace: true, state: null });
     };
 
     useEffect(() => {
+        //Check ref to prevent push twice
         if (!scoreRef.current) {
-            setScore((prev) => [...prev, data.wpm]);
+            setScore((prev) => [...prev, data.wpm]); //Push new score to the array
             scoreRef.current = true;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

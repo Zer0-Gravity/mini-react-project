@@ -11,7 +11,7 @@ function Header({ score }: HeaderProps) {
                 <h1 className="text-neutral-500">
                     Personal best:
                     <span className="text-neutral-200">
-                        {score ? score : "0"} WPM
+                        {score !== 0 ? score : "0"} WPM
                     </span>
                 </h1>
             </div>
