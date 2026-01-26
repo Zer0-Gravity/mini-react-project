@@ -20,9 +20,11 @@ function ControlBar({
 }: ControlBarProps) {
     return (
         <>
-            <div className="flex mb-2 gap-10">
-                <div className="flex gap-3 items-center">
-                    <h1 className="text-neutral-500">Difficulty: </h1>
+            <div className="flex mb-2 gap-10 ">
+                <div className="flex gap-3 items-center flex-1">
+                    <h1 className="text-neutral-500 xs:hidden md:block">
+                        Difficulty:{" "}
+                    </h1>
                     <select
                         value={difficulty}
                         onChange={changeDifficulties}
@@ -56,12 +58,14 @@ function ControlBar({
                         />
                     </div>
                 </div>
-                <div className="flex gap-3 items-center">
-                    <h1 className="text-neutral-500">Mode</h1>
+                <div className="flex gap-3 items-center ">
+                    <h1 className="text-neutral-500 xs:hidden md:block">
+                        Mode
+                    </h1>
                     <select
                         value={mode}
                         onChange={changeMode}
-                        className="md:hidden text-blue-500 border border-blue-500 px-2 py-1 rounded-lg outline-none"
+                        className="md:hidden text-blue-500 border border-blue-500 px-2 py-1 rounded-lg outline-none w-full"
                     >
                         <option value="timed">Timed(60)</option>
                         <option value="passage">Passage</option>
