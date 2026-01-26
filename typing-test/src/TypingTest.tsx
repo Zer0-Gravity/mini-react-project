@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Playground from "./Component/Playground";
 import ControlBar from "./Component/ControlBar";
-import type { LevelEntries, MockData } from "./Utils/Type";
+import type {
+    DifficultyLevels,
+    LevelEntries,
+    MockData,
+    Mode,
+} from "./Utils/Type";
 import { dataTyping } from "./Utils/DataTyping";
 import Header from "./Component/Header";
-
-type DifficultyLevels = keyof MockData;
-type Mode = "timed" | "passage";
 
 interface MainProps {
     score: number[];
@@ -50,7 +52,9 @@ function TypingTest({ score }: MainProps) {
         return () => stopTimer();
     }, []);
 
-    const changeDifficulties = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeDifficulties = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    ) => {
         const level = e.target.value as DifficultyLevels; //Narrow e.target.value (string) to union type DifficultyLevels
         setDifficulty(level);
 
@@ -68,7 +72,9 @@ function TypingTest({ score }: MainProps) {
         getRandomPassage(difficulty),
     );
 
-    const changeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeMode = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    ) => {
         const value = e.target.value as Mode;
 
         setMode(value);

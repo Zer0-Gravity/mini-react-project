@@ -8,3 +8,6 @@ export interface LevelEntries {
     id: string;
     text: string;
 }
+
+export type DifficultyLevels = "easy" | "medium" | "hard";
+export type Mode = "timed" | "passage";

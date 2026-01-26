@@ -2,8 +2,12 @@ import React from "react";
 import Input from "./Input";
 
 interface ControlBarProps {
-    changeDifficulties: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    changeMode: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeDifficulties: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    ) => void;
+    changeMode: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    ) => void;
     difficulty: string;
     mode: string;
 }
@@ -19,7 +23,16 @@ function ControlBar({
             <div className="flex mb-2 gap-10">
                 <div className="flex gap-3 items-center">
                     <h1 className="text-neutral-500">Difficulty: </h1>
-                    <div className="space-x-1">
+                    <select
+                        value={difficulty}
+                        onChange={changeDifficulties}
+                        className="md:hidden text-blue-500 border border-blue-500 px-2 py-1 rounded-lg outline-none"
+                    >
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <div className="xs:hidden md:flex space-x-1">
                         <Input
                             text="Easy"
                             value="easy"
@@ -45,20 +58,30 @@ function ControlBar({
                 </div>
                 <div className="flex gap-3 items-center">
                     <h1 className="text-neutral-500">Mode</h1>
-                    <Input
-                        text="Timed(60s)"
-                        value="timed"
-                        name="mode"
-                        onInteract={changeMode}
-                        onValue={mode}
-                    />
-                    <Input
-                        text="Passage"
-                        value="passage"
-                        name="mode"
-                        onInteract={changeMode}
-                        onValue={mode}
-                    />
+                    <select
+                        value={mode}
+                        onChange={changeMode}
+                        className="md:hidden text-blue-500 border border-blue-500 px-2 py-1 rounded-lg outline-none"
+                    >
+                        <option value="timed">Timed(60)</option>
+                        <option value="passage">Passage</option>
+                    </select>
+                    <div className="xs:hidden md:flex space-x-1">
+                        <Input
+                            text="Timed(60s)"
+                            value="timed"
+                            name="mode"
+                            onInteract={changeMode}
+                            onValue={mode}
+                        />
+                        <Input
+                            text="Passage"
+                            value="passage"
+                            name="mode"
+                            onInteract={changeMode}
+                            onValue={mode}
+                        />
+                    </div>
                 </div>
             </div>
         </>
