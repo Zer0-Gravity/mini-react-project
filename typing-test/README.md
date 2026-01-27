@@ -20,7 +20,7 @@ A responsive typing app built for Hackathon from front end mentor it provide a r
 - [Lucide React](https://lucide.dev/guide/packages/lucide-react)
 
 ### Preview
-![Demo Gif](./src/Demo/Weather%20Demo.gif)
+![Demo Gif](./src/Demo/TypingTest.gif)
 
 ### Quick Start
 1. `git clone https://github.com/Zer0-Gravity/mini-react-project`
