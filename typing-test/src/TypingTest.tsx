@@ -6,6 +6,7 @@ import type {
     LevelEntries,
     MockData,
     Mode,
+    StatusProps,
 } from "./Utils/Type";
 import { dataTyping } from "./Utils/DataTyping";
 import Header from "./Component/Header";
@@ -18,6 +19,7 @@ function TypingTest({ score }: MainProps) {
     const [difficulty, setDifficulty] = useState<DifficultyLevels>("easy");
     const [seconds, setSeconds] = useState<number>(60);
     const [mode, setMode] = useState<Mode>("timed");
+    const [status, setStatus] = useState<StatusProps | null>(null);
     const timeRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const finalScore = Math.max(0, ...score);
 
@@ -93,13 +95,13 @@ function TypingTest({ score }: MainProps) {
                     <h1 className="text-neutral-500 status-display-header">
                         <span>WPM: </span>
                         <span className="text-neutral-200 status-display-span">
-                            40
+                            {status?.wpm}
                         </span>
                     </h1>
                     <h1 className="text-neutral-500 status-display-header">
                         <span>Accuracy:</span>
                         <span className="text-red-500 status-display-span">
-                            95%
+                            {status?.accuracy}%
                         </span>
                     </h1>
                     <h1 className="text-neutral-500 status-display-header">
@@ -127,6 +129,7 @@ function TypingTest({ score }: MainProps) {
                     onStop={stopTimer}
                     seconds={{ seconds, setSeconds }}
                     mode={mode}
+                    setStatus={setStatus}
                 />
             </section>
         </main>

@@ -1,11 +1,18 @@
-import React, { useEffect, useRef, useState, type SetStateAction } from "react";
-import type { LevelEntries } from "../Utils/Type";
+import React, {
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+    type SetStateAction,
+} from "react";
+import type { LevelEntries, StatusProps } from "../Utils/Type";
 import { useNavigate } from "react-router";
 
 interface PlaygroundProps {
     passage: LevelEntries;
     onStart: () => void;
     onStop: () => void;
+    setStatus: React.Dispatch<SetStateAction<StatusProps>>;
     seconds: {
         seconds: number;
         setSeconds: React.Dispatch<SetStateAction<number>>;
@@ -19,6 +26,7 @@ function Playground({
     seconds,
     mode,
     onStop,
+    setStatus,
 }: PlaygroundProps) {
     const [userType, setUserType] = useState<string>("");
     const [spin, setSpinning] = useState<boolean>(false); //State spinning image for restart button
@@ -51,7 +59,7 @@ function Playground({
         }
     };
 
-    const calculate = () => {
+    const calculate = useCallback(() => {
         const time = 60 / 60;
         const totalChars = userType.length;
 
@@ -82,7 +90,7 @@ function Playground({
                 : 100;
 
         return { wpm, raw, accuracy, correctChars, wrongChars };
-    };
+    }, [passage.text, userType]);
 
     const restartLevel = () => {
         setUserType("");
@@ -95,6 +103,10 @@ function Playground({
             setSpinning(false);
         }, 1000);
     };
+
+    useEffect(() => {
+        setStatus(calculate);
+    }, [calculate, setStatus]);
 
     useEffect(() => {
         const handleKeydown = (e: KeyboardEvent) => {

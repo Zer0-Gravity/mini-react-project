@@ -11,3 +11,8 @@ export interface LevelEntries {
 
 export type DifficultyLevels = "easy" | "medium" | "hard";
 export type Mode = "timed" | "passage";
+
+export interface StatusProps {
+    wpm: number;
+    accuracy: number;
+}
