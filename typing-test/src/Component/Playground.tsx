@@ -12,7 +12,7 @@ interface PlaygroundProps {
     passage: LevelEntries;
     onStart: () => void;
     onStop: () => void;
-    setStatus: React.Dispatch<SetStateAction<StatusProps>>;
+    setStatus: React.Dispatch<SetStateAction<StatusProps | null>>;
     seconds: {
         seconds: number;
         setSeconds: React.Dispatch<SetStateAction<number>>;
