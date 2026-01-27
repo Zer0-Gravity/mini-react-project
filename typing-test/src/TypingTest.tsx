@@ -91,7 +91,7 @@ function TypingTest({ score }: MainProps) {
 
             {/* Label section */}
             <section className="flex justify-between border-b border-b-neutral-600 custom-width xs:flex-col xs:gap-4 lg:flex-row items-center">
-                <div className="flex gap-10 xs:w-full xs:justify-around">
+                <div className="flex gap-10 xs:w-full xs:justify-around lg:w-[10%]">
                     <h1 className="text-neutral-500 status-display-header">
                         <span>WPM: </span>
                         <span className="text-neutral-200 status-display-span">

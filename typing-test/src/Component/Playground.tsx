@@ -104,6 +104,7 @@ function Playground({
         }, 1000);
     };
 
+    //Send the calculate number to the status state
     useEffect(() => {
         setStatus(calculate);
     }, [calculate, setStatus]);
