@@ -81,3 +81,7 @@ body {
 .status-display-span {
     @apply font-bold xs:text-[30px] md:text-[16px];
 }
+
+.result-style {
+    @apply border border-neutral-500 md:w-22.5 xs:w-75  py-1 px-2 rounded-sm;
+}

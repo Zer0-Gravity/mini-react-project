@@ -49,26 +49,26 @@ function Result({ score, setScore }: ResultProps) {
                         Solid run. Keep pushing to beat your high score
                     </p>
                 </section>
-                <section className="flex gap-4">
-                    <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
+                <section className="flex md:flex-row xs:flex-col gap-4">
+                    <div className="result-style">
                         <h1 className="text-neutral-500">Raw</h1>
                         <span className="text-neutral-200 font-semibold">
                             {data.raw}
                         </span>
                     </div>
-                    <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
+                    <div className="result-style">
                         <h1 className="text-neutral-500">WPM</h1>
                         <span className="text-neutral-200 font-semibold">
                             {data.wpm}
                         </span>
                     </div>
-                    <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
+                    <div className="result-style">
                         <h1 className="text-neutral-500">Accuracy</h1>
                         <span className="text-red-500 font-semibold">
                             {data.accuracy}%
                         </span>
                     </div>
-                    <div className="border border-neutral-500 w-22.5 py-1 px-2 rounded-sm">
+                    <div className="result-style">
                         <h1 className="text-neutral-500">Character</h1>
                         <p className="text-neutral-200 font-medium">
                             <span className="text-green-500 font-semibold">
