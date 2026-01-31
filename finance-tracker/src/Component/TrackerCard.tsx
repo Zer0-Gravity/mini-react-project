@@ -2,7 +2,7 @@ import { MoveUpRight, Trash } from "lucide-react";
 
 function TrackerCard() {
     return (
-        <div className="text-white border flex justify-between p-2 bg-secondary items-center rounded-lg">
+        <div className="text-white border flex justify-between p-2 min-h-17 bg-secondary items-center rounded-lg">
             <div className="flex gap-5 items-center">
                 <div className="border w-10 h-10 flex items-center justify-center rounded-full">
                     <MoveUpRight />

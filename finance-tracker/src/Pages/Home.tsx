@@ -26,23 +26,29 @@ function Home() {
                 </div>
             </section>
 
-            <section>
+            <section className="space-y-8">
                 {/* Goal card */}
-                <div>
+                <div className="space-y-3">
                     <h1 className="text-[16px] font-semibold text-secondary">
                         Goal
                     </h1>
-                    <div>
+                    <div className="flex gap-3 border overflow-x-auto overflow-hidden hide-scrollbar">
+                        <GoalCard />
+                        <GoalCard />
+                        <GoalCard />
                         <GoalCard />
                     </div>
                 </div>
 
                 {/* Activity Card */}
-                <div>
+                <div className="space-y-3">
                     <h1 className="text-[16px] font-semibold text-secondary">
                         Recent Activity
                     </h1>
-                    <div>
+                    <div className="flex flex-col gap-2 overflow-y-auto overflow-hidden max-h-62.5 hide-scrollbar">
+                        <TrackerCard />
+                        <TrackerCard />
+                        <TrackerCard />
                         <TrackerCard />
                     </div>
                 </div>
