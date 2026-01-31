@@ -15,5 +15,5 @@ body {
 }
 
 .container-custom {
-    @apply w-200 h-200 bg-primary;
+    @apply w-200 h-200 bg-primary rounded-lg p-5;
 }
