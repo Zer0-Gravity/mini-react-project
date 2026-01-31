@@ -3,15 +3,15 @@ import { NavLink } from "react-router";
 
 function Navbar() {
     return (
-        <nav className="h-200 w-12.5 border flex flex-col items-center justify-center gap-10">
+        <nav className="h-200 w-12.5 border flex flex-col items-center justify-center gap-10 rounded-lg bg-primary">
             <NavLink to={"/"}>
-                <HomeIcon />
+                <HomeIcon color="#eae2b7" />
             </NavLink>
             <NavLink to={"/transaction"}>
-                <Wallet />
+                <Wallet color="#eae2b7" />
             </NavLink>
             <NavLink to={"/goal"}>
-                <Goal />
+                <Goal color="#eae2b7" />
             </NavLink>
         </nav>
     );

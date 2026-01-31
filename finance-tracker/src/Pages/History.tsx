@@ -1,5 +1,5 @@
 function History() {
-    return <div className="container-custom">History</div>;
+    return <div className="container-custom">History Transaction</div>;
 }
 
 export default History;
