@@ -1,6 +1,7 @@
 import { Goal, HandCoins, MailPlus, Send, ShoppingBag } from "lucide-react";
 import ButtonAdd from "../Component/Home/ButtonAdd";
 import DisplayButton from "../Component/Home/DisplayButton";
+import GoalCard from "../Component/GoalCard";
 
 function Home() {
     return (
@@ -30,7 +31,9 @@ function Home() {
                     <h1 className="text-[16px] font-semibold text-secondary">
                         Goal
                     </h1>
-                    <div></div>
+                    <div>
+                        <GoalCard />
+                    </div>
                 </div>
 
                 {/* Activity Card */}
