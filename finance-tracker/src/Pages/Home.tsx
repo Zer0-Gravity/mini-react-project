@@ -1,5 +1,5 @@
 function Home() {
-    return <div className="w-200 h-200">Home</div>;
+    return <div className="container-custom">Home</div>;
 }
 
 export default Home;
