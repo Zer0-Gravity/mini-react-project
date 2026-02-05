@@ -2,6 +2,8 @@ import TrackerCard from "../Component/TrackerCard";
 import { useState } from "react";
 import type { SingleValue } from "react-select";
 import ReactSelect from "react-select";
+import ButtonAdd from "../Component/Home/ButtonAdd";
+import { Goal, HandCoins, ShoppingBag } from "lucide-react";
 
 interface TransactionType {
     value: string;
@@ -37,14 +39,20 @@ function History() {
                         options={options}
                         value={selectedOption}
                         onChange={handleChange}
-                        className="text-black w-40 "
+                        className="text-black w-40"
                     />
                 </div>
             </section>
-            <section className="space-y-1">
-                <TrackerCard />
-                <TrackerCard />
-                <TrackerCard />
+            <section>
+                <div className="flex justify-end gap-5">
+                    <ButtonAdd icon={HandCoins} text="Add Income" />
+                    <ButtonAdd icon={ShoppingBag} text="Add Expense" />
+                </div>
+            </section>
+            <section>
+                <TrackerCard rounded={false} />
+                <TrackerCard rounded={false} />
+                <TrackerCard rounded={false} />
             </section>
         </div>
     );

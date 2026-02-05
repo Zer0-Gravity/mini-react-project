@@ -46,10 +46,10 @@ function Home() {
                         Recent Activity
                     </h1>
                     <div className="flex flex-col gap-2 overflow-y-auto overflow-hidden max-h-62.5 hide-scrollbar">
-                        <TrackerCard />
-                        <TrackerCard />
-                        <TrackerCard />
-                        <TrackerCard />
+                        <TrackerCard rounded={true} />
+                        <TrackerCard rounded={true} />
+                        <TrackerCard rounded={true} />
+                        <TrackerCard rounded={true} />
                     </div>
                 </div>
             </section>

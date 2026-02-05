@@ -1,8 +1,14 @@
 import { MoveUpRight, Trash } from "lucide-react";
 
-function TrackerCard() {
+interface TrackerProps {
+    rounded: boolean;
+}
+
+function TrackerCard({ rounded }: TrackerProps) {
     return (
-        <div className="text-white flex justify-between p-2 min-h-17 bg-secondary items-center rounded-lg">
+        <div
+            className={`text-white flex justify-between p-2 min-h-17 bg-secondary items-center ${rounded ? "rounded-lg" : "rounded-none"}`}
+        >
             <div className="flex gap-5 items-center">
                 <div className="border w-10 h-10 flex items-center justify-center rounded-full">
                     <MoveUpRight />
