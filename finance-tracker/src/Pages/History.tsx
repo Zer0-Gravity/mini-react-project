@@ -3,7 +3,7 @@ import { useState } from "react";
 import type { SingleValue } from "react-select";
 import ReactSelect from "react-select";
 import ButtonAdd from "../Component/Home/ButtonAdd";
-import { Goal, HandCoins, ShoppingBag } from "lucide-react";
+import { HandCoins, ShoppingBag } from "lucide-react";
 
 interface TransactionType {
     value: string;
@@ -25,7 +25,7 @@ function History() {
     return (
         <div className="container-custom space-y-3">
             <h1 className="font-bold text-[25px] text-secondary">
-                History Transaction
+                Transaction List
             </h1>
             <section className="flex justify-between">
                 <input
