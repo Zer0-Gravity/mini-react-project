@@ -1,4 +1,3 @@
-import { Filter } from "lucide-react";
 import TrackerCard from "../Component/TrackerCard";
 import { useState } from "react";
 import type { SingleValue } from "react-select";
@@ -22,20 +21,23 @@ function History() {
     };
 
     return (
-        <div className="container-custom">
+        <div className="container-custom space-y-3">
             <h1 className="font-bold text-[25px] text-secondary">
                 History Transaction
             </h1>
-            <section>
-                <input type="search" placeholder="Search Transaction" />
-                <div className="flex text-secondary">
-                    <h1>
-                        <Filter /> Filter
-                    </h1>
+            <section className="flex justify-between">
+                <input
+                    type="search"
+                    placeholder="Search Transaction"
+                    className="bg-secondary rounded-lg px-2 text-[14px] outline-none"
+                />
+                <div className="flex text-secondary items-center gap-3">
+                    <h1>Filter</h1>
                     <ReactSelect<TransactionType>
                         options={options}
                         value={selectedOption}
                         onChange={handleChange}
+                        className="text-black w-40 "
                     />
                 </div>
             </section>
