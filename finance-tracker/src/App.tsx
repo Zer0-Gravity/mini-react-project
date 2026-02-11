@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Navbar from "./Component/Navbar";
 import History from "./Pages/History";
 import Goal from "./Pages/Goal";
+import TransactionWindow from "./Component/TransactionWIndow";
 
 function App() {
     return (
@@ -14,6 +15,10 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/transaction" element={<History />} />
                         <Route path="/goal" element={<Goal />} />
+                        <Route
+                            path="/transaction-window"
+                            element={<TransactionWindow />}
+                        />
                     </Routes>
                 </section>
             </main>
