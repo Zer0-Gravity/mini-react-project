@@ -1,12 +1,40 @@
 import { CirclePlus, CircleX } from "lucide-react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import type { TransactionType } from "../type";
+import { financeTrack } from "../Store";
 
 function TransactionWindow() {
+    const { addTransactions } = financeTrack(); //Import the global state from the zustand
     const navigate = useNavigate();
+    const [description, setDescription] = useState<string>("");
+    const [amount, setAmount] = useState<number>(0);
+    const [transType, setTransType] = useState<TransactionType>("income");
 
     //Navigate to previous page
     const previousPage = () => {
         navigate(-1);
+    };
+
+    //Handle on change target for transaction type
+    const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTransType(e.target.value as TransactionType);
+    };
+
+    const addNewTransaction = () => {
+        const newTransaction = {
+            id: crypto.randomUUID(), //Get random ID from crypto
+            description: description,
+            amount: amount,
+            date: new Date().toLocaleDateString(),
+            type: transType,
+        };
+
+        if (!description && !amount) {
+            return;
+        }
+
+        addTransactions(newTransaction);
     };
 
     return (
@@ -16,6 +44,7 @@ function TransactionWindow() {
                     Add Transaction
                 </h1>
                 <button onClick={previousPage}>
+                    {/*Close page when button clicked*/}
                     <CircleX className="text-secondary" size={20} />
                 </button>
             </section>
@@ -29,6 +58,7 @@ function TransactionWindow() {
                     <input
                         type="text"
                         className="p-2 bg-secondary rounded-lg w-full outline-none"
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
 
@@ -40,6 +70,7 @@ function TransactionWindow() {
                     <input
                         type="number"
                         className="p-2 bg-secondary rounded-lg w-full outline-none"
+                        onChange={(e) => setAmount(Number(e.target.value))}
                     />
                 </div>
 
@@ -49,12 +80,26 @@ function TransactionWindow() {
                         Transaction Type
                     </h1>
                     <div className="flex gap-2">
-                        <TransactionType value={"income"} text={"Income"} />
-                        <TransactionType value={"expense"} text={"Expense"} />
+                        {/* Pass the necessary data for the radio component */}
+                        <TransactionType
+                            value={"income"}
+                            text={"Income"}
+                            onValue={transType}
+                            onChange={handleTypeChange}
+                        />
+                        <TransactionType
+                            value={"expense"}
+                            text={"Expense"}
+                            onValue={transType}
+                            onChange={handleTypeChange}
+                        />
                     </div>
                 </div>
 
-                <button className="bg-secondary p-2 rounded-lg font-medium text-primary items-center flex  justify-center gap-2">
+                <button
+                    className="bg-secondary p-2 rounded-lg font-medium text-primary items-center flex  justify-center gap-2"
+                    onClick={addNewTransaction}
+                >
                     <CirclePlus size={20} />
                     Add Transaction
                 </button>
@@ -66,16 +111,25 @@ function TransactionWindow() {
 interface TransactionOption {
     value: string;
     text: string;
+    onValue: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function TransactionType({ value, text }: TransactionOption) {
+function TransactionType({
+    value,
+    text,
+    onValue,
+    onChange,
+}: TransactionOption) {
     return (
         <label className="border border-secondary p-2 rounded-lg has-checked:bg-secondary">
             <input
                 type="radio"
                 value={value}
+                checked={value === onValue}
                 name="transaction-type"
                 className="peer hidden"
+                onChange={onChange}
             />
             <span className="text-secondary font-medium peer-checked:text-primary">
                 {text}

@@ -51,8 +51,8 @@ function History() {
                     </h1>
                 </div>
                 <div className="flex gap-5">
-                    <ButtonAdd icon={HandCoins} text="Add Income" />
-                    <ButtonAdd icon={ShoppingBag} text="Add Expense" />
+                    {/* <ButtonAdd icon={HandCoins} text="Add Income" />
+                    <ButtonAdd icon={ShoppingBag} text="Add Expense" /> */}
                 </div>
             </section>
             <section>

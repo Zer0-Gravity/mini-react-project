@@ -20,7 +20,11 @@ function Home() {
             {/* Add button */}
             <section>
                 <div className="flex justify-end gap-5">
-                    <ButtonAdd icon={Goal} text="Add Goal" />
+                    <ButtonAdd
+                        icon={Goal}
+                        text="Add Goal"
+                        navigate="/goal-window"
+                    />
                     <ButtonAdd
                         icon={ShoppingBag}
                         text="Add Transaction"

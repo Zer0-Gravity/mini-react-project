@@ -1,14 +1,13 @@
 import { create } from "zustand";
+import type { TransactionType } from "./type";
 
 interface TransactionProps {
     id: string;
-    title: string;
+    description: string;
     amount: number;
     date: string;
     type: TransactionType;
 }
-
-type TransactionType = "income" | "expense" | "transfer-in" | "transfer-out";
 
 interface FinanceTracker {
     balance: number;
