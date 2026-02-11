@@ -3,8 +3,11 @@ import ButtonAdd from "../Component/Home/ButtonAdd";
 import DisplayButton from "../Component/Home/DisplayButton";
 import GoalCard from "../Component/GoalCard";
 import TrackerCard from "../Component/TrackerCard";
+import { useFinanceTrack } from "../Store";
 
 function Home() {
+    const { transactions } = useFinanceTrack();
+
     return (
         <main className="container-custom flex flex-col gap-5">
             {/* balance Display */}
@@ -53,10 +56,7 @@ function Home() {
                         Recent Activity
                     </h1>
                     <div className="flex flex-col gap-2 overflow-y-auto overflow-hidden max-h-62.5 hide-scrollbar">
-                        <TrackerCard rounded={true} />
-                        <TrackerCard rounded={true} />
-                        <TrackerCard rounded={true} />
-                        <TrackerCard rounded={true} />
+                        <TrackerCard rounded={true} data={transactions} />
                     </div>
                 </div>
             </section>

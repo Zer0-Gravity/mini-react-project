@@ -4,6 +4,7 @@ import type { SingleValue } from "react-select";
 import ReactSelect from "react-select";
 import ButtonAdd from "../Component/Home/ButtonAdd";
 import { CircleDollarSign, ShoppingBag } from "lucide-react";
+import { useFinanceTrack } from "../Store";
 
 interface TransactionType {
     value: string;
@@ -17,6 +18,8 @@ function History() {
         { value: "income", label: "Income" },
         { value: "Expense", label: "Expense" },
     ];
+
+    const { transactions } = useFinanceTrack();
 
     const handleChange = (newValue: SingleValue<TransactionType>) => {
         setSelectedOption(newValue);
@@ -59,9 +62,11 @@ function History() {
                 </div>
             </section>
             <section>
-                <TrackerCard rounded={false} />
-                <TrackerCard rounded={false} />
-                <TrackerCard rounded={false} />
+                {transactions.length !== 0 ? (
+                    <TrackerCard rounded={false} data={transactions} />
+                ) : (
+                    <h1>No transaction listed currently</h1>
+                )}
             </section>
         </div>
     );

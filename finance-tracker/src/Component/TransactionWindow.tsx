@@ -35,6 +35,7 @@ function TransactionWindow() {
         }
 
         addTransactions(newTransaction);
+        navigate(-1);
     };
 
     return (
