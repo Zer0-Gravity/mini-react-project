@@ -1,4 +1,4 @@
-import { Goal, HandCoins, MailPlus, Send, ShoppingBag } from "lucide-react";
+import { Goal, MailPlus, Send, ShoppingBag } from "lucide-react";
 import ButtonAdd from "../Component/Home/ButtonAdd";
 import DisplayButton from "../Component/Home/DisplayButton";
 import GoalCard from "../Component/GoalCard";
@@ -21,8 +21,11 @@ function Home() {
             <section>
                 <div className="flex justify-end gap-5">
                     <ButtonAdd icon={Goal} text="Add Goal" />
-                    <ButtonAdd icon={HandCoins} text="Add Income" />
-                    <ButtonAdd icon={ShoppingBag} text="Add Expense" />
+                    <ButtonAdd
+                        icon={ShoppingBag}
+                        text="Add Transaction"
+                        navigate="/transaction-window"
+                    />
                 </div>
             </section>
 
