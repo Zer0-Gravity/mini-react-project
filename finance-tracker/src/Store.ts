@@ -15,7 +15,7 @@ interface FinanceTracker {
     addTransactions: (transaction: TransactionProps) => void;
 }
 
-export const financeTrack = create<FinanceTracker>((set) => ({
+export const useFinanceTrack = create<FinanceTracker>((set) => ({
     balance: 0, // Main balance
     transactions: [], // Transaction card
     addTransactions: (transaction) =>

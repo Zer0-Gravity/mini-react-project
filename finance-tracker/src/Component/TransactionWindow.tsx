@@ -2,10 +2,10 @@ import { CirclePlus, CircleX } from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import type { TransactionType } from "../type";
-import { financeTrack } from "../Store";
+import { useFinanceTrack } from "../Store";
 
 function TransactionWindow() {
-    const { addTransactions } = financeTrack(); //Import the global state from the zustand
+    const { addTransactions } = useFinanceTrack(); //Import the global state from the zustand
     const navigate = useNavigate();
     const [description, setDescription] = useState<string>("");
     const [amount, setAmount] = useState<number>(0);
@@ -81,13 +81,13 @@ function TransactionWindow() {
                     </h1>
                     <div className="flex gap-2">
                         {/* Pass the necessary data for the radio component */}
-                        <TransactionType
+                        <InputOption
                             value={"income"}
                             text={"Income"}
                             onValue={transType}
                             onChange={handleTypeChange}
                         />
-                        <TransactionType
+                        <InputOption
                             value={"expense"}
                             text={"Expense"}
                             onValue={transType}
@@ -115,12 +115,7 @@ interface TransactionOption {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function TransactionType({
-    value,
-    text,
-    onValue,
-    onChange,
-}: TransactionOption) {
+function InputOption({ value, text, onValue, onChange }: TransactionOption) {
     return (
         <label className="border border-secondary p-2 rounded-lg has-checked:bg-secondary">
             <input
