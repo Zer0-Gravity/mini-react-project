@@ -3,7 +3,7 @@ import { useState } from "react";
 import type { SingleValue } from "react-select";
 import ReactSelect from "react-select";
 import ButtonAdd from "../Component/Home/ButtonAdd";
-import { HandCoins, ShoppingBag } from "lucide-react";
+import { CircleDollarSign, HandCoins, ShoppingBag } from "lucide-react";
 
 interface TransactionType {
     value: string;
@@ -43,8 +43,14 @@ function History() {
                     />
                 </div>
             </section>
-            <section>
-                <div className="flex justify-end gap-5">
+            <section className="flex justify-between">
+                <div className="flex gap-2 items-center">
+                    <CircleDollarSign size={20} color="red" />
+                    <h1 className="font-bold text-red-500">
+                        Total Expense: 60
+                    </h1>
+                </div>
+                <div className="flex gap-5">
                     <ButtonAdd icon={HandCoins} text="Add Income" />
                     <ButtonAdd icon={ShoppingBag} text="Add Expense" />
                 </div>
