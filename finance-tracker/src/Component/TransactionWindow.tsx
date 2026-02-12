@@ -9,8 +9,24 @@ function TransactionWindow() {
     const navigate = useNavigate();
     const [description, setDescription] = useState<string>("");
     const [amount, setAmount] = useState<number>(0);
-    const [date, setDate] = useState<string>("");
     const [transType, setTransType] = useState<TransactionType>("income");
+    const [date, setDate] = useState<string>(
+        new Date().toISOString().split("T")[0],
+    ); //Set default input to today
+
+    const formatDate = (date: string | Date) => {
+        const dateObj = new Date(date); //Get the date input from user
+
+        //Format date render
+        const formattedDate = dateObj.toLocaleDateString("en-US", {
+            weekday: "short",
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+
+        return `${formattedDate}`; //Return formatted date
+    };
 
     //Navigate to previous page
     const previousPage = () => {
@@ -20,19 +36,6 @@ function TransactionWindow() {
     //Handle on change target for transaction type
     const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTransType(e.target.value as TransactionType);
-    };
-
-    const formatDate = (date: string) => {
-        const dateObj = new Date(date);
-
-        const formattedDate = dateObj.toLocaleDateString("en-US", {
-            weekday: "short",
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-        });
-
-        return `${formattedDate}`;
     };
 
     const addNewTransaction = () => {
@@ -98,6 +101,7 @@ function TransactionWindow() {
                     </h1>
                     <input
                         type="date"
+                        value={date}
                         className="p-2 bg-secondary rounded-lg w-full outline-none"
                         onChange={(e) => setDate(e.target.value)}
                     />

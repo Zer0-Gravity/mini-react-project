@@ -13,6 +13,7 @@ interface FinanceTracker {
     balance: number;
     transactions: TransactionProps[];
     addTransactions: (transaction: TransactionProps) => void;
+    delTransactions: (index: string) => void;
 }
 
 export const useFinanceTrack = create<FinanceTracker>((set) => ({
@@ -21,5 +22,11 @@ export const useFinanceTrack = create<FinanceTracker>((set) => ({
     addTransactions: (transaction) =>
         set((state) => ({
             transactions: [...state.transactions, transaction],
+        })),
+    delTransactions: (index) =>
+        set((state) => ({
+            transactions: state.transactions.filter(
+                (item) => item.id !== index,
+            ),
         })),
 }));

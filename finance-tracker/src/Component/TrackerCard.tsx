@@ -1,5 +1,6 @@
 import { MoveUpRight, Trash } from "lucide-react";
 import type { TransactionProps } from "../type";
+import { useFinanceTrack } from "../Store";
 
 interface TrackerProps {
     rounded: boolean;
@@ -7,6 +8,8 @@ interface TrackerProps {
 }
 
 function TrackerCard({ rounded, data }: TrackerProps) {
+    const { delTransactions } = useFinanceTrack();
+
     return (
         <>
             {data.map((transaction) => (
@@ -34,7 +37,7 @@ function TrackerCard({ rounded, data }: TrackerProps) {
                         <h1 className="font-bold text-[18px]">
                             ${transaction.amount.toFixed(2)}
                         </h1>
-                        <button>
+                        <button onClick={() => delTransactions(transaction.id)}>
                             <Trash size={20} />
                         </button>
                     </div>
