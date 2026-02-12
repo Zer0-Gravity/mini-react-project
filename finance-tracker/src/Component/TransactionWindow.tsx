@@ -1,19 +1,20 @@
-import { CirclePlus, CircleX } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 import type { TransactionType } from "../type";
 import { useFinanceTrack } from "../Store";
 import InputForm from "./InputForm";
+import InputFormHeader from "./InputFormHeader";
+import { useNavigate } from "react-router";
 
 function TransactionWindow() {
     const { addTransactions } = useFinanceTrack(); //Import the global state from the zustand
-    const navigate = useNavigate();
     const [description, setDescription] = useState<string>("");
     const [amount, setAmount] = useState<number>(0);
     const [transType, setTransType] = useState<TransactionType>("income");
     const [date, setDate] = useState<string>(
         new Date().toISOString().split("T")[0],
     ); //Set default input to today
+    const navigate = useNavigate();
 
     const formatDate = (date: string | Date) => {
         const dateObj = new Date(date); //Get the date input from user
@@ -27,11 +28,6 @@ function TransactionWindow() {
         });
 
         return `${formattedDate}`; //Return formatted date
-    };
-
-    //Navigate to previous page
-    const previousPage = () => {
-        navigate(-1);
     };
 
     //Handle on change target for transaction type
@@ -70,15 +66,7 @@ function TransactionWindow() {
 
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-40">
-            <section className="flex justify-between mb-10">
-                <h1 className="text-2xl font-bold text-secondary">
-                    Add Transaction
-                </h1>
-                <button onClick={previousPage}>
-                    {/*Close page when button clicked*/}
-                    <CircleX className="text-secondary" size={20} />
-                </button>
-            </section>
+            <InputFormHeader text="Add Transaction" />
 
             <section className="flex flex-col gap-5">
                 {/* Transaction description */}
