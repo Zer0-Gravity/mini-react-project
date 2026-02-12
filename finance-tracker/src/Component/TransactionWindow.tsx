@@ -9,6 +9,7 @@ function TransactionWindow() {
     const navigate = useNavigate();
     const [description, setDescription] = useState<string>("");
     const [amount, setAmount] = useState<number>(0);
+    const [date, setDate] = useState<string>("");
     const [transType, setTransType] = useState<TransactionType>("income");
 
     //Navigate to previous page
@@ -21,12 +22,25 @@ function TransactionWindow() {
         setTransType(e.target.value as TransactionType);
     };
 
+    const formatDate = (date: string) => {
+        const dateObj = new Date(date);
+
+        const formattedDate = dateObj.toLocaleDateString("en-US", {
+            weekday: "short",
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+
+        return `${formattedDate}`;
+    };
+
     const addNewTransaction = () => {
         const newTransaction = {
             id: crypto.randomUUID(), //Get random ID from crypto
             description: description,
             amount: amount,
-            date: new Date().toLocaleDateString(),
+            date: formatDate(date),
             type: transType,
         };
 
@@ -34,8 +48,8 @@ function TransactionWindow() {
             return;
         }
 
-        addTransactions(newTransaction);
-        navigate(-1);
+        addTransactions(newTransaction); //Add transaction record
+        navigate(-1); //Immediately go back 1 page
     };
 
     return (
@@ -65,13 +79,27 @@ function TransactionWindow() {
 
                 {/* Transaction Amount */}
                 <div>
+                    <div>
+                        <h1 className="text-[14px] font-medium text-secondary">
+                            Amount
+                        </h1>
+                        <input
+                            type="number"
+                            className="p-2 bg-secondary rounded-lg w-full outline-none"
+                            onChange={(e) => setAmount(Number(e.target.value))}
+                        />
+                    </div>
+                </div>
+
+                {/* Transaction date */}
+                <div>
                     <h1 className="text-[14px] font-medium text-secondary">
-                        Amount
+                        Date
                     </h1>
                     <input
-                        type="number"
+                        type="date"
                         className="p-2 bg-secondary rounded-lg w-full outline-none"
-                        onChange={(e) => setAmount(Number(e.target.value))}
+                        onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
 

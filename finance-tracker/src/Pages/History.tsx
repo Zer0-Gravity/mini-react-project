@@ -50,7 +50,8 @@ function History() {
                 <div className="flex gap-2 items-center">
                     <CircleDollarSign size={20} color="red" />
                     <h1 className="font-bold text-red-500">
-                        Total Expense :{" "}
+                        Total Expense :
+                        {/* Count the total expense */}
                         {transactions
                             .reduce((acc, item) => {
                                 return acc + item.amount;
