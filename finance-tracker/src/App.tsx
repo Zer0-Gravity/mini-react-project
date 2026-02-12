@@ -3,8 +3,7 @@ import Home from "./Pages/Home";
 import Navbar from "./Component/Navbar";
 import History from "./Pages/History";
 import Goal from "./Pages/Goal";
-import TransactionWindow from "./Component/TransactionWIndow";
-
+import TransactionWindow from "./Component/TransactionWindow";
 function App() {
     return (
         <BrowserRouter>
