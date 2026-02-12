@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import type { TransactionType } from "../type";
 import { useFinanceTrack } from "../Store";
+import InputForm from "./InputForm";
 
 function TransactionWindow() {
     const { addTransactions } = useFinanceTrack(); //Import the global state from the zustand
@@ -55,6 +56,18 @@ function TransactionWindow() {
         navigate(-1); //Immediately go back 1 page
     };
 
+    const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAmount(+e.target.value);
+    };
+
+    const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDescription(e.target.value);
+    };
+
+    const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDate(e.target.value);
+    };
+
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-40">
             <section className="flex justify-between mb-10">
@@ -69,43 +82,28 @@ function TransactionWindow() {
 
             <section className="flex flex-col gap-5">
                 {/* Transaction description */}
-                <div className="space-y-1">
-                    <h1 className="text-[14px] font-medium text-secondary">
-                        Description
-                    </h1>
-                    <input
-                        type="text"
-                        className="p-2 bg-secondary rounded-lg w-full outline-none"
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
+                <InputForm
+                    text="Description"
+                    value={description}
+                    inputType="text"
+                    onChange={handleDescription}
+                />
 
                 {/* Transaction Amount */}
-                <div>
-                    <div>
-                        <h1 className="text-[14px] font-medium text-secondary">
-                            Amount
-                        </h1>
-                        <input
-                            type="number"
-                            className="p-2 bg-secondary rounded-lg w-full outline-none"
-                            onChange={(e) => setAmount(Number(e.target.value))}
-                        />
-                    </div>
-                </div>
+                <InputForm
+                    text="Amount"
+                    value={amount}
+                    inputType="number"
+                    onChange={handleAmount}
+                />
 
                 {/* Transaction date */}
-                <div>
-                    <h1 className="text-[14px] font-medium text-secondary">
-                        Date
-                    </h1>
-                    <input
-                        type="date"
-                        value={date}
-                        className="p-2 bg-secondary rounded-lg w-full outline-none"
-                        onChange={(e) => setDate(e.target.value)}
-                    />
-                </div>
+                <InputForm
+                    text="Date"
+                    value={date}
+                    inputType="date"
+                    onChange={handleDate}
+                />
 
                 {/* Transaction Type */}
                 <div className="space-y-2">

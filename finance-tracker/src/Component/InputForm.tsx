@@ -1,10 +1,10 @@
-import type { SetStateAction } from "react";
+import type React from "react";
 
 interface InputFormProps {
     inputType: string;
-    value: string;
+    value: string | number;
     text: string;
-    onChange: React.Dispatch<SetStateAction<string>>;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function InputForm({ inputType, text, value, onChange }: InputFormProps) {
@@ -15,7 +15,7 @@ function InputForm({ inputType, text, value, onChange }: InputFormProps) {
                 type={inputType}
                 value={value}
                 className="p-2 bg-secondary rounded-lg w-full outline-none"
-                onChange={(e) => onChange(e.target.value)}
+                onChange={onChange}
             />
         </div>
     );
