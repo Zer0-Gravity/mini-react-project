@@ -6,7 +6,7 @@ import TrackerCard from "../Component/TrackerCard";
 import { useFinanceTrack } from "../Store";
 
 function Home() {
-    const { transactions } = useFinanceTrack();
+    const { transactions, goals } = useFinanceTrack();
 
     return (
         <main className="container-custom flex flex-col gap-5">
@@ -43,10 +43,13 @@ function Home() {
                         Goal
                     </h1>
                     <div className="flex gap-3 border overflow-x-auto overflow-hidden hide-scrollbar">
-                        <GoalCard />
-                        <GoalCard />
-                        <GoalCard />
-                        <GoalCard />
+                        {goals.map((goal) =>
+                            goal.favorite === true ? (
+                                <GoalCard data={goal} />
+                            ) : (
+                                <h1>No favorite</h1>
+                            ),
+                        )}
                     </div>
                 </div>
 
