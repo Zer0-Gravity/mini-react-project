@@ -2,13 +2,29 @@ import React, { useState } from "react";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
 import { CirclePlus } from "lucide-react";
+import { useFinanceTrack } from "../Store";
+import { useNavigate } from "react-router";
 
 function GoalWindow() {
     const [title, setTitle] = useState<string>("");
     const [goalAmount, setGoalAmount] = useState<number>(0);
     const [goalDesc, setGoalDesc] = useState<string>("");
+    const { addGoals } = useFinanceTrack();
+    const navigate = useNavigate();
 
-    const addNewGoal = () => {};
+    const addNewGoal = () => {
+        const newGoals = {
+            goalId: crypto.randomUUID(),
+            title: title,
+            description: goalDesc ? goalDesc : "No Description",
+            currentAmount: 0,
+            goalAmount: goalAmount,
+            favorite: false,
+        };
+
+        addGoals(newGoals);
+        navigate(-1);
+    };
 
     //Handle change event
     const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
