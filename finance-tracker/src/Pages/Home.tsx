@@ -8,6 +8,8 @@ import { useFinanceTrack } from "../Store";
 function Home() {
     const { transactions, goals } = useFinanceTrack();
 
+    const favoriteGoals = goals.filter((goal) => goal.favorite === true);
+
     return (
         <main className="container-custom flex flex-col gap-5">
             {/* balance Display */}
@@ -43,12 +45,12 @@ function Home() {
                         Goal
                     </h1>
                     <div className="flex gap-3 border overflow-x-auto overflow-hidden hide-scrollbar">
-                        {goals.map((goal) =>
-                            goal.favorite === true ? (
+                        {favoriteGoals.length !== 0 ? (
+                            favoriteGoals.map((goal) => (
                                 <GoalCard data={goal} />
-                            ) : (
-                                <h1>No favorite</h1>
-                            ),
+                            ))
+                        ) : (
+                            <h1>No favorite</h1>
                         )}
                     </div>
                 </div>
