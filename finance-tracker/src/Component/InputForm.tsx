@@ -9,7 +9,7 @@ interface InputFormProps {
 
 function InputForm({ inputType, text, value, onChange }: InputFormProps) {
     return (
-        <div>
+        <div className="space-y-2">
             <h1 className="text-[14px] font-medium text-secondary">{text}</h1>
             <input
                 type={inputType}
