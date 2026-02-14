@@ -11,3 +11,12 @@ export interface TransactionProps {
     date: string;
     type: TransactionType;
 }
+
+export interface GoalProps {
+    goalId: string;
+    title: string;
+    description: string;
+    goalAmount: number;
+    currentAmount?: number;
+    favorite: boolean;
+}
