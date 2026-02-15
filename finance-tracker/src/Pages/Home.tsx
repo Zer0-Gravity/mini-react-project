@@ -9,6 +9,7 @@ function Home() {
     const { transactions, goals } = useFinanceTrack();
 
     const favoriteGoals = goals.filter((goal) => goal.favorite === true);
+    const slicedArray = transactions.slice(-4);
 
     return (
         <main className="container-custom flex flex-col gap-5">
@@ -61,7 +62,16 @@ function Home() {
                         Recent Activity
                     </h1>
                     <div className="flex flex-col gap-2 overflow-y-auto overflow-hidden max-h-62.5 hide-scrollbar">
-                        <TrackerCard rounded={true} data={transactions} />
+                        {slicedArray.length !== 0 ? (
+                            slicedArray.map((transaction) => (
+                                <TrackerCard
+                                    rounded={true}
+                                    data={transaction}
+                                />
+                            ))
+                        ) : (
+                            <h1>No recent activity</h1>
+                        )}
                     </div>
                 </div>
             </section>
