@@ -8,8 +8,8 @@ import { useFinanceTrack } from "../Store";
 function Home() {
     const { transactions, goals } = useFinanceTrack();
 
-    const favoriteGoals = goals.filter((goal) => goal.favorite === true);
-    const slicedArray = transactions.slice(-4);
+    const favoriteGoals = goals.filter((goal) => goal.favorite === true); //Filter array by favorite is true
+    const slicedArray = transactions.slice(-4); //Show only 4 newly added array
 
     return (
         <main className="container-custom flex flex-col gap-5">

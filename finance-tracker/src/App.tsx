@@ -5,6 +5,7 @@ import History from "./Pages/History";
 import Goal from "./Pages/Goal";
 import TransactionWindow from "./Component/TransactionWindow";
 import GoalWindow from "./Component/GoalWindow";
+import GoalDetail from "./Component/GoalDetail";
 function App() {
     return (
         <BrowserRouter>
@@ -20,6 +21,10 @@ function App() {
                             element={<TransactionWindow />}
                         />
                         <Route path="/goal-window" element={<GoalWindow />} />
+                        <Route
+                            path="/goal-detail/:goalId"
+                            element={<GoalDetail />}
+                        />
                     </Routes>
                 </section>
             </main>
