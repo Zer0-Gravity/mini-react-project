@@ -78,7 +78,9 @@ function History() {
             </section>
             <section>
                 {filteredItems.length !== 0 ? (
-                    <TrackerCard rounded={false} data={filteredItems} />
+                    filteredItems.map((transaction) => (
+                        <TrackerCard rounded={false} data={transaction} />
+                    ))
                 ) : (
                     <h1>No transaction listed currently</h1>
                 )}
