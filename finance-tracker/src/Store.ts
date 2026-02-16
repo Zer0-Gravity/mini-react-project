@@ -18,21 +18,30 @@ interface GoalProps {
     favorite: boolean;
 }
 
+interface FundsProps {
+    fundId: string;
+    amount: number;
+}
+
 interface FinanceTracker {
     balance: number;
     transactions: TransactionProps[];
     goals: GoalProps[];
+    funds: FundsProps[];
     addTransactions: (transaction: TransactionProps) => void;
     delTransactions: (index: string) => void;
     addGoals: (goal: GoalProps) => void;
     delGoals: (index: string) => void;
     toggleGoal: (index: string) => void;
+    addFunds: (fund: FundsProps) => void;
+    delFunds: (index: string) => void;
 }
 
 export const useFinanceTrack = create<FinanceTracker>((set) => ({
     balance: 0, // Main balance
     transactions: [], // Transaction card
     goals: [],
+    funds: [],
     //Add new transaction
     addTransactions: (transaction) =>
         set((state) => ({
@@ -61,5 +70,12 @@ export const useFinanceTrack = create<FinanceTracker>((set) => ({
                     ? { ...goal, favorite: !goal.favorite } //Toggle the favorite to true or false
                     : goal,
             ),
+        })),
+
+    //Add current fund for the goal
+    addFunds: (fund) => set((state) => ({ state: [...state.funds, fund] })),
+    delFunds: (index) =>
+        set((state) => ({
+            state: state.funds.filter((item) => index !== item.fundId),
         })),
 }));

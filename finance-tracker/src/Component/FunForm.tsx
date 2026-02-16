@@ -1,11 +1,10 @@
-import React, { useState, type SetStateAction } from "react";
+import React, { useState } from "react";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
-import { NutOffIcon, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 
 function FunForm() {
     const [fund, setFund] = useState<number>(0);
-    const [template, setTemplate] = useState<number>(0);
 
     const handleFund = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFund(+e.target.value);
