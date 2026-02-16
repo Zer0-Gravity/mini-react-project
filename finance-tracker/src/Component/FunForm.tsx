@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
 import { PlusCircle } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useFinanceTrack } from "../Store";
 
 function FunForm() {
     const [fund, setFund] = useState<number>(0);
     const navigate = useNavigate();
     const { addFunds } = useFinanceTrack();
+    const { goalId } = useParams();
 
     const handleFund = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFund(+e.target.value);
@@ -33,6 +34,7 @@ function FunForm() {
     const handleNewFunds = () => {
         const newFund = {
             fundId: crypto.randomUUID(),
+            goalId: goalId,
             date: formatDate(new Date()),
             amount: fund,
         };

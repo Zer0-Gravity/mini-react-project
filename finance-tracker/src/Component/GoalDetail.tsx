@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useFinanceTrack } from "../Store";
 import InputFormHeader from "./InputFormHeader";
-import { Currency, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import FunCard from "./FunCard";
 import { useEffect } from "react";
 
@@ -13,12 +13,14 @@ function GoalDetail() {
     const goalDetail = goals.find((goal) => goal.goalId === goalId); // Find the supposed array based on the ID
 
     const handleNavigateAddFund = () => {
-        navigate("/add-fund-form"); //Navigate to form for adding new fund
+        navigate(`/add-fund-form/${goalDetail?.goalId}`); //Navigate to form for adding new fund
     };
 
-    const totalFunds = funds.reduce((acc, item) => {
-        return acc + item.amount;
-    }, 0);
+    const totalFunds = funds
+        .filter((item) => item.goalId === goalDetail?.goalId) //Get the correct fund for the current array goal
+        .reduce((sum, item) => {
+            return sum + item.amount; //Sum the total current fund goal
+        }, 0);
 
     useEffect(() => {
         if (!goalDetail) return; //Check if goal detail is not empty
@@ -31,11 +33,13 @@ function GoalDetail() {
 
     const progressBar = () => {
         const current = goalDetail?.currentAmount ?? 0;
-        const total = goalDetail?.goalAmount ?? 1;
+        const total = goalDetail?.goalAmount ?? 1; //Avoid division by zero
         const percentage = (current / total) * 100;
 
+        //Clamp the value from 0 to 100
         const clamp = Math.min(Math.max(percentage, 0), 100);
 
+        //Round the decimal number
         return Math.round(clamp);
     };
 
@@ -79,9 +83,12 @@ function GoalDetail() {
                 </div>
 
                 <div className="h-75 bg-secondary rounded-lg overflow-y-auto">
-                    {funds.map((fund) => (
-                        <FunCard data={fund} />
-                    ))}
+                    {funds
+                        //Compare the id from goal parent to show the correct array
+                        .filter((fund) => fund.goalId === goalDetail?.goalId)
+                        .map((data) => (
+                            <FunCard data={data} />
+                        ))}
                 </div>
             </section>
         </main>

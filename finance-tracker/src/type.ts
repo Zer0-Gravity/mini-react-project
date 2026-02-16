@@ -23,6 +23,7 @@ export interface GoalProps {
 
 export interface FundsProps {
     fundId: string;
+    goalId: string | undefined;
     date: string;
     amount: number;
 }

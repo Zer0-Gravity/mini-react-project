@@ -20,6 +20,7 @@ interface GoalProps {
 
 interface FundsProps {
     fundId: string;
+    goalId: string | undefined;
     date: string;
     amount: number;
 }
@@ -67,7 +68,7 @@ export const useFinanceTrack = create<FinanceTracker>((set) => ({
                 goal.goalId === updatedGoal.goalId ? updatedGoal : goal,
             ),
         })),
-        
+
     //Del Goals
     delGoals: (index) =>
         set((state) => ({

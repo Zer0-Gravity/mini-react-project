@@ -26,7 +26,10 @@ function App() {
                             path="/goal-detail/:goalId"
                             element={<GoalDetail />}
                         />
-                        <Route path="/add-fund-form" element={<FunForm />} />
+                        <Route
+                            path="/add-fund-form/:goalId"
+                            element={<FunForm />}
+                        />
                     </Routes>
                 </section>
             </main>
