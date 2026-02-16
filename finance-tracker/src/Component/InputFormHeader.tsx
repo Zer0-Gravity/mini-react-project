@@ -2,7 +2,7 @@ import { CircleX } from "lucide-react";
 import { useNavigate } from "react-router";
 
 interface HeaderProps {
-    text: string;
+    text: string | undefined;
 }
 
 function InputFormHeader({ text }: HeaderProps) {
