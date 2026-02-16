@@ -20,6 +20,7 @@ function FunCard({ data }: CardProps) {
                 </h1>
             </div>
             <button onClick={() => delFunds(data.fundId)}>
+                {/* Delete card based on the id */}
                 <Trash size={18} fill="red" stroke="red" />
             </button>
         </div>

@@ -3,17 +3,32 @@ import { useFinanceTrack } from "../Store";
 import InputFormHeader from "./InputFormHeader";
 import { PlusCircle } from "lucide-react";
 import FunCard from "./FunCard";
+import { useEffect } from "react";
 
 function GoalDetail() {
     const { goalId } = useParams(); //Get the goalId
-    const { goals, funds } = useFinanceTrack();
+    const { goals, funds, updateGoals } = useFinanceTrack();
     const navigate = useNavigate();
 
     const goalDetail = goals.find((goal) => goal.goalId === goalId); // Find the supposed array based on the ID
 
     const handleNavigateAddFund = () => {
-        navigate("/add-fund-form");
+        navigate("/add-fund-form"); //Navigate to form for adding new fund
     };
+
+    const totalFunds = funds.reduce((acc, item) => {
+        return acc + item.amount;
+    }, 0);
+
+    useEffect(() => {
+        if (!goalDetail) return; //Check if goal detail is not empty
+
+        //Check if the current amount is not the same value with total funds
+        if (goalDetail.currentAmount !== totalFunds) {
+            updateGoals({ ...goalDetail, currentAmount: totalFunds }); //Update the current amount
+        }
+    }, [goalDetail, updateGoals, totalFunds]);
+
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-20">
             <InputFormHeader text={goalDetail?.title} />

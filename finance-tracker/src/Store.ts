@@ -33,6 +33,7 @@ interface FinanceTracker {
     delTransactions: (index: string) => void;
     addGoals: (goal: GoalProps) => void;
     delGoals: (index: string) => void;
+    updateGoals: (updatedGoal: GoalProps) => void;
     toggleGoal: (index: string) => void;
     addFunds: (fund: FundsProps) => void;
     delFunds: (index: string) => void;
@@ -58,6 +59,15 @@ export const useFinanceTrack = create<FinanceTracker>((set) => ({
 
     //Add Goals
     addGoals: (goal) => set((state) => ({ goals: [...state.goals, goal] })),
+
+    //Update goals
+    updateGoals: (updatedGoal) =>
+        set((state) => ({
+            goals: state.goals.map((goal) =>
+                goal.goalId === updatedGoal.goalId ? updatedGoal : goal,
+            ),
+        })),
+        
     //Del Goals
     delGoals: (index) =>
         set((state) => ({
