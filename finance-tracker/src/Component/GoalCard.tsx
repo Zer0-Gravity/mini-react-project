@@ -8,7 +8,7 @@ interface GoalCardProps {
 }
 
 function GoalCard({ data }: GoalCardProps) {
-    const { toggleGoal, delGoals } = useFinanceTrack();
+    const { toggleGoal, delGoals, progressBar } = useFinanceTrack();
 
     return (
         <Link to={`/goal-detail/${data.goalId}`}>
@@ -37,7 +37,10 @@ function GoalCard({ data }: GoalCardProps) {
                 </p>
                 <div className="flex gap-10 items-center">
                     <div className="w-full h-2 bg-white rounded-full">
-                        <div className="h-2 bg-primary rounded-full w-25"></div>
+                        <div
+                            className="h-2 bg-primary rounded-full"
+                            style={{ width: `${progressBar(data)}%` }}
+                        ></div>
                     </div>
                     <button
                         onClick={(e) => {

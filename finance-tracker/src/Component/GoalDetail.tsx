@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 function GoalDetail() {
     const { goalId } = useParams(); //Get the goalId
-    const { goals, funds, updateGoals } = useFinanceTrack();
+    const { goals, funds, updateGoals, progressBar } = useFinanceTrack();
     const navigate = useNavigate();
 
     const goalDetail = goals.find((goal) => goal.goalId === goalId); // Find the supposed array based on the ID
@@ -31,19 +31,6 @@ function GoalDetail() {
         }
     }, [goalDetail, updateGoals, totalFunds]);
 
-    const progressBar = () => {
-        const current = goalDetail?.currentAmount ?? 0;
-        const total = goalDetail?.goalAmount ?? 1; //Avoid division by zero
-        const percentage = (current / total) * 100;
-
-        //Clamp the value from 0 to 100
-        const clamp = Math.min(Math.max(percentage, 0), 100);
-
-        //Round the decimal number
-        return Math.round(clamp);
-    };
-
-    console.log(progressBar());
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-20">
             <InputFormHeader text={goalDetail?.title} />
@@ -58,7 +45,9 @@ function GoalDetail() {
                     <div className="w-full bg-secondary rounded-full border-2 border-secondary">
                         <div
                             className="h-2 bg-primary rounded-full w-25"
-                            style={{ width: `${progressBar()}%` }}
+                            style={{
+                                width: `${goalDetail ? progressBar(goalDetail) : 0}%`, //Check if array exist
+                            }}
                         ></div>
                     </div>
                     <div className="flex justify-between">
