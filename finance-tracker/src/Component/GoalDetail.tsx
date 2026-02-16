@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useFinanceTrack } from "../Store";
 import InputFormHeader from "./InputFormHeader";
-import { PlusCircle } from "lucide-react";
+import { Currency, PlusCircle } from "lucide-react";
 import FunCard from "./FunCard";
 import { useEffect } from "react";
 
@@ -29,6 +29,17 @@ function GoalDetail() {
         }
     }, [goalDetail, updateGoals, totalFunds]);
 
+    const progressBar = () => {
+        const current = goalDetail?.currentAmount ?? 0;
+        const total = goalDetail?.goalAmount ?? 1;
+        const percentage = (current / total) * 100;
+
+        const clamp = Math.min(Math.max(percentage, 0), 100);
+
+        return Math.round(clamp);
+    };
+
+    console.log(progressBar());
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-20">
             <InputFormHeader text={goalDetail?.title} />
@@ -41,7 +52,10 @@ function GoalDetail() {
                 <div className="text-secondary space-y-2">
                     <h1 className="font-bold text-[18px]">Progress</h1>
                     <div className="w-full bg-secondary rounded-full border-2 border-secondary">
-                        <div className="h-2 bg-primary rounded-full w-25"></div>
+                        <div
+                            className="h-2 bg-primary rounded-full w-25"
+                            style={{ width: `${progressBar()}%` }}
+                        ></div>
                     </div>
                     <div className="flex justify-between">
                         <h1>${goalDetail?.currentAmount?.toFixed(2)}</h1>
