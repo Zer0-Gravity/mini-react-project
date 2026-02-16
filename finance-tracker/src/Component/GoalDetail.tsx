@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useFinanceTrack } from "../Store";
 import InputFormHeader from "./InputFormHeader";
 import { PlusCircle } from "lucide-react";
@@ -7,9 +7,13 @@ import FunCard from "./FunCard";
 function GoalDetail() {
     const { goalId } = useParams(); //Get the goalId
     const { goals } = useFinanceTrack();
+    const navigate = useNavigate();
 
     const goalDetail = goals.find((goal) => goal.goalId === goalId); // Find the supposed array based on the ID
 
+    const handleNavigateAddFund = () => {
+        navigate("/add-fund-form");
+    };
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-20">
             <InputFormHeader text={goalDetail?.title} />
@@ -34,7 +38,10 @@ function GoalDetail() {
                     <h1 className="text-secondary font-medium">
                         Progress History
                     </h1>
-                    <button className="underline text-secondary  flex items-center gap-2 p-2 rounded-lg">
+                    <button
+                        className="underline text-secondary  flex items-center gap-2 p-2 rounded-lg"
+                        onClick={handleNavigateAddFund}
+                    >
                         <PlusCircle size={14} />
                         <span className="text-[14px] font-medium">
                             Add Fund

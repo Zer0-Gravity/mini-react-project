@@ -6,6 +6,7 @@ import Goal from "./Pages/Goal";
 import TransactionWindow from "./Component/TransactionWindow";
 import GoalWindow from "./Component/GoalWindow";
 import GoalDetail from "./Component/GoalDetail";
+import FunForm from "./Component/FunForm";
 function App() {
     return (
         <BrowserRouter>
@@ -25,6 +26,7 @@ function App() {
                             path="/goal-detail/:goalId"
                             element={<GoalDetail />}
                         />
+                        <Route path="/add-fund-form" element={<FunForm />} />
                     </Routes>
                 </section>
             </main>
