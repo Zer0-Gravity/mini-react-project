@@ -20,3 +20,9 @@ export interface GoalProps {
     currentAmount?: number;
     favorite: boolean;
 }
+
+export interface FundsProps {
+    fundId: string;
+    date: string;
+    amount: number;
+}

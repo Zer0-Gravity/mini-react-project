@@ -6,7 +6,7 @@ import FunCard from "./FunCard";
 
 function GoalDetail() {
     const { goalId } = useParams(); //Get the goalId
-    const { goals } = useFinanceTrack();
+    const { goals, funds } = useFinanceTrack();
     const navigate = useNavigate();
 
     const goalDetail = goals.find((goal) => goal.goalId === goalId); // Find the supposed array based on the ID
@@ -50,11 +50,9 @@ function GoalDetail() {
                 </div>
 
                 <div className="h-75 bg-secondary rounded-lg overflow-y-auto">
-                    <FunCard />
-                    <FunCard />
-                    <FunCard />
-                    <FunCard />
-                    <FunCard />
+                    {funds.map((fund) => (
+                        <FunCard data={fund} />
+                    ))}
                 </div>
             </section>
         </main>

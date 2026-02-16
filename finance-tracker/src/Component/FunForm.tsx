@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
 import { PlusCircle } from "lucide-react";
+import { useNavigate } from "react-router";
+import { useFinanceTrack } from "../Store";
 
 function FunForm() {
     const [fund, setFund] = useState<number>(0);
+    const navigate = useNavigate();
+    const { addFunds } = useFinanceTrack();
 
     const handleFund = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFund(+e.target.value);
@@ -12,6 +16,29 @@ function FunForm() {
 
     const handleTemplate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFund(+e.target.value);
+    };
+    const formatDate = (date: string | Date) => {
+        const dateObj = new Date(date); //Get the date input from user
+
+        //Format date render
+        const formattedDate = dateObj.toLocaleDateString("en-US", {
+            weekday: "short",
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+
+        return `${formattedDate}`; //Return formatted date
+    };
+    const handleNewFunds = () => {
+        const newFund = {
+            fundId: crypto.randomUUID(),
+            date: formatDate(new Date()),
+            amount: fund,
+        };
+
+        addFunds(newFund);
+        navigate(-1);
     };
 
     return (
@@ -53,7 +80,10 @@ function FunForm() {
                         onChange={handleTemplate}
                     />
                 </div>
-                <button className="w-full flex items-center justify-center bg-secondary p-2 rounded-lg">
+                <button
+                    className="w-full flex items-center justify-center bg-secondary p-2 rounded-lg"
+                    onClick={handleNewFunds}
+                >
                     <PlusCircle size={18} />
                     <span>Add Fund</span>
                 </button>
