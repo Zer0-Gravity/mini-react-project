@@ -1,11 +1,14 @@
 import { Trash } from "lucide-react";
 import type { FundsProps } from "../type";
+import { useFinanceTrack } from "../Store";
 
 interface CardProps {
     data: FundsProps;
 }
 
 function FunCard({ data }: CardProps) {
+    const { delFunds } = useFinanceTrack();
+
     return (
         <div className="w-full h-10 flex items-center justify-between p-2">
             <div className="flex gap-7">
@@ -16,7 +19,9 @@ function FunCard({ data }: CardProps) {
                     {data.date}
                 </h1>
             </div>
-            <Trash size={18} fill="red" stroke="red" />
+            <button onClick={() => delFunds(data.fundId)}>
+                <Trash size={18} fill="red" stroke="red" />
+            </button>
         </div>
     );
 }
