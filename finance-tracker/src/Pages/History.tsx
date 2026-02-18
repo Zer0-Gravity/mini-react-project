@@ -5,16 +5,18 @@ import ReactSelect from "react-select";
 import ButtonAdd from "../Component/Home/ButtonAdd";
 import { CircleDollarSign, ShoppingBag } from "lucide-react";
 import { useFinanceTrack } from "../Store";
+import type { TransactionProps } from "../type";
 
-interface TransactionType {
+interface FilterType {
     value: string;
     label: string;
 }
 
 function History() {
-    const [selectedOption, setSelectedOption] =
-        useState<TransactionType | null>(null);
-    const options: TransactionType[] = [
+    const [selectedOption, setSelectedOption] = useState<FilterType | null>(
+        null,
+    );
+    const options: FilterType[] = [
         { value: "income", label: "Income" },
         { value: "Expense", label: "Expense" },
     ];
@@ -22,8 +24,22 @@ function History() {
 
     const { transactions } = useFinanceTrack();
 
-    const handleChange = (newValue: SingleValue<TransactionType>) => {
+    const handleChange = (newValue: SingleValue<FilterType>) => {
         setSelectedOption(newValue);
+    };
+
+    //Sum total expense or income
+    const totalAmount = (
+        itemArray: TransactionProps[],
+        type: string,
+    ): string => {
+        const total = itemArray
+            .reduce((sum, item) => {
+                return item.type === type ? sum + item.amount : sum; // Check if item.type === 'income' or 'expense' then total the amount
+            }, 0)
+            .toFixed(2);
+
+        return total;
     };
 
     //Logic for filtered search
@@ -48,7 +64,7 @@ function History() {
                 />
                 <div className="flex text-secondary items-center gap-3">
                     <h1>Filter</h1>
-                    <ReactSelect<TransactionType>
+                    <ReactSelect<FilterType>
                         options={options}
                         value={selectedOption}
                         onChange={handleChange}
@@ -60,12 +76,12 @@ function History() {
                 <div className="flex gap-2 items-center">
                     <CircleDollarSign size={20} color="red" />
                     <h1 className="font-bold text-red-500">
-                        Total Expense :{/* Count the total expense */}
-                        {transactions
-                            .reduce((acc, item) => {
-                                return acc + item.amount;
-                            }, 0)
-                            .toFixed(2)}
+                        Expense :{/* Count the total expense */}
+                        {totalAmount(transactions, "expense")}
+                    </h1>
+                    <h1 className="font-bold text-green-500">
+                        Income :{/* Count the total expense */}
+                        {totalAmount(transactions, "income")}
                     </h1>
                 </div>
                 <div className="flex gap-5">
