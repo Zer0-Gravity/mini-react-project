@@ -45,13 +45,17 @@ function Home() {
                     <h1 className="text-[16px] font-semibold text-secondary">
                         Goal
                     </h1>
-                    <div className="flex gap-3 border overflow-x-auto overflow-hidden hide-scrollbar">
+                    <div className="flex gap-3 overflow-x-auto overflow-hidden hide-scrollbar">
                         {favoriteGoals.length !== 0 ? (
                             favoriteGoals.map((goal) => (
                                 <GoalCard data={goal} />
                             ))
                         ) : (
-                            <h1>No favorite</h1>
+                            <div className="h-20">
+                                <h1 className="text-secondary opacity-75">
+                                    No pinned goal
+                                </h1>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -70,7 +74,9 @@ function Home() {
                                 />
                             ))
                         ) : (
-                            <h1>No recent activity</h1>
+                            <h1 className="text-secondary opacity-75">
+                                No recent activity
+                            </h1>
                         )}
                     </div>
                 </div>

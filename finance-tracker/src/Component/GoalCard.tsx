@@ -14,7 +14,7 @@ function GoalCard({ data }: GoalCardProps) {
         <Link to={`/goal-detail/${data.goalId}`}>
             <div
                 key={data.goalId}
-                className="bg-secondary min-w-50 p-2 rounded-lg space-y-1"
+                className="bg-secondary p-2 rounded-lg space-y-1"
             >
                 <div className="flex justify-between">
                     <h1 className="font-medium">{data.title}</h1>
