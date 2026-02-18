@@ -4,10 +4,11 @@ import InputFormHeader from "./InputFormHeader";
 import { PlusCircle } from "lucide-react";
 import FunCard from "./FunCard";
 import { useEffect } from "react";
+import { progressBar } from "../utility";
 
 function GoalDetail() {
     const { goalId } = useParams(); //Get the goalId
-    const { goals, funds, updateGoals, progressBar } = useFinanceTrack();
+    const { goals, funds, updateGoals } = useFinanceTrack();
     const navigate = useNavigate();
 
     const goalDetail = goals.find((goal) => goal.goalId === goalId); // Find the supposed array based on the ID

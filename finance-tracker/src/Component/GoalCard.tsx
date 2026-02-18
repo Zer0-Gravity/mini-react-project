@@ -2,13 +2,14 @@ import { Star, Trash } from "lucide-react";
 import type { GoalProps } from "../type";
 import { useFinanceTrack } from "../Store";
 import { Link } from "react-router";
+import { progressBar } from "../utility";
 
 interface GoalCardProps {
     data: GoalProps;
 }
 
 function GoalCard({ data }: GoalCardProps) {
-    const { toggleGoal, delGoals, progressBar } = useFinanceTrack();
+    const { toggleGoal, delGoals } = useFinanceTrack();
 
     return (
         <Link to={`/goal-detail/${data.goalId}`}>
