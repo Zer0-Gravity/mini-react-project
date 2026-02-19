@@ -4,6 +4,7 @@ import DisplayButton from "../Component/Home/DisplayButton";
 import GoalCard from "../Component/GoalCard";
 import TrackerCard from "../Component/TrackerCard";
 import { useFinanceTrack } from "../Store";
+import { useBalance } from "../utility";
 
 function Home() {
     const { transactions, goals } = useFinanceTrack();
@@ -16,7 +17,7 @@ function Home() {
             {/* balance Display */}
             <section className="w-full h-67.5 bg-secondary p-2 rounded-lg flex-col flex items-center justify-center gap-3">
                 <h1 className="text-[16px] font-medium">Your Balance</h1>
-                <h1 className="text-[50px] font-medium">$450,000.00</h1>
+                <h1 className="text-[50px] font-medium">{`$${useBalance()}`}</h1>
                 <div className="flex gap-20">
                     <DisplayButton text="Send Money" icon={Send} />
                     <DisplayButton text="Receive Money" icon={MailPlus} />

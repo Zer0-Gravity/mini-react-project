@@ -1,3 +1,4 @@
+import { useFinanceTrack } from "./Store";
 import type { GoalProps, TransactionProps } from "./type";
 
 export const progressBar = (goalArr: GoalProps) => {
@@ -26,4 +27,16 @@ export const totalAmount = (
         .toFixed(2);
 
     return total; //Convert string into number
+};
+
+//Calculate total balance
+export const useBalance = () => {
+    const balance = 100; //Base value for balance
+    const { transactions } = useFinanceTrack();
+
+    //Convert string to number
+    const income = parseFloat(totalAmount(transactions, "income")); //Call the total amount function
+    const expense = parseFloat(totalAmount(transactions, "expense"));
+
+    return (balance + income - expense).toFixed(2); //CAlculate total balance
 };
