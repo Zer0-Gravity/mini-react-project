@@ -1,10 +1,12 @@
 import { CirclePlus } from "lucide-react";
 import React, { useState } from "react";
 import type { TransactionType } from "../type";
-import { useFinanceTrack } from "../Store";
+import { useFinanceTrack, useWarning } from "../Store";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
 import { useNavigate } from "react-router";
+import { useHandleModal } from "../utility";
+import WarningWIndow from "./WarningWIndow";
 
 function TransactionWindow() {
     const { addTransactions } = useFinanceTrack(); //Import the global state from the zustand
@@ -15,6 +17,8 @@ function TransactionWindow() {
         new Date().toISOString().split("T")[0],
     ); //Set default input to today
     const navigate = useNavigate();
+    const validate = useHandleModal();
+    const { warning, message } = useWarning();
 
     const formatDate = (date: string | Date) => {
         const dateObj = new Date(date); //Get the date input from user
@@ -44,10 +48,7 @@ function TransactionWindow() {
             type: transType,
         };
 
-        if (!description && !amount) {
-            return;
-        }
-
+        if (!validate(description, amount)) return;
         addTransactions(newTransaction); //Add transaction record
         navigate(-1); //Immediately go back 1 page
     };
@@ -68,6 +69,7 @@ function TransactionWindow() {
         <main className="w-200 h-200 bg-primary rounded-lg p-40">
             <InputFormHeader text="Add Transaction" />
 
+            {warning === true && <WarningWIndow text={message} />}
             <section className="flex flex-col gap-5">
                 {/* Transaction description */}
                 <InputForm

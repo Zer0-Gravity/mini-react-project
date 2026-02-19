@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
 import { CirclePlus } from "lucide-react";
-import { useFinanceTrack } from "../Store";
+import { useFinanceTrack, useWarning } from "../Store";
 import { useNavigate } from "react-router";
+import WarningWIndow from "./WarningWIndow";
+import { useHandleModal } from "../utility";
 
 function GoalWindow() {
     const [title, setTitle] = useState<string>("");
     const [goalAmount, setGoalAmount] = useState<number>(0);
     const [goalDesc, setGoalDesc] = useState<string>("");
     const { addGoals } = useFinanceTrack();
+    const { warning, message } = useWarning();
+    const validate = useHandleModal();
     const navigate = useNavigate();
 
     const addNewGoal = () => {
@@ -21,6 +25,9 @@ function GoalWindow() {
             goalAmount: goalAmount,
             favorite: false,
         };
+
+        if (!validate(title, goalAmount)) return;
+        //Call function helper to handle the modal behavior
 
         addGoals(newGoals);
         navigate(-1);
@@ -40,9 +47,10 @@ function GoalWindow() {
     };
 
     return (
-        <main className="w-200 h-200 bg-primary rounded-lg p-40">
+        <main className="w-200 h-200 bg-primary rounded-lg p-40 relative">
             <InputFormHeader text="Add Goal" />
 
+            {warning === true && <WarningWIndow text={message} />}
             <section className="space-y-2">
                 <InputForm
                     text="Title"

@@ -1,4 +1,4 @@
-import { useFinanceTrack } from "./Store";
+import { useFinanceTrack, useWarning } from "./Store";
 import type { GoalProps, TransactionProps } from "./type";
 
 export const progressBar = (goalArr: GoalProps) => {
@@ -39,4 +39,27 @@ export const useBalance = () => {
     const expense = parseFloat(totalAmount(transactions, "expense"));
 
     return (balance + income - expense).toFixed(2); //CAlculate total balance
+};
+
+//Handle modal behavior
+export const useHandleModal = () => {
+    const { setMessage, setWarning } = useWarning();
+
+    const validate = (title: string, amount: number) => {
+        const error: string[] = []; //Array fpr error string
+
+        //Check if the title and amount empty
+        if (!title.trim()) error.push("Title");
+        if (!amount || amount === 0) error.push("Amount");
+
+        if (error.length > 0) {
+            setMessage(error.join(" & ") + " can't be empty"); //Join array separated with "&"
+            setWarning(true); //set warning to true
+            return false;
+        }
+
+        return true;
+    };
+
+    return validate;
 };

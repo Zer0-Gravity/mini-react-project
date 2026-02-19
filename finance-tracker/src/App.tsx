@@ -7,6 +7,7 @@ import TransactionWindow from "./Component/TransactionWindow";
 import GoalWindow from "./Component/GoalWindow";
 import GoalDetail from "./Component/GoalDetail";
 import FunForm from "./Component/FunForm";
+
 function App() {
     return (
         <BrowserRouter>

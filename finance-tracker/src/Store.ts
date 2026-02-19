@@ -97,3 +97,17 @@ export const useFinanceTrack = create<FinanceTracker>()(
         { name: "tracker-storage" },
     ),
 );
+
+interface Warning {
+    warning: boolean;
+    message: string;
+    setWarning: (warn: boolean) => void;
+    setMessage: (text: string) => void;
+}
+
+export const useWarning = create<Warning>((set) => ({
+    warning: false,
+    message: "",
+    setWarning: (warn) => set({ warning: warn }),
+    setMessage: (text) => set({message: text})
+}));
