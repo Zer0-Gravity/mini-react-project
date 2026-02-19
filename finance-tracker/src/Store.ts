@@ -27,7 +27,6 @@ interface FundsProps {
 }
 
 interface FinanceTracker {
-    balance: number;
     transactions: TransactionProps[];
     goals: GoalProps[];
     funds: FundsProps[];
@@ -44,7 +43,6 @@ interface FinanceTracker {
 export const useFinanceTrack = create<FinanceTracker>()(
     persist(
         (set) => ({
-            balance: 0, // Main balance
             transactions: [], // Transaction card
             goals: [],
             funds: [],

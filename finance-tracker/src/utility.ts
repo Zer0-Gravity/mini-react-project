@@ -1,4 +1,4 @@
-import type { GoalProps } from "./type";
+import type { GoalProps, TransactionProps } from "./type";
 
 export const progressBar = (goalArr: GoalProps) => {
     if (!goalArr) return;
@@ -12,4 +12,18 @@ export const progressBar = (goalArr: GoalProps) => {
 
     //Round the decimal number
     return Math.round(clamp);
+};
+
+//Calculate total expense or income
+export const totalAmount = (
+    itemArray: TransactionProps[],
+    type: string,
+): string => {
+    const total = itemArray
+        .reduce((sum, item) => {
+            return item.type === type ? sum + item.amount : sum; // Check if item.type === 'income' or 'expense' then total the amount
+        }, 0)
+        .toFixed(2);
+
+    return total; //Convert string into number
 };

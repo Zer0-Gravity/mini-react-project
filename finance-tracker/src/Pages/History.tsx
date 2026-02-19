@@ -3,9 +3,9 @@ import { useState } from "react";
 import type { SingleValue } from "react-select";
 import ReactSelect from "react-select";
 import ButtonAdd from "../Component/Home/ButtonAdd";
-import { CircleDollarSign, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { useFinanceTrack } from "../Store";
-import type { TransactionProps } from "../type";
+import { totalAmount } from "../utility";
 
 interface FilterType {
     value: string;
@@ -26,20 +26,6 @@ function History() {
 
     const handleChange = (newValue: SingleValue<FilterType>) => {
         setSelectedOption(newValue);
-    };
-
-    //Sum total expense or income
-    const totalAmount = (
-        itemArray: TransactionProps[],
-        type: string,
-    ): string => {
-        const total = itemArray
-            .reduce((sum, item) => {
-                return item.type === type ? sum + item.amount : sum; // Check if item.type === 'income' or 'expense' then total the amount
-            }, 0)
-            .toFixed(2);
-
-        return total; //Convert string into number
     };
 
     //Filter array by search input
