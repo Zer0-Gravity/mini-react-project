@@ -39,10 +39,10 @@ function History() {
             }, 0)
             .toFixed(2);
 
-        return total;
+        return total; //Convert string into number
     };
 
-    //Logic for filtered search
+    //Filter array by search input
     const filteredItems = transactions.filter((item) => {
         const filterSearch = item.description
             .toLowerCase()
@@ -72,16 +72,13 @@ function History() {
                     />
                 </div>
             </section>
-            <section className="flex justify-between">
-                <div className="flex gap-2 items-center">
-                    <CircleDollarSign size={20} color="red" />
+            <section className="flex justify-between items-center">
+                <div className="flex gap-2 items-center bg-secondary px-5 py-1 rounded-full w-80 justify-between">
                     <h1 className="font-bold text-red-500">
-                        Expense :{/* Count the total expense */}
-                        {totalAmount(transactions, "expense")}
+                        {`Expense : $ ${totalAmount(transactions, "expense")}`}
                     </h1>
                     <h1 className="font-bold text-green-500">
-                        Income :{/* Count the total expense */}
-                        {totalAmount(transactions, "income")}
+                        {`Income : $ ${totalAmount(transactions, "income")}`}
                     </h1>
                 </div>
                 <div className="flex gap-5">
@@ -98,7 +95,9 @@ function History() {
                         <TrackerCard rounded={false} data={transaction} />
                     ))
                 ) : (
-                    <h1>No transaction listed currently</h1>
+                    <h1 className="text-secondary text-center font-medium">
+                        No transaction listed currently
+                    </h1>
                 )}
             </section>
         </div>
