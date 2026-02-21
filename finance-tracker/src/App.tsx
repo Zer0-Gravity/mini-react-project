@@ -7,6 +7,7 @@ import TransactionWindow from "./Component/TransactionWindow";
 import GoalWindow from "./Component/GoalWindow";
 import GoalDetail from "./Component/GoalDetail";
 import FunForm from "./Component/FunForm";
+import TransferMoney from "./Component/TransferMoney";
 
 function App() {
     return (
@@ -30,6 +31,24 @@ function App() {
                         <Route
                             path="/add-fund-form/:goalId"
                             element={<FunForm />}
+                        />
+                        <Route
+                            path="/send"
+                            element={
+                                <TransferMoney
+                                    value="Send Money"
+                                    type="Sended"
+                                />
+                            }
+                        />
+                        <Route
+                            path="/receive"
+                            element={
+                                <TransferMoney
+                                    value="Receive Money"
+                                    type="Received"
+                                />
+                            }
                         />
                     </Routes>
                 </section>

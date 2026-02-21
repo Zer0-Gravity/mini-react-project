@@ -5,6 +5,7 @@ import GoalCard from "../Component/GoalCard";
 import TrackerCard from "../Component/TrackerCard";
 import { useFinanceTrack } from "../Store";
 import { useBalance } from "../utility";
+import { Link } from "react-router";
 
 function Home() {
     const { transactions, goals } = useFinanceTrack();
@@ -19,8 +20,12 @@ function Home() {
                 <h1 className="text-[16px] font-medium">Your Balance</h1>
                 <h1 className="text-[50px] font-medium">{`$${useBalance()}`}</h1>
                 <div className="flex gap-20">
-                    <DisplayButton text="Send Money" icon={Send} />
-                    <DisplayButton text="Receive Money" icon={MailPlus} />
+                    <Link to={"/send"}>
+                        <DisplayButton text="Send Money" icon={Send} />
+                    </Link>
+                    <Link to={"/receive"}>
+                        <DisplayButton text="Receive Money" icon={MailPlus} />
+                    </Link>
                 </div>
             </section>
 
