@@ -26,10 +26,21 @@ interface FundsProps {
     amount: number;
 }
 
+interface TransferProps {
+    id: string;
+    name: string;
+    email: string;
+    address: string;
+    amount: number;
+    source: string;
+    layoutCard: "TRANSFER";
+}
+
 interface FinanceTracker {
     transactions: TransactionProps[];
     goals: GoalProps[];
     funds: FundsProps[];
+    transfers: TransferProps[];
     addTransactions: (transaction: TransactionProps) => void;
     delTransactions: (index: string) => void;
     addGoals: (goal: GoalProps) => void;
@@ -38,6 +49,8 @@ interface FinanceTracker {
     toggleGoal: (index: string) => void;
     addFunds: (fund: FundsProps) => void;
     delFunds: (index: string) => void;
+    addTransfer: (transfer: TransferProps) => void;
+    delTransfer: (index: string) => void;
 }
 
 export const useFinanceTrack = create<FinanceTracker>()(
@@ -46,6 +59,7 @@ export const useFinanceTrack = create<FinanceTracker>()(
             transactions: [], // Transaction card
             goals: [],
             funds: [],
+            transfers: [],
             //Add new transaction
             addTransactions: (transaction) =>
                 set((state) => ({
@@ -85,7 +99,15 @@ export const useFinanceTrack = create<FinanceTracker>()(
                             : goal,
                     ),
                 })),
-
+            //Add transfer
+            addTransfer: (transfer) =>
+                set((state) => ({ transfers: [...state.transfers, transfer] })),
+            delTransfer: (index) =>
+                set((state) => ({
+                    transfers: state.transfers.filter(
+                        (item) => index !== item.id,
+                    ),
+                })),
             //Add current fund for the goal
             addFunds: (fund) =>
                 set((state) => ({ funds: [...state.funds, fund] })),
@@ -109,5 +131,5 @@ export const useWarning = create<Warning>((set) => ({
     warning: false,
     message: "",
     setWarning: (warn) => set({ warning: warn }),
-    setMessage: (text) => set({message: text})
+    setMessage: (text) => set({ message: text }),
 }));
