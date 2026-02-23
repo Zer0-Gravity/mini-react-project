@@ -13,8 +13,7 @@ function Home() {
     const favoriteGoals = goals.filter((goal) => goal.favorite === true); //Filter array by favorite is true
     const slicedArray = transactions.slice(-4); //Show only 4 newly added array
 
-    const joined = [...transfers, ...transactions];
-    console.table(joined);
+    console.table(transfers);
 
     return (
         <main className="container-custom flex flex-col gap-5">

@@ -39,7 +39,7 @@ function App() {
                             element={
                                 <TransferMoney
                                     value="Send Money"
-                                    type="Sended"
+                                    type="sended"
                                 />
                             }
                         />
@@ -48,7 +48,7 @@ function App() {
                             element={
                                 <TransferMoney
                                     value="Receive Money"
-                                    type="Received"
+                                    type="received"
                                 />
                             }
                         />

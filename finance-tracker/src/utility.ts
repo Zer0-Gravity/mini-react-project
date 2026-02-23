@@ -1,5 +1,5 @@
 import { useFinanceTrack, useWarning } from "./Store";
-import type { GoalProps, TransactionProps } from "./type";
+import type { GoalProps, TransactionProps, TransferProps } from "./type";
 
 export const progressBar = (goalArr: GoalProps) => {
     if (!goalArr) return;
@@ -17,7 +17,7 @@ export const progressBar = (goalArr: GoalProps) => {
 
 //Calculate total expense or income
 export const totalAmount = (
-    itemArray: TransactionProps[],
+    itemArray: TransactionProps[] | TransferProps[],
     type: string,
 ): string => {
     const total = itemArray
@@ -32,11 +32,15 @@ export const totalAmount = (
 //Calculate total balance
 export const useBalance = () => {
     const balance = 100; //Base value for balance
-    const { transactions } = useFinanceTrack();
+    const { transactions, transfers } = useFinanceTrack();
 
     //Convert string to number
-    const income = parseFloat(totalAmount(transactions, "income")); //Call the total amount function
-    const expense = parseFloat(totalAmount(transactions, "expense"));
+    const income =
+        parseFloat(totalAmount(transactions, "income")) +
+        parseFloat(totalAmount(transfers, "received")); //Call the total amount function
+    const expense =
+        parseFloat(totalAmount(transactions, "expense")) +
+        parseFloat(totalAmount(transfers, "sended"));
 
     return (balance + income - expense).toFixed(2); //CAlculate total balance
 };

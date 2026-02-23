@@ -15,7 +15,7 @@ function TransferCard({ data }: CardProps) {
                 {`Transaction date : ${data.date}`}
             </p>
             <div className="flex ">
-                <div className="w-80 grid grid-cols-[80px_auto]">
+                <div className="w-90 mr-5 grid grid-cols-[80px_auto]">
                     <span className="font-medium">Name</span>{" "}
                     <span className="font-light">: {data.name}</span>
                     <span className="font-medium">Amount</span>{" "}

@@ -25,8 +25,8 @@ function TransferHistory() {
                 />
             </section>
 
-            <section>
-                {filteredTransfer.length !== 0 ? (
+            <section className="space-y-2">
+                {filteredTransfer.length    !== 0 ? (
                     filteredTransfer.map((transfer) => (
                         <TransferCard key={transfer.id} data={transfer} />
                     ))
