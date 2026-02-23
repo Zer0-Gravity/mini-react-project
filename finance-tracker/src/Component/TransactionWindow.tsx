@@ -5,7 +5,7 @@ import { useFinanceTrack, useWarning } from "../Store";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
 import { useNavigate } from "react-router";
-import { useHandleModal } from "../utility";
+import { formatDate, useHandleModal } from "../utility";
 import WarningWIndow from "./WarningWIndow";
 
 function TransactionWindow() {
@@ -19,20 +19,6 @@ function TransactionWindow() {
     const navigate = useNavigate();
     const validate = useHandleModal();
     const { warning, message } = useWarning();
-
-    const formatDate = (date: string | Date) => {
-        const dateObj = new Date(date); //Get the date input from user
-
-        //Format date render
-        const formattedDate = dateObj.toLocaleDateString("en-US", {
-            weekday: "short",
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-        });
-
-        return `${formattedDate}`; //Return formatted date
-    };
 
     //Handle on change target for transaction type
     const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {

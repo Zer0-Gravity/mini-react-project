@@ -63,3 +63,17 @@ export const useHandleModal = () => {
 
     return validate;
 };
+
+export const formatDate = (date: string | Date) => {
+    const dateObj = new Date(date); //Get the date input from user
+
+    //Format date render
+    const formattedDate = dateObj.toLocaleDateString("en-US", {
+        weekday: "short",
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+    });
+
+    return `${formattedDate}`; //Return formatted date
+};

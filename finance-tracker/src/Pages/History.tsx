@@ -59,7 +59,7 @@ function History() {
                 </div>
             </section>
             <section className="flex justify-between items-center">
-                <div className="flex gap-2 items-center bg-secondary px-5 py-1 rounded-full w-80 justify-between">
+                <div className="flex gap-2 items-center bg-secondary px-5 py-1 rounded-full w-90 justify-between">
                     <h1 className="font-bold text-red-500">
                         {`Expense : $ ${totalAmount(transactions, "expense")}`}
                     </h1>
