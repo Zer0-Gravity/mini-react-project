@@ -25,7 +25,7 @@ function TransferCard({ data }: CardProps) {
                     <span className="font-medium">Email</span>
                     <span>: {data.email}</span>
                     <p
-                        className={`mt-5 border p-2 text-center rounded-sm w-20 font-medium ${data.type === "Received" ? "text-green-400" : "text-red-400"}`}
+                        className={`mt-5 border p-2 text-center rounded-sm w-20 font-medium ${data.type === "received" ? "text-green-400" : "text-red-400"}`}
                     >
                         {data.type}
                     </p>

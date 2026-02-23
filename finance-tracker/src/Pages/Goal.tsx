@@ -28,7 +28,7 @@ function GoalPage() {
                     navigate="/goal-window"
                 />
             </section>
-            <section>
+            <section className="h-165 overflow-y-auto hide-scrollbar">
                 {filteredGoals.length !== 0 ? (
                     <div>
                         {filteredGoals.map((goal) => (

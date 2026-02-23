@@ -75,7 +75,7 @@ function History() {
                     />
                 </div>
             </section>
-            <section>
+            <section className="h-165 overflow-y-auto hide-scrollbar">
                 {filteredItems.length !== 0 ? (
                     filteredItems.map((transaction) => (
                         <TrackerCard rounded={false} data={transaction} />
