@@ -1,11 +1,14 @@
 import { Trash } from "lucide-react";
 import type { TransferProps } from "../type";
+import { useFinanceTrack } from "../Store";
 
 interface CardProps {
     data: TransferProps;
 }
 
 function TransferCard({ data }: CardProps) {
+    const { delTransfer } = useFinanceTrack();
+
     return (
         <div className="w-full bg-secondary p-4 flex flex-col rounded-lg">
             <p className="text-[14px] font-light italic mb-2">
@@ -32,7 +35,10 @@ function TransferCard({ data }: CardProps) {
                         <h1 className="text-xl font-medium">{data.source}</h1>
                     </div>
                 </div>
-                <button className="flex justify-end">
+                <button
+                    className="flex justify-end"
+                    onClick={() => delTransfer(data.id)}
+                >
                     <Trash />
                 </button>
             </div>

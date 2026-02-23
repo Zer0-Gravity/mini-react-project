@@ -31,7 +31,9 @@ function TransferHistory() {
                         <TransferCard key={transfer.id} data={transfer} />
                     ))
                 ) : (
-                    <h1>No transfer listed</h1>
+                    <h1 className="text-secondary text-center font-medium">
+                        No transfer listed
+                    </h1>
                 )}
             </section>
         </main>
