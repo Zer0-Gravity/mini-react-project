@@ -10,6 +10,7 @@ export interface TransactionProps {
     amount: number;
     date: string;
     type: TransactionType;
+    layoutCard: "DAILY";
 }
 
 export interface GoalProps {
@@ -32,6 +33,7 @@ export interface TransferProps {
     id: string;
     name: string;
     email: string;
+    date: string;
     address: string;
     amount: number;
     source: string;

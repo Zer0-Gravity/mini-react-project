@@ -1,6 +1,6 @@
 import { CirclePlus } from "lucide-react";
 import React, { useState } from "react";
-import type { TransactionType } from "../type";
+import type { TransactionProps, TransactionType } from "../type";
 import { useFinanceTrack, useWarning } from "../Store";
 import InputForm from "./InputForm";
 import InputFormHeader from "./InputFormHeader";
@@ -26,12 +26,13 @@ function TransactionWindow() {
     };
 
     const addNewTransaction = () => {
-        const newTransaction = {
+        const newTransaction: TransactionProps = {
             id: crypto.randomUUID(), //Get random ID from crypto
             description: description,
             amount: amount,
             date: formatDate(date),
             type: transType,
+            layoutCard: "DAILY",
         };
 
         if (!validate(description, amount)) return;

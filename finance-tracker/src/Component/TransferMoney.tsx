@@ -4,6 +4,7 @@ import InputFormHeader from "./InputFormHeader";
 import { useFinanceTrack } from "../Store";
 import type { TransferProps } from "../type";
 import { useNavigate } from "react-router";
+import { formatDate } from "../utility";
 
 interface TransferForm {
     value: string;
@@ -27,6 +28,7 @@ function TransferMoney({ value, type }: TransferForm) {
             name: name,
             email: email,
             address: address,
+            date: formatDate(new Date()),
             amount: amount,
             source: source,
             type: type,
@@ -48,7 +50,7 @@ function TransferMoney({ value, type }: TransferForm) {
         setAmount(Number(e.target.value));
     const handleSource = (e: React.ChangeEvent<HTMLInputElement>) =>
         setSource(e.target.value);
-    
+
     return (
         <main className="w-200 h-200 bg-primary rounded-lg p-40">
             <InputFormHeader text={value} />
