@@ -19,7 +19,9 @@ function TransferHistory() {
                 <input
                     type="text"
                     className="search-query"
+                    value={query}
                     placeholder="Search Name"
+                    onChange={(e) => setQuery(e.target.value)}
                 />
             </section>
 
