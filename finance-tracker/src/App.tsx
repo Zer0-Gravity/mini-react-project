@@ -8,6 +8,7 @@ import GoalWindow from "./Component/GoalWindow";
 import GoalDetail from "./Component/GoalDetail";
 import FunForm from "./Component/FunForm";
 import TransferMoney from "./Component/TransferMoney";
+import TransferHistory from "./Component/Transfer/TransferHistory";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                             path="/goal-detail/:goalId"
                             element={<GoalDetail />}
                         />
+                        <Route path="/transfer" element={<TransferHistory />} />
                         <Route
                             path="/add-fund-form/:goalId"
                             element={<FunForm />}

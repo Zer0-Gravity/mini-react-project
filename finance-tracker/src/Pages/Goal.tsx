@@ -13,13 +13,13 @@ function GoalPage() {
     );
 
     return (
-        <div className="container-custom space-y-3">
+        <div className="container-custom">
             <h1 className="font-bold text-[25px] text-secondary">Goal</h1>
             <section className="flex justify-between items-center">
                 <input
                     type="search"
                     placeholder="Search Goal"
-                    className="bg-secondary p-2 rounded-lg"
+                    className="search-query"
                     onChange={(e) => setQuery(e.target.value)}
                 />
                 <ButtonAdd

@@ -37,7 +37,7 @@ function History() {
     });
 
     return (
-        <div className="container-custom space-y-3">
+        <div className="container-custom ">
             <h1 className="font-bold text-[25px] text-secondary">
                 Transaction List
             </h1>
@@ -45,7 +45,7 @@ function History() {
                 <input
                     type="search"
                     placeholder="Search Transaction"
-                    className="bg-secondary rounded-lg px-2 text-[14px] outline-none"
+                    className="search-query"
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <div className="flex text-secondary items-center gap-3">

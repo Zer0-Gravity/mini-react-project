@@ -18,5 +18,9 @@ body {
 }
 
 .container-custom {
-    @apply w-200 h-200 bg-primary rounded-lg p-5;
+    @apply w-200 h-200 bg-primary rounded-lg p-5 space-y-3;
+}
+
+.search-query {
+    @apply bg-secondary rounded-lg p-2 text-[14px] outline-none;
 }

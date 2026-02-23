@@ -1,4 +1,4 @@
-import { Goal, HomeIcon, Wallet } from "lucide-react";
+import { Goal, HomeIcon, Repeat, Wallet } from "lucide-react";
 import { NavLink } from "react-router";
 
 function Navbar() {
@@ -12,6 +12,9 @@ function Navbar() {
             </NavLink>
             <NavLink to={"/goal"}>
                 <Goal color="#eae2b7" />
+            </NavLink>
+            <NavLink to={"/transfer"}>
+                <Repeat color="#eae2b7" />
             </NavLink>
         </nav>
     );
