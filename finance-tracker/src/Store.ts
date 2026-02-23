@@ -1,40 +1,12 @@
 import { create } from "zustand";
-import type { TransactionType } from "./type";
+import type {
+    FundsProps,
+    GoalProps,
+    TransactionProps,
+    TransferProps,
+    Warning,
+} from "./type";
 import { persist } from "zustand/middleware";
-
-interface TransactionProps {
-    id: string;
-    description: string;
-    amount: number;
-    date: string;
-    type: TransactionType;
-}
-
-interface GoalProps {
-    goalId: string;
-    title: string;
-    description: string;
-    goalAmount: number;
-    currentAmount?: number;
-    favorite: boolean;
-}
-
-interface FundsProps {
-    fundId: string;
-    goalId: string | undefined;
-    date: string;
-    amount: number;
-}
-
-interface TransferProps {
-    id: string;
-    name: string;
-    email: string;
-    address: string;
-    amount: number;
-    source: string;
-    layoutCard: "TRANSFER";
-}
 
 interface FinanceTracker {
     transactions: TransactionProps[];
@@ -119,13 +91,6 @@ export const useFinanceTrack = create<FinanceTracker>()(
         { name: "tracker-storage" },
     ),
 );
-
-interface Warning {
-    warning: boolean;
-    message: string;
-    setWarning: (warn: boolean) => void;
-    setMessage: (text: string) => void;
-}
 
 export const useWarning = create<Warning>((set) => ({
     warning: false,

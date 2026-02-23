@@ -27,3 +27,21 @@ export interface FundsProps {
     date: string;
     amount: number;
 }
+
+export interface TransferProps {
+    id: string;
+    name: string;
+    email: string;
+    address: string;
+    amount: number;
+    source: string;
+    type: string;
+    layoutCard: "TRANSFER";
+}
+
+export interface Warning {
+    warning: boolean;
+    message: string;
+    setWarning: (warn: boolean) => void;
+    setMessage: (text: string) => void;
+}
