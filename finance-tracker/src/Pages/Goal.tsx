@@ -2,9 +2,15 @@ import { Goal } from "lucide-react";
 import GoalCard from "../Component/GoalCard";
 import ButtonAdd from "../Component/Home/ButtonAdd";
 import { useFinanceTrack } from "../Store";
+import { useState } from "react";
 
 function GoalPage() {
     const { goals } = useFinanceTrack();
+    const [query, setQuery] = useState<string>("");
+
+    const filteredGoals = goals.filter((goal) =>
+        goal.title.toLowerCase().includes(query.toLowerCase()),
+    );
 
     return (
         <div className="container-custom space-y-3">
@@ -14,6 +20,7 @@ function GoalPage() {
                     type="search"
                     placeholder="Search Goal"
                     className="bg-secondary p-2 rounded-lg"
+                    onChange={(e) => setQuery(e.target.value)}
                 />
                 <ButtonAdd
                     icon={Goal}
@@ -22,14 +29,16 @@ function GoalPage() {
                 />
             </section>
             <section>
-                {goals.length !== 0 ? (
+                {filteredGoals.length !== 0 ? (
                     <div>
-                        {goals.map((goal) => (
+                        {filteredGoals.map((goal) => (
                             <GoalCard data={goal} />
                         ))}
                     </div>
                 ) : (
-                    <h1>No goal set found</h1>
+                    <h1 className="text-secondary text-center font-medium">
+                        No goal list found
+                    </h1>
                 )}
             </section>
         </div>
