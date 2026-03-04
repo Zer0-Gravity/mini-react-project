@@ -4,16 +4,16 @@ import { Link } from "react-router";
 function Login() {
     return (
         <main className="min-h-screen w-full flex items-center justify-center">
-            <section className="absolute inset-0">
+            <section className="absolute inset-0 md:relative md:w-100 md:h-125">
                 <img
                     src="/beach.jpg"
                     alt="beach"
-                    className="object-cover h-full w-full"
+                    className="object-cover h-full w-full md:rounded-l-2xl"
                 />
             </section>
-            <section className="relative z-10 h-screen w-full bg-white/20 flex flex-col justify-center backdrop-blur-[5px]">
-                <div className="mx-10 space-y-3">
-                    <h1 className="text-[30px] font-extrabold">
+            <section className="relative z-10 h-screen w-full bg-white/20 flex flex-col justify-center backdrop-blur-[5px] md:w-100 md:h-125 md:bg-primary md:rounded-r-2xl ">
+                <div className="mx-auto md:mx-10 space-y-3 min-w-75">
+                    <h1 className="text-[30px] font-extrabold mb-10">
                         Welcome Back!!
                     </h1>
                     <form className="space-y-6">
@@ -35,7 +35,7 @@ function Login() {
                             <Eye className="w-5" />
                         </div>
                     </form>
-                    <div>
+                    <div className="space-y-2">
                         <p className="text-center text-small">or</p>
                         <button className="bg-white h-12.5 rounded-lg flex text-big items-center justify-center w-full">
                             <img src="/Google-icon.svg" className="w-5 mr-3" />
