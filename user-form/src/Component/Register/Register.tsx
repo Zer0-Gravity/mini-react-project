@@ -1,4 +1,4 @@
-import { CircleAlert, Eye, LockKeyhole, Mail, UserRound } from "lucide-react";
+import { Eye, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { Link } from "react-router";
 
 function Register() {
@@ -12,10 +12,10 @@ function Register() {
                 />
             </section>
             <section className="relative z-10 h-screen w-full bg-white/20 flex flex-col justify-center backdrop-blur-[5px] md:w-100 md:h-125 md:bg-primary md:rounded-r-2xl ">
-                <div className="mx-auto md:mx-10 space-y-3 min-w-75">
-                    <p className="absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2">
+                <div className="mx-auto md:mx-10 space-y-4 min-w-75">
+                    {/* <p className="absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2">
                         <CircleAlert /> <span>Username has been taken</span>
-                    </p>
+                    </p> */}
                     <h1 className="text-[30px] font-extrabold">Registration</h1>
                     <form className="space-y-4.5">
                         <div className="border-b-2 flex gap-2 items-center">

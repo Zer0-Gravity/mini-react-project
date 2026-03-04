@@ -1,7 +1,11 @@
-import { CircleAlert, Eye, LockKeyhole, Mail } from "lucide-react";
+import { LockKeyhole, Mail } from "lucide-react";
 import { Link } from "react-router";
+import { usePassword } from "../../store";
+import ButtonPassword from "../Utils/ButtonPassword";
 
 function Login() {
+    const { togglePass } = usePassword();
+
     return (
         <main className="min-h-screen w-full flex items-center justify-center">
             <section className="absolute inset-0 md:relative md:w-100 md:h-125">
@@ -13,9 +17,9 @@ function Login() {
             </section>
             <section className="relative z-10 h-screen w-full bg-white/20 flex flex-col justify-center backdrop-blur-[5px] md:w-100 md:h-125 md:bg-primary md:rounded-r-2xl ">
                 <div className="mx-auto md:mx-10 space-y-3 min-w-75">
-                    <p className="absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2">
+                    {/* <p className="absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2">
                         <CircleAlert /> <span>Username has been taken</span>
-                    </p>
+                    </p> */}
                     <h1 className="text-[30px] font-extrabold mb-10">
                         Welcome Back!!
                     </h1>
@@ -31,11 +35,11 @@ function Login() {
                         <div className="border-b-2 flex gap-2 items-center">
                             <LockKeyhole className="w-5" />
                             <input
-                                type="password"
+                                type={togglePass ? "text" : "password"}
                                 placeholder="Password"
                                 className="flex-1 py-2 outline-none"
                             />
-                            <Eye className="w-5" />
+                            <ButtonPassword />
                         </div>
                     </form>
                     <div className="space-y-2">
