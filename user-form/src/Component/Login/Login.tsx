@@ -1,11 +1,9 @@
 import { LockKeyhole, Mail } from "lucide-react";
 import { Link } from "react-router";
-import { usePassword } from "../../store";
 import ButtonPassword from "../Utils/ButtonPassword";
+import { useTogglePassword } from "../Utils/function";
 
 function Login() {
-    const { togglePass } = usePassword();
-
     return (
         <main className="min-h-screen w-full flex items-center justify-center">
             <section className="absolute inset-0 md:relative md:w-100 md:h-125">
@@ -35,7 +33,7 @@ function Login() {
                         <div className="border-b-2 flex gap-2 items-center">
                             <LockKeyhole className="w-5" />
                             <input
-                                type={togglePass ? "text" : "password"}
+                                type={useTogglePassword()}
                                 placeholder="Password"
                                 className="flex-1 py-2 outline-none"
                             />
