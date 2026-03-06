@@ -67,7 +67,7 @@ function Register() {
                             Sign In
                         </Link>
                     </p>
-                    <button className="w-full bg-button h-12.5 text-white rounded-lg text-big font-bold">
+                    <button className="w-full bg-button h-12.5 text-white rounded-lg text-med font-bold">
                         Sign In
                     </button>
                 </div>

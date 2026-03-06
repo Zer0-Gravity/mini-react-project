@@ -6,7 +6,8 @@
     --color-secondary: #2b98d1;
     --color-button: #ff7300;
     --text-small: 13px;
-    --text-big: 15px;
+    --text-med: 15px;
+    --text-big: 18px;
 }
 
 body {

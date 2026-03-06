@@ -42,7 +42,7 @@ function Login() {
                     </form>
                     <div className="space-y-2">
                         <p className="text-center text-small">or</p>
-                        <button className="bg-white h-12.5 rounded-lg flex text-big items-center justify-center w-full">
+                        <button className="bg-white h-12.5 rounded-lg flex text-med items-center justify-center w-full">
                             <img src="/Google-icon.svg" className="w-5 mr-3" />
                             Sign in with Google
                         </button>
@@ -56,8 +56,8 @@ function Login() {
                             Sign Up
                         </Link>
                     </p>
-                    <button className="w-full bg-button h-12.5 text-white rounded-lg text-big font-bold">
-                        Sign In
+                    <button className="w-full bg-button h-12.5 text-white rounded-lg text-med font-bold">
+                        SIGN IN
                     </button>
                 </div>
             </section>
