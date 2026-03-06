@@ -1,21 +1,28 @@
 import { Minus, Plus, Power, RefreshCcw } from "lucide-react";
+import { useState } from "react";
 
 function LoginSuccess() {
+    const [count, setCount] = useState<number>(0);
+
+    const handleAdd = () => setCount(count + 1);
+    const handleMin = () => setCount(count - 1);
+    const handleRes = () => setCount(0);
+
     return (
         <main className="h-screen w-full flex items-center justify-center">
             <section className="flex flex-col mx-auto bg-primary h-full w-full md:w-200 md:h-125 items-center justify-center rounded-xl gap-3">
                 <h1 className="text-[30px] font-bold">Welcome, User</h1>
                 <p className="text-small">You have logged in, Yay!!</p>
                 <div className="flex flex-col items-center md:justify-end">
-                    <h1 className="text-[40px] font-bold">0</h1>
+                    <h1 className="text-[40px] font-bold">{count}</h1>
                     <div className="space-x-2">
-                        <button className="counter-button">
+                        <button className="counter-button" onClick={handleRes}>
                             <RefreshCcw className="m-auto" />
                         </button>
-                        <button className="counter-button">
+                        <button className="counter-button" onClick={handleAdd}>
                             <Plus className="m-auto" />
                         </button>
-                        <button className="counter-button">
+                        <button className="counter-button" onClick={handleMin}>
                             <Minus className="m-auto" />
                         </button>
                     </div>
