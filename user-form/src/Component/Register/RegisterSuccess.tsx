@@ -13,7 +13,7 @@ function RegisterSuccess() {
                     className="text-green-500"
                 />
                 <h1 className="text-[30px] font-bold">Registration Complete</h1>
-                <p className="text-med font-light text-justify">
+                <p className="text-med font-light text-center">
                     Thanks for joining us, please return to login page to
                     proceed
                 </p>

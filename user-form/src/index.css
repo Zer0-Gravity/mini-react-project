@@ -13,3 +13,7 @@
 body {
     font-family: "Lato", sans-serif;
 }
+
+.counter-button {
+    @apply w-11.25 h-8.75 bg-button rounded-lg text-white;
+}
