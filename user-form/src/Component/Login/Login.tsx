@@ -6,8 +6,8 @@ import {
     PASSWORD_REGEX,
     useTogglePassword,
 } from "../Utils/function";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Form from "../Form";
 
 function Login() {
     const {
@@ -34,54 +34,40 @@ function Login() {
                         Welcome Back!!
                     </h1>
                     <form className="space-y-6">
-                        <div
-                            className={`border-b-2 flex gap-2 items-center relative ${errors.email ? "border-red-500" : "border-black"}`}
+                        <Form
+                            Icon={Mail}
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            register={register}
+                            errors={errors.email}
+                            validationRules={{
+                                required: "Email is required",
+                                pattern: {
+                                    value: EMAIL_REGEX,
+                                    message: "Please enter valid input",
+                                },
+                            }}
+                        />
+                        <Form
+                            Icon={Mail}
+                            type={useTogglePassword()}
+                            name="password"
+                            placeholder="Password"
+                            register={register}
+                            errors={errors.password}
+                            validationRules={{
+                                required: "Password is required",
+                                pattern: {
+                                    value: PASSWORD_REGEX,
+                                    message:
+                                        "Password need to be 8 character length. included one of Uppercase, Symbol and Number",
+                                },
+                            }}
                         >
-                            <Mail className="w-5" />
-                            <input
-                                {...register("email", {
-                                    required: "Email is required",
-                                    pattern: {
-                                        value: EMAIL_REGEX,
-                                        message: "Please enter valid email",
-                                    },
-                                })}
-                                className="flex-1 py-2 outline-none"
-                                placeholder="Email"
-                            />
-                            {errors.email?.message && (
-                                <>
-                                    <AlertCircle className="text-red-500 w-5" />
-                                    <p className="text-small absolute -bottom-5.5 right-0 text-red-500">
-                                        {errors.email?.message as string}
-                                    </p>
-                                </>
-                            )}
-                        </div>
-                        <div
-                            className={`border-b-2 flex gap-2 items-center relative ${errors.password ? "border-red-500" : "border-black"}`}
-                        >
-                            <LockKeyhole className="w-5" />
-                            <input
-                                {...register("password", {
-                                    required: "Password is required",
-                                    pattern: {
-                                        value: PASSWORD_REGEX,
-                                        message:
-                                            "Password need at least 8 character length, have an uppercase, symbol, and number",
-                                    },
-                                })}
-                                type={useTogglePassword()}
-                                className="flex-1 py-2 outline-none"
-                                placeholder="Email"
-                            />
-                            {errors.password && (
-                                <p className="text-small absolute -bottom-5.5 right-0 text-red-500">
-                                    {errors.password?.message as string}
-                                </p>
-                            )}
                             <ButtonPassword />
-                        </div>
+                        </Form>
+
                         <div className="space-y-2">
                             <p className="text-center text-small">or</p>
                             <button
