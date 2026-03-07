@@ -16,6 +16,10 @@ function Login() {
         formState: { errors },
     } = useForm({ mode: "onChange" });
 
+    const handleLogin = (data: object) => {
+        console.log(data);
+    };
+
     return (
         <main className="min-h-screen w-full flex items-center justify-center">
             <section className="absolute inset-0 md:relative md:w-100 md:h-125">
@@ -25,7 +29,7 @@ function Login() {
                     className="object-cover h-full w-full md:rounded-l-2xl"
                 />
             </section>
-            <section className="relative z-10 h-screen w-full bg-white/20 flex flex-col justify-center backdrop-blur-[5px] md:w-100 md:h-125 md:bg-primary md:rounded-r-2xl ">
+            <section className="relative z-10 h-screen w-full bg-white/35 flex flex-col justify-center backdrop-blur-[5px] md:w-100 md:h-125 md:bg-primary md:rounded-r-2xl ">
                 <div className="mx-auto md:mx-10 space-y-3 min-w-75">
                     {/* <p className="absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2">
                         <CircleAlert /> <span>Username has been taken</span>
@@ -33,7 +37,10 @@ function Login() {
                     <h1 className="text-[30px] font-extrabold mb-10">
                         Welcome Back!!
                     </h1>
-                    <form className="space-y-6">
+                    <form
+                        className="space-y-6"
+                        onSubmit={handleSubmit(handleLogin)}
+                    >
                         <Form
                             Icon={Mail}
                             type="email"

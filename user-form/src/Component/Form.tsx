@@ -40,7 +40,7 @@ function Form({
                 {children}
             </div>
             {errors?.message && (
-                <p className="text-small text-red-500 absolute right-0 ">
+                <p className="text-small text-shadow-2xs text-red-500 absolute right-0 ">
                     {errors.message as string}
                 </p>
             )}
