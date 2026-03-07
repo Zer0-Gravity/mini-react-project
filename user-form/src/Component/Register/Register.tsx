@@ -17,6 +17,10 @@ function Register() {
         formState: { errors },
     } = useForm({ mode: "onChange" });
 
+    const handleRegister = (data: object) => {
+        console.log(data);
+        console.log("clicked");
+    };
     // eslint-disable-next-line react-hooks/incompatible-library
     const passwordRepeat = watch("password");
     return (
@@ -34,7 +38,10 @@ function Register() {
                         <CircleAlert /> <span>Username has been taken</span>
                     </p> */}
                     <h1 className="text-[30px] font-extrabold">Registration</h1>
-                    <form className="space-y-4">
+                    <form
+                        className="space-y-4"
+                        onSubmit={handleSubmit(handleRegister)}
+                    >
                         <div className="flex gap-2">
                             <div className="flex-1">
                                 <Form
@@ -110,19 +117,19 @@ function Register() {
                         >
                             <ButtonPassword />
                         </Form>
-                    </form>
-                    <p className="text-small">
-                        Already have an account?
-                        <Link to="/" className="text-secondary underline">
+                        <p className="text-small">
+                            Already have an account?
+                            <Link to="/" className="text-secondary underline">
+                                Sign In
+                            </Link>
+                        </p>
+                        <button
+                            type="submit"
+                            className="w-full bg-button h-12.5 text-white rounded-lg text-med font-bold"
+                        >
                             Sign In
-                        </Link>
-                    </p>
-                    <button
-                        type="submit"
-                        className="w-full bg-button h-12.5 text-white rounded-lg text-med font-bold"
-                    >
-                        Sign In
-                    </button>
+                        </button>
+                    </form>
                 </div>
             </section>
         </main>
