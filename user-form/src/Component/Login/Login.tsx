@@ -1,4 +1,4 @@
-import { AlertCircle, LockKeyhole, Mail } from "lucide-react";
+import { LockKeyhole, Mail } from "lucide-react";
 import { Link } from "react-router";
 import ButtonPassword from "../Utils/ButtonPassword";
 import {
@@ -50,7 +50,7 @@ function Login() {
                             }}
                         />
                         <Form
-                            Icon={Mail}
+                            Icon={LockKeyhole}
                             type={useTogglePassword()}
                             name="password"
                             placeholder="Password"

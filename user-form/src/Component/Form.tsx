@@ -25,25 +25,25 @@ function Form({
 }: InputProps) {
     console.log("Field:", name, "Error Object:", errors);
     return (
-        <div
-            className={`border-b-2 flex gap-2 items-center relative ${errors ? "border-red-500" : "border-black"}`}
-        >
-            <Icon className="w-5" />
-            <input
-                {...register(name, validationRules)}
-                type={type}
-                className="flex-1 py-2 outline-none"
-                placeholder={placeholder}
-            />
+        <div className="relative">
+            <div
+                className={`border-b-2 border-black flex gap-2 items-center relative ${errors && "border-red-500"}`}
+            >
+                <Icon className="w-5" />
+                <input
+                    {...register(name, validationRules)}
+                    type={type}
+                    className="flex-1 py-2 outline-none"
+                    placeholder={placeholder}
+                />
+                {errors?.message && <AlertCircle size={18} color="red" />}
+                {children}
+            </div>
             {errors?.message && (
-                <>
-                    <AlertCircle className="text-red-500 w-5" />
-                    <p className="text-small absolute -bottom-5.5 right-0 text-red-500">
-                        {errors.message as string}
-                    </p>
-                </>
+                <p className="text-small text-red-500 absolute right-0 ">
+                    {errors.message as string}
+                </p>
             )}
-            {children}
         </div>
     );
 }
