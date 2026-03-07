@@ -3,7 +3,7 @@ import { AlertCircle } from "lucide-react";
 import type React from "react";
 
 interface InputProps {
-    Icon: React.ElementType;
+    Icon?: React.ElementType;
     name: string;
     errors: any;
     type: string;
@@ -23,17 +23,16 @@ function Form({
     placeholder,
     children,
 }: InputProps) {
-    console.log("Field:", name, "Error Object:", errors);
     return (
         <div className="relative">
             <div
-                className={`border-b-2 border-black flex gap-2 items-center relative ${errors && "border-red-500"}`}
+                className={`border-b-2 border-black flex gap-2 items-center relative ${errors && "border-red-500"} `}
             >
-                <Icon className="w-5" />
+                {Icon && <Icon className="w-5" />}
                 <input
                     {...register(name, validationRules)}
                     type={type}
-                    className="flex-1 py-2 outline-none"
+                    className="flex-1 py-2 outline-none w-10 "
                     placeholder={placeholder}
                 />
                 {errors?.message && <AlertCircle size={18} color="red" />}
