@@ -3,4 +3,5 @@ export interface UserTypeProp {
     lastname: string;
     email: string;
     password: string;
+    refreshToken: string;
 }
