@@ -7,7 +7,7 @@ import tryConnectDB from "../config/databaseConnection.js";
 const app: Application = express();
 const PORT = process.env.PORT || 3500;
 
-tryConnectDB();
+tryConnectDB(); //Call function for connecting to mongoDB
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //Middleware for express, so the backend can read JSON file
