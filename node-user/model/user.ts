@@ -1,7 +1,7 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import type { UserTypeProp } from "../src/type.js";
 
-const userSchema = new Schema<UserTypeProp>({
+const UserSchema = new Schema<UserTypeProp>({
     firstname: {
         type: String,
         required: true,
@@ -20,4 +20,4 @@ const userSchema = new Schema<UserTypeProp>({
     },
 });
 
-export default userSchema;
+export default mongoose.model("User", UserSchema);
