@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import tryConnectDB from "../config/databaseConnection.js";
 import handleNewUser from "../controllers/registerController.js";
+import handleUserLogin from "../controllers/loginController.js";
 
 const app: Application = express();
 const PORT = process.env.PORT || 3500;
@@ -15,6 +16,7 @@ app.use(express.json()); //Middleware for express, so the backend can read JSON 
 
 //Call router for the controller
 app.use("/register", handleNewUser);
+app.use("/login", handleUserLogin);
 
 //Listen server from port 3500 and connect to mongoDB
 mongoose.connection.once("open", () => {
