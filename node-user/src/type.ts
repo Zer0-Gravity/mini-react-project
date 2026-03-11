@@ -13,3 +13,9 @@ export interface UserTypeProp {
     password: string;
     refreshToken: string;
 }
+
+export interface PayloadType {
+    userInfo: {
+        email: string;
+    };
+}

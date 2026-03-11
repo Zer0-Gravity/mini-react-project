@@ -1,15 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
-interface PayloadType {
-    userInfo: {
-        email: string;
-    };
-}
+import type { PayloadType } from "../src/type.js";
 
 const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization; //Check the user identity
 
+    //Check the header start with Bearer or not
     if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
     const token = authHeader.split(" ")[1]; //Get the actual sting token in the array
 

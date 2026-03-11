@@ -4,12 +4,14 @@ import express from "express";
 import mongoose from "mongoose";
 import tryConnectDB from "../config/databaseConnection.js";
 import rootRouter from "../route/rootRouter.js";
+import cookieParser from "cookie-parser";
 
 const app: Application = express();
 const PORT = process.env.PORT || 3500;
 
 tryConnectDB(); //Call function for connecting to mongoDB
 
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //Middleware for express, so the backend can read JSON file
 

@@ -12,7 +12,7 @@ const handleUserLogin = async (req: Request, res: Response) => {
     }
 
     //find the match user by email
-    const foundUser = await User.findOne({ email: email });
+    const foundUser = await User.findOne({ email: email }).exec();
     if (!foundUser) return res.sendStatus(401); //Send unauthorized access error code
 
     const matchPassword = await bcrypt.compare(password, foundUser.password);
@@ -37,7 +37,7 @@ const handleUserLogin = async (req: Request, res: Response) => {
 
         res.cookie("jwt", refreshToken, {
             httpOnly: true, //Prevent Javascript for reading cookies
-            secure: true, //Set http to secure https
+            // `secure: true,` //Set http to secure https
             maxAge: 24 * 60 * 60 * 1000,
         });
 
