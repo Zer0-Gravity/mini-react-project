@@ -6,8 +6,7 @@ import type { PayloadType } from "../src/type.js";
 const handleRefreshToken = async (req: Request, res: Response) => {
     const cookies = req.cookies; //get the available cookies
 
-    if (!cookies?.jwt)
-        return res.status(403).json({ message: "no cookies found" });
+    if (!cookies?.jwt) return res.sendStatus(403);
     const refreshToken = cookies.jwt;
 
     //Check if the user with this refresh token exist
