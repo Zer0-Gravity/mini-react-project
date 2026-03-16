@@ -14,6 +14,23 @@ body {
     font-family: "Lato", sans-serif;
 }
 
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    } /* Stay solid for most of the time */
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.animate-fade-out {
+    animation: fadeOut 5s forwards;
+}
+
 .counter-button {
     @apply w-11.25 h-8.75 bg-button rounded-lg text-white;
 }
