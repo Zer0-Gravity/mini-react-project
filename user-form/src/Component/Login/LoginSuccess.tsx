@@ -1,12 +1,31 @@
+import axios from "axios";
 import { Minus, Plus, Power, RefreshCcw } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function LoginSuccess() {
     const [count, setCount] = useState<number>(0);
+    const navigate = useNavigate();
 
     const handleAdd = () => setCount(count + 1);
     const handleMin = () => setCount(count - 1);
     const handleRes = () => setCount(0);
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.post(
+                "http://localhost:3500/api/logout",
+                {},
+                {
+                    withCredentials: true,
+                },
+            );
+            console.log("Refresh token deleted", response.data);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <main className="h-screen w-full flex items-center justify-center">
@@ -27,7 +46,10 @@ function LoginSuccess() {
                         </button>
                     </div>
                 </div>
-                <button className="w-37.5 h-12.5 bg-button flex items-center justify-center text-white rounded-lg gap-2">
+                <button
+                    className="w-37.5 h-12.5 bg-button flex items-center justify-center text-white rounded-lg gap-2"
+                    onClick={handleLogout}
+                >
                     <Power size={20} /> <span>Log Out</span>
                 </button>
             </section>

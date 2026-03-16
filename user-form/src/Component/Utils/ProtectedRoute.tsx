@@ -1,9 +1,13 @@
 import { Outlet, Navigate } from "react-router";
+import { useAuthUser } from "../../store";
 
 function ProtectedRoute() {
-    const isAuthenticated = document.cookie.includes("jwt");
+    const { user, isLoading } = useAuthUser();
 
-    return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
+    //Prevent redirecting while still on checking cookies
+    if (isLoading) return <p>Loading...</p>;
+
+    return user ? <Outlet /> : <Navigate to="/" replace />;
 }
 
 export default ProtectedRoute;

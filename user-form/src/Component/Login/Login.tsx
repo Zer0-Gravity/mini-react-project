@@ -10,9 +10,11 @@ import { useForm } from "react-hook-form";
 import Form from "../Form";
 import axios from "axios";
 import { useState } from "react";
+import { useAuthUser } from "../../store";
 
 function Login() {
     const [errMsg, setErrMsg] = useState<string>("");
+    const { setUser } = useAuthUser();
     const navigate = useNavigate();
 
     const {
@@ -23,10 +25,17 @@ function Login() {
 
     const handleLogin = async (data: object) => {
         try {
-            await axios.post("http://localhost:3500/api/login", data, {
-                withCredentials: true,
-            });
+            const response = await axios.post(
+                "http://localhost:3500/api/login",
+                data,
+                {
+                    withCredentials: true,
+                },
+            );
+            console.log(response.data);
+            setUser(response.data);
             navigate("/login-success");
+
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             if (error.response?.status === 409) {
