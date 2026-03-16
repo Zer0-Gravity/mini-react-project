@@ -1,5 +1,5 @@
-import { LockKeyhole, Mail } from "lucide-react";
-import { Link } from "react-router";
+import { CircleAlert, LockKeyhole, Mail } from "lucide-react";
+import { Link, useNavigate } from "react-router";
 import ButtonPassword from "../Utils/ButtonPassword";
 import {
     EMAIL_REGEX,
@@ -8,16 +8,33 @@ import {
 } from "../Utils/function";
 import { useForm } from "react-hook-form";
 import Form from "../Form";
+import axios from "axios";
+import { useState } from "react";
 
 function Login() {
+    const [errMsg, setErrMsg] = useState<string>("");
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ mode: "onChange" });
 
-    const handleLogin = (data: object) => {
-        console.log(data);
+    const handleLogin = async (data: object) => {
+        try {
+            await axios.post("http://localhost:3500/api/login", data, {
+                withCredentials: true,
+            });
+            navigate("/login-success");
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            if (error.response?.status === 409) {
+                setErrMsg("No user found with the email");
+            } else if (error.response?.status === 500) {
+                setErrMsg("An error occurred, please try again");
+            }
+        }
     };
 
     return (
@@ -31,9 +48,11 @@ function Login() {
             </section>
             <section className="relative z-10 h-screen w-full bg-white/35 flex flex-col justify-center backdrop-blur-[5px] md:w-100 md:h-125 md:bg-primary md:rounded-r-2xl ">
                 <div className="mx-auto md:mx-10 space-y-3 min-w-75">
-                    {/* <p className="absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2">
-                        <CircleAlert /> <span>Username has been taken</span>
-                    </p> */}
+                    <p
+                        className={`absolute bg-red-400 w-80 p-2 rounded-lg text-white flex gap-2 ${!errMsg ? "hidden" : "animate-fade-out"}`}
+                    >
+                        <CircleAlert /> <span>{errMsg}</span>
+                    </p>
                     <h1 className="text-[30px] font-extrabold mb-10">
                         Welcome Back!!
                     </h1>

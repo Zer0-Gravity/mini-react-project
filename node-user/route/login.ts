@@ -3,6 +3,6 @@ import express from "express";
 import handleUserLogin from "../controllers/loginController.js";
 
 const router: Router = express.Router();
-router.get("/", handleUserLogin);
+router.post("/", handleUserLogin);
 
 export default router;
