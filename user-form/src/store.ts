@@ -13,6 +13,17 @@ interface AuthUser {
     setLoading: (bool: boolean) => void;
 }
 
+interface UserProps {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
+interface DatabaseProp {
+    data: UserProps | null;
+    setData: (data: UserProps) => void;
+}
+
 export const useAuthUser = create<AuthUser>((set) => ({
     user: null,
     isLoading: true,
@@ -23,4 +34,9 @@ export const useAuthUser = create<AuthUser>((set) => ({
 export const usePassword = create<PasswordProp>((set) => ({
     togglePass: false,
     setTogglePass: () => set((state) => ({ togglePass: !state.togglePass })),
+}));
+
+export const useDataAuth = create<DatabaseProp>((set) => ({
+    data: null,
+    setData: (serverData) => set({ data: serverData }),
 }));

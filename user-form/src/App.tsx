@@ -6,10 +6,11 @@ import LoginSuccess from "./Component/Login/LoginSuccess";
 import ProtectedRoute from "./Component/Utils/ProtectedRoute";
 import { useEffect } from "react";
 import axios from "axios";
-import { useAuthUser } from "./store";
+import { useAuthUser, useDataAuth } from "./store";
 
 function App() {
     const { setUser } = useAuthUser();
+    const { setData } = useDataAuth();
 
     //verify the refresh token if it exist
     useEffect(() => {
@@ -19,14 +20,20 @@ function App() {
                     "http://localhost:3500/api/refresh",
                     { withCredentials: true },
                 );
-                setUser(response.data);
+                const { accessToken, userData } = response.data;
+
+                //Get the access Token
+                setUser(accessToken);
+
+                //Get the data from the server side
+                setData(userData);
             } catch (error) {
                 console.log("Error occurred", error);
             }
         };
 
         verifyRefreshToken();
-    }, [setUser]);
+    }, [setUser, setData]);
 
     return (
         <BrowserRouter>

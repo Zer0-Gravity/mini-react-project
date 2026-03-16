@@ -42,8 +42,12 @@ const handleUserLogin = async (req: Request, res: Response) => {
 
         //Send json respond for the front end to read
         return res.status(200).json({
-            message: "Login successful",
             accessToken: accessToken,
+            userData: {
+                firstName: foundUser.firstname,
+                lastName: foundUser.lastname,
+                email: foundUser.email,
+            },
         });
     } else {
         res.status(401).json({

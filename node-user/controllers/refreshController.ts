@@ -29,7 +29,14 @@ const handleRefreshToken = async (req: Request, res: Response) => {
                 { expiresIn: "1d" },
             );
 
-            res.json({ accessToken });
+            res.json({
+                accessToken,
+                userData: {
+                    firstName: foundUser.firstname,
+                    lastName: foundUser.lastname,
+                    email: foundUser.email,
+                },
+            });
         },
     );
 };

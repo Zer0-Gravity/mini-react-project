@@ -10,11 +10,12 @@ import { useForm } from "react-hook-form";
 import Form from "../Form";
 import axios from "axios";
 import { useState } from "react";
-import { useAuthUser } from "../../store";
+import { useAuthUser, useDataAuth } from "../../store";
 
 function Login() {
     const [errMsg, setErrMsg] = useState<string>("");
     const { setUser } = useAuthUser();
+    const { setData } = useDataAuth();
     const navigate = useNavigate();
 
     const {
@@ -32,8 +33,15 @@ function Login() {
                     withCredentials: true,
                 },
             );
-            console.log(response.data);
-            setUser(response.data);
+            const { accessToken, userData } = response.data;
+
+            //Get the access Token
+            setUser(accessToken);
+
+            //Get the data from the server side
+            setData(userData);
+
+            //Redirect to login success page
             navigate("/login-success");
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
