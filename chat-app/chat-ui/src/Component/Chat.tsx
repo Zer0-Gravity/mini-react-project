@@ -3,8 +3,8 @@ import { Send } from "lucide-react";
 function Chat() {
     return (
         <main className="flex flex-col h-screen w-screen md:w-200 pt-10  text-white relative">
-            <section className="flex-1 flex flex-col justify-end p-2">
-                <p>
+            <section className="flex-1 flex flex-col justify-end gap-2 m-2">
+                <p className="bg-secondary p-2 rounded-lg">
                     Hello this is message that i work on, who are you today is
                     good day, doesnt it huehhue so technically iam free you
                     know?

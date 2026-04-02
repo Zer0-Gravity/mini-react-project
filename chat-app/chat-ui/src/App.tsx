@@ -1,9 +1,11 @@
 import Chat from "./Component/Chat";
+import Home from "./Component/Home";
 
 function App() {
     return (
-        <main className="flex items-center justify-center h-screen w-screen bg-primary">
-            <Chat />;
+        <main className="bg-primary h-screen w-screen flex justify-center items-center">
+            <Home />
+            {/* <Chat />; */}
         </main>
     );
 }
