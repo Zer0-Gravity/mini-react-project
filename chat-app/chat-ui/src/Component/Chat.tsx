@@ -1,4 +1,4 @@
-import { CircleX, Send, Settings, UserCircle2 } from "lucide-react";
+import { Send, Settings, UserCircle2 } from "lucide-react";
 import React, { useState } from "react";
 
 function Chat() {
@@ -13,7 +13,7 @@ function Chat() {
             <div className="flex justify-between items-center">
                 <h1 className="font-bold text-[25px]">Socket.io Group Chat</h1>
                 <Settings onClick={() => setModal(!modal)} />
-            </div>
+            </div>  
 
             {modal && (
                 <main className="absolute inset-0 bg-black/5 flex items-center justify-center">
