@@ -1,8 +1,16 @@
 import { CircleX, Send } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 function Chat() {
+    const [inputChat, setInputChat] = useState<string>("");
+    const [chat, setChat] = useState<string[]>([]);
     const navigate = useNavigate();
+
+    const sendMessage = () => {
+        setChat((prev) => [...prev, inputChat]);
+        setInputChat("");
+    };
 
     return (
         <main className="flex flex-col h-screen w-screen md:w-200 text-white relative">
@@ -14,15 +22,11 @@ function Chat() {
 
             <section className="flex-1 flex flex-col gap-2 m-2 overflow-y-auto min-h-0">
                 <div className="mt-auto space-y-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                        <div key={i} className="space-y-1 max-w-[80%]">
+                    {chat.map((msg, i) => (
+                        <div key={i} className="space-y-1 w-fit max-w-[80%]">
                             <div className="bg-secondary p-2 rounded-lg space-y-2">
                                 <p className="font-bold text-[12px]">Andy</p>
-                                <p>
-                                    Hello this is message that i work on, who
-                                    are you today is good day, doesnt it huehhue
-                                    so technically iam free you know?
-                                </p>
+                                <p>{msg}</p>
                             </div>
                             <p className="text-[12px]">12:00</p>
                         </div>
@@ -35,8 +39,11 @@ function Chat() {
                     type="text"
                     placeholder="type a message"
                     className="w-full outline-none"
+                    value={inputChat}
+                    onChange={(e) => setInputChat(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 />
-                <button>
+                <button onClick={sendMessage}>
                     <Send className="text-white" />
                 </button>
             </section>
