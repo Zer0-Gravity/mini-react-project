@@ -1,14 +1,18 @@
-import ChatWindow from "./components/ChatWindow";
+import { BrowserRouter, Route, Routes } from "react-router";
+import MainLayout from "./components/MainLayout";
 import EmptyState from "./components/EmptyState";
-import Sidebar from "./components/Sidebar";
+import ChatWindow from "./components/ChatWindow";
 
 function App() {
     return (
-        <main className="flex h-screen w-screen">
-            <Sidebar />
-            {/* <ChatWindow /> */}
-            <EmptyState />
-        </main>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<MainLayout />}>
+                    <Route index element={<EmptyState />} />
+                    <Route path="/:roomId" element={<ChatWindow />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
