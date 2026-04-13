@@ -15,8 +15,8 @@ function ChatWindow() {
     });
 
     return (
-        <main className="bg-main-chat w-full h-full p-5 flex flex-col">
-            <header className="flex justify-between text-primary-text mb-10">
+        <main className="bg-main-chat w-full h-full p-5 flex flex-col gap-5">
+            <header className="flex justify-between text-primary-text">
                 <div className="flex gap-2">
                     <Hash />
                     <h1 className="font-semibold ">Public Room</h1>
@@ -24,19 +24,28 @@ function ChatWindow() {
                 <XCircle />
             </header>
 
-            <section className="flex-1">
-                <div className="flex gap-2">
-                    <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
-                        <User size={15} />
+            <section className="flex-1 flex flex-col-reverse gap-3 overflow-y-auto hide-scrollbar ">
+                {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="flex gap-2">
+                        <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
+                            <User size={15} />
+                        </div>
+                        <div className="bg-receiver text-primary-text p-3.75 rounded-lg max-w-200 space-y-2">
+                            <div className="flex justify-between font-semibold text-[12px]">
+                                <p>User</p>
+                                <p>14 : 00</p>
+                            </div>
+                            <p className="text-primary-text text-[14px] font-medium">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Quos quidem deleniti
+                                accusantium cupiditate exercitationem,
+                                blanditiis corrupti dicta obcaecati neque a? Quo
+                                voluptatibus accusamus sit consequatur culpa a.
+                                Eveniet, deleniti provident. Pendejo
+                            </p>
+                        </div>
                     </div>
-                    <div className="bg-sender text-primary-text p-2 rounded-lg max-w-200">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quos quidem deleniti accusantium cupiditate
-                        exercitationem, blanditiis corrupti dicta obcaecati
-                        neque a? Quo voluptatibus accusamus sit consequatur
-                        culpa a. Eveniet, deleniti provident.
-                    </div>
-                </div>
+                ))}
             </section>
 
             <section className="bg-message-input w-full flex p-2 rounded-lg items-end">
