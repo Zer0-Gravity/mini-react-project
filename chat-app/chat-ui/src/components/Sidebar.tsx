@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 function Sidebar() {
     const [theme, setTheme] = useState(() => {
+        //Get the saved theme from the local storage
         return localStorage.getItem("theme") === "dark";
     });
 
@@ -20,15 +21,19 @@ function Sidebar() {
 
     return (
         <main className="bg-sidebar h-screen md:w-75 p-3 space-y-5">
-            <div className="flex items-center">
-                <h1 className="font-bold text-4xl mb-10 flex-1 text-center">
+            <div className="flex items-center mb-10">
+                <h1 className="font-bold text-4xl flex-1 text-center">
                     U-TALK
                 </h1>
                 <button
-                    className="border rounded-full"
+                    className={`rounded-full p-1 ${theme ? "bg-gray-50" : "bg-gray-800"} `}
                     onClick={() => setTheme(!theme)}
                 >
-                    {theme ? <Sun /> : <Moon />}
+                    {theme ? (
+                        <Sun size={20} fill="black" />
+                    ) : (
+                        <Moon size={20} fill="white" color="white" />
+                    )}
                 </button>
             </div>
 
