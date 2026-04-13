@@ -1,9 +1,33 @@
 @import "tailwindcss";
 
+@theme {
+    --color-sidebar: var(--sidebar);
+    --color-main-chat: var(--main-chat);
+    --color-sender: var(--sender);
+    --color-receiver: var(--receiver);
+    --color-accent: var(--accent);
+}
+
+:root {
+    --sidebar: #f7f7f9;
+    --main-chat: #ffffff;
+    --sender: #007aff;
+    --receiver: #e9e9eb;
+    --accent: #f5c2e7;
+}
+
+.dark {
+    --sidebar: #1e1e2e;
+    --main-chat: #181825;
+    --sender: #89b4fa;
+    --receiver: #313244;
+    --accent: #f5c2e7;
+}
+
+
 .button {
     display: flex;
     gap: 10px;
-    border: 1px solid black;
     width: 105px;
     height: 40px;
     justify-content: center;
