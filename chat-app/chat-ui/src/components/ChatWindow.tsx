@@ -1,6 +1,19 @@
 import { Hash, Image, Plus, Send, User, XCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 function ChatWindow() {
+    const [textMessage, setTextMessage] = useState<string>("");
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        if (textAreaRef.current) {
+            //Set the start of the height as auto
+            textAreaRef.current.style.height = `auto`;
+            //set the height following the user input
+            textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+        }
+    });
+
     return (
         <main className="bg-main-chat w-full h-full p-5 flex flex-col">
             <header className="flex justify-between text-primary-text mb-10">
@@ -28,7 +41,10 @@ function ChatWindow() {
 
             <section className="bg-message-input w-full flex p-2 rounded-lg items-end">
                 <textarea
+                    ref={textAreaRef}
                     placeholder="Type a message"
+                    value={textMessage}
+                    onChange={(e) => setTextMessage(e.target.value)}
                     className="w-full flex-1 outline-none p-2 resize-none bg-transparent min-h-10"
                     rows={1}
                 />
