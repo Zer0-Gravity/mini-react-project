@@ -6,6 +6,9 @@
     --color-sender: var(--sender);
     --color-receiver: var(--receiver);
     --color-accent: var(--accent);
+    --color-primary-text: var(--primary-text);
+    --color-secondary-text: var(--secondary-text);
+    --color-message-input: var(--message-input);
 }
 
 :root {
@@ -14,6 +17,9 @@
     --sender: #007aff;
     --receiver: #e9e9eb;
     --accent: #f5c2e7;
+    --primary-text: #000000;
+    --secondary-text: #ffffff;
+    --message-input: #dfdfe2;
 }
 
 .dark {
@@ -22,6 +28,9 @@
     --sender: #89b4fa;
     --receiver: #313244;
     --accent: #f5c2e7;
+    --primary-text: #ffffff;
+    --secondary-text: #000000;
+    --message-input: #ffffff;
 }
 
 .button {

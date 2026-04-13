@@ -10,6 +10,7 @@ function Sidebar() {
     useEffect(() => {
         const root = window.document.documentElement;
 
+        //Check the theme condition
         if (theme) {
             root.classList.add("dark");
             localStorage.setItem("theme", "dark");
@@ -20,9 +21,9 @@ function Sidebar() {
     }, [theme]);
 
     return (
-        <main className="bg-sidebar h-screen md:w-75 p-3 space-y-5">
+        <main className="bg-sidebar h-full md:w-75 p-3 space-y-5">
             <div className="flex items-center mb-10">
-                <h1 className="font-bold text-4xl flex-1 text-center">
+                <h1 className="font-bold text-4xl flex-1 text-center text-primary-text">
                     U-TALK
                 </h1>
                 <button
@@ -50,7 +51,7 @@ function Sidebar() {
             </section>
 
             <section className="space-y-4">
-                <h1>Roomlist</h1>
+                <h1 className="text-primary-text">Roomlist</h1>
 
                 <div>
                     <div className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent">
