@@ -68,7 +68,6 @@ function Sidebar() {
                         <Link
                             to={`/${room.roomId}`}
                             key={room.roomId}
-                            state={{ roomData: room }}
                             className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent"
                         >
                             <div className="flex">

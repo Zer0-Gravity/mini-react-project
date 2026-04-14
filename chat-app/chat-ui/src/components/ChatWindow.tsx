@@ -1,14 +1,15 @@
 import { Hash, Image, Plus, Send, User, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router";
-import type { RoomType } from "../type";
+import { NavLink, useParams } from "react-router";
+import { useRoom } from "../store";
 
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
+    const { roomList } = useRoom();
 
-    const location = useLocation();
-    const room: RoomType = location.state?.roomData;
+    const { roomId } = useParams();
+    const currentRoom = roomList.find((r) => r.roomId === roomId);
 
     useEffect(() => {
         if (textAreaRef.current) {
@@ -24,7 +25,7 @@ function ChatWindow() {
             <header className="flex justify-between text-primary-text shadow-8xl">
                 <div className="flex gap-2">
                     <Hash />
-                    <h1 className="font-semibold ">{room.roomName}</h1>
+                    <h1 className="font-semibold ">{currentRoom?.roomName}</h1>
                 </div>
                 <NavLink to={"/"}>
                     <XCircle />
