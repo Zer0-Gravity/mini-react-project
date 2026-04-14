@@ -1,13 +1,20 @@
 import { create } from "zustand";
-
-interface ModalType {
-    modalType: string | null;
-    openModal: (type: string) => void;
-    closeModal: () => void;
-}
+import type { MessagesObj, ModalType, RoomList } from "./type";
 
 export const useModal = create<ModalType>((set) => ({
     modalType: null,
     openModal: (type) => set({ modalType: type }),
     closeModal: () => set({ modalType: null }),
+}));
+
+export const useRoom = create<RoomList>((set) => ({
+    roomList: [
+        {
+            roomId: "P4l8CRGQ",
+            roomName: "Public Room",
+            messages: [] as MessagesObj[],
+        },
+    ],
+    addRooms: (room) =>
+        set((state) => ({ roomList: [...state.roomList, room] })),
 }));

@@ -1,28 +1,15 @@
 import { Hash, LogIn, Moon, MoreHorizontal, Plus, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { MessagesObj, RoomType } from "../type";
 import { Link } from "react-router";
-import { useModal } from "../store";
+import { useModal, useRoom } from "../store";
 
 function Sidebar() {
     const [theme, setTheme] = useState(() => {
         //Get the saved theme from the local storage
         return localStorage.getItem("theme") === "dark";
     });
-
+    const { roomList } = useRoom();
     const { openModal } = useModal();
-    const [roomList, setRoomList] = useState<RoomType[]>([
-        {
-            roomId: "P4l8CRGQ",
-            roomName: "Public Room",
-            messages: [] as MessagesObj[],
-        },
-        {
-            roomId: "dawidwdw",
-            roomName: "meme",
-            messages: [] as MessagesObj[],
-        },
-    ]);
 
     useEffect(() => {
         const root = window.document.documentElement;

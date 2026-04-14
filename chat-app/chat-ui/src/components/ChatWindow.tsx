@@ -21,7 +21,7 @@ function ChatWindow() {
 
     return (
         <main className="bg-main-chat w-full h-full p-5 flex flex-col gap-5">
-            <header className="flex justify-between text-primary-text">
+            <header className="flex justify-between text-primary-text shadow-8xl">
                 <div className="flex gap-2">
                     <Hash />
                     <h1 className="font-semibold ">{room.roomName}</h1>
