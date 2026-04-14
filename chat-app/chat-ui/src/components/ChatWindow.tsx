@@ -6,9 +6,10 @@ import { useRoom } from "../store";
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    const { roomList } = useRoom();
+    const { roomList } = useRoom(); //Grab the array room from the zustand store
 
     const { roomId } = useParams();
+    //Find correct array room by comparing its id with the id from user params
     const currentRoom = roomList.find((r) => r.roomId === roomId);
 
     useEffect(() => {
