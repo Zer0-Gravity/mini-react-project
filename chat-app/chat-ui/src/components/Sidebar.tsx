@@ -1,11 +1,25 @@
 import { Hash, LogIn, Moon, MoreHorizontal, Plus, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import type { MessagesObj, RoomType } from "../type";
 
 function Sidebar() {
     const [theme, setTheme] = useState(() => {
         //Get the saved theme from the local storage
         return localStorage.getItem("theme") === "dark";
     });
+
+    const [roomList, setRoomList] = useState<RoomType[]>([
+        {
+            roomId: "daiwjdiwjd",
+            roomName: "piblic",
+            messages: [] as MessagesObj[],
+        },
+        {
+            roomId: "dawidwdw",
+            roomName: "meme",
+            messages: [] as MessagesObj[],
+        },
+    ]);
 
     useEffect(() => {
         const root = window.document.documentElement;
@@ -53,14 +67,19 @@ function Sidebar() {
             <section className="space-y-4">
                 <h1 className="text-primary-text">Roomlist</h1>
 
-                <div>
-                    <div className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent">
-                        <div className="flex">
-                            <Hash />
-                            <h1>Public room</h1>
+                <div className="flex flex-col gap-3">
+                    {roomList.map((room) => (
+                        <div
+                            key={room.roomId}
+                            className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent"
+                        >
+                            <div className="flex">
+                                <Hash />
+                                <h1>{room.roomName}</h1>
+                            </div>
+                            <MoreHorizontal />
                         </div>
-                        <MoreHorizontal />
-                    </div>
+                    ))}
                 </div>
             </section>
         </main>
