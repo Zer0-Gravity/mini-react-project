@@ -2,6 +2,7 @@ import { Hash, LogIn, Moon, MoreHorizontal, Plus, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { MessagesObj, RoomType } from "../type";
 import { Link } from "react-router";
+import { randomId } from "../utils";
 
 function Sidebar() {
     const [theme, setTheme] = useState(() => {
@@ -21,6 +22,7 @@ function Sidebar() {
             messages: [] as MessagesObj[],
         },
     ]);
+    console.log(randomId(8));
 
     useEffect(() => {
         const root = window.document.documentElement;
