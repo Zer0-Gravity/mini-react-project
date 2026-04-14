@@ -2,7 +2,7 @@ import { Hash, LogIn, Moon, MoreHorizontal, Plus, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { MessagesObj, RoomType } from "../type";
 import { Link } from "react-router";
-import { randomId } from "../utils";
+import { useModal } from "../store";
 
 function Sidebar() {
     const [theme, setTheme] = useState(() => {
@@ -10,6 +10,7 @@ function Sidebar() {
         return localStorage.getItem("theme") === "dark";
     });
 
+    const { openModal } = useModal();
     const [roomList, setRoomList] = useState<RoomType[]>([
         {
             roomId: "P4l8CRGQ",
@@ -22,7 +23,6 @@ function Sidebar() {
             messages: [] as MessagesObj[],
         },
     ]);
-    console.log(randomId(8));
 
     useEffect(() => {
         const root = window.document.documentElement;
@@ -56,12 +56,18 @@ function Sidebar() {
             </div>
 
             <section className="flex gap-10 justify-center">
-                <button className="button bg-accent">
+                <button
+                    className="button bg-accent"
+                    onClick={() => openModal("create")}
+                >
                     <Plus />
                     <span>Create</span>
                 </button>
 
-                <button className="button bg-accent">
+                <button
+                    className="button bg-accent"
+                    onClick={() => openModal("join")}
+                >
                     <LogIn />
                     <span>Join</span>
                 </button>
