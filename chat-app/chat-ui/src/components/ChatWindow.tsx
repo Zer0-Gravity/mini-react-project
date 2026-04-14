@@ -2,15 +2,30 @@ import { Hash, Image, Plus, Send, User, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
 import { useRoom } from "../store";
+import type { MessagesObj } from "../type";
 
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    const { roomList } = useRoom(); //Grab the array room from the zustand store
+    const { roomList, addMessages } = useRoom(); //Grab the array room from the zustand store
 
+    //Get the room id
     const { roomId } = useParams();
-    //Find correct array room by comparing its id with the id from user params
+    //Find correct room data by comparing the id
     const currentRoom = roomList.find((r) => r.roomId === roomId);
+    //If currentRoom exist take the messages object and put in variable
+    const chatLog = currentRoom ? currentRoom.messages : null;
+
+    const sendMessages = () => {
+        const newMessage: MessagesObj = {
+            author: "Guest",
+            message: textMessage,
+            time: "14:00",
+        };
+
+        addMessages(newMessage, roomId);
+        setTextMessage("");
+    };
 
     useEffect(() => {
         if (textAreaRef.current) {
@@ -34,27 +49,26 @@ function ChatWindow() {
             </header>
 
             <section className="flex-1 flex flex-col-reverse gap-3 overflow-y-auto hide-scrollbar ">
-                {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="flex gap-2">
-                        <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
-                            <User size={15} />
-                        </div>
-                        <div className="bg-receiver text-primary-text p-3.75 rounded-lg max-w-200 space-y-2">
-                            <div className="flex justify-between font-semibold text-[12px]">
-                                <p>User</p>
-                                <p>14 : 00</p>
+                {!chatLog ? (
+                    <div></div>
+                ) : (
+                    chatLog.map((msg, i) => (
+                        <div key={i} className="flex gap-2">
+                            <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
+                                <User size={15} />
                             </div>
-                            <p className="text-primary-text text-[14px] font-medium">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quos quidem deleniti
-                                accusantium cupiditate exercitationem,
-                                blanditiis corrupti dicta obcaecati neque a? Quo
-                                voluptatibus accusamus sit consequatur culpa a.
-                                Eveniet, deleniti provident. Pendejo
-                            </p>
+                            <div className="bg-receiver text-primary-text p-3.75 rounded-lg max-w-200 space-y-2">
+                                <div className="flex justify-between font-semibold text-[12px] text-gray-400">
+                                    <p>{msg.author}</p>
+                                    <p>{msg.time}</p>
+                                </div>
+                                <p className="text-primary-text text-[14px] font-medium">
+                                    {msg.message}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </section>
 
             <section className="bg-message-input w-full flex p-2 rounded-lg items-end">
@@ -69,7 +83,10 @@ function ChatWindow() {
                 <div className="flex gap-2 items-center h-10">
                     <Plus size={20} />
                     <Image size={20} />
-                    <button className="bg-accent rounded-full w-10 h-10 flex items-center justify-center">
+                    <button
+                        className="bg-accent rounded-full w-10 h-10 flex items-center justify-center"
+                        onClick={sendMessages}
+                    >
                         <Send size={20} />
                     </button>
                 </div>

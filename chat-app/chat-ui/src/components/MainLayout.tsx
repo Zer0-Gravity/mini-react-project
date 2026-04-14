@@ -19,7 +19,9 @@ function MainLayout() {
             </div>
 
             {/* Display the chat window */}
-            <div className={`${roomId ? "block" : "hidden"} md:flex md:flex-1`}>
+            <div
+                className={`${roomId ? "block" : "hidden"} md:flex md:flex-1 w-full`}
+            >
                 <Outlet />
             </div>
         </main>

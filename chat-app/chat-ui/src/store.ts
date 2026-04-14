@@ -17,4 +17,12 @@ export const useRoom = create<RoomList>((set) => ({
     ],
     addRooms: (room) =>
         set((state) => ({ roomList: [...state.roomList, room] })),
+    addMessages: (message, roomId) =>
+        set((state) => ({
+            roomList: state.roomList.map((room) =>
+                room.roomId === roomId
+                    ? { ...room, messages: [...room.messages, message] }
+                    : room,
+            ),
+        })),
 }));
