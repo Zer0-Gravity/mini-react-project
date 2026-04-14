@@ -1,6 +1,7 @@
 import { Hash, LogIn, Moon, MoreHorizontal, Plus, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { MessagesObj, RoomType } from "../type";
+import { Link } from "react-router";
 
 function Sidebar() {
     const [theme, setTheme] = useState(() => {
@@ -69,7 +70,8 @@ function Sidebar() {
 
                 <div className="flex flex-col gap-3">
                     {roomList.map((room) => (
-                        <div
+                        <Link
+                            to={`/${room.roomId}`}
                             key={room.roomId}
                             className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent"
                         >
@@ -78,7 +80,7 @@ function Sidebar() {
                                 <h1>{room.roomName}</h1>
                             </div>
                             <MoreHorizontal />
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
