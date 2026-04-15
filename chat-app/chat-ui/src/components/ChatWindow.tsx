@@ -19,8 +19,6 @@ function ChatWindow() {
     //If currentRoom exist take the messages object and put in variable
     const chatLog = currentRoom ? currentRoom.messages : null;
 
-    console.log(roomList);
-
     const sendMessages = () => {
         const newMessage: MessagesObj = {
             author: "Guest",

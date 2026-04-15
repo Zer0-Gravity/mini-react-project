@@ -27,7 +27,7 @@ function Sidebar() {
     return (
         <main className="bg-sidebar h-full p-3 space-y-5">
             <div className="flex items-center mb-10">
-                <h1 className="font-bold text-4xl flex-1 text-center text-primary-text">
+                <h1 className="font-bold text-[20px] flex-1 text-primary-text">
                     U-TALK
                 </h1>
                 <button
@@ -47,7 +47,7 @@ function Sidebar() {
                     className="button bg-accent"
                     onClick={() => openModal("create")}
                 >
-                    <Plus />
+                    <Plus size={18} />
                     <span>Create</span>
                 </button>
 
@@ -55,7 +55,7 @@ function Sidebar() {
                     className="button bg-accent"
                     onClick={() => openModal("join")}
                 >
-                    <LogIn />
+                    <LogIn size={18} />
                     <span>Join</span>
                 </button>
             </section>
@@ -70,9 +70,11 @@ function Sidebar() {
                             key={room.roomId}
                             className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent"
                         >
-                            <div className="flex">
-                                <Hash />
-                                <h1>{room.roomName}</h1>
+                            <div className="flex items-center gap-2">
+                                <Hash size={18} />
+                                <h1 className="font-medium text-[14px]">
+                                    {room.roomName}
+                                </h1>
                             </div>
                             <MoreHorizontal />
                         </Link>
