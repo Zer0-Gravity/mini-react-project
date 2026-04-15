@@ -24,6 +24,7 @@ function Modal({ modalType }: ModalType) {
             messages: [] as MessagesObj[],
         };
 
+        //Add new room to the array collection
         addRooms(newRoom);
         setNameInput("");
         closeModal();

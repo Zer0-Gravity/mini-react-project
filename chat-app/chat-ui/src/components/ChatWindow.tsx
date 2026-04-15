@@ -28,10 +28,23 @@ function ChatWindow() {
             time: "14:00",
         };
 
+        if (!textMessage.trim()) return;
+
         addMessages(newMessage, roomId);
         //send the message to server
         socket.emit("send_message", { newMessage, roomId });
         setTextMessage("");
+    };
+
+    const enterKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === "Enter") {
+            //Immediately send message when user press enter
+            if (!e.shiftKey) {
+                //Prevent new line for being added and send the message
+                e.preventDefault();
+                sendMessages();
+            }
+        }
     };
 
     useEffect(() => {
@@ -83,7 +96,8 @@ function ChatWindow() {
                 {!chatLog ? (
                     <div></div>
                 ) : (
-                    chatLog.map((msg, i) => (
+                    //Put the new message on the bottom
+                    [...chatLog].reverse().map((msg, i) => (
                         <div key={i} className="flex gap-2">
                             <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
                                 <User size={15} />
@@ -93,7 +107,7 @@ function ChatWindow() {
                                     <p>{msg.author}</p>
                                     <p>{msg.time}</p>
                                 </div>
-                                <p className="text-primary-text text-[14px] font-medium">
+                                <p className="text-primary-text text-[14px] font-medium whitespace-pre-wrap">
                                     {msg.message}
                                 </p>
                             </div>
@@ -110,6 +124,7 @@ function ChatWindow() {
                     onChange={(e) => setTextMessage(e.target.value)}
                     className="w-full flex-1 outline-none p-2 resize-none bg-transparent min-h-10"
                     rows={1}
+                    onKeyDown={enterKey}
                 />
                 <div className="flex gap-2 items-center h-10">
                     <Plus size={20} />
