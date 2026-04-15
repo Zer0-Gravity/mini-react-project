@@ -13,7 +13,7 @@ function Modal({ modalType }: ModalType) {
     const { closeModal } = useModal();
     const { addRooms, roomList } = useRoom();
     const [nameInput, setNameInput] = useState<string>("");
-    const [inputId, setInputId] = useState<string>("`");
+    const [inputId, setInputId] = useState<string>("");
     const navigate = useNavigate();
     const roomId = roomList.map((room) => room.roomId).toString();
 

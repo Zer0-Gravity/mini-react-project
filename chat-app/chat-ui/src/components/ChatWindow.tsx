@@ -19,6 +19,8 @@ function ChatWindow() {
     //If currentRoom exist take the messages object and put in variable
     const chatLog = currentRoom ? currentRoom.messages : null;
 
+    console.log(roomList);
+
     const sendMessages = () => {
         const newMessage: MessagesObj = {
             author: "Guest",
@@ -39,14 +41,15 @@ function ChatWindow() {
         }
 
         //Receive an incoming message to the array object
-        const receiveMessage = (data: MessagesObj) => {
-            addMessages(data, roomId);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const receiveMessage = (data: any) => {
+            addMessages(data.newMessage, data.roomId);
         };
         socket.on("receive_message", receiveMessage);
 
         return () => {
             //Clear when unmount
-            socket.off("receive_message");
+            socket.off("receive_message", receiveMessage);
         };
     }, [roomId, addMessages]);
 

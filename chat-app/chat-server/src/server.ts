@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
 
     //Send the message to the client
     socket.on("send_message", (data) => {
-        socket.to(data.roomId).emit("receive_message", data.newMessage);
+        socket.to(data.roomId).emit("receive_message", data);
         console.log(data.newMessage);
     });
 });
