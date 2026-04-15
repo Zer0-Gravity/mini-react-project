@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
 import { useRoom } from "../store";
 import type { MessagesObj } from "../type";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3500");
 
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
@@ -24,8 +27,28 @@ function ChatWindow() {
         };
 
         addMessages(newMessage, roomId);
+        //send the message to server
+        socket.emit("send_message", { newMessage, roomId });
         setTextMessage("");
     };
+
+    useEffect(() => {
+        //Join room as soon as user enter the chat
+        if (roomId) {
+            socket.emit("join_room", roomId);
+        }
+
+        //Receive an incoming message to the array object
+        const receiveMessage = (data: MessagesObj) => {
+            addMessages(data, roomId);
+        };
+        socket.on("receive_message", receiveMessage);
+
+        return () => {
+            //Clear when unmount
+            socket.off("receive_message");
+        };
+    }, [roomId, addMessages]);
 
     useEffect(() => {
         if (textAreaRef.current) {
@@ -41,7 +64,12 @@ function ChatWindow() {
             <header className="flex justify-between text-primary-text shadow-8xl">
                 <div className="flex gap-2">
                     <Hash />
-                    <h1 className="font-semibold ">{currentRoom?.roomName}</h1>
+                    <h1 className="font-semibold ">
+                        {currentRoom?.roomName}/
+                        <span className="font-light text-gray-400 text-[14px]">
+                            {currentRoom?.roomId}
+                        </span>
+                    </h1>
                 </div>
                 <NavLink to={"/"}>
                     <XCircle />

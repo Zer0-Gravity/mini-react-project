@@ -18,6 +18,18 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     console.log(`User connected with id: ${socket.id}`);
+
+    //Let the user join to the room
+    socket.on("join_room", (roomId) => {
+        socket.join(roomId);
+        console.log(`User join room ${roomId}`);
+    });
+
+    //Send the message to the client
+    socket.on("send_message", (data) => {
+        socket.to(data.roomId).emit("receive_message", data.newMessage);
+        console.log(data.newMessage);
+    });
 });
 
 server.listen(PORT, () => {
