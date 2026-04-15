@@ -1,9 +1,18 @@
-import { Hash, Image, Plus, Send, User, XCircle } from "lucide-react";
+import {
+    Hash,
+    Image,
+    Paperclip,
+    Plus,
+    Send,
+    User,
+    XCircle,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
 import { useRoom } from "../store";
 import type { MessagesObj } from "../type";
 import { io } from "socket.io-client";
+import Linkify from "linkify-react";
 
 const socket = io("http://localhost:3500");
 
@@ -45,6 +54,10 @@ function ChatWindow() {
         }
     };
 
+    const option = {
+        className:
+            "'text-blue-600 hover:text-blue-800 underline decoration-2 transition-colors'",
+    };
     useEffect(() => {
         //Join room as soon as user enter the chat
         if (roomId) {
@@ -100,13 +113,19 @@ function ChatWindow() {
                             <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
                                 <User size={15} />
                             </div>
-                            <div className="bg-receiver text-primary-text p-3.75 rounded-lg max-w-200 space-y-2">
-                                <div className="flex justify-between font-semibold text-[12px] text-gray-400">
-                                    <p>{msg.author}</p>
-                                    <p>{msg.time}</p>
+                            <div className="space-y-2">
+                                <div className="bg-receiver text-primary-text p-3.75 rounded-lg max-w-200 space-y-2 min-w-20">
+                                    <p className="font-semibold text-[12px] text-gray-500">
+                                        {msg.author}
+                                    </p>
+                                    <p className="text-primary-text text-[14px] whitespace-pre-wrap">
+                                        <Linkify options={option}>
+                                            {msg.message}
+                                        </Linkify>
+                                    </p>
                                 </div>
-                                <p className="text-primary-text text-[14px] font-medium whitespace-pre-wrap">
-                                    {msg.message}
+                                <p className="text-[10px] text-gray-400">
+                                    {msg.time}
                                 </p>
                             </div>
                         </div>
@@ -125,8 +144,7 @@ function ChatWindow() {
                     onKeyDown={enterKey}
                 />
                 <div className="flex gap-2 items-center h-10">
-                    <Plus size={20} />
-                    <Image size={20} />
+                    <Paperclip size={18} />
                     <button
                         className="bg-accent rounded-full w-10 h-10 flex items-center justify-center"
                         onClick={sendMessages}
