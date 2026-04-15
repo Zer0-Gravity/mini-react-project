@@ -3,6 +3,7 @@ import { useModal, useRoom } from "../store";
 import type { MessagesObj, RoomType } from "../type";
 import { randomId } from "../utils";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 interface ModalType {
     modalType: string;
@@ -10,10 +11,13 @@ interface ModalType {
 
 function Modal({ modalType }: ModalType) {
     const { closeModal } = useModal();
-    const { addRooms } = useRoom();
+    const { addRooms, roomList } = useRoom();
     const [nameInput, setNameInput] = useState<string>("");
+    const [inputId, setInputId] = useState<string>("`");
+    const navigate = useNavigate();
+    const roomId = roomList.map((room) => room.roomId).toString();
 
-    const createNewRoom = () => {
+    const createRoom = () => {
         const newRoom: RoomType = {
             roomId: randomId(8),
             roomName: nameInput,
@@ -23,6 +27,24 @@ function Modal({ modalType }: ModalType) {
         addRooms(newRoom);
         setNameInput("");
         closeModal();
+    };
+
+    const joinRoom = () => {
+        const newJoin: RoomType = {
+            roomId: inputId,
+            roomName: nameInput,
+            messages: [] as MessagesObj[],
+        };
+
+        if (inputId === roomId) {
+            alert("You already join the room");
+        }
+
+        addRooms(newJoin);
+        setInputId("");
+        setNameInput("");
+        closeModal();
+        navigate(`/${inputId}`);
     };
 
     return (
@@ -35,10 +57,19 @@ function Modal({ modalType }: ModalType) {
                 <input
                     type="text"
                     placeholder="Type room name"
-                    className="h-14 w-full outline-none bg-message-input p-2 rounded-lg"
+                    className="input-modal bg-message-input"
                     value={nameInput}
                     onChange={(e) => setNameInput(e.target.value)}
                 />
+
+                <input
+                    type="text"
+                    placeholder="Enter room ID"
+                    className={`input-modal bg-message-input ${modalType === "create" ? "hidden" : "block"}`}
+                    value={inputId}
+                    onChange={(e) => setInputId(e.target.value)}
+                />
+
                 <div className="flex justify-end gap-4">
                     <button className="button bg-red-500" onClick={closeModal}>
                         <X />
@@ -46,10 +77,12 @@ function Modal({ modalType }: ModalType) {
                     </button>
                     <button
                         className="button bg-accent"
-                        onClick={createNewRoom}
+                        onClick={() =>
+                            modalType === "create" ? createRoom() : joinRoom()
+                        }
                     >
                         <Save />
-                        <p>Save</p>
+                        <p>{modalType === "create" ? "Create" : "Join"}</p>
                     </button>
                 </div>
             </div>
