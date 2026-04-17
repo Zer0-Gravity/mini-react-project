@@ -1,12 +1,4 @@
-import {
-    Hash,
-    Image,
-    Paperclip,
-    Plus,
-    Send,
-    User,
-    XCircle,
-} from "lucide-react";
+import { Hash, Paperclip, Send, User, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
 import { useRoom } from "../store";

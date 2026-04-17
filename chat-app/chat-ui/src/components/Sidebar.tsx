@@ -1,6 +1,15 @@
-import { Hash, LogIn, Moon, MoreHorizontal, Plus, Sun } from "lucide-react";
+import {
+    Hash,
+    LogIn,
+    Moon,
+    MoreHorizontal,
+    Plus,
+    Settings,
+    Sun,
+    UserCircle,
+} from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useModal, useRoom } from "../store";
 
 function Sidebar() {
@@ -8,6 +17,7 @@ function Sidebar() {
         //Get the saved theme from the local storage
         return localStorage.getItem("theme") === "dark";
     });
+    const navigate = useNavigate();
     const { roomList } = useRoom();
     const { openModal } = useModal();
 
@@ -25,7 +35,7 @@ function Sidebar() {
     }, [theme]);
 
     return (
-        <main className="bg-sidebar h-full p-3 space-y-5">
+        <main className="bg-sidebar h-full p-3 flex gap-3 flex-col">
             <div className="flex items-center mb-10">
                 <h1 className="font-bold text-[20px] flex-1 text-primary-text">
                     U-TALK
@@ -60,7 +70,7 @@ function Sidebar() {
                 </button>
             </section>
 
-            <section className="space-y-4">
+            <section className="space-y-4 flex-1">
                 <h1 className="text-primary-text">Roomlist</h1>
 
                 <div className="flex flex-col gap-3">
@@ -80,6 +90,20 @@ function Sidebar() {
                         </Link>
                     ))}
                 </div>
+            </section>
+
+            {/* Account section */}
+            <section className="flex justify-between text-primary-text bg-main-chat items-center p-2 rounded-lg">
+                <div className="flex gap-3 items-center">
+                    <div className="bg-message-input w-7.5 h-7.5 grid place-items-center rounded-full text-secondary-text">
+                        <UserCircle />
+                    </div>
+                    <div>
+                        <h1 className="font-medium">John Doe</h1>
+                        <p className="text-gray-500">#a4hi</p>
+                    </div>
+                </div>
+                <Settings onClick={() => navigate("user-setting")} />
             </section>
         </main>
     );
