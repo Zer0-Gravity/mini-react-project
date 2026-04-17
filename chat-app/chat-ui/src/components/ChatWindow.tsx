@@ -3,10 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
 import { useRoom } from "../store";
 import type { MessagesObj } from "../type";
-import { io } from "socket.io-client";
-import Linkify from "linkify-react";
 
-const socket = io("http://localhost:3500");
+import Linkify from "linkify-react";
+import { socket } from "../socket";
 
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");

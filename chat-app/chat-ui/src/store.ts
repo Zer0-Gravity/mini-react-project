@@ -8,25 +8,32 @@ export const useModal = create<ModalType>((set) => ({
     closeModal: () => set({ modalType: null }),
 }));
 
-export const useRoom = create<RoomList>((set) => ({
-    roomList: [
-        {
-            roomId: "P4l8CRGQ",
-            roomName: "Public Room",
-            messages: [] as MessagesObj[],
-        },
-    ],
-    addRooms: (room) =>
-        set((state) => ({ roomList: [...state.roomList, room] })),
-    addMessages: (message, roomId) =>
-        set((state) => ({
-            roomList: state.roomList.map((room) =>
-                room.roomId === roomId
-                    ? { ...room, messages: [...room.messages, message] }
-                    : room,
-            ),
-        })),
-}));
+export const useRoom = create<RoomList>()(
+    persist(
+        (set) => ({
+            roomList: [
+                {
+                    roomId: "P4l8CRGQ",
+                    roomName: "Public Room",
+                    messages: [] as MessagesObj[],
+                },
+            ],
+            addRooms: (room) =>
+                set((state) => ({ roomList: [...state.roomList, room] })),
+
+            //Add message based on room id
+            addMessages: (message, roomId) =>
+                set((state) => ({
+                    roomList: state.roomList.map((room) =>
+                        room.roomId === roomId
+                            ? { ...room, messages: [...room.messages, message] }
+                            : room,
+                    ),
+                })),
+        }),
+        { name: "u-talk-storage" },
+    ),
+);
 
 export const useTheme = create<ThemeState>()(
     persist(
