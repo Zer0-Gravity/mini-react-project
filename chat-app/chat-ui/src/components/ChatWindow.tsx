@@ -54,18 +54,6 @@ function ChatWindow() {
         if (roomId) {
             socket.emit("join_room", roomId);
         }
-
-        //Receive an incoming message to the array object
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const receiveMessage = (data: any) => {
-            addMessages(data.newMessage, data.roomId);
-        };
-        socket.on("receive_message", receiveMessage);
-
-        return () => {
-            //Clear when unmount
-            socket.off("receive_message", receiveMessage);
-        };
     }, [roomId, addMessages]);
 
     useEffect(() => {
