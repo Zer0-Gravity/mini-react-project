@@ -8,31 +8,15 @@ import {
     Sun,
     UserCircle,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+
 import { Link, useNavigate } from "react-router";
-import { useModal, useRoom } from "../store";
+import { useModal, useRoom, useTheme } from "../store";
 
 function Sidebar() {
-    const [theme, setTheme] = useState(() => {
-        //Get the saved theme from the local storage
-        return localStorage.getItem("theme") === "dark";
-    });
     const navigate = useNavigate();
     const { roomList } = useRoom();
     const { openModal } = useModal();
-
-    useEffect(() => {
-        const root = window.document.documentElement;
-
-        //Check the theme condition
-        if (theme) {
-            root.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-        } else {
-            root.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-        }
-    }, [theme]);
+    const { isDark, toggleTheme } = useTheme();
 
     return (
         <main className="bg-sidebar h-full p-3 flex gap-3 flex-col">
@@ -41,10 +25,10 @@ function Sidebar() {
                     U-TALK
                 </h1>
                 <button
-                    className={`rounded-full p-1 ${theme ? "bg-gray-50" : "bg-gray-800"} `}
-                    onClick={() => setTheme(!theme)}
+                    className={`rounded-full p-1 ${isDark ? "bg-gray-50" : "bg-gray-800"} `}
+                    onClick={toggleTheme}
                 >
-                    {theme ? (
+                    {isDark ? (
                         <Sun size={20} fill="black" />
                     ) : (
                         <Moon size={20} fill="white" color="white" />

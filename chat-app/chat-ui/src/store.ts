@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import type { MessagesObj, ModalType, RoomList } from "./type";
+import type { MessagesObj, ModalType, RoomList, ThemeState } from "./type";
+import { persist } from "zustand/middleware";
 
 export const useModal = create<ModalType>((set) => ({
     modalType: null,
@@ -26,3 +27,13 @@ export const useRoom = create<RoomList>((set) => ({
             ),
         })),
 }));
+
+export const useTheme = create<ThemeState>()(
+    persist(
+        (set) => ({
+            isDark: false,
+            toggleTheme: () => set((state) => ({ isDark: !state.isDark })),
+        }),
+        { name: "theme" },
+    ),
+);

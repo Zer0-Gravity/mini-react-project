@@ -26,3 +26,8 @@ export interface UserMessages {
     messages: MessagesObj[];
     addMessages: (message: MessagesObj) => void;
 }
+
+export interface ThemeState {
+    isDark: boolean;
+    toggleTheme: () => void;
+}
