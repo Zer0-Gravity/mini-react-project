@@ -56,3 +56,82 @@
     height: 60px;
     border-radius: 8px;
 }
+
+.setting-form {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, 50px);
+    grid-template-areas:
+        "label-id "
+        "user-id"
+        "label-name"
+        "user-name"
+        "button"
+        "label-option"
+        "more-button";
+
+    .label-id {
+        grid-area: label-id;
+    }
+
+    .input-id {
+        grid-area: user-id;
+    }
+
+    .label-name {
+        grid-area: label-name;
+    }
+
+    .input-name {
+        grid-area: user-name;
+    }
+
+    .save-button {
+        grid-area: button;
+        width: 300px;
+        height: 40px;
+    }
+
+    .label-option {
+        grid-area: label-option;
+    }
+
+    .more-button {
+        grid-area: more-button;
+    }
+
+    .label-id,
+    .label-name,
+    .label-option {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+
+@media (min-width: 786px) {
+    .setting-form {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 100px 300px;
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas:
+            "label-id user-id"
+            "label-name user-name"
+            ". button"
+            "label-option more-button";
+
+        .label-id,
+        .label-name,
+        .label-option {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+}

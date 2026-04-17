@@ -4,46 +4,53 @@ import { useNavigate } from "react-router";
 function UserSetting() {
     const navigate = useNavigate();
     return (
-        <main className="bg-main-chat h-screen w-screen p-5 md:flex md:justify-center">
-            <div className="md:w-162.5">
+        <main className="bg-main-chat h-screen w-screen p-5 flex justify-center text-primary-text">
+            <div className="md:w-165 w-full">
                 <header className="flex justify-between text-primary-text">
                     <h1>User Setting</h1>
                     <XCircle onClick={() => navigate("/")} />
                 </header>
-
-                <section>
-                    <div className="flex gap-10">
-                        <p>User ID</p>
-                        <div className="flex">
+                <section className="flex items-center mt-20 flex-col">
+                    <div className="setting-form">
+                        
+                        {/* Automatic generated id */}
+                        <p className="label-id">User ID</p>
+                        <div className="flex gap-2 items-center input-id">
                             <input
                                 type="text"
                                 placeholder="Save to generate code"
                                 readOnly
+                                className="p-2 h-10 bg-message-input outline-none rounded-[5px]"
                             />
                             <Copy />
                         </div>
-                    </div>
-                    <div className="flex">
-                        <p>Display Name</p>
-                        <input type="text" />
-                    </div>
-                    <button>Save Button</button>
-                </section>
 
-                <section>
-                    <div className="flex items-center">
-                        <p>More Option</p>
-                        <div className="h-0.5 w-full bg-black" />
-                    </div>
-                    <div>
-                        <button className="button">
-                            <Download />
-                            <p>Download Data</p>
+                        {/* Add Username */}
+                        <p className="label-name">Display Name</p>
+                        <input
+                            type="text"
+                            className="p-2 h-10 w-75 bg-message-input outline-none input-name rounded-[5px]"
+                        />
+
+                        {/* Save Button */}
+                        <button className="p-2 bg-accent save-button text-secondary-text font-medium rounded-[5px] ">
+                            Save Button
                         </button>
-                        <button className="button">
-                            <Trash />
-                            <p>Wipe Data</p>
-                        </button>
+
+                        {/* More Option */}
+
+                        <p className="label-option">More Option</p>
+
+                        <div className="w-full flex flex-col md:flex-row justify-around more-button gap-4">
+                            <button className="p-2 rounded-[5px] flex gap-2 text-white bg-green-500 items-center justify-center">
+                                <Download size={18} />
+                                <p>Download Data</p>
+                            </button>
+                            <button className="p-2 rounded-[5px] flex gap-2 text-white bg-red-500 items-center justify-center">
+                                <Trash size={18} />
+                                <p>Wipe Data</p>
+                            </button>
+                        </div>
                     </div>
                 </section>
             </div>
