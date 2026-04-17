@@ -1,22 +1,20 @@
 import {
     Hash,
     LogIn,
-    Moon,
     MoreHorizontal,
     Plus,
     Settings,
-    Sun,
     UserCircle,
 } from "lucide-react";
 
 import { Link, useNavigate } from "react-router";
-import { useModal, useRoom, useTheme } from "../store";
+import { useModal, useRoom } from "../store";
+import SliderTheme from "./SliderTheme";
 
 function Sidebar() {
     const navigate = useNavigate();
     const { roomList } = useRoom();
     const { openModal } = useModal();
-    const { isDark, toggleTheme } = useTheme();
 
     return (
         <main className="bg-sidebar h-full p-3 flex gap-3 flex-col">
@@ -24,16 +22,7 @@ function Sidebar() {
                 <h1 className="font-bold text-[20px] flex-1 text-primary-text">
                     U-TALK
                 </h1>
-                <button
-                    className={`rounded-full p-1 ${isDark ? "bg-gray-50" : "bg-gray-800"} `}
-                    onClick={toggleTheme}
-                >
-                    {isDark ? (
-                        <Sun size={20} fill="black" />
-                    ) : (
-                        <Moon size={20} fill="white" color="white" />
-                    )}
-                </button>
+                <SliderTheme />
             </div>
 
             <section className="flex gap-10 justify-center">
@@ -77,7 +66,7 @@ function Sidebar() {
             </section>
 
             {/* Account section */}
-            <section className="flex justify-between text-primary-text bg-main-chat items-center p-2 rounded-lg">
+            <section className="flex justify-between text-primary-text bg-main-chat items-center p-2 rounded-lg shadow-[0_0_5px_rgba(0,0,0.1)]">
                 <div className="flex gap-3 items-center">
                     <div className="bg-message-input w-7.5 h-7.5 grid place-items-center rounded-full text-secondary-text">
                         <UserCircle />

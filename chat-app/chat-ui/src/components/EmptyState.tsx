@@ -1,6 +1,6 @@
 function EmptyState() {
     return (
-        <main className="bg-main-chat h-full w-full flex items-center justify-center">
+        <main className="bg-main-chat h-full w-full flex items-center justify-center p-10">
             <img src="/" alt="" />
             <section className="flex flex-col items-center text-primary-text space-y-2">
                 <h1 className="font-bold text-[45px] ">Welcome to U-TALK👋 </h1>
