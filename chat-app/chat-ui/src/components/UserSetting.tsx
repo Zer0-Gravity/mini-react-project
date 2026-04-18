@@ -13,11 +13,15 @@ function UserSetting() {
     console.log(userData);
 
     const saveUser = () => {
+        //Check if ID already exist if not generate new one if it exist use the old one
+        const generatedId = userData.id || randomId(5);
+
         const newUser: UserProfile = {
-            id: randomId(5),
+            id: generatedId,
             name: displayName,
         };
 
+        //Add data to the object
         addUser(newUser);
     };
 
