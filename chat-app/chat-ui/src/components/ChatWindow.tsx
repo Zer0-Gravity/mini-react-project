@@ -1,7 +1,7 @@
 import { Hash, Paperclip, Send, User, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
-import { useRoom } from "../store";
+import { useRoom, useUserData } from "../store";
 import type { MessagesObj } from "../type";
 
 import Linkify from "linkify-react";
@@ -11,6 +11,7 @@ function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const { roomList, addMessages } = useRoom(); //Grab the array room from the zustand store
+    const { userData } = useUserData(); //Grab the user data from zustand store
 
     //Get the room id
     const { roomId } = useParams();
@@ -21,7 +22,8 @@ function ChatWindow() {
 
     const sendMessages = () => {
         const newMessage: MessagesObj = {
-            author: "Guest",
+            authorId: userData.id,
+            author: userData.name,
             message: textMessage,
             time: "14:00",
         };
@@ -88,22 +90,35 @@ function ChatWindow() {
                 ) : (
                     //Put the new message on the bottom
                     [...chatLog].reverse().map((msg, i) => (
-                        <div key={i} className="flex gap-2">
-                            <div className="bg-gray-400 p-2 rounded-full w-7.5 h-7.5">
+                        <div
+                            key={i}
+                            className={`flex gap-2 ${msg.authorId === userData.id ? "justify-end" : "justify-start"}`}
+                        >
+                            <div
+                                className={`bg-gray-400 p-2 rounded-full w-7.5 h-7.5 ${msg.authorId === userData.id ? "hidden" : "block"}`}
+                            >
                                 <User size={15} />
                             </div>
                             <div className="space-y-2">
-                                <div className="bg-receiver text-primary-text p-3.75 rounded-lg max-w-200 space-y-2 min-w-20">
-                                    <p className="font-semibold text-[12px] text-gray-500">
+                                <div
+                                    className={`${msg.authorId === userData.id ? "bg-sender" : "bg-receiver"} text-primary-text p-3.75 rounded-lg max-w-200 space-y-2 min-w-20`}
+                                >
+                                    <p
+                                        className={`font-semibold text-[12px] text-gray-500 ${msg.authorId === userData.id ? "hidden" : "block"}`}
+                                    >
                                         {msg.author}
                                     </p>
-                                    <p className="text-primary-text text-[14px] whitespace-pre-wrap">
+                                    <p
+                                        className={`${msg.authorId === userData.id ? "text-sender-text" : "text-receiver-text"} text-[14px] whitespace-pre-wrap`}
+                                    >
                                         <Linkify options={option}>
                                             {msg.message}
                                         </Linkify>
                                     </p>
                                 </div>
-                                <p className="text-[10px] text-gray-400">
+                                <p
+                                    className={`text-[10px] text-gray-400 flex ${msg.authorId === userData.id ? "justify-end" : "justify-start"}`}
+                                >
                                     {msg.time}
                                 </p>
                             </div>
@@ -118,12 +133,12 @@ function ChatWindow() {
                     placeholder="Type a message"
                     value={textMessage}
                     onChange={(e) => setTextMessage(e.target.value)}
-                    className="w-full flex-1 outline-none p-2 resize-none bg-transparent min-h-10"
+                    className="w-full flex-1 outline-none p-2 resize-none bg-transparent min-h-10 text-primary-text"
                     rows={1}
                     onKeyDown={enterKey}
                 />
-                <div className="flex gap-2 items-center h-10">
-                    <Paperclip size={18} />
+                <div className="flex gap-2 items-center h-10 ">
+                    <Paperclip size={18} className="text-primary-text" />
                     <button
                         className="bg-accent rounded-full w-10 h-10 flex items-center justify-center"
                         onClick={sendMessages}

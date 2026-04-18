@@ -6,8 +6,13 @@
     --color-sender: var(--sender);
     --color-receiver: var(--receiver);
     --color-accent: var(--accent);
+
     --color-primary-text: var(--primary-text);
     --color-secondary-text: var(--secondary-text);
+
+    --color-sender-text: var(--sender-text);
+    --color-receiver-text: var(--receiver-text);
+
     --color-message-input: var(--message-input);
 }
 
@@ -19,18 +24,26 @@
     --accent: #f5c2e7;
     --primary-text: #000000;
     --secondary-text: #ffffff;
+
+    --sender-text: #ffffff;
+    --receiver-text: #000000;
+
     --message-input: #dfdfe2;
 }
 
 .dark {
     --sidebar: #1e1e2e;
-    --main-chat: #181825;
+    --main-chat: #11111b;
     --sender: #89b4fa;
     --receiver: #313244;
     --accent: #f5c2e7;
-    --primary-text: #ffffff;
-    --secondary-text: #000000;
-    --message-input: #ffffff;
+    --primary-text: #cdd6f4;
+    --secondary-text: #9399b2;
+
+    --sender-text: #11111b; /* Dark text on light blue bubble */
+    --receiver-text: #cdd6f4;
+
+    --message-input: #1e1e2e;
 }
 
 .button {

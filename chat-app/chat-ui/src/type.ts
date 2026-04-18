@@ -1,4 +1,5 @@
 export interface MessagesObj {
+    authorId: string;
     author: string;
     message: string;
     time: string;
