@@ -31,3 +31,13 @@ export interface ThemeState {
     isDark: boolean;
     toggleTheme: () => void;
 }
+
+export interface UserProfile {
+    id: string;
+    name: string;
+}
+
+export interface UserState {
+    userData: UserProfile;
+    addUser: (newUser: UserProfile) => void;
+}

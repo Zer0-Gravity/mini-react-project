@@ -1,5 +1,11 @@
 import { create } from "zustand";
-import type { MessagesObj, ModalType, RoomList, ThemeState } from "./type";
+import type {
+    MessagesObj,
+    ModalType,
+    RoomList,
+    ThemeState,
+    UserState,
+} from "./type";
 import { persist } from "zustand/middleware";
 
 export const useModal = create<ModalType>((set) => ({
@@ -42,5 +48,18 @@ export const useTheme = create<ThemeState>()(
             toggleTheme: () => set((state) => ({ isDark: !state.isDark })),
         }),
         { name: "theme" },
+    ),
+);
+
+export const useUserData = create<UserState>()(
+    persist(
+        (set) => ({
+            userData: {
+                id: "",
+                name: "",
+            },
+            addUser: (newUser) => set(() => ({ userData: newUser })),
+        }),
+        { name: "u-talk-user-data-storage" },
     ),
 );

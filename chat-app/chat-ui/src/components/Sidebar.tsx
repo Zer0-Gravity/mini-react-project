@@ -8,13 +8,14 @@ import {
 } from "lucide-react";
 
 import { Link, useNavigate } from "react-router";
-import { useModal, useRoom } from "../store";
+import { useModal, useRoom, useUserData } from "../store";
 import SliderTheme from "./SliderTheme";
 
 function Sidebar() {
     const navigate = useNavigate();
     const { roomList } = useRoom();
     const { openModal } = useModal();
+    const { userData } = useUserData();
 
     return (
         <main className="bg-sidebar h-full p-3 flex gap-3 flex-col">
@@ -72,8 +73,10 @@ function Sidebar() {
                         <UserCircle />
                     </div>
                     <div>
-                        <h1 className="font-medium">John Doe</h1>
-                        <p className="text-gray-500">#a4hi</p>
+                        <h1 className="font-medium">{`${userData.name ? userData.name : "Guest"}`}</h1>
+                        <p className="text-gray-500">
+                            #{`${userData.id ? userData.id : "00000"}`}
+                        </p>
                     </div>
                 </div>
                 <Settings onClick={() => navigate("user-setting")} />
