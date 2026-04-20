@@ -18,8 +18,10 @@ function Modal({ modalType }: ModalType) {
     const roomId = roomList.map((room) => room.roomId).toString();
 
     const createRoom = () => {
+        const generatedId = randomId(8);
+
         const newRoom: RoomType = {
-            roomId: randomId(8),
+            roomId: generatedId,
             roomName: nameInput,
             messages: [] as MessagesObj[],
         };
@@ -28,6 +30,7 @@ function Modal({ modalType }: ModalType) {
         addRooms(newRoom);
         setNameInput("");
         closeModal();
+        navigate(`/${generatedId}`);
     };
 
     const joinRoom = () => {
@@ -49,9 +52,9 @@ function Modal({ modalType }: ModalType) {
     };
 
     return (
-        <section className="inset-0 bg-black/80 h-full w-full absolute flex items-center justify-center">
+        <section className="inset-0 bg-black/80 h-full w-full absolute flex items-center justify-center z-10">
             <div className="bg-sidebar p-5 md:w-150 w-[90%] space-y-5 rounded-lg">
-                <h1 className="text-[25px] font-bold text-primary-text">
+                <h1 className="text-[20px] font-bold text-primary-text">
                     {modalType === "create" ? "Create Room" : "Join Room"}
                 </h1>
 

@@ -6,6 +6,7 @@ import type { MessagesObj } from "../type";
 
 import Linkify from "linkify-react";
 import { socket } from "../socket";
+import { formatDate } from "../utils";
 
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
@@ -25,7 +26,7 @@ function ChatWindow() {
             authorId: userData.id,
             author: userData.name,
             message: textMessage,
-            time: "14:00",
+            time: new Date().toISOString(),
         };
 
         if (!textMessage.trim()) return;
@@ -119,7 +120,7 @@ function ChatWindow() {
                                 <p
                                     className={`text-[10px] text-gray-400 flex ${msg.authorId === userData.id ? "justify-end" : "justify-start"}`}
                                 >
-                                    {msg.time}
+                                    {formatDate(msg.time)}
                                 </p>
                             </div>
                         </div>
