@@ -22,7 +22,7 @@ export const formatDate = (sendAt: string) => {
             hour12: false,
         });
     } else {
-        return date.toLocaleDateString("en_US", {
+        return date.toLocaleDateString("en-US", {
             weekday: "short",
             month: "short",
             day: "numeric",

@@ -30,6 +30,16 @@ io.on("connection", (socket) => {
         socket.to(data.roomId).emit("receive_message", data);
         console.log(data.newMessage);
     });
+
+    //Listen if user send a typing signal
+    socket.on("user_typing", (data) => {
+        socket.to(data.roomId).emit("display_typing", data);
+    });
+
+    //Send the typing signal to other client
+    socket.on("clear_typing", (data) => {
+        socket.to(data.roomId).emit("stop_typing");
+    });
 });
 
 server.listen(PORT, () => {

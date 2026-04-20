@@ -11,8 +11,11 @@ import { formatDate } from "../utils";
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
+    const [typingStatus, setTypingStatus] = useState<string>("");
     const { roomList, addMessages } = useRoom(); //Grab the array room from the zustand store
     const { userData } = useUserData(); //Grab the user data from zustand store
+
+    const typingTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
     //Get the room id
     const { roomId } = useParams();
@@ -34,10 +37,17 @@ function ChatWindow() {
         addMessages(newMessage, roomId);
         //send the message to server
         socket.emit("send_message", { newMessage, roomId });
+        //Clear the textarea
         setTextMessage("");
+
+        //Signal server to stop typing
+        socket.emit("clear_typing", { roomId });
+
+        //Clear the typing indicator
+        setTypingStatus("");
     };
 
-    const enterKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const handleKeydown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter") {
             //Immediately send message when user press enter
             if (!e.shiftKey) {
@@ -45,6 +55,15 @@ function ChatWindow() {
                 e.preventDefault();
                 sendMessages();
             }
+        }
+
+        //Check if user currently typing
+        if (e.key.length === 1 || e.key === "Backspace") {
+            //Send the data to the server
+            socket.emit("user_typing", {
+                message: `${userData.name} is Typing`,
+                roomId,
+            });
         }
     };
 
@@ -57,7 +76,36 @@ function ChatWindow() {
         if (roomId) {
             socket.emit("join_room", roomId);
         }
-    }, [roomId, addMessages]);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const handleTyping = (data: any) => {
+            setTypingStatus(data.message);
+
+            //Clear timeout after 2 second
+            if (typingTimeout.current) clearTimeout(typingTimeout.current);
+
+            //Set timeout for 2 second
+            typingTimeout.current = setTimeout(() => {
+                setTypingStatus("");
+            }, 2000);
+        };
+
+        //Function to clear typing state
+        const clearTypingDisplay = () => {
+            setTypingStatus("");
+            if (typingTimeout.current) clearTimeout(typingTimeout.current);
+        };
+
+        //listen for socket connection
+        socket.on("stop_typing", clearTypingDisplay);
+        socket.on("display_typing", handleTyping);
+
+        return () => {
+            //Clear listening event on unmount
+            socket.off("display_typing", handleTyping);
+            socket.off("stop_typing", clearTypingDisplay);
+        };
+    }, [roomId]);
 
     useEffect(() => {
         if (textAreaRef.current) {
@@ -128,6 +176,13 @@ function ChatWindow() {
                 )}
             </section>
 
+            <div className="h-6">
+                {typingStatus && (
+                    <p className="text-{14px} p-2 bg-receiver rounded-lg animate-pulse ml-2">
+                        {typingStatus}...
+                    </p>
+                )}
+            </div>
             <section className="bg-message-input w-full flex p-2 rounded-lg items-end">
                 <textarea
                     ref={textAreaRef}
@@ -136,7 +191,7 @@ function ChatWindow() {
                     onChange={(e) => setTextMessage(e.target.value)}
                     className="w-full flex-1 outline-none p-2 resize-none bg-transparent min-h-10 text-primary-text"
                     rows={1}
-                    onKeyDown={enterKey}
+                    onKeyDown={handleKeydown}
                 />
                 <div className="flex gap-2 items-center h-10 ">
                     <Paperclip size={18} className="text-primary-text" />
