@@ -1,12 +1,10 @@
-import { Hash, Paperclip, Send, User, XCircle } from "lucide-react";
+import { Hash, Paperclip, Send, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router";
 import { useRoom, useUserData } from "../store";
 import type { MessagesObj } from "../type";
-
-import Linkify from "linkify-react";
 import { socket } from "../socket";
-import { formatDate } from "../utils";
+import MessageBubble from "./MessageBubble";
 
 function ChatWindow() {
     const [textMessage, setTextMessage] = useState<string>("");
@@ -67,10 +65,6 @@ function ChatWindow() {
         }
     };
 
-    const option = {
-        className:
-            "'text-blue-600 hover:text-blue-800 underline decoration-2 transition-colors'",
-    };
     useEffect(() => {
         //Join room as soon as user enter the chat
         if (roomId) {
@@ -138,41 +132,11 @@ function ChatWindow() {
                     <div></div>
                 ) : (
                     //Put the new message on the bottom
-                    [...chatLog].reverse().map((msg, i) => (
-                        <div
-                            key={i}
-                            className={`flex gap-2 ${msg.authorId === userData.id ? "justify-end" : "justify-start"}`}
-                        >
-                            <div
-                                className={`bg-gray-400 p-2 rounded-full w-7.5 h-7.5 ${msg.authorId === userData.id ? "hidden" : "block"}`}
-                            >
-                                <User size={15} />
-                            </div>
-                            <div className="space-y-2">
-                                <div
-                                    className={`${msg.authorId === userData.id ? "bg-sender" : "bg-receiver"} text-primary-text p-3.75 rounded-lg max-w-200 space-y-2 min-w-20`}
-                                >
-                                    <p
-                                        className={`font-semibold text-[12px] text-gray-500 ${msg.authorId === userData.id ? "hidden" : "block"}`}
-                                    >
-                                        {msg.author}
-                                    </p>
-                                    <p
-                                        className={`${msg.authorId === userData.id ? "text-sender-text" : "text-receiver-text"} text-[14px] whitespace-pre-wrap`}
-                                    >
-                                        <Linkify options={option}>
-                                            {msg.message}
-                                        </Linkify>
-                                    </p>
-                                </div>
-                                <p
-                                    className={`text-[10px] text-gray-400 flex ${msg.authorId === userData.id ? "justify-end" : "justify-start"}`}
-                                >
-                                    {formatDate(msg.time)}
-                                </p>
-                            </div>
-                        </div>
-                    ))
+                    [...chatLog]
+                        .reverse()
+                        .map((msg, i) => (
+                            <MessageBubble key={i} msg={msg} user={userData} />
+                        ))
                 )}
             </section>
 

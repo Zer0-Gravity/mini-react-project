@@ -40,6 +40,7 @@ function Modal({ modalType }: ModalType) {
             messages: [] as MessagesObj[],
         };
 
+        //Check if room with the same id already exist
         if (inputId === roomId) {
             alert("You already join the room");
         }
