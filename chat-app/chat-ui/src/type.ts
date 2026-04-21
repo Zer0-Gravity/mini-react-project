@@ -14,6 +14,7 @@ export interface RoomType {
 export interface RoomList {
     roomList: RoomType[];
     addRooms: (room: RoomType) => void;
+    deleteRooms: (id: string) => void;
     addMessages: (message: MessagesObj, roomId: string | undefined) => void;
 }
 

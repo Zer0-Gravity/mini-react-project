@@ -26,6 +26,12 @@ export const useRoom = create<RoomList>()(
             ],
             addRooms: (room) =>
                 set((state) => ({ roomList: [...state.roomList, room] })),
+            deleteRooms: (id) =>
+                set((state) => ({
+                    roomList: [
+                        ...state.roomList.filter((room) => room.roomId !== id),
+                    ],
+                })),
 
             //Add message based on room id
             addMessages: (message, roomId) =>

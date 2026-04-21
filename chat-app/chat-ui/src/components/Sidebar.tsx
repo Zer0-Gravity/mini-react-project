@@ -1,15 +1,9 @@
-import {
-    Hash,
-    LogIn,
-    MoreHorizontal,
-    Plus,
-    Settings,
-    UserCircle,
-} from "lucide-react";
+import { LogIn, Plus, Settings, UserCircle } from "lucide-react";
 
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useModal, useRoom, useUserData } from "../store";
 import SliderTheme from "./SliderTheme";
+import Roomlist from "./Roomlist";
 
 function Sidebar() {
     const navigate = useNavigate();
@@ -49,19 +43,7 @@ function Sidebar() {
 
                 <div className="flex flex-col gap-3">
                     {roomList.map((room) => (
-                        <Link
-                            to={`/${room.roomId}`}
-                            key={room.roomId}
-                            className="justify-between flex h-12.5 items-center p-2 rounded-lg bg-accent"
-                        >
-                            <div className="flex items-center gap-2">
-                                <Hash size={18} />
-                                <h1 className="font-medium text-[14px]">
-                                    {room.roomName}
-                                </h1>
-                            </div>
-                            <MoreHorizontal />
-                        </Link>
+                        <Roomlist key={room.roomId} room={room} />
                     ))}
                 </div>
             </section>
