@@ -54,7 +54,7 @@ function Modal({ modalType }: ModalType) {
 
     return (
         <section className="inset-0 bg-black/80 h-full w-full absolute flex items-center justify-center z-10">
-            <div className="bg-sidebar p-5 md:w-150 w-[90%] space-y-5 rounded-lg">
+            <div className="bg-main-chat p-5 md:w-150 w-[90%] space-y-5 rounded-lg">
                 <h1 className="text-[20px] font-bold text-primary-text">
                     {modalType === "create" ? "Create Room" : "Join Room"}
                 </h1>
