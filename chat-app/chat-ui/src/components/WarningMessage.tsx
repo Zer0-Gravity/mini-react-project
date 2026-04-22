@@ -38,15 +38,15 @@ function WarningMessage({ setWarn }: WarningType) {
                         </p>
                     </div>
                 </div>
-                <div className="flex justify-end gap-2 text-black">
+                <div className="flex justify-between sm:justify-end gap-2 text-black">
                     <button
-                        className="p-1 w-18 rounded-lg bg-green-400"
+                        className="p-1 w-full sm:w-18 rounded-lg bg-green-400"
                         onClick={handleWipeData}
                     >
                         Yes
                     </button>
                     <button
-                        className="p-1 w-18 rounded-lg bg-red-400"
+                        className="p-1 w-full sm:w-18 rounded-lg bg-red-400"
                         onClick={() => setWarn(false)}
                     >
                         No
