@@ -1,4 +1,4 @@
-import { Copy, Download, Save, Trash, XCircle } from "lucide-react";
+import { Copy, Save, Trash, XCircle } from "lucide-react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import type { UserProfile } from "../type";
