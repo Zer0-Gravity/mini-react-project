@@ -1,7 +1,9 @@
 import {
     ChevronRight,
+    File,
     FolderClosed,
     LogOut,
+    MoreVertical,
     Plus,
     Search,
     Sun,
@@ -12,6 +14,7 @@ import { useState } from "react";
 function Sidebar() {
     const [searchValue, setSearchValue] = useState<string>("");
     const [isFocused, setIsFocused] = useState<boolean>(false);
+    const [accordion, setAccordion] = useState<boolean>(false);
 
     const isExpanded = isFocused || searchValue.length > 0;
 
@@ -50,14 +53,40 @@ function Sidebar() {
             </section>
 
             {/* Project section */}
-            <section className="flex-1">
-                <div className="flex justify-between">
-                    <div className="flex gap-2">
-                        <FolderClosed />
-                        <h1>My Project</h1>
+            <section className="flex-1 select-none cursor-pointer">
+                <div
+                    className="flex justify-between"
+                    onClick={() => setAccordion(!accordion)}
+                >
+                    <div className="flex gap-2 items-center">
+                        <FolderClosed size={18} />
+                        <h1 className="font-semibold">My Project</h1>
                     </div>
-                    <ChevronRight />
+                    <ChevronRight
+                        className={`${accordion ? "rotate-90" : "rotate-0"} transition-all duration-300`}
+                    />
                 </div>
+
+                {accordion && (
+                    <ul className="ml-4 mt-2 select-none cursor-pointer">
+                        {["example", "dash", "test"].map((item) => (
+                            <li className="group flex items-center gap-2 relative pl-4 pb-3 last:pb-0">
+                                {/* Vertical line */}
+                                <div className="absolute top-0 left-0 h-full bg-slate-800 w-0.5 group-last:h-1/2" />
+                                {/* Horizontal line */}
+                                <div className="absolute top-1/2 left-0 h-0.5 w-3 bg-slate-800" />
+
+                                <div className="flex justify-between w-full">
+                                    <div className="flex gap-2">
+                                        <File size={20} />
+                                        {item}
+                                    </div>
+                                    <MoreVertical size={20} />
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </section>
 
             {/* Toggle theme */}
