@@ -37,3 +37,16 @@
         }
     }
 }
+
+.button-board {
+    color: white;
+    width: auto;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 5px;
+}

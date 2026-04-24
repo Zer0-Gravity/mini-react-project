@@ -1,10 +1,14 @@
 import { BrowserRouter } from "react-router";
 import Sidebar from "./components/sidebar/Sidebar";
+import ProjectPage from "./components/page/ProjectPage";
 
 function App() {
     return (
         <BrowserRouter>
-            <Sidebar />
+            <main className="flex">
+                <Sidebar />
+                <ProjectPage />
+            </main>
         </BrowserRouter>
     );
 }
