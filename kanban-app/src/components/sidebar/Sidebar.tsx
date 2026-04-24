@@ -6,10 +6,10 @@ import {
     MoreVertical,
     Plus,
     Search,
-    Sun,
     User,
 } from "lucide-react";
 import { useState } from "react";
+import ToggleButton from "../utils/ToggleButton";
 
 function Sidebar() {
     const [searchValue, setSearchValue] = useState<string>("");
@@ -19,7 +19,16 @@ function Sidebar() {
     const isExpanded = isFocused || searchValue.length > 0;
 
     return (
-        <main className="w-75 border-r h-screen p-4 flex flex-col gap-4">
+        <main className="w-75 border-r h-screen p-4 flex flex-col gap-5">
+            <div className="flex items-center gap-2 mb-5">
+                <img
+                    src="/Logo.png"
+                    alt="Logo"
+                    className="aspect-square w-12"
+                />
+                <h1 className="text-4xl font-bold">O-Reilo</h1>
+            </div>
+
             {/* Search and Create Section */}
             <section className="flex gap-2">
                 {/* Create new project */}
@@ -90,11 +99,9 @@ function Sidebar() {
             </section>
 
             {/* Toggle theme */}
-            <section className="flex">
+            <section className="flex justify-between items-center">
                 <h1>Light Mode</h1>
-                <button>
-                    <Sun />
-                </button>
+                <ToggleButton />
             </section>
 
             {/* Account section */}

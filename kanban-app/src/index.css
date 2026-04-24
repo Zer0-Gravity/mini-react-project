@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+.switch {
+    position: relative;
+    display: flex;
+    width: 40px;
+    height: 20px;
+
+    input:checked + .box .ball {
+        transform: translateX(18px);
+    }
+
+    input {
+        opacity: 0;
+        width: 0;
+    }
+
+    .box {
+        display: absolute;
+        border-radius: 50px;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 3px;
+        background-color: rgb(41, 41, 105);
+        transition: 0.4s;
+        box-sizing: border-box;
+
+        .ball {
+            width: 16px;
+            height: 16px;
+            border-radius: 100%;
+            background-color: rgb(0, 255, 255);
+            transition: 0.4s;
+        }
+    }
+}
