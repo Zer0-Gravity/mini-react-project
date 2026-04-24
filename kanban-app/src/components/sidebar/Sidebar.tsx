@@ -53,6 +53,7 @@ function Sidebar() {
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         onChange={(e) => setSearchValue(e.target.value)}
+                        placeholder={isExpanded ? "Search project..." : ""}
                     />
                     <Search
                         className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"
