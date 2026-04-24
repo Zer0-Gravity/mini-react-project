@@ -50,3 +50,7 @@
     padding: 8px;
     border-radius: 5px;
 }
+
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}

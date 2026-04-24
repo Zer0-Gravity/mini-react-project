@@ -1,6 +1,8 @@
 import {
     Filter,
+    GripVertical,
     List,
+    MoreHorizontal,
     Plus,
     Search,
     SortDesc,
@@ -20,13 +22,17 @@ function ProjectPage() {
     const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
 
     return (
-        <main className="h-screen w-screen">
+        <main className="h-full w-full flex-col flex">
             <section className="p-6 border-b space-y-6">
                 <header className="flex items-center justify-between">
                     <h1 className="font-semibold text-[40px]">Example </h1>
-                    <div>
-                        <Search />
-                        <input type="search" placeholder="Search board" />
+                    <div className="flex gap-2 items-center bg-gray-200 h-10 w-75 p-2 rounded-lg">
+                        <Search size={18} />
+                        <input
+                            type="search"
+                            placeholder="Search board"
+                            className="outline-none w-full h-full"
+                        />
                     </div>
                 </header>
 
@@ -74,6 +80,30 @@ function ProjectPage() {
                         </button>
                     </div>
                 </div>
+            </section>
+
+            <section className="p-5 gap-3 flex overflow-x-auto hide-scroll">
+                {["To-Do", "Working", "Research", "Done", "On Hold"].map(
+                    (item, i) => (
+                        <div
+                            key={i}
+                            className="bg-gray-200 min-w-87.5 min-h-20 p-2 rounded-lg"
+                        >
+                            <header className="flex justify-between items-center">
+                                <div className="flex items-center gap-2">
+                                    <GripVertical size={18} />
+                                    <h1 className="font-semibold">{item}</h1>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <MoreHorizontal size={18} />
+                                    <button className="bg-amber-500 w-7.5 h-7.5 place-items-center grid text-white rounded-[5px]">
+                                        <Plus />
+                                    </button>
+                                </div>
+                            </header>
+                        </div>
+                    ),
+                )}
             </section>
         </main>
     );

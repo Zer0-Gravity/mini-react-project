@@ -7,7 +7,9 @@ function App() {
         <BrowserRouter>
             <main className="flex">
                 <Sidebar />
-                <ProjectPage />
+                <div className="flex-1 min-w-0">
+                    <ProjectPage />
+                </div>
             </main>
         </BrowserRouter>
     );
