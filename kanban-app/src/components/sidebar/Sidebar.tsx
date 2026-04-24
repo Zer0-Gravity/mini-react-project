@@ -30,9 +30,9 @@ function Sidebar() {
                         Create Project
                     </p>
                 </button>
-                {/* Search Project */}\
+                {/* Search Project */}
                 <div
-                    className={`${isExpanded ? "flex-1" : "w-10 h-8.75"} bg-orange-300 rounded-[5px] relative`}
+                    className={`${isExpanded ? "flex-1" : "w-10"} h-8.75 bg-orange-300 rounded-[5px] relative`}
                 >
                     <input
                         type="text"
