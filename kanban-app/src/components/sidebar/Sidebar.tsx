@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import ToggleButton from "../utils/ToggleButton";
+import { AnimatePresence, motion } from "motion/react";
 
 function Sidebar() {
     const [searchValue, setSearchValue] = useState<string>("");
@@ -65,7 +66,7 @@ function Sidebar() {
             {/* Project section */}
             <section className="flex-1 select-none cursor-pointer">
                 <div
-                    className="flex justify-between"
+                    className="flex justify-between py-2    "
                     onClick={() => setAccordion(!accordion)}
                 >
                     <div className="flex gap-2 items-center">
@@ -77,26 +78,41 @@ function Sidebar() {
                     />
                 </div>
 
-                {accordion && (
-                    <ul className="ml-4 mt-2 select-none cursor-pointer">
-                        {["example", "dash", "test"].map((item) => (
-                            <li className="group flex items-center gap-2 relative pl-4 pb-3 last:pb-0">
-                                {/* Vertical line */}
-                                <div className="absolute top-0 left-0 h-full bg-slate-800 w-0.5 group-last:h-1/2" />
-                                {/* Horizontal line */}
-                                <div className="absolute top-1/2 left-0 h-0.5 w-3 bg-slate-800" />
+                <AnimatePresence>
+                    {accordion && (
+                        <ul className="ml-4 mt-2 select-none cursor-pointer">
+                            {["example", "dash", "test"].map((item, index) => (
+                                <motion.li
+                                    key={item}
+                                    layout
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    className="group flex items-center gap-2 relative pl-4 pb-3 last:pb-0"
+                                    transition={{
+                                        delay: index * 0.1,
+                                        type: "spring",
+                                        damping: 20,
+                                        stiffness: 300,
+                                    }}
+                                >
+                                    {/* Vertical line */}
+                                    <div className="absolute top-0 left-0 h-full bg-slate-800 w-0.5 group-last:h-1/2" />
+                                    {/* Horizontal line */}
+                                    <div className="absolute top-1/2 left-0 h-0.5 w-3 bg-slate-800" />
 
-                                <div className="flex justify-between w-full">
-                                    <div className="flex gap-2">
-                                        <File size={20} />
-                                        {item}
+                                    <div className="flex justify-between w-full">
+                                        <div className="flex gap-2">
+                                            <File size={20} />
+                                            {item}
+                                        </div>
+                                        <MoreVertical size={20} />
                                     </div>
-                                    <MoreVertical size={20} />
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                                </motion.li>
+                            ))}
+                        </ul>
+                    )}
+                </AnimatePresence>
             </section>
 
             {/* Toggle theme */}
