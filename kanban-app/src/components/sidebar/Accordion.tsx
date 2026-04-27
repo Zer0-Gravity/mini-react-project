@@ -1,11 +1,36 @@
+import {
+    offset,
+    useDismiss,
+    useFloating,
+    useInteractions,
+} from "@floating-ui/react";
 import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Popover from "../utils/Popover";
+import { useState } from "react";
 
 interface AccordionType {
     isOpen: boolean;
 }
 
 function Accordion({ isOpen }: AccordionType) {
+    const [activeId, setActiveId] = useState<string>("");
+
+    const { refs, floatingStyles, context } = useFloating({
+        placement: "right-start",
+        middleware: [offset(-10)],
+        open: activeId !== null,
+        onOpenChange: (open) => {
+            if (!open) setActiveId("");
+        },
+    });
+
+    //Use dismiss hook from floating UI
+    const dismiss = useDismiss(context);
+
+    //Get the prop for  interaction
+    const { getReferenceProps } = useInteractions([dismiss]);
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -36,8 +61,26 @@ function Accordion({ isOpen }: AccordionType) {
                                     <File size={20} />
                                     {item}
                                 </div>
-                                <MoreVertical size={20} />
+                                <button
+                                    className="p-0.75 rounded-full hover:bg-gray-300"
+                                    ref={
+                                        activeId === item
+                                            ? refs.setReference
+                                            : null
+                                    }
+                                    onClick={() => setActiveId(item)}
+                                    {...getReferenceProps()}
+                                >
+                                    <MoreVertical size={20} />
+                                </button>
                             </div>
+
+                            {activeId === item && (
+                                <Popover
+                                    floating={refs.setFloating}
+                                    floatingStyle={floatingStyles}
+                                />
+                            )}
                         </motion.li>
                     ))}
                 </ul>
