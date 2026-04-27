@@ -1,21 +1,19 @@
 import {
     ChevronRight,
-    File,
     FolderClosed,
     LogOut,
-    MoreVertical,
     Plus,
     Search,
     User,
 } from "lucide-react";
 import { useState } from "react";
 import ToggleButton from "../utils/ToggleButton";
-import { AnimatePresence, motion } from "motion/react";
+import Accordion from "./Accordion";
 
 function Sidebar() {
     const [searchValue, setSearchValue] = useState<string>("");
     const [isFocused, setIsFocused] = useState<boolean>(false);
-    const [accordion, setAccordion] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const isExpanded = isFocused || searchValue.length > 0;
 
@@ -67,52 +65,18 @@ function Sidebar() {
             <section className="flex-1 select-none cursor-pointer">
                 <div
                     className="flex justify-between py-2    "
-                    onClick={() => setAccordion(!accordion)}
+                    onClick={() => setIsOpen(!isOpen)}
                 >
                     <div className="flex gap-2 items-center">
                         <FolderClosed size={18} />
                         <h1 className="font-semibold">My Project</h1>
                     </div>
                     <ChevronRight
-                        className={`${accordion ? "rotate-90" : "rotate-0"} transition-all duration-300`}
+                        className={`${isOpen ? "rotate-90" : "rotate-0"} transition-all duration-300`}
                     />
                 </div>
 
-                <AnimatePresence>
-                    {accordion && (
-                        <ul className="ml-4 mt-2 select-none cursor-pointer">
-                            {["example", "dash", "test"].map((item, index) => (
-                                <motion.li
-                                    key={item}
-                                    layout
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    className="group flex items-center gap-2 relative pl-4 pb-3 last:pb-0"
-                                    transition={{
-                                        delay: index * 0.1,
-                                        type: "spring",
-                                        damping: 20,
-                                        stiffness: 300,
-                                    }}
-                                >
-                                    {/* Vertical line */}
-                                    <div className="absolute top-0 left-0 h-full bg-slate-800 w-0.5 group-last:h-1/2" />
-                                    {/* Horizontal line */}
-                                    <div className="absolute top-1/2 left-0 h-0.5 w-3 bg-slate-800" />
-
-                                    <div className="flex justify-between w-full">
-                                        <div className="flex gap-2">
-                                            <File size={20} />
-                                            {item}
-                                        </div>
-                                        <MoreVertical size={20} />
-                                    </div>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    )}
-                </AnimatePresence>
+                <Accordion isOpen={isOpen} />
             </section>
 
             {/* Toggle theme */}
