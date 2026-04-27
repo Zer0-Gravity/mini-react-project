@@ -1,30 +1,8 @@
-import {
-    File,
-    Filter,
-    Flag,
-    GripVertical,
-    Link,
-    List,
-    MessageCircle,
-    MoreHorizontal,
-    Plus,
-    Search,
-    SortDesc,
-    SquareKanban,
-    Table2,
-} from "lucide-react";
-import { motion } from "motion/react";
-import { useState, type ElementType } from "react";
-
-const tabs = [
-    { id: "Board", icon: <SquareKanban size={20} /> },
-    { id: "Table", icon: <Table2 size={20} /> },
-    { id: "List", icon: <List size={20} /> },
-];
+import { Filter, Plus, Search, SortDesc } from "lucide-react";
+import KanbanBoard from "./Kanban/KanbanBoard";
+import TabSection from "./TabSection";
 
 function ProjectPage() {
-    const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
-
     return (
         <main className="h-full w-full flex-col flex">
             <section className="p-6 border-b space-y-6">
@@ -42,32 +20,7 @@ function ProjectPage() {
 
                 <div className="flex items-center justify-between">
                     {/* Tab button */}
-                    <div className="bg-gray-300 rounded-[5px] p-2 flex gap-5">
-                        {tabs.map((tab, index) => (
-                            <button
-                                key={index}
-                                className={`relative w-25 h-10 ${activeTab === tab.id ? "text-white" : "text-black/40"} transition-colors grid place-items-center`}
-                                onClick={() => setActiveTab(tab.id)}
-                            >
-                                {activeTab === tab.id && (
-                                    <motion.div
-                                        className="absolute inset-0 bg-amber-600 z-0 rounded-[5px]"
-                                        layoutId="activePill"
-                                        transition={{
-                                            type: "spring",
-                                            stiffness: 380,
-                                            damping: 30,
-                                        }}
-                                    />
-                                )}
-
-                                <div className="flex items-center gap-2 relative z-10">
-                                    {tab.icon} <span>{tab.id}</span>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-
+                    <TabSection />
                     {/* Other utility button */}
                     <div className="flex items-center gap-4">
                         <button className="button-board bg-gray-600">
@@ -86,110 +39,10 @@ function ProjectPage() {
                 </div>
             </section>
 
-            <section className="p-5 gap-3 flex overflow-x-auto hide-scroll">
-                {["To-Do", "Working", "Research", "Done", "On Hold"].map(
-                    (item, i) => (
-                        <div
-                            key={i}
-                            className="bg-gray-200 min-w-87.5 min-h-20 p-2 rounded-lg select-none cursor-pointer"
-                        >
-                            {/* Header section */}
-                            <header className="flex justify-between items-center">
-                                <div className="flex items-center gap-2">
-                                    <GripVertical size={18} />
-                                    <h1 className="font-semibold">{item}</h1>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <MoreHorizontal size={18} />
-                                    <button className="bg-amber-500 w-7.5 h-7.5 place-items-center grid text-white rounded-[5px]">
-                                        <Plus />
-                                    </button>
-                                </div>
-                            </header>
-
-                            {/* Card section */}
-                            <div className="mt-5">
-                                <div className="h-50 bg-white p-2 flex flex-col gap-2 rounded-lg ">
-                                    {/* Card Header */}
-                                    <div className="flex justify-between items-center">
-                                        <p className="bg-blue-200 py-1 px-2 text-blue-500 font-medium rounded-sm">
-                                            • Not Started
-                                        </p>
-                                        <MoreHorizontal size={18} />
-                                    </div>
-
-                                    {/* Card title */}
-                                    <div className="flex-1">
-                                        <h1 className="font-semibold text-[20px]">
-                                            Make new website1
-                                        </h1>
-                                        <p className="truncate text-[14px]">
-                                            Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit.
-                                            Debitis minus saepe nam dolores
-                                            laborum nisi quas possimus deleniti
-                                            obcaecati excepturi, accusantium
-                                            asperiores quibusdam ex odit neque
-                                            vitae quis laboriosam cumque!
-                                        </p>
-                                    </div>
-
-                                    {/* Card Detail */}
-                                    <div className="flex justify-between">
-                                        <div className="flex gap-1 items-center">
-                                            <Flag size={14} />
-                                            <p className="font-light">
-                                                30 Aug 2025
-                                            </p>
-                                        </div>
-                                        <p className="py-1 px-2 rounded-sm bg-red-300 text-red-800">
-                                            High
-                                        </p>
-                                    </div>
-
-                                    <hr />
-
-                                    {/* Content Detail */}
-                                    <div className="flex justify-evenly">
-                                        <CardBottom
-                                            icon={MessageCircle}
-                                            amount={4}
-                                            description="Comment"
-                                        />
-                                        <CardBottom
-                                            icon={Link}
-                                            amount={5}
-                                            description="Links"
-                                        />
-                                        <CardBottom
-                                            icon={File}
-                                            amount={14}
-                                            description="File"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ),
-                )}
-            </section>
+            {/* Kanban Board section */}
+            <KanbanBoard />
         </main>
     );
 }
 
 export default ProjectPage;
-
-interface cardBottomType {
-    icon: ElementType;
-    amount: number;
-    description: string;
-}
-
-function CardBottom({ icon: Icon, amount, description }: cardBottomType) {
-    return (
-        <div className="flex items-center gap-2">
-            <Icon size={14} />
-            <p className="text-[14px]">{`${amount} ${description}`}</p>
-        </div>
-    );
-}

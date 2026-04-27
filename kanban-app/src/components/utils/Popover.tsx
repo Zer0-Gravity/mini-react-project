@@ -35,7 +35,7 @@ interface ButtonType {
 function ButtonPop({ desc, icon: Icon, color }: ButtonType) {
     return (
         <button
-            className={`flex gap-2 items-center text-${color}-600 hover:bg-gray-400 p-0.5 rounded-sm`}
+            className={`flex gap-2 items-center text-${color}-600 hover:bg-gray-200 p-0.5 rounded-sm`}
         >
             <Icon size={18} />
             <span>{desc}</span>
