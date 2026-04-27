@@ -7,21 +7,22 @@ import {
 import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Popover from "../utils/Popover";
-import { useState } from "react";
+import { usePopOver } from "../utils/store";
 
 interface AccordionType {
     isOpen: boolean;
 }
 
 function Accordion({ isOpen }: AccordionType) {
-    const [activeId, setActiveId] = useState<string>("");
+    // const [activeId, setActiveId] = useState<string>("");
+    const { activePop, isPop } = usePopOver();
 
     const { refs, floatingStyles, context } = useFloating({
         placement: "right-start",
         middleware: [offset(-10)],
-        open: activeId !== null,
+        open: activePop !== null,
         onOpenChange: (open) => {
-            if (!open) setActiveId("");
+            if (!open) isPop("");
         },
     });
 
@@ -64,18 +65,18 @@ function Accordion({ isOpen }: AccordionType) {
                                 <button
                                     className="p-0.75 rounded-full hover:bg-gray-300"
                                     ref={
-                                        activeId === item
+                                        activePop === item
                                             ? refs.setReference
                                             : null
                                     }
-                                    onClick={() => setActiveId(item)}
+                                    onClick={() => isPop(item)}
                                     {...getReferenceProps()}
                                 >
                                     <MoreVertical size={20} />
                                 </button>
                             </div>
 
-                            {activeId === item && (
+                            {activePop === item && (
                                 <Popover
                                     floating={refs.setFloating}
                                     floatingStyle={floatingStyles}

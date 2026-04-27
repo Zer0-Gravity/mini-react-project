@@ -12,7 +12,7 @@ function Popover({ floating, floatingStyle }: PopoverType) {
     return (
         <AnimatePresence>
             <motion.div
-                className="absolute right-0 p-2 flex flex-col gap-1.5 bg-gray-100 shadow-lg rounded-lg w-40 z-20"
+                className="right-0 p-2 flex flex-col gap-1.5 bg-gray-100 shadow-lg rounded-lg w-40 z-20"
                 ref={floating}
                 style={floatingStyle}
                 initial={{ opacity: 0 }}
