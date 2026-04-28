@@ -83,7 +83,7 @@ interface cardBottomType {
 
 function CardBottom({ icon: Icon, amount, description }: cardBottomType) {
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 opacity-60">    
             <Icon size={14} />
             <p className="text-[14px]">{`${amount} ${description}`}</p>
         </div>

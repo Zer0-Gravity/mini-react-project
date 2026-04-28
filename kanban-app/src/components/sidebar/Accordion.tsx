@@ -1,6 +1,5 @@
 import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import Popover from "../utils/Popover";
 import ButtonPopOver from "../utils/ButtonPopOver";
 
 interface AccordionType {
