@@ -1,19 +1,22 @@
 import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import ButtonPopOver from "../utils/ButtonPopOver";
+import { useProjectData } from "../utils/store";
 
 interface AccordionType {
     isOpen: boolean;
 }
 
 function Accordion({ isOpen }: AccordionType) {
+    const { projects } = useProjectData();
+
     return (
         <AnimatePresence>
             {isOpen && (
                 <ul className="ml-4 mt-2 select-none cursor-pointer">
-                    {["example", "dash", "test"].map((item, index) => (
+                    {Object.values(projects).map((item, index) => (
                         <motion.li
-                            key={item}
+                            key={item.projectId}
                             layout
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -35,10 +38,10 @@ function Accordion({ isOpen }: AccordionType) {
                             <div className="flex justify-between w-full">
                                 <div className="flex gap-2">
                                     <File size={20} />
-                                    {item}
+                                    {item.projectName}
                                 </div>
                                 <ButtonPopOver
-                                    item={item}
+                                    item={item.projectId}
                                     icon={MoreVertical}
                                     size={18}
                                 />
