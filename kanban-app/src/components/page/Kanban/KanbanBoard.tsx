@@ -1,5 +1,6 @@
 import { GripVertical, MoreHorizontal, Plus } from "lucide-react";
 import KanbanCard from "./KanbanCard";
+import ButtonPopOver from "../../utils/ButtonPopOver";
 
 function KanbanBoard() {
     return (
@@ -17,7 +18,11 @@ function KanbanBoard() {
                                 <h1 className="font-semibold">{item}</h1>
                             </div>
                             <div className="flex items-center gap-2">
-                                <MoreHorizontal size={18} />
+                                <ButtonPopOver
+                                    item={item}
+                                    icon={MoreHorizontal}
+                                    size={18}
+                                />
                                 <button className="bg-amber-500 w-7.5 h-7.5 place-items-center grid text-white rounded-[5px]">
                                     <Plus />
                                 </button>

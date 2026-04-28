@@ -1,37 +1,13 @@
-import {
-    offset,
-    useDismiss,
-    useFloating,
-    useInteractions,
-} from "@floating-ui/react";
 import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Popover from "../utils/Popover";
-import { usePopOver } from "../utils/store";
+import ButtonPopOver from "../utils/ButtonPopOver";
 
 interface AccordionType {
     isOpen: boolean;
 }
 
 function Accordion({ isOpen }: AccordionType) {
-    // const [activeId, setActiveId] = useState<string>("");
-    const { activePop, isPop } = usePopOver();
-
-    const { refs, floatingStyles, context } = useFloating({
-        placement: "right-start",
-        middleware: [offset(-10)],
-        open: activePop !== null,
-        onOpenChange: (open) => {
-            if (!open) isPop("");
-        },
-    });
-
-    //Use dismiss hook from floating UI
-    const dismiss = useDismiss(context);
-
-    //Get the prop for  interaction
-    const { getReferenceProps } = useInteractions([dismiss]);
-
     return (
         <AnimatePresence>
             {isOpen && (
@@ -62,26 +38,12 @@ function Accordion({ isOpen }: AccordionType) {
                                     <File size={20} />
                                     {item}
                                 </div>
-                                <button
-                                    className="p-0.75 rounded-full hover:bg-gray-300"
-                                    ref={
-                                        activePop === item
-                                            ? refs.setReference
-                                            : null
-                                    }
-                                    onClick={() => isPop(item)}
-                                    {...getReferenceProps()}
-                                >
-                                    <MoreVertical size={20} />
-                                </button>
-                            </div>
-
-                            {activePop === item && (
-                                <Popover
-                                    floating={refs.setFloating}
-                                    floatingStyle={floatingStyles}
+                                <ButtonPopOver
+                                    item={item}
+                                    icon={MoreVertical}
+                                    size={18}
                                 />
-                            )}
+                            </div>
                         </motion.li>
                     ))}
                 </ul>
