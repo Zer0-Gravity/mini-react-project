@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import type { ProjectType } from "../utils/types";
 import { useProjectData } from "../utils/store";
+import { randomId } from "../utils/utilsFunction";
 
 function SearchAndCreate() {
     const [searchValue, setSearchValue] = useState<string>("");
@@ -11,11 +12,11 @@ function SearchAndCreate() {
     const [isNew, setIsNew] = useState<boolean>(false);
     const isExpanded = isFocused || searchValue.length > 0;
     const [projectTitle, setProjectTitle] = useState<string>("");
-    const { addProjects } = useProjectData();
+    const { addProjects, projects } = useProjectData();
 
     const handleNewProject = () => {
         const newProject: ProjectType = {
-            projectId: crypto.randomUUID(),
+            projectId: `PJ#${randomId(5)}`,
             projectName: projectTitle,
             board: [],
         };
@@ -29,6 +30,8 @@ function SearchAndCreate() {
         //Close the window
         setIsNew(false);
     };
+
+    console.log(projects);
 
     return (
         <>
