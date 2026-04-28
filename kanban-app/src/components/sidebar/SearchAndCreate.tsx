@@ -1,6 +1,8 @@
 import { Check, Plus, Search, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import type { ProjectType } from "../utils/types";
+import { useProjectData } from "../utils/store";
 
 function SearchAndCreate() {
     const [searchValue, setSearchValue] = useState<string>("");
@@ -8,6 +10,25 @@ function SearchAndCreate() {
     const isSearch = searchValue.length > 0;
     const [isNew, setIsNew] = useState<boolean>(false);
     const isExpanded = isFocused || searchValue.length > 0;
+    const [projectTitle, setProjectTitle] = useState<string>("");
+    const { addProjects } = useProjectData();
+
+    const handleNewProject = () => {
+        const newProject: ProjectType = {
+            projectId: crypto.randomUUID(),
+            projectName: projectTitle,
+            board: [],
+        };
+
+        //Check if the title not empty
+        if (!projectTitle) return;
+
+        addProjects(newProject);
+        setProjectTitle("");
+
+        //Close the window
+        setIsNew(false);
+    };
 
     return (
         <>
@@ -71,9 +92,13 @@ function SearchAndCreate() {
                             type="text"
                             placeholder="New project"
                             className="flex-1 h-full p-1.5 outline-none"
+                            onChange={(e) => setProjectTitle(e.target.value)}
                         />
                         <div className="flex items-center">
-                            <button className="p-0.75 hover:bg-amber-300 rounded-full">
+                            <button
+                                className="p-0.75 hover:bg-amber-300 rounded-full"
+                                onClick={handleNewProject}
+                            >
                                 <Check size={18} color="green" />
                             </button>
                             <button
