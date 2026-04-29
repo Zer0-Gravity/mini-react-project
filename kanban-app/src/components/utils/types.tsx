@@ -30,6 +30,8 @@ export interface ProjectState {
     //Add Function
     addProjects: (newProject: ProjectType) => void;
     addBoards: (projectId: string, newBoard: BoardType) => void;
+
+    editProjects: (projectId: string, newName: string) => void;
 }
 
 export interface PopOverState {

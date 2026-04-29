@@ -1,9 +1,18 @@
 import { AlertTriangle, Check, Trash, X } from "lucide-react";
-import { useModal } from "./store";
+import { useModal, useProjectData } from "./store";
 import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 
 function GlobalModal() {
-    const { modal, targetType, closeModal } = useModal();
+    const { modal, targetType, targetId, closeModal } = useModal();
+    const { editProjects } = useProjectData();
+    const [newName, setNewName] = useState<string>("");
+
+    const handleRename = () => {
+        if (targetType === "project") editProjects(targetId, newName);
+        setNewName("");
+        closeModal();
+    };
 
     return (
         <AnimatePresence>
@@ -22,6 +31,8 @@ function GlobalModal() {
                             <input
                                 type="text"
                                 className="p-2 w-full bg-gray-300 rounded-sm outline-none"
+                                value={newName}
+                                onChange={(e) => setNewName(e.target.value)}
                             />
                             <div className="flex justify-end gap-2">
                                 <button
@@ -31,7 +42,10 @@ function GlobalModal() {
                                     <X size={18} color="red" />
                                     <span>Cancel</span>
                                 </button>
-                                <button className="p-1.5 hover:bg-green-300 rounded-sm font-medium flex gap-2 items-center text-[14px]">
+                                <button
+                                    className="p-1.5 hover:bg-green-300 rounded-sm font-medium flex gap-2 items-center text-[14px]"
+                                    onClick={handleRename}
+                                >
                                     <Check size={18} color="green" />
                                     <span>Rename</span>
                                 </button>

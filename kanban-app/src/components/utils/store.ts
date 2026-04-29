@@ -46,12 +46,19 @@ export const useProjectData = create<ProjectState>()(
                 set((state) => {
                     state.projects[newProject.projectId] = newProject;
                 }),
+
             addBoards: (projectId: string, newBoard: BoardType) =>
                 set((state) => {
                     //Add new board to the board array
                     state.boards[newBoard.boardId] = newBoard;
                     //Push it to the main array
                     state.projects[projectId].board.push(newBoard.boardId);
+                }),
+
+            //Rename Function
+            editProjects: (projectId: string, newName: string) =>
+                set((state) => {
+                    state.projects[projectId].projectName = newName;
                 }),
         })),
         { name: "kanban-storage" },
