@@ -60,6 +60,29 @@ export const useProjectData = create<ProjectState>()(
                 set((state) => {
                     state.projects[projectId].projectName = newName;
                 }),
+            deleteProjects: (projectId: string) =>
+                set((state) => {
+                    //Find the project data
+                    const project = state.projects[projectId];
+                    if (!project) return;
+
+                    //Get the board data inside the project
+                    project.board.forEach((boardId) => {
+                        const board = state.boards[boardId];
+
+                        if (board) {
+                            //Get card data inside the board array
+                            board.card.forEach((cardId) => {
+                                //Delete card
+                                delete state.cards[cardId];
+                            });
+                        }
+                        //Delete board
+                        delete state.boards[boardId];
+                    });
+                    //Delete project
+                    delete state.projects[projectId];
+                }),
         })),
         { name: "kanban-storage" },
     ),

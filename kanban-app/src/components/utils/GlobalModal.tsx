@@ -5,12 +5,18 @@ import { useState } from "react";
 
 function GlobalModal() {
     const { modal, targetType, targetId, closeModal } = useModal();
-    const { editProjects } = useProjectData();
+    const { editProjects, deleteProjects } = useProjectData();
     const [newName, setNewName] = useState<string>("");
 
     const handleRename = () => {
         if (targetType === "project") editProjects(targetId, newName);
         setNewName("");
+        closeModal();
+    };
+
+    const handleDelete = () => {
+        if (targetType === "project") deleteProjects(targetId);
+
         closeModal();
     };
 
@@ -74,7 +80,10 @@ function GlobalModal() {
                                     <X size={18} color="red" />
                                     <span>Cancel</span>
                                 </button>
-                                <button className="p-1.5 hover:bg-green-300 rounded-sm font-medium flex gap-2 items-center text-[14px]">
+                                <button
+                                    className="p-1.5 hover:bg-green-300 rounded-sm font-medium flex gap-2 items-center text-[14px]"
+                                    onClick={handleDelete}
+                                >
                                     <Trash size={18} color="green" />
                                     <span>Delete</span>
                                 </button>
