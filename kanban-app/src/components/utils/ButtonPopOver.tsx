@@ -12,9 +12,17 @@ interface ButtonPopOverType {
     item: string;
     icon: ElementType;
     size: number;
+    onRename: () => void;
+    onDelete: () => void;
 }
 
-function ButtonPopOver({ item, icon: Icon, size }: ButtonPopOverType) {
+function ButtonPopOver({
+    item,
+    icon: Icon,
+    size,
+    onRename,
+    onDelete,
+}: ButtonPopOverType) {
     const { activePop, isPop } = usePopOver();
 
     const { refs, floatingStyles, context } = useFloating({
@@ -47,6 +55,8 @@ function ButtonPopOver({ item, icon: Icon, size }: ButtonPopOverType) {
                 <Popover
                     floating={refs.setFloating}
                     floatingStyle={floatingStyles}
+                    onRename={onRename}
+                    onDelete={onDelete}
                 />
             )}
         </>

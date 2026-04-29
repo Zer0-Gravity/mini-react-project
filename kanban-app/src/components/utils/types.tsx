@@ -36,3 +36,17 @@ export interface PopOverState {
     activePop: string;
     isPop: (itemPop: string) => void;
 }
+
+type TargetType = "project" | "board" | "card";
+
+export interface ModalType {
+    modal: "delete" | "rename" | null;
+    targetId: string | null;
+    targetType: TargetType | null;
+    openModal: (
+        type: "rename" | "delete",
+        id: string,
+        targetType: TargetType,
+    ) => void;
+    closeModal: () => void;
+}

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type {
     BoardType,
+    ModalType,
     PopOverState,
     ProjectState,
     ProjectType,
@@ -11,6 +12,15 @@ import { persist } from "zustand/middleware";
 export const usePopOver = create<PopOverState>((set) => ({
     activePop: "",
     isPop: (itemPop) => set({ activePop: itemPop }),
+}));
+
+export const useModal = create<ModalType>((set) => ({
+    modal: null,
+    targetId: null,
+    targetType: null,
+    openModal: (type, id, target) =>
+        set({ modal: type, targetId: id, targetType: target }),
+    closeModal: () => set({ modal: null, targetId: null, targetType: null }),
 }));
 
 export const useProjectData = create<ProjectState>()(
