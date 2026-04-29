@@ -1,7 +1,7 @@
 import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import ButtonPopOver from "../utils/ButtonPopOver";
-import { useProjectData } from "../utils/store";
+import { useModal, useProjectData } from "../utils/store";
 
 interface AccordionType {
     isOpen: boolean;
@@ -9,14 +9,15 @@ interface AccordionType {
 
 function Accordion({ isOpen }: AccordionType) {
     const { projects } = useProjectData();
+    const { openModal } = useModal();
 
     return (
         <AnimatePresence>
             {isOpen && (
                 <ul className="ml-4 mt-2 select-none cursor-pointer">
-                    {Object.values(projects).map((item, index) => (
+                    {Object.values(projects).map((project, index) => (
                         <motion.li
-                            key={item.projectId}
+                            key={project.projectId}
                             layout
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -38,12 +39,26 @@ function Accordion({ isOpen }: AccordionType) {
                             <div className="flex justify-between w-full">
                                 <div className="flex gap-2">
                                     <File size={20} />
-                                    {item.projectName}
+                                    {project.projectName}
                                 </div>
                                 <ButtonPopOver
-                                    item={item.projectId}
+                                    item={project.projectId}
                                     icon={MoreVertical}
                                     size={18}
+                                    onRename={() =>
+                                        openModal(
+                                            "rename",
+                                            project.projectId,
+                                            "project",
+                                        )
+                                    }
+                                    onDelete={() =>
+                                        openModal(
+                                            "delete",
+                                            project.projectId,
+                                            "project",
+                                        )
+                                    }
                                 />
                             </div>
                         </motion.li>

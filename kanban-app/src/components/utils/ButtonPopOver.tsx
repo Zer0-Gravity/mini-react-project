@@ -28,7 +28,7 @@ function ButtonPopOver({
     const { refs, floatingStyles, context } = useFloating({
         placement: "right-start",
         middleware: [offset(-10)],
-        open: activePop !== null,
+        open: activePop === item,
         onOpenChange: (open) => {
             if (!open) isPop("");
         },

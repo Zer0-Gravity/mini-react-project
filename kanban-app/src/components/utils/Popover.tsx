@@ -2,6 +2,7 @@ import { PenLine, Trash } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type React from "react";
 import type { ElementType } from "react";
+import { usePopOver } from "./store";
 
 interface PopoverType {
     floating: (node: HTMLElement | null) => void;
@@ -46,10 +47,14 @@ interface ButtonType {
 }
 
 function ButtonPop({ desc, icon: Icon, color, onClick }: ButtonType) {
+    const { isPop } = usePopOver();
     return (
         <button
             className={`flex gap-2 items-center text-${color}-600 hover:bg-gray-200 p-0.5 rounded-sm`}
-            onClick={() => onClick}
+            onClick={() => {
+                onClick();
+                isPop("");
+            }}
         >
             <Icon size={18} />
             <span>{desc}</span>

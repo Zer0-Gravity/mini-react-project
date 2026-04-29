@@ -10,7 +10,7 @@ import { immer } from "zustand/middleware/immer";
 import { persist } from "zustand/middleware";
 
 export const usePopOver = create<PopOverState>((set) => ({
-    activePop: "",
+    activePop: null,
     isPop: (itemPop) => set({ activePop: itemPop }),
 }));
 
@@ -30,6 +30,11 @@ export const useProjectData = create<ProjectState>()(
                 PJYubTv: {
                     projectId: "PJYubTv",
                     projectName: "Project Example 1",
+                    board: ["BDybXty"],
+                },
+                PJuYthd: {
+                    projectId: "PJuYthd",
+                    projectName: "Project Example 2",
                     board: ["BDybXty"],
                 },
             },
