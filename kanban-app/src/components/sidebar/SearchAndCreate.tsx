@@ -12,11 +12,11 @@ function SearchAndCreate() {
     const [isNew, setIsNew] = useState<boolean>(false);
     const isExpanded = isFocused || searchValue.length > 0;
     const [projectTitle, setProjectTitle] = useState<string>("");
-    const { addProjects, projects } = useProjectData();
+    const { addProjects } = useProjectData();
 
     const handleNewProject = () => {
         const newProject: ProjectType = {
-            projectId: `PJ#${randomId(5)}`,
+            projectId: `PJ${randomId(5)}`,
             projectName: projectTitle,
             board: [],
         };
@@ -30,9 +30,6 @@ function SearchAndCreate() {
         //Close the window
         setIsNew(false);
     };
-
-    console.log(projects);
-
     return (
         <>
             <section className="flex gap-2">

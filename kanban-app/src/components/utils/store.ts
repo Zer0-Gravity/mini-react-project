@@ -1,40 +1,26 @@
 import { create } from "zustand";
-import type { BoardType, CardType, ProjectType } from "./types";
+import type {
+    BoardType,
+    PopOverState,
+    ProjectState,
+    ProjectType,
+} from "./types";
 import { immer } from "zustand/middleware/immer";
 import { persist } from "zustand/middleware";
-
-interface PopOverState {
-    activePop: string;
-    isPop: (itemPop: string) => void;
-}
 
 export const usePopOver = create<PopOverState>((set) => ({
     activePop: "",
     isPop: (itemPop) => set({ activePop: itemPop }),
 }));
 
-interface ProjectState {
-    projects: Record<string, ProjectType>;
-    boards: Record<string, BoardType>;
-    cards: Record<string, CardType>;
-
-    //Add Function
-    addProjects: (newProject: ProjectType) => void;
-}
-
 export const useProjectData = create<ProjectState>()(
     persist(
         immer((set) => ({
             projects: {
-                p1: {
-                    projectId: "p1",
+                PJYubTv: {
+                    projectId: "PJYubTv",
                     projectName: "Project Example 1",
-                    board: [],
-                },
-                p2: {
-                    projectId: "p2",
-                    projectName: "Project Example 2",
-                    board: [],
+                    board: ["BDybXty"],
                 },
             },
             boards: {},
@@ -44,6 +30,13 @@ export const useProjectData = create<ProjectState>()(
             addProjects: (newProject: ProjectType) =>
                 set((state) => {
                     state.projects[newProject.projectId] = newProject;
+                }),
+            addBoards: (projectId: string, newBoard: BoardType) =>
+                set((state) => {
+                    //Add new board to the board array
+                    state.boards[newBoard.boardId] = newBoard;
+                    //Push it to the main array
+                    state.projects[projectId].board.push(newBoard.boardId);
                 }),
         })),
         { name: "kanban-storage" },
