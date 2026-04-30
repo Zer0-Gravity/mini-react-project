@@ -60,6 +60,8 @@ export const useProjectData = create<ProjectState>()(
                 set((state) => {
                     state.projects[projectId].projectName = newName;
                 }),
+
+            //Delete Function
             deleteProjects: (projectId: string) =>
                 set((state) => {
                     //Find the project data
