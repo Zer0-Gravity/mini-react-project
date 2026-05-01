@@ -34,7 +34,10 @@ export interface ProjectState {
     editProjects: (projectId: string, newName: string) => void;
     editBoards: (boardId: string, newName: string) => void;
     editCards: (cardId: string, newName: string) => void;
+
     deleteProjects: (projectId: string) => void;
+    deleteBoard: (boardId: string) => void;
+    deleteCard: (cardId: string) => void;
 }
 
 export interface PopOverState {

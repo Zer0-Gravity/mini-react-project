@@ -126,6 +126,35 @@ export const useProjectData = create<ProjectState>()(
                     //Delete project
                     delete state.projects[projectId];
                 }),
+
+            deleteBoard: (boardId: string) =>
+                set((state) => {
+                    //Find the parent id
+                    const projectParent = Object.keys(state.projects).find(
+                        (pId) => state.projects[pId].board.includes(boardId),
+                    );
+
+                    //Check parent id
+                    if (projectParent) {
+                        state.projects[projectParent].board = state.projects[
+                            projectParent
+                        ].board.filter((id) => id !== boardId);
+                    }
+
+                    delete state.boards[boardId];
+                }),
+            deleteCard: (cardId: string) =>
+                set((state) => {
+                    const boardParent = Object.keys(state.boards).find((bId) =>
+                        state.boards[bId].card.includes(cardId),
+                    );
+
+                    if (boardParent) {
+                        state.boards[boardParent].card = state.boards[
+                            boardParent
+                        ].card.filter((id) => id !== cardId);
+                    }
+                }),
         })),
         { name: "kanban-storage" },
     ),

@@ -34,7 +34,9 @@ function KanbanCard({ id }: KanbanCardProp) {
                                 onRename={() =>
                                     openModal("rename", card.cardId, "card")
                                 }
-                                onDelete={() => openModal("delete", card.cardId, 'card')}
+                                onDelete={() =>
+                                    openModal("delete", card.cardId, "card")
+                                }
                             />
                         </div>
 

@@ -51,7 +51,9 @@ function ButtonPop({ desc, icon: Icon, color, onClick }: ButtonType) {
     return (
         <button
             className={`flex gap-2 items-center text-${color}-600 hover:bg-gray-200 p-0.5 rounded-sm`}
-            onClick={() => {
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 onClick();
                 isPop("");
             }}

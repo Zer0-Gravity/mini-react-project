@@ -5,8 +5,14 @@ import { useState } from "react";
 
 function GlobalModal() {
     const { modal, targetType, targetId, closeModal } = useModal();
-    const { editProjects, deleteProjects, editBoards, editCards } =
-        useProjectData();
+    const {
+        editProjects,
+        deleteProjects,
+        editBoards,
+        editCards,
+        deleteBoard,
+        deleteCard,
+    } = useProjectData();
     const [newName, setNewName] = useState<string>("");
 
     const handleRename = () => {
@@ -19,6 +25,8 @@ function GlobalModal() {
 
     const handleDelete = () => {
         if (targetType === "project") deleteProjects(targetId);
+        if (targetType === "board") deleteBoard(targetId);
+        if (targetType === "card") deleteCard(targetId);
 
         closeModal();
     };
