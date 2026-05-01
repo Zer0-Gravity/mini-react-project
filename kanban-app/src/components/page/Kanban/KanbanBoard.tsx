@@ -16,11 +16,12 @@ function KanbanBoard({ id }: KanbanBoardProp) {
         <section className="p-5 gap-3 flex overflow-x-auto hide-scroll">
             {projectView.board.map((id) => {
                 const board = boards[id];
+                const isCardEmpty = boards[id].card.length < 1;
 
                 return (
                     <div
                         key={id}
-                        className="bg-gray-200 max-w-87.5 min-h-20 p-2 rounded-lg select-none cursor-pointer"
+                        className={`bg-gray-200 w-87.5 p-2 rounded-lg select-none cursor-pointer ${isCardEmpty ? "h-20" : "min-h-20"}`}
                     >
                         {/* Header section */}
                         <header className="flex justify-between items-center">
