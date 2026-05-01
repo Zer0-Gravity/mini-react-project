@@ -45,7 +45,11 @@ function ButtonPopOver({
             <button
                 className="p-0.75 rounded-full hover:bg-gray-300"
                 ref={activePop === item ? refs.setReference : null}
-                onClick={() => isPop(item)}
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isPop(item);
+                }}
                 {...getReferenceProps()}
             >
                 <Icon size={size} />
