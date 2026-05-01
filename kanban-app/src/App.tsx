@@ -1,23 +1,18 @@
-import { BrowserRouter } from "react-router";
-import Sidebar from "./components/sidebar/Sidebar";
+import { BrowserRouter, Route, Routes } from "react-router";
 import ProjectPage from "./components/page/ProjectPage";
-import GlobalModal from "./components/utils/GlobalModal";
-import { useModal } from "./components/utils/store";
+
 import EmptyPage from "./components/page/EmptyPage";
+import MainLayout from "./components/page/MainLayout";
 
 function App() {
-    const { modal } = useModal();
-
     return (
         <BrowserRouter>
-            <main className="flex relative">
-                {modal && <GlobalModal />}
-                <Sidebar />
-                <div className="flex-1 min-w-0">
-                    {/* <ProjectPage /> */}
-                    <EmptyPage />
-                </div>
-            </main>
+            <Routes>
+                <Route path="/" element={<MainLayout />}>
+                    <Route index element={<EmptyPage />} />
+                    <Route path="/:projectId" element={<ProjectPage />} />
+                </Route>
+            </Routes>
         </BrowserRouter>
     );
 }
