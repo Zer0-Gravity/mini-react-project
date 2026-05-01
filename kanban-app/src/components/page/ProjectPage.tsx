@@ -3,9 +3,14 @@ import KanbanBoard from "./Kanban/KanbanBoard";
 import TabSection from "./TabSection";
 import { useState } from "react";
 import ModalButton from "../utils/ModalButton";
+import { useParams } from "react-router";
+import { useProjectData } from "../utils/store";
 
 function ProjectPage() {
     const [isNewBoard, setIsNewBoard] = useState<boolean>(false);
+    const { projects } = useProjectData();
+
+    const { projectId } = useParams();
 
     const handleCloseModal = () => {
         setIsNewBoard(false);
@@ -44,7 +49,9 @@ function ProjectPage() {
 
             <section className="p-6 border-b space-y-6">
                 <header className="flex items-center justify-between">
-                    <h1 className="font-semibold text-[40px]">Example </h1>
+                    <h1 className="font-semibold text-[40px]">
+                        {projects[projectId].projectName}{" "}
+                    </h1>
                     <div className="flex gap-2 items-center bg-gray-200 h-10 w-75 p-2 rounded-lg">
                         <Search size={18} />
                         <input
@@ -80,7 +87,7 @@ function ProjectPage() {
             </section>
 
             {/* Kanban Board section */}
-            <KanbanBoard />
+            <KanbanBoard id={projectId} />
         </main>
     );
 }

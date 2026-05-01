@@ -32,14 +32,46 @@ export const useProjectData = create<ProjectState>()(
                     projectName: "Project Example 1",
                     board: ["BDybXty"],
                 },
-                PJuYthd: {
-                    projectId: "PJuYthd",
-                    projectName: "Project Example 2",
-                    board: ["BDybXty"],
+                PJz9qRm: {
+                    projectId: "PJz9qRm",
+                    projectName: "Marketing Campaign",
+                    board: ["BDv2wPk"],
                 },
             },
-            boards: {},
-            cards: {},
+            boards: {
+                BDybXty: {
+                    boardId: "BDybXty",
+                    boardName: "Engineering Sprint",
+                    card: ["CD12345"],
+                },
+                BDv2wPk: {
+                    boardId: "BDv2wPk",
+                    boardName: "Social Media Launch",
+                    card: ["CD67890"],
+                },
+            },
+            cards: {
+                CD12345: {
+                    cardId: "CD12345",
+                    title: "Setup React Router",
+                    description:
+                        "Configure nested routes and outlets for the dashboard.",
+                    dateCreated: "2023-10-01",
+                    dateEnd: "2023-10-05",
+                    priority: "High",
+                    status: "Working",
+                },
+                CD67890: {
+                    cardId: "CD67890",
+                    title: "Design Instagram Assets",
+                    description:
+                        "Create 5 carousel templates for the product reveal.",
+                    dateCreated: "2023-11-10",
+                    dateEnd: "2023-11-15",
+                    priority: "Medium",
+                    status: "Not Started",
+                },
+            },
 
             //Add Function
             addProjects: (newProject: ProjectType) =>

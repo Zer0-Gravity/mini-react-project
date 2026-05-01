@@ -2,6 +2,7 @@ import { MoreVertical, File } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import ButtonPopOver from "../utils/ButtonPopOver";
 import { useModal, useProjectData } from "../utils/store";
+import { Link } from "react-router";
 
 interface AccordionType {
     isOpen: boolean;
@@ -36,7 +37,10 @@ function Accordion({ isOpen }: AccordionType) {
                             <div className="absolute top-1/2 left-0 h-0.5 w-3 bg-slate-800" />
 
                             {/* Project name */}
-                            <div className="flex justify-between w-full">
+                            <Link
+                                to={`/${project.projectId}`}
+                                className="flex justify-between w-full"
+                            >
                                 <div className="flex gap-2">
                                     <File size={20} />
                                     {project.projectName}
@@ -60,7 +64,7 @@ function Accordion({ isOpen }: AccordionType) {
                                         )
                                     }
                                 />
-                            </div>
+                            </Link>
                         </motion.li>
                     ))}
                 </ul>
