@@ -1,10 +1,10 @@
-import { Filter, Plus, Search, SortDesc, X } from "lucide-react";
+import { Filter, Plus, Search, SortDesc } from "lucide-react";
 import KanbanBoard from "./Kanban/KanbanBoard";
 import TabSection from "./TabSection";
 import { useState } from "react";
-import ModalButton from "../utils/ModalButton";
 import { useParams } from "react-router";
 import { useProjectData } from "../utils/store";
+import NewBoard from "../utils/NewBoard";
 
 function ProjectPage() {
     const [isNewBoard, setIsNewBoard] = useState<boolean>(false);
@@ -19,32 +19,7 @@ function ProjectPage() {
     return (
         <main className="h-full w-full flex-col flex relative">
             {isNewBoard && (
-                <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/2">
-                    <div className="bg-white shadow-[0px_4px_10px_10px_rgba(0,0,0,0.2)] p-3 rounded-lg space-y-3 w-100">
-                        <h1 className="font-semibold text-lg">
-                            Create new board
-                        </h1>
-                        <input
-                            type="text"
-                            className="p-2 w-full bg-gray-300 rounded-sm outline-none"
-                            placeholder="Board name"
-                        />
-                        <div className="flex justify-end gap-2">
-                            <ModalButton
-                                color="red"
-                                onClick={handleCloseModal}
-                                btnName="Cancel"
-                                icon={X}
-                            />
-                            <ModalButton
-                                color="green"
-                                onClick={handleCloseModal}
-                                btnName="Create"
-                                icon={Plus}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <NewBoard handleCloseModal={handleCloseModal} id={projectId} />
             )}
 
             <section className="p-6 border-b space-y-6">
