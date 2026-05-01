@@ -32,6 +32,8 @@ export interface ProjectState {
     addBoards: (projectId: string, newBoard: BoardType) => void;
 
     editProjects: (projectId: string, newName: string) => void;
+    editBoards: (boardId: string, newName: string) => void;
+    editCards: (cardId: string, newName: string) => void;
     deleteProjects: (projectId: string) => void;
 }
 

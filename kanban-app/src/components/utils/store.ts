@@ -92,6 +92,15 @@ export const useProjectData = create<ProjectState>()(
                 set((state) => {
                     state.projects[projectId].projectName = newName;
                 }),
+            editBoards: (boardId: string, newName: string) =>
+                set((state) => {
+                    state.boards[boardId].boardName = newName;
+                }),
+
+            editCards: (cardId: string, newName: string) =>
+                set((state) => {
+                    state.cards[cardId].title = newName;
+                }),
 
             //Delete Function
             deleteProjects: (projectId: string) =>
