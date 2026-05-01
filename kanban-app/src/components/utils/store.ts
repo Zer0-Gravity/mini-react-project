@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type {
     BoardType,
+    CardType,
     ModalType,
     PopOverState,
     ProjectState,
@@ -85,6 +86,12 @@ export const useProjectData = create<ProjectState>()(
                     state.boards[newBoard.boardId] = newBoard;
                     //Push it to the main array
                     state.projects[projectId].board.push(newBoard.boardId);
+                }),
+
+            addCards: (boardId: string, newCard: CardType) =>
+                set((state) => {
+                    state.cards[newCard.cardId] = newCard;
+                    state.boards[boardId].card.push(newCard.cardId);
                 }),
 
             //Rename Function

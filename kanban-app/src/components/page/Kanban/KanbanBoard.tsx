@@ -51,7 +51,12 @@ function KanbanBoard({ id }: KanbanBoardProp) {
                                         )
                                     }
                                 />
-                                <button className="bg-amber-500 w-7.5 h-7.5 place-items-center grid text-white rounded-[5px]">
+                                <button
+                                    className="bg-amber-500 w-7.5 h-7.5 place-items-center grid text-white rounded-[5px]"
+                                    onClick={() =>
+                                        openModal("addCard", board.boardId)
+                                    }
+                                >
                                     <Plus />
                                 </button>
                             </div>

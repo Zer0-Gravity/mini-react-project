@@ -2,6 +2,7 @@ import { AlertTriangle, Check, Trash, X } from "lucide-react";
 import { useModal, useProjectData } from "./store";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import NewCard from "./NewCard";
 
 function GlobalModal() {
     const { modal, targetType, targetId, closeModal } = useModal();
@@ -101,6 +102,8 @@ function GlobalModal() {
                             </div>
                         </div>
                     )}
+
+                    {modal === "addCard" && <NewCard />}
                 </div>
             </motion.main>
         </AnimatePresence>
